@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Motion Dashboard — Blackstone Law, APC</title>
+<style>
+:root {
+  --bg: #0f1117; --surface: #1a1d27; --surface2: #22262f; --border: #2e3340;
+  --text: #e4e6eb; --text-dim: #8b8fa3; --accent: #6c8cff; --accent-dim: rgba(108,140,255,.12);
+  --red: #ff4d6a; --red-dim: rgba(255,77,106,.12);
+  --orange: #ff9f43; --orange-dim: rgba(255,159,67,.12);
+  --green: #2ed573; --green-dim: rgba(46,213,115,.12);
+  --yellow: #ffc048; --yellow-dim: rgba(255,192,72,.12);
+  --purple: #a55eea; --purple-dim: rgba(165,94,234,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;}
+
+/* ── Header ── */
+.header{background:linear-gradient(135deg,#1a1d27,#1e2235);border-bottom:1px solid var(--border);padding:24px 40px;}
+.header-row{display:flex;justify-content:space-between;align-items:flex-start;}
+.header h1{font-size:22px;font-weight:600;letter-spacing:-.3px;}
+.header h1 em{font-style:normal;color:var(--accent);}
+.header-sub{color:var(--text-dim);font-size:13px;margin-top:3px;}
+.week-badge{background:var(--accent-dim);color:var(--accent);padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;}
+.header-meta{display:flex;gap:20px;margin-top:14px;font-size:12px;color:var(--text-dim);}
+.header-meta strong{color:var(--text);}
+
+/* ── Stats ── */
+.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;padding:20px 40px;}
+@media(max-width:1100px){.stats{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr);padding:16px 16px;}}
+.sc{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;}
+.sc .l{font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--text-dim);margin-bottom:6px;}
+.sc .v{font-size:26px;font-weight:700;}
+.sc .s{font-size:11px;color:var(--text-dim);margin-top:3px;}
+.sc.u .v{color:var(--red);} .sc.f .v{color:var(--orange);} .sc.a .v{color:var(--yellow);}
+.sc.d .v{color:var(--green);} .sc.w .v{color:var(--accent);} .sc.c .v{color:var(--purple);}
+
+/* ── Deadline Strip ── */
+.strip-wrap{position:relative;padding:0 40px 16px;}
+.strip{display:flex;gap:10px;overflow-x:auto;scrollbar-width:thin;scrollbar-color:var(--accent) var(--surface);padding-bottom:6px;}
+.strip::-webkit-scrollbar{height:6px;}
+.strip::-webkit-scrollbar-track{background:var(--surface);border-radius:3px;}
+.strip::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px;}
+.strip-fade-l,.strip-fade-r{position:absolute;top:0;bottom:6px;width:40px;pointer-events:none;z-index:3;}
+.strip-fade-l{left:40px;background:linear-gradient(90deg,var(--bg),transparent);}
+.strip-fade-r{right:40px;background:linear-gradient(270deg,var(--bg),transparent);}
+.chip{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px 16px;white-space:nowrap;flex-shrink:0;min-width:0;transition:border-color .15s;}
+.chip:hover{border-color:var(--accent);}
+.chip-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.chip-case{font-size:12px;font-weight:600;color:var(--text);max-width:160px;overflow:hidden;text-overflow:ellipsis;}
+.chip-label{font-size:11px;color:var(--text-dim);}
+.chip-days{font-size:11px;font-weight:700;padding:2px 8px;border-radius:8px;flex-shrink:0;}
+.chip-days.crit{background:var(--red-dim);color:var(--red);}
+.chip-days.soon{background:var(--orange-dim);color:var(--orange);}
+.chip-days.ok{background:var(--accent-dim);color:var(--accent);}
+
+/* ── Filters + Tabs ── */
+.controls{display:flex;align-items:center;gap:12px;padding:0 40px 16px;flex-wrap:wrap;}
+.tabs{display:flex;gap:4px;background:var(--surface);border-radius:10px;padding:3px;border:1px solid var(--border);}
+.tab{padding:7px 16px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;color:var(--text-dim);transition:.15s;white-space:nowrap;user-select:none;}
+.tab:hover{color:var(--text);}
+.tab.active{background:var(--accent);color:#fff;}
+.tab .tc{font-size:10px;opacity:.65;margin-left:4px;}
+.sep{flex:1;}
+.fg{display:flex;align-items:center;gap:5px;}
+.fg label{font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.4px;}
+select,input[type=text]{background:var(--surface);border:1px solid var(--border);color:var(--text);padding:6px 10px;border-radius:8px;font-size:12px;outline:none;}
+select:focus,input:focus{border-color:var(--accent);}
+
+/* ── Content ── */
+.content{padding:0 40px 40px;}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+/* ── Tables ── */
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;}
+thead th{background:var(--surface2);color:var(--text-dim);font-size:10px;text-transform:uppercase;letter-spacing:.6px;font-weight:600;padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);cursor:pointer;white-space:nowrap;position:sticky;top:0;z-index:2;}
+thead th:first-child{border-radius:8px 0 0 0;} thead th:last-child{border-radius:0 8px 0 0;}
+thead th:hover{color:var(--text);}
+thead th .sa{font-size:9px;margin-left:3px;opacity:.35;}
+thead th.sorted .sa{opacity:1;color:var(--accent);}
+tbody tr{border-bottom:1px solid var(--border);}
+tbody tr:hover{background:rgba(108,140,255,.03);}
+tbody td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top;}
+tbody tr:last-child td{border-bottom:none;}
+.case-name{font-weight:600;} .case-num{font-size:11px;color:var(--text-dim);margin-top:1px;}
+
+/* ── Badges ── */
+.b{display:inline-block;padding:2px 9px;border-radius:10px;font-size:10px;font-weight:600;white-space:nowrap;}
+.b-urgent{background:var(--red-dim);color:var(--red);}
+.b-filed{background:var(--orange-dim);color:var(--orange);}
+.b-cont{background:var(--yellow-dim);color:var(--yellow);}
+.b-denied{background:var(--green-dim);color:var(--green);}
+.b-granted{background:var(--red-dim);color:var(--red);}
+.b-antic{background:var(--yellow-dim);color:var(--yellow);}
+.b-paused{background:rgba(139,143,163,.12);color:var(--text-dim);}
+.b-high{background:var(--red-dim);color:var(--red);}
+.b-med{background:var(--orange-dim);color:var(--orange);}
+.b-appeal{background:var(--purple-dim);color:var(--purple);}
+.b-won{background:var(--green-dim);color:var(--green);}
+.b-lost{background:var(--red-dim);color:var(--red);}
+.b-pend{background:var(--orange-dim);color:var(--orange);}
+.b-stay{background:var(--yellow-dim);color:var(--yellow);}
+.dl-c{color:var(--red);font-weight:600;} .dl-s{color:var(--orange);font-weight:600;} .dl-o{color:var(--text);}
+
+/* ── Scorecard ── */
+.sc-row{display:flex;gap:20px;flex-wrap:wrap;}
+.donut-wrap{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;display:flex;align-items:center;gap:20px;min-width:300px;}
+.donut-svg{width:110px;height:110px;}
+.donut-leg{display:flex;flex-direction:column;gap:6px;}
+.leg-item{display:flex;align-items:center;gap:7px;font-size:12px;}
+.leg-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.sc-tbl{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;flex:1;min-width:280px;max-height:500px;overflow-y:auto;}
+.sc-tbl h3{font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;}
+
+/* ── Data Notes ── */
+.notes{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin-top:20px;font-size:12px;color:var(--text-dim);line-height:1.7;}
+.notes h3{font-size:11px;color:var(--text);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;margin-top:12px;}
+.notes h3:first-child{margin-top:0;}
+.notes ul{list-style:none;padding:0;}
+.notes li{padding:1px 0;} .notes li::before{content:'\2022';color:var(--accent);margin-right:7px;}
+
+/* ── Footer ── */
+.footer{padding:18px 40px;border-top:1px solid var(--border);font-size:11px;color:var(--text-dim);text-align:center;}
+@media(max-width:640px){.header,.controls,.content,.footer,.strip{padding-left:16px;padding-right:16px;}}
+</style>
+</head>
+<body>
+
+<!-- ════ HEADER ════ -->
+<div class="header">
+  <div class="header-row">
+    <div>
+      <h1>Motion <em>Dashboard</em></h1>
+      <div class="header-sub">Blackstone Law, APC &mdash; RQ Team Active Caseload</div>
+    </div>
+    <div class="week-badge">Week of March 30, 2026</div>
+  </div>
+  <div class="header-meta">
+    <span>Generated: <strong>Mon, March 30, 2026</strong></span>
+    <span>Team: <strong>RQ, SM, JM, KA</strong></span>
+    <span>Next refresh: <strong>April 6, 2026</strong></span>
+  </div>
+</div>
+
+<!-- ════ STATS ════ -->
+<div class="stats">
+  <div class="sc u"><div class="l">Urgent</div><div class="v">7</div><div class="s">Deadlines &le; 14d</div></div>
+  <div class="sc f"><div class="l">Filed / Briefing</div><div class="v">12</div><div class="s">Active hearings</div></div>
+  <div class="sc a"><div class="l">Anticipated</div><div class="v">5</div><div class="s">Expected filings</div></div>
+  <div class="sc d"><div class="l">Decided</div><div class="v">14</div><div class="s">Last 120 days + prior</div></div>
+  <div class="sc w"><div class="l">MTCA Win Rate</div><div class="v">55%</div><div class="s">6W / 5L decided</div></div>
+  <div class="sc c"><div class="l">CMCs</div><div class="v">10</div><div class="s">Next 90 days</div></div>
+</div>
+
+<!-- ════ DEADLINE STRIP ════ -->
+<div class="strip-wrap"><div class="strip-fade-l"></div><div class="strip" id="deadlineStrip"></div><div class="strip-fade-r"></div></div>
+
+<!-- ════ CONTROLS ════ -->
+<div class="controls">
+  <div class="tabs" id="tabBar">
+    <div class="tab active" data-tab="action">Action Needed<span class="tc">7</span></div>
+    <div class="tab" data-tab="briefing">Briefing<span class="tc">12</span></div>
+    <div class="tab" data-tab="watching">Watching<span class="tc">15</span></div>
+    <div class="tab" data-tab="closed">Closed<span class="tc">14</span></div>
+    <div class="tab" data-tab="scorecard">Scorecard</div>
+  </div>
+  <div class="sep"></div>
+  <div class="fg"><label>Atty</label><select id="fAtty"><option value="">All</option><option>RQ</option><option>SM</option><option>JM</option></select></div>
+  <div class="fg"><label>Type</label><select id="fType"><option value="">All</option><option value="MTCA">MTCA</option><option value="Demurrer">Demurrer</option><option value="Remand">Remand</option><option value="Consolidate">Consolidate</option><option value="MTC">MTC Disc.</option><option value="Protective">Protective Ord.</option><option value="Stay">Stay</option></select></div>
+  <div class="fg"><input type="text" id="fSearch" placeholder="Search case..." style="width:160px;"/></div>
+</div>
+
+<!-- ════ CONTENT ════ -->
+<div class="content">
+
+<!-- ──── TAB 1: ACTION NEEDED ──── -->
+<div class="tab-panel active" id="panel-action">
+<table>
+<thead><tr>
+  <th onclick="sortT(this,0)">Case <span class="sa">&#9650;</span></th>
+  <th onclick="sortT(this,1)">Action Required <span class="sa">&#9650;</span></th>
+  <th onclick="sortT(this,2)">Deadline <span class="sa">&#9650;</span></th>
+  <th onclick="sortT(this,3)">Assigned <span class="sa">&#9650;</span></th>
+</tr></thead>
+<tbody class="ft">
+  <tr data-a="SM" data-m="Demurrer" data-c="Bielma v. So Cal Sandbags">
+    <td><div class="case-name">Bielma v. So Cal Sandbags</div><div class="case-num">Riverside Sup.</div></td>
+    <td>Demurrer + Motion for Leave to File SAC hearing <strong>4/1</strong>. Opp filed 2/5, reply filed 2/10. Hearing 2/20 was MTCA &mdash; verify demurrer ruling. <span class="b b-urgent">TOMORROW</span></td>
+    <td class="dl-c">Apr 1, 2026</td>
+    <td>SM</td>
+  </tr>
+  <tr data-a="JM" data-m="Remand" data-c="Conant v. Evergreen">
+    <td><div class="case-name">Conant v. Evergreen</div><div class="case-num">N.D. Cal. 3:26-cv-01964-VC</div></td>
+    <td>Motion to remand due. Judge reassigned 3/27; all prior hearing dates vacated. Also has D&rsquo;s MTCA hearing 4/23 &mdash; need opp strategy.</td>
+    <td class="dl-c">Apr 6, 2026</td>
+    <td>JM</td>
+  </tr>
+  <tr data-a="SM" data-m="MTCA" data-c="Edmiston v. Weatherford">
+    <td><div class="case-name">Edmiston v. Weatherford</div><div class="case-num">25CV144036 &mdash; Alameda Dept. 18</div></td>
+    <td>D&rsquo;s MTCA (filed by GRSM). <strong>Opposition due 4/9.</strong> Notice of Errata filed. Draft opp immediately.</td>
+    <td class="dl-c">Apr 9, 2026</td>
+    <td>SM</td>
+  </tr>
+  <tr data-a="SM" data-m="MTC" data-c="Cohee v. Upper Deck">
+    <td><div class="case-name">Cohee v. Upper Deck</div></td>
+    <td>L/D to provide notice of MTC to D&rsquo;s objection-only responses (SROGs S1, RFP S1, RFP S2, SROGs S2)</td>
+    <td class="dl-c">Mar 30 (TODAY)</td>
+    <td>SM</td>
+  </tr>
+  <tr data-a="RQ" data-m="MTCA" data-c="Paz v. Slater">
+    <td><div class="case-name">Paz v. Slater, Inc.</div><div class="case-num">CIVSB2515041 &mdash; San Bernardino, Dept. S27</div></td>
+    <td>Analyze MTCA + Dismiss Class papers (filed 3/24 by Jackson Lewis). Hearing date TBD &mdash; monitor.</td>
+    <td class="dl-c">Awaiting hearing date</td>
+    <td>RQ</td>
+  </tr>
+  <tr data-a="JM" data-m="Consolidate" data-c="Neeley v. Wellness Together">
+    <td><div class="case-name">Neeley v. Wellness Together</div><div class="case-num">25CV000155</div></td>
+    <td>FAC filing deadline Apr 3. D&rsquo;s response deadline Apr 21 (Milana). New related client Bakshi retained 3/27.</td>
+    <td class="dl-s">Apr 3 (FAC)</td>
+    <td>JM / RQ</td>
+  </tr>
+  <tr data-a="SM" data-m="MTCA" data-c="Matute v. CCL Tube">
+    <td><div class="case-name">Matute v. CCL Tube</div></td>
+    <td>Sheppard Mullin (Campbell) requesting onboarding docs. E-signature, no audit trail. Build preemptive opp framework.</td>
+    <td class="dl-s">Strategic</td>
+    <td>SM</td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+<!-- ──── TAB 2: BRIEFING ──── -->
+<div class="tab-panel" id="panel-briefing">
+<table>
+<thead><tr>
+  <th onclick="sortT(this,0)">Case <span class="sa">&#9650;</span></th>
+  <th onclick="sortT(this,1)">Motion <span class="sa">&#9650;</span></th>
+  <th onclick="sortT(this,2)">Court / Dept <span class="sa">&#9650;</span></th>
+  <th onclick="sortT(this,3)">Hearing <span class="sa">&#9650;</span></th>
+  <th onclick="sortT(this,4)">Opp Due <span class="sa">&#9650;</span></th>
+  <th onclick="sortT(this,5)">Reply Due <span class="sa">&#9650;</span></th>
+  <th>Defense Counsel</th>
+  <th>Status</th>
+</tr></thead>
+<tbody class="ft">
+  <tr data-a="SM" data-m="MTCA" data-c="Edmiston v. Weatherford">
+    <td><div class="case-name">Edmiston v. Weatherford</div><div class="case-num">25CV144036</div></td>
+    <td>D&rsquo;s MTCA</td>
+    <td>Alameda Sup., Dept. 18</td>
+    <td class="dl-s"><strong>Apr 22</strong></td>
+    <td class="dl-c">Apr 9</td>
+    <td class="dl-s">Apr 15</td>
+    <td>GRSM</td>
+    <td><span class="b b-urgent">Opp due 10d</span></td>
+  </tr>
+  <tr data-a="JM" data-m="Remand" data-c="Conant v. Evergreen">
+    <td><div class="case-name">Conant v. Evergreen</div><div class="case-num">3:26-cv-01964-VC</div></td>
+    <td>P&rsquo;s Motion to Remand</td>
+    <td>N.D. Cal.</td>
+    <td class="dl-c"><strong>Filing: Apr 6</strong></td>
+    <td>~Apr 20 (14d)</td>
+    <td>~Apr 27 (7d)</td>
+    <td>Fisher Phillips &mdash; Peixoto</td>
+    <td><span class="b b-urgent">Judge reassigned</span></td>
+  </tr>
+  <tr data-a="JM" data-m="MTCA" data-c="Conant v. Evergreen">
+    <td><div class="case-name">Conant v. Evergreen</div><div class="case-num">3:26-cv-01964-VC</div></td>
+    <td>D&rsquo;s MTCA</td>
+    <td>N.D. Cal.</td>
+    <td class="dl-s"><strong>Apr 23</strong></td>
+    <td class="dl-c">Apr 2</td>
+    <td class="dl-s">Apr 9</td>
+    <td>Fisher Phillips &mdash; Peixoto</td>
+    <td><span class="b b-urgent">Opp due 3d</span></td>
+  </tr>
+  <tr data-a="JM" data-m="Consolidate" data-c="Caleres / Ramirez">
+    <td><div class="case-name">Caleres / Ramirez (PAGA)</div><div class="case-num">CIVRS2510023</div></td>
+    <td>D&rsquo;s Motion to Consolidate</td>
+    <td>San Bernardino, Dept. R17</td>
+    <td class="dl-s"><strong>Apr 22</strong></td>
+    <td class="dl-s">Apr 9</td>
+    <td>Apr 15</td>
+    <td>Ogletree Deakins &mdash; Rivera</td>
+    <td><span class="b b-filed">Briefing</span></td>
+  </tr>
+  <tr data-a="RQ" data-m="MTCA" data-c="Hawkins v. NNA Services">
+    <td><div class="case-name">Hawkins v. NNA Services</div><div class="case-num">25STCV30828</div></td>
+    <td>D&rsquo;s MTCA</td>
+    <td>LASC, Dept. 12</td>
+    <td class="dl-o"><strong>Jun 25</strong></td>
+    <td class="dl-s">Jun 11</td>
+    <td>Jun 18</td>
+    <td>Littler Mendelson &mdash; Stacey James</td>
+    <td><span class="b b-filed">Briefing</span></td>
+  </tr>
+  <tr data-a="RQ" data-m="MTCA" data-c="Paz v. Slater">
+    <td><div class="case-name">Paz v. Slater, Inc.</div><div class="case-num">CIVSB2515041</div></td>
+    <td>D&rsquo;s MTCA + Dismiss Class</td>
+    <td>San Bernardino, Dept. S27<br>Hon. Thomas S. Garza</td>
+    <td class="dl-c"><strong>TBD</strong></td>
+    <td>TBD</td>
+    <td>TBD</td>
+    <td>Jackson Lewis &mdash; Desiderio, Lara, Woo</td>
+    <td><span class="b b-urgent">Awaiting date</span></td>
+  </tr>
+  <tr data-a="JM" data-m="MTCA" data-c="Duenas v. Cargomatic">
+    <td><div class="case-name">Duenas v. Cargomatic</div><div class="case-num">25STCV16450</div></td>
+    <td>D&rsquo;s MTCA (cont&rsquo;d from 5/5)</td>
+    <td>LASC, Dept. 17<br>Hon. Laura Seigle</td>
+    <td class="dl-o"><strong>Jun 5</strong></td>
+    <td>May 22</td>
+    <td>May 29</td>
+    <td>Fisher Phillips &mdash; Taylor / Bui</td>
+    <td><span class="b b-cont">Cont&rsquo;d &mdash; stip 3/23</span></td>
+  </tr>
+  <tr data-a="JM" data-m="Protective" data-c="Duenas v. Cargomatic">
+    <td><div class="case-name">Duenas v. Cargomatic</div><div class="case-num">25STCV16450</div></td>
+    <td>D&rsquo;s Motion for Protective Order</td>
+    <td>LASC, Dept. 17</td>
+    <td class="dl-o"><strong>Jun 5</strong></td>
+    <td>May 22</td>
+    <td>May 29</td>
+    <td>Fisher Phillips &mdash; Taylor / Bui</td>
+    <td><span class="b b-filed">Briefing</span></td>
+  </tr>
+  <tr data-a="SM" data-m="MTC" data-c="Caleres / Ramirez">
+    <td><div class="case-name">Ramirez v. Caleres (Federal)</div><div class="case-num">5:26-cv-00054-JGB-SP</div></td>
+    <td>D&rsquo;s Motion to Strike Class Claims</td>
+    <td>C.D. Cal.</td>
+    <td class="dl-o"><strong>TBD</strong></td>
+    <td>Filed 3/13; Opp 3/16</td>
+    <td>&mdash;</td>
+    <td>Ogletree Deakins &mdash; Rivera</td>
+    <td><span class="b b-filed">Briefing</span></td>
+  </tr>
+  <tr data-a="" data-m="Demurrer" data-c="Yang v. PRS Holdings">
+    <td><div class="case-name">Yang v. PRS Holdings</div><div class="case-num">25CV005380</div></td>
+    <td>D&rsquo;s Demurrer</td>
+    <td>Sacramento, Dept. 22</td>
+    <td class="dl-o"><strong>Jun 12</strong></td>
+    <td>Jun 1</td>
+    <td>Jun 5</td>
+    <td>Morgan Lewis &mdash; Burch</td>
+    <td><span class="b b-filed">Briefing</span></td>
+  </tr>
+  <tr data-a="" data-m="MTCA" data-c="Front Porch / Rouse-Hasan">
+    <td><div class="case-name">Front Porch / Rouse-Hasan</div></td>
+    <td>D&rsquo;s MTCA (continued)</td>
+    <td>Alameda Sup., Dept. 22</td>
+    <td class="dl-o"><strong>Jul 21</strong></td>
+    <td>Jul 8</td>
+    <td>Jul 14</td>
+    <td>Kate LaQuay &mdash; Munck Wilson Mandala</td>
+    <td><span class="b b-cont">Cont&rsquo;d &mdash; pend. mediation</span></td>
+  </tr>
+  <tr data-a="JM" data-m="MTCA" data-c="Brown v. Hope Program">
+    <td><div class="case-name">Brown v. Hope Program</div><div class="case-num">157214 &mdash; Alameda Dept. 20</div></td>
+    <td>D&rsquo;s MTCA</td>
+    <td>Alameda Sup., Dept. 20</td>
+    <td class="dl-o"><strong>Jul 22</strong></td>
+    <td>Jul 9</td>
+    <td>Jul 15</td>
+    <td>Donahue Fitzgerald &mdash; Garretson</td>
+    <td><span class="b b-filed">Briefing</span></td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+<!-- ──── TAB 3: WATCHING ──── -->
+<div class="tab-panel" id="panel-watching">
+
+<h3 style="font-size:13px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">Anticipated Motions</h3>
+<table>
+<thead><tr>
+  <th onclick="sortT(this,0)">Case <span class="sa">&#9650;</span></th>
+  <th onclick="sortT(this,1)">Expected Motion <span class="sa">&#9650;</span></th>
+  <th>Likelihood</th>
+  <th>Trigger / Notes</th>
+  <th>Assigned</th>
+</tr></thead>
+<tbody class="ft">
+  <tr data-a="SM" data-m="MTCA" data-c="Matute v. CCL Tube">
+    <td><div class="case-name">Matute v. CCL Tube</div></td>
+    <td>MTCA</td>
+    <td><span class="b b-high">HIGH</span></td>
+    <td>Sheppard Mullin (Campbell) has arb agreement. E-signature, no audit trail. Requesting onboarding docs 3/25.</td>
+    <td>SM</td>
+  </tr>
+  <tr data-a="RQ" data-m="MTCA" data-c="Cazares v. Oleander Holdings">
+    <td><div class="case-name">Cazares v. Oleander Holdings</div></td>
+    <td>MTCA</td>
+    <td><span class="b b-med">MEDIUM</span></td>
+    <td>RQ sent letter 3/26 requesting arb docs. New defense counsel appeared.</td>
+    <td>RQ</td>
+  </tr>
+  <tr data-a="SM" data-m="MTCA" data-c="Hernandez v. Apoyo Financiero">
+    <td><div class="case-name">Hernandez/Ramirez v. Apoyo Fin.</div></td>
+    <td>MTCA</td>
+    <td><span class="b b-med">MEDIUM</span></td>
+    <td>Co-counsel Medina McKelvey requesting arb docs 3/24.</td>
+    <td>SM</td>
+  </tr>
+  <tr data-a="JM" data-m="MTCA" data-c="Ramirez v. Finish Line">
+    <td><div class="case-name">Ramirez v. The Finish Line</div></td>
+    <td>MTCA</td>
+    <td><span class="b b-med">MEDIUM</span></td>
+    <td>Ogletree Deakins (Levin) 3/25. Arb deficiencies: e-signed, no audit trail, no IP.</td>
+    <td>JM</td>
+  </tr>
+  <tr data-a="RQ" data-m="MTCA" data-c="Hyatt / Seybold">
+    <td><div class="case-name">Hyatt / Seybold</div><div class="case-num">7:26-cv-02103 &mdash; N.D. Cal.</div></td>
+    <td>MTCA</td>
+    <td><span class="b b-filed">FILED</span></td>
+    <td>Hearing <strong>Aug 27</strong>. Opp 8/14, Reply 8/20. Defense: Seyfarth Shaw (Richard Mojica). FAC answer filed 3/11.</td>
+    <td>RQ</td>
+  </tr>
+</tbody>
+</table>
+
+<h3 style="font-size:13px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.5px;margin:24px 0 10px;">Upcoming CMCs &amp; Status Conferences</h3>
+<table>
+<thead><tr>
+  <th onclick="sortT(this,0)">Date <span class="sa">&#9650;</span></th>
+  <th onclick="sortT(this,1)">Case <span class="sa">&#9650;</span></th>
+  <th>Event</th>
+  <th>Court / Dept</th>
+  <th>Case No.</th>
+  <th>Assigned</th>
+</tr></thead>
+<tbody class="ft">
+  <tr data-a="SM" data-m="" data-c="Edmiston v. Weatherford"><td><strong>Apr 29</strong></td><td><div class="case-name">Edmiston v. Weatherford (Class)</div></td><td>CMC (Complex)</td><td>Alameda Sup., Dept. 18</td><td>25CV144036</td><td>SM</td></tr>
+  <tr data-a="SM" data-m="" data-c="Edmiston v. Weatherford"><td><strong>Apr 29</strong></td><td><div class="case-name">Edmiston v. Weatherford (PAGA)</div></td><td>CMC (Complex)</td><td>Alameda Sup.</td><td>&mdash;</td><td>SM</td></tr>
+  <tr data-a="RQ" data-m="" data-c="Soto v. Control Air"><td><strong>Apr 29</strong></td><td><div class="case-name">Soto v. Control Air</div></td><td>Status Conference</td><td>Sacramento CX101</td><td>30-2025-01477443</td><td>RQ</td></tr>
+  <tr data-a="" data-m="" data-c="Galvez v. Snap-On"><td><strong>Jun 3</strong></td><td><div class="case-name">Galvez v. Snap-On Logistics</div></td><td>CMC</td><td>LASC</td><td>26STCV06582</td><td>&mdash;</td></tr>
+  <tr data-a="" data-m="Demurrer" data-c="Yang v. PRS Holdings"><td><strong>Jun 12</strong></td><td><div class="case-name">Yang v. PRS Holdings</div></td><td>CMC + Demurrer Hearing</td><td>Sacramento, Dept. 22</td><td>25CV005380</td><td>&mdash;</td></tr>
+  <tr data-a="JM" data-m="" data-c="Brown v. Hope Program"><td><strong>Jun 25</strong></td><td><div class="case-name">Brown v. Hope Program</div></td><td>Status Conf. / Post-Med.</td><td>Alameda, Dept. 20</td><td>157214</td><td>JM</td></tr>
+  <tr data-a="" data-m="" data-c="Rucker v. River City"><td><strong>Jun 26</strong></td><td><div class="case-name">Rucker v. River City Medical</div></td><td>Complex CMC</td><td>Sacramento</td><td>&mdash;</td><td>&mdash;</td></tr>
+  <tr data-a="" data-m="" data-c="Lopez v. General Coatings"><td><strong>Jul 31</strong></td><td><div class="case-name">Lopez v. General Coatings</div></td><td>Initial CMC</td><td>San Diego, Dept. N-31</td><td>26CU011461N</td><td>&mdash;</td></tr>
+  <tr data-a="" data-m="" data-c="Miranda v. Imperial Valley"><td><strong>Sep 3</strong></td><td><div class="case-name">Miranda v. Imperial Valley</div></td><td>CMC</td><td>Imperial, Dept. 9</td><td>ECU004143</td><td>&mdash;</td></tr>
+  <tr data-a="" data-m="" data-c="Chavez v. Southland Box"><td><strong>Jan 21, 2027</strong></td><td><div class="case-name">Chavez v. Southland Box</div></td><td>CMC + OSC</td><td>LASC, Dept. 68</td><td>&mdash;</td><td>&mdash;</td></tr>
+</tbody>
+</table>
+
+<h3 style="font-size:13px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.5px;margin:24px 0 10px;">Other Watched Items</h3>
+<table>
+<thead><tr>
+  <th>Case</th>
+  <th>Item</th>
+  <th>Status</th>
+  <th>Notes</th>
+</tr></thead>
+<tbody class="ft">
+  <tr data-a="JM" data-m="MTCA" data-c="Duenas v. Cargomatic">
+    <td><div class="case-name">Duenas v. Cargomatic</div></td>
+    <td>MTCA (continued)</td>
+    <td><span class="b b-cont">Stip cont&rsquo;d 3/23</span></td>
+    <td>MTCA continued to <strong>6/5/26</strong> (Dept. 17, Judge Seigle). Same date as D&rsquo;s protective order motion.</td>
+  </tr>
+  <tr data-a="" data-m="" data-c="Zhang / Halrec">
+    <td><div class="case-name">Zhang / Halrec (Dublin Toyota)</div></td>
+    <td>MTCA withdrawal status</td>
+    <td><span class="b b-paused">UNCONFIRMED</span></td>
+    <td>Check if MTCA was formally withdrawn after Dublin Toyota MTCA granted.</td>
+  </tr>
+  <tr data-a="" data-m="" data-c="Valenzuela v. Childnet">
+    <td><div class="case-name">Valenzuela v. Childnet</div></td>
+    <td>Case stayed / Lift Stay denied</td>
+    <td><span class="b b-stay">STAYED</span></td>
+    <td>MTCA granted 11/14/25 (PAGA only). Motion to Lift Stay denied 1/20/26.</td>
+  </tr>
+  <tr data-a="" data-m="MTCA" data-c="Parker Palm Springs / Diaz">
+    <td><div class="case-name">Parker Palm Springs / Diaz</div></td>
+    <td>MTCA &mdash; delegation clause</td>
+    <td><span class="b b-pend">PENDING</span></td>
+    <td>12/5/25 hearing &mdash; further oral argument ordered re delegation clause. Defense: Nicholas &amp; Tomasevic (Jake Schulte).</td>
+  </tr>
+  <tr data-a="" data-m="" data-c="Rosado v. Ridgecrest">
+    <td><div class="case-name">Rosado v. Ridgecrest Regional</div></td>
+    <td>No active motion</td>
+    <td><span class="b b-paused">MONITOR</span></td>
+    <td>CMC was 12/17/25. Watch for defense motion activity.</td>
+  </tr>
+  <tr data-a="" data-m="" data-c="William V. v. Patrol Solutions">
+    <td><div class="case-name">William V. v. Patrol Solutions</div></td>
+    <td>Post-MTCA denial</td>
+    <td><span class="b b-denied">DENIED 2/6/26</span></td>
+    <td>Formation / e-sign issues. Watch for appeal or discovery restart.</td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+<!-- ──── TAB 4: CLOSED ──── -->
+<div class="tab-panel" id="panel-closed">
+<table>
+<thead><tr>
+  <th onclick="sortT(this,0)">Case <span class="sa">&#9650;</span></th>
+  <th onclick="sortT(this,1)">Motion <span class="sa">&#9650;</span></th>
+  <th onclick="sortT(this,2)">Outcome <span class="sa">&#9650;</span></th>
+  <th onclick="sortT(this,3)">Date <span class="sa">&#9650;</span></th>
+  <th>Appeal / Follow-Up</th>
+  <th>Defense Counsel</th>
+</tr></thead>
+<tbody class="ft">
+  <!-- WON (MTCA DENIED) -->
+  <tr data-a="RQ" data-m="MTCA" data-c="Acevedo v. Wisk Class"><td><div class="case-name">Acevedo v. Wisk (Class)</div></td><td>MTCA</td><td><span class="b b-denied">DENIED</span></td><td>Pre-period</td><td><span class="b b-appeal">Appeal &mdash; 1st DCA A175526</span></td><td>&mdash;</td></tr>
+  <tr data-a="RQ" data-m="MTCA" data-c="Acevedo v. Wisk PAGA"><td><div class="case-name">Acevedo v. Wisk (PAGA)</div></td><td>MTCA</td><td><span class="b b-denied">DENIED</span></td><td>Pre-period</td><td><span class="b b-appeal">Appeal &mdash; 1st DCA</span></td><td>&mdash;</td></tr>
+  <tr data-a="RQ" data-m="MTCA" data-c="Anguiano v. Kinecta"><td><div class="case-name">Anguiano v. Kinecta</div></td><td>MTCA</td><td><span class="b b-denied">DENIED</span></td><td>Feb 5, 2026</td><td>Defense considering appeal (3/24 email)</td><td>&mdash;</td></tr>
+  <tr data-a="" data-m="MTCA" data-c="Hikvision / Fernald"><td><div class="case-name">Hikvision / Fernald</div></td><td>MTCA</td><td><span class="b b-denied">DENIED</span></td><td>Jan 22, 2026</td><td>Authentication issues &mdash; no appeal filed</td><td>&mdash;</td></tr>
+  <tr data-a="" data-m="MTCA" data-c="Williams v. Patrol Solutions"><td><div class="case-name">Williams v. Patrol Solutions</div></td><td>MTCA</td><td><span class="b b-denied">DENIED</span></td><td>Feb 6, 2026</td><td>Formation / e-sign defects. Watch for appeal.</td><td>&mdash;</td></tr>
+  <tr data-a="" data-m="MTCA" data-c="LA Solar / Steves"><td><div class="case-name">LA Solar / Steves</div></td><td>MTCA</td><td><span class="b b-denied">DENIED</span></td><td>Feb 13, 2026</td><td>None</td><td>Gordon Rees &mdash; Eulalio J. Garcia</td></tr>
+  <!-- LOST (MTCA GRANTED) -->
+  <tr data-a="RQ" data-m="MTCA" data-c="Hoskins v. Ridgecrest"><td><div class="case-name">Hoskins v. Ridgecrest</div></td><td>MTCA</td><td><span class="b b-granted">GRANTED</span></td><td>Mar 17, 2026</td><td>JPA discussions w/ Gundzik</td><td>&mdash;</td></tr>
+  <tr data-a="SM" data-m="MTCA" data-c="Cohee v. Upper Deck"><td><div class="case-name">Cohee v. Upper Deck</div></td><td>MTCA</td><td><span class="b b-granted">GRANTED</span></td><td>Pre-period</td><td>None (discovery MTC pending)</td><td>&mdash;</td></tr>
+  <tr data-a="" data-m="MTCA" data-c="Touch / Hamcor (Dublin Toyota)"><td><div class="case-name">Touch / Hamcor (Dublin Toyota)</div></td><td>MTCA</td><td><span class="b b-granted">GRANTED</span></td><td>Pre-period</td><td>None</td><td>Littler &mdash; Courtney Chambers</td></tr>
+  <tr data-a="" data-m="MTCA" data-c="Truitt / Carias-Paredes Class"><td><div class="case-name">Truitt / Carias-Paredes (Class)</div></td><td>MTCA</td><td><span class="b b-granted">GRANTED</span></td><td>Pre-period</td><td>Only De Oilers bound by arb agreement</td><td>Belden Blaine Raytis &mdash; Viviano Aguilar</td></tr>
+  <tr data-a="" data-m="MTCA" data-c="Valenzuela v. Childnet"><td><div class="case-name">Valenzuela v. Childnet</div></td><td>MTCA</td><td><span class="b b-granted">GRANTED</span></td><td>Nov 14, 2025</td><td>PAGA only; case stayed. Lift Stay denied 1/20/26.</td><td>Martorell Law</td></tr>
+  <!-- OTHER DECIDED -->
+  <tr data-a="" data-m="Stay" data-c="Truitt (PAGA)"><td><div class="case-name">Truitt / Carias-Paredes (PAGA)</div></td><td>Motion to Stay PAGA</td><td><span class="b b-granted">GRANTED</span></td><td>Dec 19, 2025</td><td>PAGA stayed pending arb outcome</td><td>Belden Blaine Raytis</td></tr>
+  <tr data-a="" data-m="Remand" data-c="Caleres / Ramirez Class"><td><div class="case-name">Caleres / Ramirez (Class)</div></td><td>Motion to Remand</td><td><span class="b b-granted">DENIED</span></td><td>Mar 23, 2026</td><td>Untimely CAFA removal &mdash; case remains in state</td><td>Ogletree Deakins &mdash; Rivera</td></tr>
+  <tr data-a="JM" data-m="Consolidate" data-c="Neeley v. Wellness Together"><td><div class="case-name">Neeley v. Wellness Together</div><div class="case-num">25CV000155 / 25CV138991</div></td><td>Consolidation</td><td><span class="b b-denied">Not Contested</span></td><td>Mar 17, 2026</td><td>FAC due 4/3. Bakshi 3/27.</td><td>&mdash;</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ──── TAB 5: SCORECARD ──── -->
+<div class="tab-panel" id="panel-scorecard">
+<div class="sc-row">
+  <div class="donut-wrap">
+    <svg class="donut-svg" viewBox="0 0 120 120" id="donut"></svg>
+    <div class="donut-leg">
+      <div class="leg-item"><div class="leg-dot" style="background:var(--green)"></div>Won (Denied): 6</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--red)"></div>Lost (Granted): 5</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--orange)"></div>Pending / Briefing: 6</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--yellow)"></div>Continued: 2</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--purple)"></div>Anticipated: 4</div>
+    </div>
+  </div>
+  <div class="sc-tbl">
+    <h3>MTCA Case-by-Case Breakdown</h3>
+    <table>
+    <thead><tr><th>Case</th><th>Result</th><th>Status / Notes</th></tr></thead>
+    <tbody>
+      <!-- WON -->
+      <tr><td>Acevedo v. Wisk (Class)</td><td><span class="b b-won">WON</span></td><td>On appeal (1st DCA A175526)</td></tr>
+      <tr><td>Acevedo v. Wisk (PAGA)</td><td><span class="b b-won">WON</span></td><td>On appeal (1st DCA)</td></tr>
+      <tr><td>Anguiano v. Kinecta</td><td><span class="b b-won">WON</span></td><td>Defense considering appeal</td></tr>
+      <tr><td>Hikvision / Fernald</td><td><span class="b b-won">WON</span></td><td>Authentication &mdash; denied 1/22/26</td></tr>
+      <tr><td>Williams v. Patrol Solutions</td><td><span class="b b-won">WON</span></td><td>Formation / e-sign &mdash; denied 2/6/26</td></tr>
+      <tr><td>LA Solar / Steves</td><td><span class="b b-won">WON</span></td><td>Denied 2/13/26 (Gordon Rees)</td></tr>
+      <!-- LOST -->
+      <tr><td>Hoskins v. Ridgecrest</td><td><span class="b b-lost">LOST</span></td><td>Granted 3/17/26. JPA discussions.</td></tr>
+      <tr><td>Cohee v. Upper Deck</td><td><span class="b b-lost">LOST</span></td><td>Granted pre-period</td></tr>
+      <tr><td>Touch / Hamcor (Dublin Toyota)</td><td><span class="b b-lost">LOST</span></td><td>Granted (Littler / Chambers)</td></tr>
+      <tr><td>Truitt / Carias-Paredes (Class)</td><td><span class="b b-lost">LOST</span></td><td>Granted &mdash; De Oilers only</td></tr>
+      <tr><td>Valenzuela v. Childnet</td><td><span class="b b-lost">LOST</span></td><td>Granted 11/14/25 (PAGA stayed)</td></tr>
+      <!-- PENDING -->
+      <tr><td>Edmiston v. Weatherford</td><td><span class="b b-pend">PENDING</span></td><td>Hearing 4/22/26 (GRSM)</td></tr>
+      <tr><td>Conant v. Evergreen</td><td><span class="b b-pend">PENDING</span></td><td>Hearing 4/23/26 (Fisher Phillips)</td></tr>
+      <tr><td>Hawkins v. NNA</td><td><span class="b b-pend">PENDING</span></td><td>Hearing 6/25/26</td></tr>
+      <tr><td>Paz v. Slater</td><td><span class="b b-pend">PENDING</span></td><td>Filed 3/24, hearing TBD (Jackson Lewis)</td></tr>
+      <tr><td>Brown v. Hope Program</td><td><span class="b b-pend">PENDING</span></td><td>Hearing 7/22/26</td></tr>
+      <tr><td>Hyatt / Seybold</td><td><span class="b b-pend">PENDING</span></td><td>Hearing 8/27/26 (Seyfarth Shaw)</td></tr>
+      <!-- CONTINUED -->
+      <tr><td>Front Porch / Rouse-Hasan</td><td><span class="b b-cont">CONT'D</span></td><td>Hearing 7/21/26 (pending mediation)</td></tr>
+      <tr><td>Duenas v. Cargomatic</td><td><span class="b b-cont">CONT'D</span></td><td>MTCA hearing 6/5/26 (stip cont. 3/23)</td></tr>
+      <!-- SPECIAL -->
+      <tr><td>Parker Palm Springs / Diaz</td><td><span class="b b-pend">PENDING</span></td><td>12/5/25 &mdash; further oral arg re delegation</td></tr>
+      <tr><td>Bielma v. So Cal Sandbags</td><td><span class="b b-pend">DECIDED?</span></td><td>Hearing 2/20/26 &mdash; verify ruling</td></tr>
+    </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Data Notes -->
+<div class="notes">
+  <h3>Data Sources</h3>
+  <ul>
+    <li>RQ Motions 2.xlsx (Karen &mdash; updated 3/26/2026) &mdash; primary source for all motion data</li>
+    <li>Outlook calendar (wildcard search, forward + backward 120&ndash;180 days) &mdash; hearing dates, CMCs</li>
+    <li>Outlook email (Active Cases subfolders) &mdash; ESERVICE, MTCA filings, M&C correspondence, minute orders</li>
+  </ul>
+  <h3>Calendar vs. Email Reconstruction</h3>
+  <ul>
+    <li>Hawkins MTCA hearing (6/25): Calendar-confirmed; opp 6/11, reply 6/18 (docketing advisory)</li>
+    <li>Edmiston MTCA hearing (4/22): Email-confirmed (GRSM filing, Notice of Errata, opp 4/9)</li>
+    <li>Conant MTCA hearing (4/23): Spreadsheet-sourced; opp 4/2, reply 4/9</li>
+    <li>Paz MTCA filing (3/24): Email-confirmed; hearing date not yet calendared</li>
+    <li>Duenas MTCA (6/5): Lexis Track alert &mdash; stip cont. 3/23, new hearing 6/5/26 Dept. 17 (Seigle)</li>
+    <li>Duenas protective order (6/5): Spreadsheet-sourced &mdash; same date as MTCA</li>
+    <li>Caleres Motion to Strike (federal): ECF activity 3/13 (filed), 3/16 (opp) &mdash; C.D. Cal. 5:26-cv-00054-JGB-SP</li>
+    <li>Bielma MTCA hearing (2/20): Email-confirmed (opposition 2/5, reply 2/10, Defense: Varner Brandt / Elia Vazquez)</li>
+    <li>Hyatt MTCA hearing (8/27): Spreadsheet-sourced; Seyfarth Shaw (Mojica). Email confirms CMC 2/17, FAC answer 3/11.</li>
+    <li>Brown MTCA (7/22): Spreadsheet-sourced</li>
+    <li>Front Porch MTCA (7/21): Spreadsheet-sourced &mdash; continued from earlier date</li>
+  </ul>
+  <h3>Deadline Calculation Methods</h3>
+  <ul>
+    <li>State (CCP &sect; 1005(b)): Opp = hearing &minus; 9 court days; Reply = hearing &minus; 5 court days</li>
+    <li>Conant / Hyatt (N.D. Cal.): Local Rule &mdash; Opp = filing + 14d; Reply = opp + 7d</li>
+    <li>William V. (C.D. Cal.): Local Rule &mdash; Opp = hearing &minus; 21d; Reply = hearing &minus; 14d</li>
+  </ul>
+  <h3>MTCA Scorecard Methodology</h3>
+  <ul>
+    <li>Win Rate = MTCA Denied / (Denied + Granted) = 6 / 11 = <strong>55%</strong></li>
+    <li>Excludes: pending (6), continued (2), anticipated (4), Parker Palm Springs (pending further argument), Bielma (unverified)</li>
+    <li>WON: Acevedo Class, Acevedo PAGA, Hikvision/Fernald, Anguiano, Patrol Solutions, LA Solar/Steves</li>
+    <li>LOST: Dublin Toyota/Touch, Truitt Class, Valenzuela, Cohee, Hoskins</li>
+  </ul>
+  <h3>Unconfirmed Items</h3>
+  <ul>
+    <li>Zhang / Halrec: MTCA withdrawal status not confirmed</li>
+    <li>Bielma: 2/20 hearing occurred but ruling not confirmed &mdash; listed as "decided?" in scorecard</li>
+    <li>Parker Palm Springs / Diaz: Pending further oral argument re delegation clause (12/5/25)</li>
+  </ul>
+</div>
+</div>
+
+</div><!-- /content -->
+
+<div class="footer">Generated by motion-dashboard &mdash; Blackstone Law, APC &mdash; Next run: Monday, April 6, 2026</div>
+
+<script>
+/* ── Deadline Strip ── */
+(function(){
+  const today = new Date('2026-03-30');
+  const deadlines = [
+    {case:'Cohee', label:'MTC Notice L/D', date:'2026-03-30'},
+    {case:'Bielma', label:'Demurrer Hearing', date:'2026-04-01'},
+    {case:'Conant', label:'MTCA Opp Due', date:'2026-04-02'},
+    {case:'Neeley', label:'FAC Deadline', date:'2026-04-03'},
+    {case:'Conant', label:'Remand Filing', date:'2026-04-06'},
+    {case:'Edmiston', label:'MTCA Opp Due', date:'2026-04-09'},
+    {case:'Caleres', label:'Consolidation Opp', date:'2026-04-09'},
+    {case:'Soto', label:'M&C re SC', date:'2026-04-15'},
+    {case:'Edmiston', label:'MTCA Reply', date:'2026-04-15'},
+    {case:'Neeley', label:'D Response', date:'2026-04-21'},
+    {case:'Edmiston', label:'MTCA Hearing', date:'2026-04-22'},
+    {case:'Caleres', label:'Consolidation Hrg', date:'2026-04-22'},
+    {case:'Conant', label:'MTCA Hearing', date:'2026-04-23'},
+    {case:'Edmiston', label:'CMC', date:'2026-04-29'},
+    {case:'Soto', label:'Status Conf.', date:'2026-04-29'},
+    {case:'Hawkins', label:'MTCA Opp Due', date:'2026-06-11'},
+    {case:'Hawkins', label:'MTCA Reply', date:'2026-06-18'},
+    {case:'Duenas', label:'Prot. Ord. Opp', date:'2026-05-22'},
+    {case:'Yang', label:'Demurrer Opp', date:'2026-06-01'},
+    {case:'Duenas', label:'MTCA + Prot. Ord.', date:'2026-06-05'},
+    {case:'Yang', label:'Demurrer Hearing', date:'2026-06-12'},
+    {case:'Hawkins', label:'MTCA Hearing', date:'2026-06-25'},
+    {case:'Front Porch', label:'MTCA Opp Due', date:'2026-07-08'},
+    {case:'Brown', label:'MTCA Opp Due', date:'2026-07-09'},
+    {case:'Front Porch', label:'MTCA Hearing', date:'2026-07-21'},
+    {case:'Brown', label:'MTCA Hearing', date:'2026-07-22'},
+    {case:'Hyatt', label:'MTCA Opp Due', date:'2026-08-14'},
+    {case:'Hyatt', label:'MTCA Hearing', date:'2026-08-27'},
+  ];
+  const strip = document.getElementById('deadlineStrip');
+  deadlines.forEach(d => {
+    const diff = Math.round((new Date(d.date) - today) / 864e5);
+    const cls = diff <= 0 ? 'crit' : diff <= 14 ? 'crit' : diff <= 30 ? 'soon' : 'ok';
+    const dotColor = diff <= 0 ? 'var(--red)' : diff <= 14 ? 'var(--red)' : diff <= 30 ? 'var(--orange)' : 'var(--accent)';
+    const dayLabel = diff === 0 ? 'TODAY' : diff < 0 ? Math.abs(diff)+'d ago' : diff + 'd';
+    strip.innerHTML += `<div class="chip"><div class="chip-dot" style="background:${dotColor}"></div><div><div class="chip-case">${d.case}</div><div class="chip-label">${d.label}</div></div><div class="chip-days ${cls}">${dayLabel}</div></div>`;
+  });
+})();
+
+/* ── Tabs ── */
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('panel-' + t.dataset.tab).classList.add('active');
+  });
+});
+
+/* ── Sorting ── */
+function parseDate(s) {
+  if (!s) return Infinity;
+  s = s.replace(/[~()\[\]]/g,'').replace(/Filing:\s*/i,'').trim();
+  const m = s.match(/(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2})(?:[,\s]+(\d{4}))?/i);
+  if (m) { const yr = m[3] || '2026'; return new Date(m[1]+' '+m[2]+', '+yr).getTime(); }
+  if (/today/i.test(s)) return new Date('2026-03-30').getTime();
+  if (/tomorrow/i.test(s)) return new Date('2026-03-31').getTime();
+  if (/TBD|await/i.test(s)) return Infinity;
+  if (/strategic/i.test(s)) return Infinity;
+  return Infinity;
+}
+function isDateCol(cells, col) {
+  let dates = 0;
+  for (let i = 0; i < Math.min(cells.length, 6); i++) {
+    const t = (cells[i].cells[col]||{}).textContent||'';
+    if (/(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d/i.test(t) || /today|tomorrow/i.test(t)) dates++;
+  }
+  return dates >= 2;
+}
+function sortT(th, col) {
+  const table = th.closest('table'), tbody = table.querySelector('tbody');
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+  const asc = th.classList.contains('sorted-asc');
+  table.querySelectorAll('th').forEach(h => h.classList.remove('sorted','sorted-asc','sorted-desc'));
+  const dateMode = isDateCol(rows, col);
+  rows.sort((a,b) => {
+    const at = (a.cells[col]||{}).textContent||'', bt = (b.cells[col]||{}).textContent||'';
+    if (dateMode) {
+      const da = parseDate(at), db = parseDate(bt);
+      return asc ? db - da : da - db;
+    }
+    return asc ? bt.localeCompare(at) : at.localeCompare(bt);
+  });
+  th.classList.add('sorted', asc ? 'sorted-desc' : 'sorted-asc');
+  rows.forEach(r => tbody.appendChild(r));
+}
+
+/* ── Filters ── */
+function applyF() {
+  const a = document.getElementById('fAtty').value;
+  const m = document.getElementById('fType').value;
+  const s = document.getElementById('fSearch').value.toLowerCase();
+  document.querySelectorAll('.ft tr').forEach(r => {
+    const ma = !a || (r.dataset.a||'').includes(a);
+    const mm = !m || (r.dataset.m||'').includes(m);
+    const ms = !s || (r.dataset.c||'').toLowerCase().includes(s);
+    r.style.display = (ma && mm && ms) ? '' : 'none';
+  });
+}
+['fAtty','fType'].forEach(id => document.getElementById(id).addEventListener('change', applyF));
+document.getElementById('fSearch').addEventListener('input', applyF);
+
+/* ── Donut ── */
+(function(){
+  // 6 won, 5 lost, 6 pending, 2 continued, 4 anticipated
+  const data = [{v:6,c:'var(--green)',l:'Won'},{v:5,c:'var(--red)',l:'Lost'},{v:6,c:'var(--orange)',l:'Pending'},{v:2,c:'var(--yellow)',l:'Cont.'},{v:4,c:'var(--purple)',l:'Antic.'}];
+  const total = data.reduce((s,d)=>s+d.v,0);
+  const cx=60,cy=60,r=46,sw=13,circ=2*Math.PI*r;
+  let off=0; const svg=document.getElementById('donut');
+  svg.innerHTML=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="var(--surface2)" stroke-width="${sw}"/>`;
+  data.forEach(d=>{
+    const pct=d.v/total, dl=pct*circ, dg=circ-dl;
+    svg.innerHTML+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${d.c}" stroke-width="${sw}" stroke-dasharray="${dl} ${dg}" stroke-dashoffset="${-off}" transform="rotate(-90 ${cx} ${cy})" stroke-linecap="round"/>`;
+    off+=dl;
+  });
+  svg.innerHTML+=`<text x="${cx}" y="${cy-5}" text-anchor="middle" fill="var(--accent)" font-size="21" font-weight="700">55%</text><text x="${cx}" y="${cy+11}" text-anchor="middle" fill="var(--text-dim)" font-size="9">Win Rate (6W/5L)</text>`;
+})();
+</script>
+</body>
+</html>

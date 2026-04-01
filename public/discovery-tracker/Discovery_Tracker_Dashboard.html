@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blackstone Law — Discovery Tracker</title>
+<style>
+  :root {
+    --bg: #0f172a; --surface: #1e293b; --surface2: #334155; --border: #475569;
+    --text: #f1f5f9; --text-muted: #94a3b8; --accent: #3b82f6;
+    --green: #22c55e; --green-bg: rgba(34,197,94,.12);
+    --yellow: #eab308; --yellow-bg: rgba(234,179,8,.12);
+    --orange: #f97316; --orange-bg: rgba(249,115,22,.12);
+    --red: #ef4444; --red-bg: rgba(239,68,68,.12);
+    --purple: #a855f7; --purple-bg: rgba(168,85,247,.12);
+    --blue-bg: rgba(59,130,246,.12);
+    --teal: #14b8a6; --teal-bg: rgba(20,184,166,.12);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Segoe UI',system-ui,-apple-system,sans-serif; background:var(--bg); color:var(--text); line-height:1.5; }
+  .container { max-width:1500px; margin:0 auto; padding:24px; }
+
+  .header { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:20px; }
+  .header h1 { font-size:1.75rem; font-weight:700; letter-spacing:-.02em; }
+  .header h1 span { color:var(--accent); }
+  .header p { color:var(--text-muted); font-size:.85rem; }
+  .header-meta { text-align:right; color:var(--text-muted); font-size:.85rem; }
+  .header-meta strong { color:var(--text); }
+
+  .search-wrap { margin-bottom:18px; position:relative; }
+  .search-wrap input { width:100%; padding:12px 18px 12px 44px; background:var(--surface); border:1px solid var(--border); border-radius:10px; color:var(--text); font-size:.9rem; outline:none; transition:border-color .2s; }
+  .search-wrap input:focus { border-color:var(--accent); }
+  .search-wrap input::placeholder { color:var(--text-muted); }
+  .search-icon { position:absolute; left:16px; top:50%; transform:translateY(-50%); color:var(--text-muted); font-size:1rem; pointer-events:none; }
+  .search-count { position:absolute; right:16px; top:50%; transform:translateY(-50%); color:var(--text-muted); font-size:.78rem; display:none; }
+
+  .phase-nav { display:flex; gap:6px; margin-bottom:24px; background:var(--surface); border-radius:12px; padding:6px; border:1px solid var(--border); }
+  .phase-btn { flex:1; padding:14px 20px; border:none; background:none; color:var(--text-muted); font-size:.9rem; font-weight:600; border-radius:8px; cursor:pointer; transition:all .2s; display:flex; align-items:center; justify-content:center; gap:10px; }
+  .phase-btn:hover { color:var(--text); background:var(--surface2); }
+  .phase-btn.active { color:#fff; }
+  .phase-btn.active[data-phase="dashboard"] { background:var(--accent); }
+  .phase-btn.active[data-phase="pre-discovery"] { background:var(--teal); }
+  .phase-btn.active[data-phase="awaiting"] { background:var(--yellow); color:#000; }
+  .phase-btn.active[data-phase="followup"] { background:var(--orange); }
+  .phase-btn.active[data-phase="completed"] { background:var(--green); }
+  .phase-btn .count { font-size:.75rem; background:rgba(255,255,255,.15); padding:2px 8px; border-radius:100px; }
+  .phase-btn.active .count { background:rgba(255,255,255,.25); }
+
+  .phase { display:none; animation:fadeIn .25s; }
+  .phase.active { display:block; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+
+  .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin-bottom:24px; }
+  .stat-card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:16px 18px; }
+  .stat-card .label { font-size:.72rem; text-transform:uppercase; letter-spacing:.06em; color:var(--text-muted); margin-bottom:4px; }
+  .stat-card .value { font-size:1.6rem; font-weight:700; }
+  .stat-card .sub { font-size:.78rem; color:var(--text-muted); margin-top:2px; }
+  .stat-card.green .value { color:var(--green); }
+  .stat-card.yellow .value { color:var(--yellow); }
+  .stat-card.orange .value { color:var(--orange); }
+  .stat-card.red .value { color:var(--red); }
+  .stat-card.blue .value { color:var(--accent); }
+  .stat-card.purple .value { color:var(--purple); }
+  .stat-card.teal .value { color:var(--teal); }
+
+  .badge { display:inline-block; font-size:.68rem; font-weight:700; padding:2px 8px; border-radius:100px; text-transform:uppercase; letter-spacing:.04em; }
+  .badge-green { background:var(--green-bg); color:var(--green); }
+  .badge-yellow { background:var(--yellow-bg); color:var(--yellow); }
+  .badge-orange { background:var(--orange-bg); color:var(--orange); }
+  .badge-red { background:var(--red-bg); color:var(--red); }
+  .badge-blue { background:var(--blue-bg); color:var(--accent); }
+  .badge-purple { background:var(--purple-bg); color:var(--purple); }
+
+  .upcoming-section { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:18px; margin-bottom:24px; }
+  .upcoming-header { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+  .upcoming-header h2 { font-size:1rem; font-weight:600; }
+  .upcoming-row { display:flex; align-items:center; padding:10px 0; border-bottom:1px solid var(--surface2); gap:16px; }
+  .upcoming-row:last-child { border-bottom:none; }
+  .upcoming-case { flex:1; font-size:.88rem; }
+  .upcoming-case .device { color:var(--text-muted); font-size:.78rem; margin-left:6px; }
+  .upcoming-type { font-size:.78rem; font-weight:600; padding:4px 10px; border-radius:6px; background:var(--surface2); color:var(--text-muted); white-space:nowrap; }
+  .upcoming-date { font-size:.85rem; font-weight:600; color:var(--text); white-space:nowrap; }
+
+  table { width:100%; border-collapse:collapse; }
+  th { text-align:left; font-size:.72rem; text-transform:uppercase; letter-spacing:.06em; color:var(--text-muted); padding:10px 12px; background:var(--surface); border-bottom:2px solid var(--border); position:sticky; top:0; }
+  td { padding:10px 12px; border-bottom:1px solid var(--surface2); font-size:.85rem; vertical-align:top; }
+  tr:hover td { background:rgba(59,130,246,.04); }
+  tr.searchable { transition:opacity .15s; }
+  tr.searchable.hidden { display:none; }
+  .table-wrap { background:var(--surface); border:1px solid var(--border); border-radius:10px; overflow:hidden; margin-bottom:24px; }
+  .table-scroll { overflow-x:auto; }
+  .case-name { font-weight:600; max-width:280px; }
+  .text-muted { color:var(--text-muted); }
+  .contingent-tag { font-size:.72rem; color:var(--orange); display:block; margin-top:2px; }
+
+  .phase-updated { font-size:.76rem; color:var(--text-muted); margin-bottom:16px; padding:6px 12px; background:var(--surface); border-radius:6px; display:inline-block; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <div>
+    <h1><span>Discovery</span> Tracker</h1>
+    <p>Blackstone Law, APC — Wage &amp; Hour Litigation</p>
+  </div>
+  <div class="header-meta">
+    <strong>100</strong> total entries tracked<br>
+    Report: <strong>March 31, 2026</strong>
+  </div>
+</div>
+
+<div class="search-wrap">
+  <span class="search-icon">🔍</span>
+  <input type="text" id="searchInput" placeholder="Search cases across all phases..." oninput="filterCases(this.value)">
+  <span class="search-count" id="searchCount"></span>
+</div>
+
+<div class="phase-nav">
+  <button class="phase-btn active" data-phase="dashboard" onclick="showPhase('dashboard')">📊 Dashboard</button>
+  <button class="phase-btn" data-phase="pre-discovery" onclick="showPhase('pre-discovery')">Pre-Discovery <span class="count">73</span></button>
+  <button class="phase-btn" data-phase="awaiting" onclick="showPhase('awaiting')">Awaiting Response <span class="count">7</span></button>
+  <button class="phase-btn" data-phase="followup" onclick="showPhase('followup')">Follow-Up <span class="count">10</span></button>
+  <button class="phase-btn" data-phase="completed" onclick="showPhase('completed')">Completed <span class="count">10</span></button>
+</div>
+
+<!-- DASHBOARD PHASE -->
+<div class="phase active" data-id="dashboard">
+  <div class="phase-updated">Last updated: March 31, 2026 (Discovery Tracker Sync)</div>
+  <div class="stats">
+    <div class="stat-card teal"><div class="label">Pre-Discovery</div><div class="value">73</div><div class="sub">Not yet propounded</div></div>
+    <div class="stat-card yellow"><div class="label">Awaiting Response</div><div class="value">7</div><div class="sub">Discovery served</div></div>
+    <div class="stat-card orange"><div class="label">Follow-Up</div><div class="value">10</div><div class="sub">M&amp;C / MTC track</div></div>
+    <div class="stat-card green"><div class="label">Completed</div><div class="value">10</div><div class="sub">Resolved / Settled</div></div>
+    <div class="stat-card red"><div class="label">Overdue</div><div class="value">0</div><div class="sub">Past deadline</div></div>
+  </div>
+  <div class="upcoming-section">
+    <div class="upcoming-header">
+      <h2>📅 Upcoming Deadlines (Next 30 Days)</h2>
+      <span class="badge badge-blue">4</span>
+    </div>
+    <div class="upcoming-row">
+      <div class="upcoming-case">Outdoor Dimensions, LLC (Richards, Carly) (Class Only)<span class="device">(SROGs, RFPs — Set 1)</span></div>
+      <div class="upcoming-type">MTC Deadline</div>
+      <div class="upcoming-date">Apr 07, 2026</div>
+    </div>
+    <div class="upcoming-row">
+      <div class="upcoming-case">Cargomatic, Inc. (Duenas, Brian) (Class only)<span class="device">(RFPs — Set 1)</span></div>
+      <div class="upcoming-type">MTC Deadline</div>
+      <div class="upcoming-date">Apr 16, 2026</div>
+    </div>
+    <div class="upcoming-row">
+      <div class="upcoming-case">Snap-On Logistics Company (Galvez, Hector) (Class)<span class="device">(FROG - General, RFP, Deposition)</span></div>
+      <div class="upcoming-type">Response Deadline</div>
+      <div class="upcoming-date">Apr 20, 2026</div>
+    </div>
+    <div class="upcoming-row">
+      <div class="upcoming-case">Snap-On Logistics Company (Galvez, Hector) (Class)<span class="device">(SROGs, RFPs - Set One)</span></div>
+      <div class="upcoming-type">Response Deadline</div>
+      <div class="upcoming-date">Apr 21, 2026</div>
+    </div>
+  </div>
+</div>
+
+<!-- PRE-DISCOVERY PHASE -->
+<div class="phase" data-id="pre-discovery">
+  <div class="phase-updated">Phase 1 — 73 entries | 27 stayed | 21 with arbitration agreement</div>
+  <div class="table-wrap"><div class="table-scroll">
+  <table>
+    <tr><th>Case Name</th><th>Filing Date</th><th>County</th><th>Discovery Status</th><th>Arbitration</th><th>Notes</th></tr>
+    <tr class="searchable">
+      <td class="case-name">Parker Palm Springs, LLC (Diaz, Marcella and Haraksin, Andrew) (Class) (KG PARTNERING)</td>
+      <td>Feb 14, 2025</td>
+      <td>Riverside</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+      <td>Yes</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">RSC Discovery Stay — stay on everything except class list. 1281.4 stay requested</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Southwest College of Medical-Dental Assistants &amp; Practical Nurses (Bowers, Guy) (Class) (BDC PARTNERING)</td>
+      <td>Feb 26, 2025</td>
+      <td>Los Angeles (LASC)</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>Yes</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — DISCO column: &quot;Holding off for now (BDC).&quot; No discovery propoun</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Magnolia Springs, Inc.; Mission Wells, Inc. (Agpalza, Yvonne) (Class)</td>
+      <td>Mar 13, 2025</td>
+      <td>Kern</td>
+      <td><span class="badge badge-blue">Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- ACTION NEEDED: Discovery Served Date not found in source data — verify via ema</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Golden Rain Foundation (Valencia, Brande, Noel, Kevin and Bassell, Mayoka) (Class)</td>
+      <td>Mar 14, 2025</td>
+      <td>Orange</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>Yes</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — DISCO column reads &quot;Data demand sent for mediation.&quot; No formal </td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Veridiam, Inc. (Douglas, Brandon) (Class)</td>
+      <td>Mar 31, 2025</td>
+      <td>San Diego</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Disco Stayed per Stip.</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Golden Rain Foundation (Valencia, Brande and Bassell, Mayoka) (PAGA)</td>
+      <td>Apr 06, 2025</td>
+      <td>Orange</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>Yes</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — DISCO column reads &quot;Data demand sent for mediation.&quot; No formal </td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Nova Measuring Instruments Inc. (Nash, Selinda) (PAGA) (KG PARTNERING)</td>
+      <td>Apr 12, 2025</td>
+      <td>Alameda</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">[2026-03-10] Sync: Per Shelby&#39;s 9/26/25 email, parties agreed to formal discover</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Parker Palm Springs, LLC (Diaz, Marcella) (PAGA) (KG PARTNERING)</td>
+      <td>Apr 12, 2025</td>
+      <td>Riverside</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+      <td>Yes</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Staying the PAGA matter pending mediation (per 12/17/2025).</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Control Air Enterprises, LLC (Soto, Ruben) (Class Only)</td>
+      <td>Apr 19, 2025</td>
+      <td>Orange</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Phase 1 case — DISCO column reads &quot;Data demand sent for mediation.&quot; No formal di</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">America Central Corporation et al. (Santamaria, Sergio) (Class)</td>
+      <td>May 14, 2025</td>
+      <td>Los Angeles (LASC)</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">DISCO column states &quot;Stayed.&quot; No further detail on scope provided.</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Lefiell Manufacturing Company (Redd, Walter) (PAGA)</td>
+      <td>May 21, 2025</td>
+      <td>Los Angeles (LASC)</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>Yes</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — no discovery propounded yet. DISCO column reads &quot;PAGA.&quot; Service</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Veridiam, Inc. (Douglas, Brandon) (PAGA)</td>
+      <td>May 22, 2025</td>
+      <td>San Diego</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 — DISCO: &quot;PAGA.&quot; Tracked in class case. Mediation with Steven Rottman </td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Flintridge Preparatory School (Shurance, Michael) (Class)</td>
+      <td>Jun 04, 2025</td>
+      <td>Los Angeles (LASC)</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+      <td>Yes</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">OC represents that class size is small and limited by job classification and arb</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Southwest College of Medical-Dental Assistants &amp; Practical Nurses (Bowers, Guy) (PAGA) (BDC PARTNERING)</td>
+      <td>Jun 04, 2025</td>
+      <td>Los Angeles (LASC)</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>Yes</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — DISCO column: &quot;PAGA.&quot; Tracking class case. Mediation 05/20/2026</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Wellness Together (Neeley, Janelle) (Class)</td>
+      <td>Jul 03, 2025</td>
+      <td>Alameda</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>Yes</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — DISCO column: &quot;Drafted (waiting on new rep).&quot; Discovery drafted</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Slater, Inc. (Paz, Esmael) (Class only)</td>
+      <td>Jul 11, 2025</td>
+      <td>San Bernardino</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+      <td>Yes</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Disco stayed per Court&#39;s complex guidelines.</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">America Central Corporation et al. (Santamaria, Sergio) (PAGA)</td>
+      <td>Jul 18, 2025</td>
+      <td>Los Angeles (LASC)</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Phase 1 case — no discovery propounded yet. DISCO column reads &quot;PAGA&quot; — deadline</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">HCC Service Company, Inc. (Callejas, Emely) (Class only)</td>
+      <td>Jul 18, 2025</td>
+      <td>Los Angeles (LASC)</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem"></td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">HCC Service Company, Inc. (Callejas, Emely) (Federal)</td>
+      <td>Jul 18, 2025</td>
+      <td>Central District (USDC)</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — discovery stayed, no discovery propounded.\n- Stip to continue </td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Flintridge Preparatory School (Shurance, Michael) (PAGA)</td>
+      <td>Jul 21, 2025</td>
+      <td>Los Angeles (LASC)</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Tracking Class Disco.</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Patrol Solutions, LLC; Patrol Solutions, Inc. (Williams, Victor &amp; Sperber, Mandy; Irving Cortes) (Class)</td>
+      <td>Aug 08, 2025</td>
+      <td>Alameda</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>Yes</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — no discovery propounded yet. Opposing MTCA. - MCC Filing Deadli</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Wisk Aero LLC (Acevedo, Esperanza) (PAGA)</td>
+      <td>Aug 12, 2025</td>
+      <td>Alameda</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>Yes</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — DISCO: &quot;PAGA.&quot; Tracking class case.<br>- Mediation with Eve Wagner</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">North American Food Ventures, Inc. dba Wild Fork Foods (Robinson, Braden) (Class Only)</td>
+      <td>Aug 14, 2025</td>
+      <td>Ventura</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — removed to CDCA. No discovery in this venue. Next Event: None.<br></td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">IMC Logistics, LLC (Lee, Ronnie) (Class)</td>
+      <td>Aug 15, 2025</td>
+      <td>Sacramento</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Full stay pending mediation 10/22/26 with Marc Feder per Stip filed 2/27/26.</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Wellness Together (Neeley, Janelle) (PAGA)</td>
+      <td>Aug 23, 2025</td>
+      <td>Alameda</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — no discovery. Deemed related to Class Case 25CV138923. Client w</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Cryoquip, LLC (Balas, Myles) (Class)</td>
+      <td>Aug 25, 2025</td>
+      <td>Riverside</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">RSC Discovery Stay (per Active sheet Stayed? field).</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">JVS SoCal (Mendez, Gabino) (Class)</td>
+      <td>Aug 25, 2025</td>
+      <td>Los Angeles (LASC)</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+      <td>Yes</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Joint Stip to Stay Pending Mediation granted 12/31/2025.</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Helpline Youth Counseling (Mayers, Kennethia Queshia) (Class and PAGA)</td>
+      <td>Sep 11, 2025</td>
+      <td>Los Angeles (LASC)</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Stayed pending mediation.</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Danco Builders (Christian McKee and Samuel Jones) (Class only)</td>
+      <td>Sep 13, 2025</td>
+      <td>Humboldt</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Full stay pending mediation per Joint Stip filed 12/23/25 (order 1/13/26). CMC 1</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Front Porch Communities and Services (Rouse-Hasan, Regenna) (Class)</td>
+      <td>Sep 14, 2025</td>
+      <td>Alameda</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+      <td>Yes</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Per stip, stayed until 08/17/2026. Responsive Pleading due 20 days after stay li</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Caleres, Inc (Ramirez, Jesus) (Class)</td>
+      <td>Sep 15, 2025</td>
+      <td>San Bernardino</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Disco stayed per Court&#39;s complex guidelines.</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">IMC Logistics, LLC (Lee, Ronnie) (PAGA)</td>
+      <td>Sep 17, 2025</td>
+      <td>Sacramento</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem"></td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">The Upper Deck Company (Cohee, Sharisse) (PAGA)</td>
+      <td>Sep 20, 2025</td>
+      <td>San Diego (SDSC)</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>Yes</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — no formal discovery. Call w/ OC on 01/13 re informal disco for </td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Patrol Solutions, LLC; Patrol Solutions, Inc. (Williams, Victor &amp; Sperber, Mandy) (PAGA)</td>
+      <td>Sep 27, 2025</td>
+      <td>Alameda</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>Yes</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — no formal discovery propounded. DISCO column: &quot;Engaging w/ OC i</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Front Porch Communities and Services (Rouse-Hasan, Regenna) (PAGA)</td>
+      <td>Sep 30, 2025</td>
+      <td>Alameda</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+      <td>Yes</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Full stay pending mediation 8/5/26 with Gig Kyriacou. Stay until 8/17/26.</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Weatherford Motors, Inc. (Edmiston, Ricky) (Class)</td>
+      <td>Sep 30, 2025</td>
+      <td>Alameda</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>Yes</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — no discovery propounded. Next Steps: &quot;Do we need to do informal</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">North American Food Ventures, Inc. dba Wild Fork Foods (Robinson, Braden) - FEDERAL (Class Only)</td>
+      <td>Oct 03, 2025</td>
+      <td>USDC — Central District</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — no discovery propounded yet.<br>- Ds Deadline to File Answer to SA</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Lulu&#39;s At Town &amp; Country Village, Inc. (Vasquez, Darlyn Cortez) (Class) (Spanish)</td>
+      <td>Oct 06, 2025</td>
+      <td>Santa Clara</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">30 days until after mediation.</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">NNA Services, LLC; National Notary Association (Hawkins, Jenifer) (Class Only)</td>
+      <td>Oct 07, 2025</td>
+      <td>Los Angeles (LASC)</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+      <td>Yes</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Stay lifted only to discovery necessary for opposing the MTCA.</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Evergreen Alliance Golf Limited, L.P. (Conant, Laura) (Class)</td>
+      <td>Oct 10, 2025</td>
+      <td>Alameda</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Federal Removal.</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Santa Teresita, Inc. (Waddell, Joan) (Class-only)</td>
+      <td>Oct 15, 2025</td>
+      <td>Los Angeles (LASC)</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem"></td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Hyatt Corporation dba Carmel Valley Ranch (Seybold, Christopher) (Class-only)</td>
+      <td>Oct 17, 2025</td>
+      <td>Monterey</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Stayed until the CMC date.</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Thornton Winery (Lopez, Jessica) (PAGA)</td>
+      <td>Oct 17, 2025</td>
+      <td>Riverside</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem"></td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Oleander Holdings, LLC dba Sacramento Post-Acute (Cazares, Maria) (Class)</td>
+      <td>Oct 20, 2025</td>
+      <td>Sacramento</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>Yes</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — no discovery propounded yet.<br>- Ds L/D to File and Serve Respons</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Hobie Cat Company II, LLC (Soria Gonzalez, Luis Angel) (Favela, Jose) (Both Class Only Ps)</td>
+      <td>Oct 24, 2025</td>
+      <td>San Diego</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — no discovery propounded yet.<br>- Doe Complaint filed, waiting for</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Fox Factory, Inc. (Sanchez, Christian) (Class)</td>
+      <td>Oct 27, 2025</td>
+      <td>San Diego</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Per stip to stay filed 01/28/2026.</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Ecology Control Industries, Inc. (Ruge, David)(Rivera, Oscar) (Class)</td>
+      <td>Oct 31, 2025</td>
+      <td>Los Angeles (LASC)</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Phase 1 case — no discovery propounded yet. No DISCO column entry.<br>L/D to File a</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Behavior Treatment &amp; Analysis, Inc. (Ines, Nayeli) (Class)</td>
+      <td>Dec 03, 2025</td>
+      <td>Contra Costa</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Phase 1 case — no discovery propounded yet. DISCO column reads &quot;Stayed.&quot;<br>OC want</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Oleander Holdings, LLC dba Sacramento Post-Acute (Cazares, Maria) (PAGA)</td>
+      <td>Dec 03, 2025</td>
+      <td>Sacramento</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — no discovery propounded yet.<br>- D&#39;s L/D to File and Serve Respon</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Caleres, Inc (Ramirez, Jesus) (PAGA)</td>
+      <td>Dec 10, 2025</td>
+      <td>San Bernardino</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Phase 1 case — no discovery propounded yet. Service completed (Y). D&#39;s response </td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Evergreen Alliance Golf Limited, L.P. (Conant, Laura) (Class - Federal)</td>
+      <td>Dec 10, 2025</td>
+      <td>Federal — Northern District</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">[Sync 2026-03-10T15:07:53.416Z] No M&amp;C letter found. Joe Marshall handling. Join</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Parkwood Landscape Maintenance, Inc. (Dickinson, Adam) (Class)</td>
+      <td>Dec 10, 2025</td>
+      <td>Los Angeles (LASC)</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem"></td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Weatherford Motors, Inc. (Edmiston, Ricky) (PAGA)</td>
+      <td>Dec 10, 2025</td>
+      <td>Alameda</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — no discovery. CMC at 1:30pm on 04/29/2026. - Companion Case: We</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Evergreen Alliance Golf Limited, L.P. (Conant, Laura) (PAGA)</td>
+      <td>Dec 21, 2025</td>
+      <td>Alameda</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">[Sync 2026-03-10T15:07:53.416Z] No M&amp;C letter found. Joe Marshall handling. Join</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Lulu&#39;s At Town &amp; Country Village, Inc. (Vasquez, Darlyn Cortez) (PAGA) (Spanish)</td>
+      <td>Dec 23, 2025</td>
+      <td>Santa Clara</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — no discovery propounded yet.<br>- 65 PAGA Exhaustion Period ends 0</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">CCL Tube, Inc. (Andino Matute, Cesar Alexander) (Class)</td>
+      <td>Dec 26, 2025</td>
+      <td>Los Angeles (LASC)</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+      <td>Yes</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem"></td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Road One dba A to Z Enterprises, Inc. (Rodriguez, Jasmine) (Class)</td>
+      <td>Dec 30, 2025</td>
+      <td>San Diego</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — no discovery propounded yet. D&#39;s L/D to File and Serve Response</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Southland Box Company (Chavez, Javier) (Class)</td>
+      <td>Dec 30, 2025</td>
+      <td>Los Angeles (LASC)</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — no discovery. D&#39;s Response: 02/13/2026. CBA possible. Peremptor</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Peterson Tractor Co. (Saephan, Nai) (Class)</td>
+      <td>Jan 06, 2026</td>
+      <td>Alameda</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — no discovery propounded yet. Service order placed 02/09/2026. -</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Behavior Treatment &amp; Analysis, Inc. (Ines, Nayeli) (PAGA)</td>
+      <td>Jan 09, 2026</td>
+      <td>Contra Costa</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Phase 1 case — no discovery propounded yet. Service not completed (Service Compl</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Med-Pharmex, Inc., et al. (Flores, Assir) (Class)</td>
+      <td>Jan 10, 2026</td>
+      <td>Los Angeles (LASC)</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — no discovery propounded yet. Waiting for OC to appear.<br>- D&#39;s L/</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Mountain Shadows Support Group (Lopez, Christian) (Class)</td>
+      <td>Jan 10, 2026</td>
+      <td>San Diego</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — no discovery propounded yet.<br>- D&#39;s L/D to File and Serve Respon</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Vicar Operating, Inc. dba VCA (Cabrera, Traci) (Class)</td>
+      <td>Jan 10, 2026</td>
+      <td>San Diego</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — no discovery. D&#39;s Response: 03/18/2026. Intro call 01/29/2026. </td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Fox Factory, Inc. (Sanchez, Christian) (PAGA)</td>
+      <td>Jan 16, 2026</td>
+      <td>San Diego</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — no discovery propounded. Stip to Stay pending mediation filed 0</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Apoyo Financiero, Inc. (Ramirez, Salvador Hernan Medina) (Hernandez, Esmeralda) (Class)</td>
+      <td>Jan 17, 2026</td>
+      <td>Santa Clara</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem"></td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Ecology Control Industries, Inc. (Ruge, David)(Rivera, Oscar) (PAGA)</td>
+      <td>Jan 17, 2026</td>
+      <td>Los Angeles (LASC)</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Phase 1 case — no discovery propounded yet. Service not completed (Service Compl</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Peterson Tractor Co. (Saephan, Nai) (PAGA)</td>
+      <td>Jan 31, 2026</td>
+      <td>Alameda</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — no discovery propounded yet. Service not completed (N). - CMC a</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Hope Program, a Licensed Clinical Social Worker Professional Corporation (Brown, Neecha) (PAGA)</td>
+      <td>Feb 02, 2026</td>
+      <td>Alameda</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — no discovery propounded yet. Fully Executed PAGA NAR due 03/04/</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">St. Supery, Inc. (Adame, Gema)</td>
+      <td>Feb 06, 2026</td>
+      <td>Napa</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — brand new, no discovery. Service not completed (N). Intro call </td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">CCL Tube, Inc. (Andino Matute, Cesar Alexander) (PAGA)</td>
+      <td>Feb 14, 2026</td>
+      <td>Los Angeles (LASC)</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Phase 1 case — no discovery propounded yet. No service information, no next step</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Caleres, Inc (Ramirez, Jesus) (Federal)</td>
+      <td>N/A</td>
+      <td>USDC — Central District</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Phase 1 case — no discovery propounded yet in the federal matter.<br>ACTION NEEDED:</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Merical, LLC (Murillo, Cesar) (Class)</td>
+      <td>N/A</td>
+      <td></td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — no discovery propounded yet.<br>- ACTION NEEDED: Initial Filing Da</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Merical, LLC (Murillo, Cesar) (PAGA)</td>
+      <td>N/A</td>
+      <td></td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — no discovery propounded yet.<br>- ACTION NEEDED: Initial Filing Da</td>
+    </tr>
+  </table></div></div>
+</div>
+
+<!-- AWAITING RESPONSE PHASE -->
+<div class="phase" data-id="awaiting">
+  <div class="phase-updated">Phase 2 — 7 entries awaiting defense responses</div>
+  <div class="table-wrap"><div class="table-scroll">
+  <table>
+    <tr><th>Case Name</th><th>Device</th><th>Propounding Party</th><th>Date Served</th><th>Orig. Deadline</th><th>Extensions</th><th>New Deadline</th><th>Status</th></tr>
+    <tr class="searchable">
+      <td class="case-name">Hikvision USA Inc. (Fernald, James) (Class Only)<span class="contingent-tag">⏳ Mediation stay negotiation pending</span></td>
+      <td>SROGs, RFPs — Set 1</td>
+      <td><span class="badge badge-blue">Plaintiff</span></td>
+      <td>N/A</td>
+      <td>Mar 06, 2026</td>
+      <td>1</td>
+      <td>Apr 10, 2026</td>
+      <td><span class="badge badge-yellow">Extended</span></td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Snap-On Logistics Company (Galvez, Hector) (Class)</td>
+      <td>FROG - General, RFP, Deposition</td>
+      <td><span class="badge badge-blue">Defendant</span></td>
+      <td>Mar 17, 2026</td>
+      <td>Apr 20, 2026</td>
+      <td>0</td>
+      <td>N/A</td>
+      <td><span class="badge badge-blue">Pending</span></td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Snap-On Logistics Company (Galvez, Hector) (Class)</td>
+      <td>SROGs, RFPs - Set One</td>
+      <td><span class="badge badge-blue">Plaintiff</span></td>
+      <td>Mar 18, 2026</td>
+      <td>Apr 21, 2026</td>
+      <td>0</td>
+      <td>N/A</td>
+      <td><span class="badge badge-blue">Pending</span></td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Hope Program, a Licensed Clinical Social Worker Professional Corporation (Brown, Neecha) (Class)<span class="contingent-tag">⏳ Discovery stayed pending mediation (stayed 2026-03-19)</span></td>
+      <td>SROGs, RFPs — Set 1</td>
+      <td><span class="badge badge-blue">Plaintiff</span></td>
+      <td>Feb 12, 2026</td>
+      <td>N/A</td>
+      <td>0</td>
+      <td>N/A</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Imperial Valley Family Medical Group (Miranda, Vanessa) (Class only)<span class="contingent-tag">⏳ Defense (Fisher Phillips) confirmed mediator Eckstrom for 7/31/26 on 3/6/26. Will request informal stay once mediator confirmed. Response deadline 3/16/26 may be mooted by stay.</span></td>
+      <td>SROGs, RFPs — Set 1</td>
+      <td><span class="badge badge-blue">Plaintiff</span></td>
+      <td>Feb 03, 2026</td>
+      <td>N/A</td>
+      <td>0</td>
+      <td>N/A</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">River City Medical Group, Inc. (Rucker, Samela) (Class only)<span class="contingent-tag">⏳ Case stayed pending mediation per Joint Stip filed 3/5/26.</span></td>
+      <td>SROGs, RFPs — Set 1</td>
+      <td><span class="badge badge-blue">Plaintiff</span></td>
+      <td>Oct 22, 2025</td>
+      <td>N/A</td>
+      <td>0</td>
+      <td>N/A</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Thornton Winery (Caceres, Hunter) (Class only)<span class="contingent-tag">⏳ Case stayed pending mediation per Joint Stip filed 2/4/26.</span></td>
+      <td>SROGs, RFPs — Set 1</td>
+      <td><span class="badge badge-blue">Plaintiff</span></td>
+      <td>Oct 28, 2025</td>
+      <td>N/A</td>
+      <td>1</td>
+      <td>N/A</td>
+      <td><span class="badge badge-orange">Stayed</span></td>
+    </tr>
+  </table></div></div>
+</div>
+
+<!-- FOLLOW-UP PHASE -->
+<div class="phase" data-id="followup">
+  <div class="phase-updated">Phase 3 — 10 entries in M&amp;C / MTC pipeline</div>
+  <div class="table-wrap"><div class="table-scroll">
+  <table>
+    <tr><th>Case Name</th><th>Device</th><th>Response Date</th><th>M&amp;C Sent</th><th>Supp. Resp. Due</th><th>MTC Deadline</th><th>MTC Drafted</th><th>MTC Filed</th><th>Status</th></tr>
+    <tr class="searchable">
+      <td class="case-name">Outdoor Dimensions, LLC (Richards, Carly) (Class Only)</td>
+      <td>SROGs, RFPs — Set 1</td>
+      <td>N/A</td>
+      <td>Feb 11, 2026</td>
+      <td>N/A</td>
+      <td>Apr 07, 2026</td>
+      <td>No</td>
+      <td>No</td>
+      <td><span class="badge badge-yellow">M&C Sent</span></td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Cargomatic, Inc. (Duenas, Brian) (Class only)</td>
+      <td>RFPs — Set 1</td>
+      <td>N/A</td>
+      <td>Feb 25, 2026</td>
+      <td>N/A</td>
+      <td>Apr 16, 2026</td>
+      <td>No</td>
+      <td>No</td>
+      <td><span class="badge badge-yellow">M&C Sent</span></td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">ISU Petasys Corp. (Garfias, Antonio) (Class)<span class="contingent-tag">⏳ Supplemental written responses received 3/5/26. Document production received 3/10/26 (ISU006298-ISU006586). MTC deadline extended correspondingly per Ryan 3/2/26 email. Reviewing sufficiency of responses.</span></td>
+      <td>SROGs, RFPs — Set 1</td>
+      <td>Mar 05, 2026</td>
+      <td>Jan 19, 2026</td>
+      <td>N/A</td>
+      <td>N/A</td>
+      <td>No</td>
+      <td>No</td>
+      <td><span class="badge badge-yellow">M&C Sent</span></td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Martis Camp Club (Nithya, Subramanyananda) (Class)<span class="contingent-tag">⏳ MTC deadline runs from date of supplemental responses</span></td>
+      <td>SROGs, RFPs — Set 1</td>
+      <td>Mar 10, 2026</td>
+      <td>Feb 27, 2026</td>
+      <td>N/A</td>
+      <td>N/A</td>
+      <td>No</td>
+      <td>No</td>
+      <td><span class="badge badge-yellow">M&C Sent</span></td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Nova Measuring Instruments Inc. (Nash, Selinda) (Class) (KG PARTNERING)<span class="contingent-tag">⏳ Shelby emailed defense counsel 3/5/26 confirming prior agreement to stay discovery 45 days post-mediation. Responses expected by 3/31/26. Defense counsel Robert Carrol (ArentFox Schiff) responded 3/7/26 telling co-counsel not to respond yet. MTC deadline runs from receipt of responses.</span></td>
+      <td>SROGs, RFPs — Set 1</td>
+      <td>Aug 14, 2025</td>
+      <td>N/A</td>
+      <td>N/A</td>
+      <td>N/A</td>
+      <td>No</td>
+      <td>No</td>
+      <td><span class="badge badge-blue">In Progress</span></td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Ridgecrest Regional Hospital (Rosado, Cynthia) (Class)<span class="contingent-tag">⏳ MTC deadline runs from Court decision on MTCA</span></td>
+      <td></td>
+      <td>Mar 24, 2026</td>
+      <td>N/A</td>
+      <td>N/A</td>
+      <td>N/A</td>
+      <td>No</td>
+      <td>No</td>
+      <td><span class="badge badge-blue">In Progress</span></td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Ridgecrest Regional Hospital (Rosado, Cynthia) (PAGA)<span class="contingent-tag">⏳ MTC deadline runs from Court decision on MTCA</span></td>
+      <td>SROGs, RFPs — Sets 1 &amp; 2</td>
+      <td>Mar 24, 2026</td>
+      <td>N/A</td>
+      <td>N/A</td>
+      <td>N/A</td>
+      <td>No</td>
+      <td>No</td>
+      <td><span class="badge badge-blue">In Progress</span></td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">So. Cal. Sandbags, Inc. (Bielma, Paul) (Class)<span class="contingent-tag">⏳ MTCA ruling pending (discovery stayed)</span></td>
+      <td>SROGs, RFPs — Sets 1 &amp; 2</td>
+      <td>N/A</td>
+      <td>Mar 02, 2026</td>
+      <td>N/A</td>
+      <td>N/A</td>
+      <td>No</td>
+      <td>No</td>
+      <td><span class="badge badge-yellow">M&C Sent</span></td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Taylor Communications (Cotton, Tinetta) (PAGA)<span class="contingent-tag">⏳ Discovery stayed pending mediation (stayed 12/9/25)</span></td>
+      <td></td>
+      <td>N/A</td>
+      <td>Sep 26, 2025</td>
+      <td>N/A</td>
+      <td>N/A</td>
+      <td>No</td>
+      <td>No</td>
+      <td><span class="badge badge-yellow">M&C Sent</span></td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Truitt Oilfield Maintenance Corporation (Carias-Paredes, Angel &amp; Oilers, Alec De) (PAGA) (KG PARTNERING)<span class="contingent-tag">⏳ Original deadline 6/24/25 blown — objections waived per CCP 2031.300. Now operating under negotiated supp production timeline. 25% time record sampling due 4/6/26 per M&amp;C agreement confirmed 3/5/26.</span></td>
+      <td></td>
+      <td>N/A</td>
+      <td>N/A</td>
+      <td>N/A</td>
+      <td>N/A</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td><span class="badge badge-purple">MTC Drafted</span></td>
+    </tr>
+  </table></div></div>
+</div>
+
+<!-- COMPLETED PHASE -->
+<div class="phase" data-id="completed">
+  <div class="phase-updated">Completed — 10 entries resolved</div>
+  <div class="table-wrap"><div class="table-scroll">
+  <table>
+    <tr><th>Case Name</th><th>Device</th><th>Completed Date</th><th>Notes</th></tr>
+    <tr class="searchable">
+      <td class="case-name">General Coatings Corporation (Lopez, Gabet) (Class)</td>
+      <td></td>
+      <td>Mar 30, 2026</td>
+      <td class="text-muted" style="max-width:300px;font-size:.78rem">- Phase 1 case — no discovery propounded yet.\n- D&#39;s L/D to File and Serve Response to Complaint: 03/02/2026.\n- Introdu</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">The Upper Deck Company (Cohee, Sharisse) (Class)</td>
+      <td>SROGs, RFPs — Sets 1 &amp; 2</td>
+      <td>Mar 27, 2026</td>
+      <td class="text-muted" style="max-width:300px;font-size:.78rem">[2026-03-10] Sync: Original response deadline 11/12/25 (30 days + 2 court days eservice from 10/10/25 service). Deadline</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Hamcor Inc. dba Dublin Toyota (Touch, Christopher) (Class) (KG PARTNERING)</td>
+      <td>SROGs, RFPs — Set 1</td>
+      <td>Mar 10, 2026</td>
+      <td class="text-muted" style="max-width:300px;font-size:.78rem">- ACTION NEEDED: Discovery Served Date not found in source data — verify via email audit.\n- PHASE REVIEW NEEDED: Case h</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Hamcor Inc. dba Dublin Toyota (Touch, Christopher) (PAGA) (KG PARTNERING)</td>
+      <td>SROGs, RFPs — Set 1</td>
+      <td>Mar 10, 2026</td>
+      <td class="text-muted" style="max-width:300px;font-size:.78rem">- ACTION NEEDED: Discovery Served Date not found in source data — verify via email audit.\n- PAGA Only discovery (SROGS,</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Magnolia Springs, Inc.; Mission Wells, Inc. (Agpalza, Yvonne) (PAGA)</td>
+      <td>SROGs, RFPs — Set 1</td>
+      <td>Mar 10, 2026</td>
+      <td class="text-muted" style="max-width:300px;font-size:.78rem">- ACTION NEEDED: Discovery Served Date not found in source data — verify via email audit.<br>- PHASE REVIEW NEEDED: Case ha</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Guardant Health, Inc. (Dizon, Devin) (Class Only)</td>
+      <td>FROGs (General), FROGs (Employment), SROGs, RFAs, RFPs — Set 1</td>
+      <td>Feb 26, 2026</td>
+      <td class="text-muted" style="max-width:300px;font-size:.78rem">- ACTION NEEDED: Discovery Served Date not found in source data — verify via email audit.\n- Disco Tracker confirms SROG</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Rapid Manufacturing, LCR (Benitez, Oscar) (Class Only) / (Ellis, Megan) (Class)</td>
+      <td>SROGs, RFPs — Set 1</td>
+      <td>Feb 23, 2026</td>
+      <td class="text-muted" style="max-width:300px;font-size:.78rem">[2026-03-10] Sync: Case settled at mediation on 2/23/26. MOU sent 2/24/26. Joint CMC statements filed 2/27/26. Discovery</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Rapid Manufacturing, LCR (Ellis, Megan) (PAGA)</td>
+      <td></td>
+      <td>Feb 23, 2026</td>
+      <td class="text-muted" style="max-width:300px;font-size:.78rem">[2026-03-10] Sync: Case settled at mediation on 2/23/26. MOU from defense (Ali Abouesh, O&#39;Hagan Meyer) sent 2/24/26. Dis</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Taylor Communications (Cotton, Tinetta) (Class)</td>
+      <td>SROGs, RFPs — Sets 1 &amp; 2</td>
+      <td>Nov 14, 2025</td>
+      <td class="text-muted" style="max-width:300px;font-size:.78rem">[Sync 2026-03-10] Per Ryan: contingent flag — discovery stayed 12/9/25 pending mediation. Active informal discovery thre</td>
+    </tr>
+    <tr class="searchable">
+      <td class="case-name">Truitt Oilfield Maintenance Corporation (Carias-Paredes, Angel &amp; Oilers, Alec De) (Class) (KG PARTNERING)</td>
+      <td>SROGs, RFPs, FROGs, RFAs — Set 1 (Both)</td>
+      <td>May 07, 2025</td>
+      <td class="text-muted" style="max-width:300px;font-size:.78rem">Discovery withdrawn</td>
+    </tr>
+  </table></div></div>
+</div>
+
+
+<script>
+function showPhase(id) {
+  document.querySelectorAll('.phase').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.phase-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.phase[data-id="'+id+'"]').classList.add('active');
+  document.querySelector('.phase-btn[data-phase="'+id+'"]').classList.add('active');
+}
+
+function filterCases(q) {
+  q = q.toLowerCase().trim();
+  const rows = document.querySelectorAll('tr.searchable');
+  let visible = 0;
+  rows.forEach(r => {
+    const match = !q || r.textContent.toLowerCase().includes(q);
+    r.classList.toggle('hidden', !match);
+    if (match) visible++;
+  });
+  const sc = document.getElementById('searchCount');
+  if (q) {
+    sc.textContent = visible + ' match' + (visible !== 1 ? 'es' : '');
+    sc.style.display = 'block';
+    // Show all phases so search works across them
+    document.querySelectorAll('.phase').forEach(p => p.style.display = 'block');
+  } else {
+    sc.style.display = 'none';
+    document.querySelectorAll('.phase').forEach(p => p.style.display = '');
+    rows.forEach(r => r.classList.remove('hidden'));
+  }
+}
+</script>
+
+</div>
+</body>
+</html>

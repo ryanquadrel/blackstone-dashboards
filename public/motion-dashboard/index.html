@@ -759,7 +759,7 @@ document.getElementById('fSearch').addEventListener('input', applyF);
 /* ── Donut ── */
 (function(){
   // 6 won, 5 lost, 6 pending, 2 continued, 4 anticipated
-  const data = [{v:6,c:'var(--green)',l:'Won'},{v:5,c:'var(--red)',l:'Lost'},{v:7,c:\'var(--orange)\',l:\'Pending\'},{v:2,c:'var(--yellow)',l:'Cont.'},{v:4,c:'var(--purple)',l:'Antic.'}];
+  const data = [{v:6,c:'var(--green)',l:'Won'},{v:5,c:'var(--red)',l:'Lost'},{v:7,c:'var(--orange)',l:'Pending'},{v:2,c:'var(--yellow)',l:'Cont.'},{v:4,c:'var(--purple)',l:'Antic.'}];
   const total = data.reduce((s,d)=>s+d.v,0);
   const cx=60,cy=60,r=46,sw=13,circ=2*Math.PI*r;
   let off=0; const svg=document.getElementById('donut');

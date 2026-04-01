@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blackstone Law — Mediation Command Center</title>
+<style>
+  :root {
+    --bg: #0f172a; --surface: #1e293b; --surface2: #334155; --border: #475569;
+    --text: #f1f5f9; --text-muted: #94a3b8; --accent: #3b82f6;
+    --green: #22c55e; --green-bg: rgba(34,197,94,.12);
+    --yellow: #eab308; --yellow-bg: rgba(234,179,8,.12);
+    --orange: #f97316; --orange-bg: rgba(249,115,22,.12);
+    --red: #ef4444; --red-bg: rgba(239,68,68,.12);
+    --purple: #a855f7; --purple-bg: rgba(168,85,247,.12);
+    --blue-bg: rgba(59,130,246,.12);
+    --teal: #14b8a6; --teal-bg: rgba(20,184,166,.12);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Segoe UI',system-ui,-apple-system,sans-serif; background:var(--bg); color:var(--text); line-height:1.5; }
+  .container { max-width:1500px; margin:0 auto; padding:24px; }
+
+  /* HEADER */
+  .header { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:20px; }
+  .header h1 { font-size:1.75rem; font-weight:700; letter-spacing:-.02em; }
+  .header h1 span { color:var(--accent); }
+  .header-meta { text-align:right; color:var(--text-muted); font-size:.85rem; }
+  .header-meta strong { color:var(--text); }
+
+  /* SEARCH */
+  .search-wrap { margin-bottom:18px; position:relative; }
+  .search-wrap input { width:100%; padding:12px 18px 12px 44px; background:var(--surface); border:1px solid var(--border); border-radius:10px; color:var(--text); font-size:.9rem; outline:none; transition:border-color .2s; }
+  .search-wrap input:focus { border-color:var(--accent); }
+  .search-wrap input::placeholder { color:var(--text-muted); }
+  .search-icon { position:absolute; left:16px; top:50%; transform:translateY(-50%); color:var(--text-muted); font-size:1rem; pointer-events:none; }
+  .search-count { position:absolute; right:16px; top:50%; transform:translateY(-50%); color:var(--text-muted); font-size:.78rem; display:none; }
+
+  /* FEE ALERT BANNER */
+  .fee-alert { background:var(--red-bg); border:1px solid var(--red); border-radius:10px; padding:12px 18px; margin-bottom:18px; display:flex; align-items:center; gap:12px; }
+  .fee-alert-icon { font-size:1.3rem; }
+  .fee-alert-text { font-size:.88rem; }
+  .fee-alert-text strong { color:var(--red); }
+
+  /* PHASE NAV */
+  .phase-nav { display:flex; gap:6px; margin-bottom:24px; background:var(--surface); border-radius:12px; padding:6px; border:1px solid var(--border); }
+  .phase-btn { flex:1; padding:14px 20px; border:none; background:none; color:var(--text-muted); font-size:.9rem; font-weight:600; border-radius:8px; cursor:pointer; transition:all .2s; display:flex; align-items:center; justify-content:center; gap:10px; }
+  .phase-btn:hover { color:var(--text); background:var(--surface2); }
+  .phase-btn.active { color:#fff; }
+  .phase-btn.active[data-phase="pipeline"] { background:var(--accent); }
+  .phase-btn.active[data-phase="booked"] { background:var(--purple); }
+  .phase-btn.active[data-phase="resolved"] { background:var(--green); }
+  .phase-btn .count { font-size:.75rem; background:rgba(255,255,255,.15); padding:2px 8px; border-radius:100px; }
+  .phase-btn.active .count { background:rgba(255,255,255,.25); }
+
+  /* PHASES */
+  .phase { display:none; animation:fadeIn .25s; }
+  .phase.active { display:block; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+
+  /* PHASE UPDATED */
+  .phase-updated { font-size:.76rem; color:var(--text-muted); margin-bottom:16px; padding:6px 12px; background:var(--surface); border-radius:6px; display:inline-block; }
+
+  /* STAT CARDS */
+  .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin-bottom:24px; }
+  .stat-card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:16px 18px; }
+  .stat-card .label { font-size:.72rem; text-transform:uppercase; letter-spacing:.06em; color:var(--text-muted); margin-bottom:4px; }
+  .stat-card .value { font-size:1.6rem; font-weight:700; }
+  .stat-card .sub { font-size:.78rem; color:var(--text-muted); margin-top:2px; }
+  .stat-card.green .value { color:var(--green); }
+  .stat-card.yellow .value { color:var(--yellow); }
+  .stat-card.orange .value { color:var(--orange); }
+  .stat-card.red .value { color:var(--red); }
+  .stat-card.blue .value { color:var(--accent); }
+  .stat-card.purple .value { color:var(--purple); }
+  .stat-card.teal .value { color:var(--teal); }
+
+  /* TABS */
+  .tabs { display:flex; gap:4px; border-bottom:2px solid var(--surface2); margin-bottom:0; overflow-x:auto; }
+  .tab { padding:10px 16px; font-size:.83rem; font-weight:600; color:var(--text-muted); border:none; background:none; cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-2px; white-space:nowrap; transition:color .15s,border-color .15s; }
+  .tab:hover { color:var(--text); }
+  .tab.active { color:var(--accent); border-bottom-color:var(--accent); }
+  .phase[data-id="booked"] .tab.active { color:var(--purple); border-bottom-color:var(--purple); }
+  .phase[data-id="resolved"] .tab.active { color:var(--green); border-bottom-color:var(--green); }
+
+  /* SECTION */
+  .section { display:none; animation:fadeIn .2s; }
+  .section.active { display:block; }
+  .section-header { display:flex; align-items:center; gap:10px; margin:20px 0 14px; }
+  .section-header h2 { font-size:1.05rem; font-weight:600; }
+
+  /* BADGES */
+  .badge { display:inline-block; font-size:.68rem; font-weight:700; padding:2px 8px; border-radius:100px; text-transform:uppercase; letter-spacing:.04em; }
+  .badge-green { background:var(--green-bg); color:var(--green); }
+  .badge-yellow { background:var(--yellow-bg); color:var(--yellow); }
+  .badge-orange { background:var(--orange-bg); color:var(--orange); }
+  .badge-red { background:var(--red-bg); color:var(--red); }
+  .badge-blue { background:var(--blue-bg); color:var(--accent); }
+  .badge-purple { background:var(--purple-bg); color:var(--purple); }
+  .badge-teal { background:var(--teal-bg); color:var(--teal); }
+
+  /* CASE CARDS */
+  .case-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(370px,1fr)); gap:12px; margin-bottom:22px; }
+  .case-card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:16px 18px; transition:border-color .15s; position:relative; }
+  .case-card:hover { border-color:var(--accent); }
+  .case-card .cc-top { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-bottom:8px; }
+  .case-card .case-name { font-weight:700; font-size:.92rem; }
+  .case-card .attorney { font-size:.68rem; font-weight:700; padding:2px 8px; border-radius:100px; }
+  .att-sm { background:rgba(168,85,247,.15); color:var(--purple); }
+  .att-jm { background:rgba(59,130,246,.15); color:var(--accent); }
+  .att-rq { background:rgba(34,197,94,.15); color:var(--green); }
+  .att-tt { background:rgba(234,179,8,.15); color:var(--yellow); }
+  .att-lm { background:rgba(249,115,22,.15); color:var(--orange); }
+  .att-jg { background:rgba(20,184,166,.15); color:var(--teal); }
+  .case-card .cc-status { font-size:.82rem; color:var(--text-muted); margin-bottom:8px; }
+  .case-card .cc-action { font-size:.82rem; padding:8px 10px; background:var(--bg); border-radius:6px; border-left:3px solid var(--accent); }
+  .case-card .cc-action strong { color:var(--accent); font-size:.68rem; text-transform:uppercase; letter-spacing:.04em; }
+  .status-dot { position:absolute; top:16px; right:18px; width:8px; height:8px; border-radius:50%; }
+  .dot-green { background:var(--green); box-shadow:0 0 6px var(--green); }
+  .dot-yellow { background:var(--yellow); box-shadow:0 0 6px var(--yellow); }
+  .dot-orange { background:var(--orange); box-shadow:0 0 6px var(--orange); }
+  .dot-red { background:var(--red); box-shadow:0 0 6px var(--red); }
+  .dot-purple { background:var(--purple); box-shadow:0 0 6px var(--purple); }
+  .not-interested { opacity:.55; }
+
+  /* COUNTDOWN */
+  .countdown { display:inline-block; font-size:.72rem; font-weight:700; padding:3px 10px; border-radius:100px; margin-bottom:6px; }
+  .cd-urgent { background:var(--red-bg); color:var(--red); }
+  .cd-soon { background:var(--orange-bg); color:var(--orange); }
+  .cd-ok { background:var(--yellow-bg); color:var(--yellow); }
+  .cd-far { background:var(--blue-bg); color:var(--accent); }
+
+  /* TABLES */
+  .table-wrap { overflow-x:auto; margin-bottom:22px; }
+  table { width:100%; border-collapse:collapse; font-size:.84rem; }
+  th { text-align:left; padding:10px 14px; background:var(--surface2); color:var(--text-muted); font-weight:600; font-size:.73rem; text-transform:uppercase; letter-spacing:.04em; border-bottom:1px solid var(--border); }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); }
+  tr:hover td { background:rgba(59,130,246,.04); }
+
+  /* TIMELINE */
+  .timeline { position:relative; padding-left:24px; margin-bottom:22px; }
+  .timeline::before { content:''; position:absolute; left:7px; top:4px; bottom:4px; width:2px; background:var(--surface2); }
+  .tl-item { position:relative; padding-bottom:14px; }
+  .tl-item:last-child { padding-bottom:0; }
+  .tl-dot { position:absolute; left:-20px; top:5px; width:10px; height:10px; border-radius:50%; border:2px solid var(--accent); background:var(--bg); }
+  .tl-item.urgent .tl-dot { border-color:var(--red); background:var(--red); }
+  .tl-item.today .tl-dot { border-color:var(--orange); background:var(--orange); }
+  .tl-date { font-size:.73rem; font-weight:700; color:var(--accent); text-transform:uppercase; }
+  .tl-item.urgent .tl-date { color:var(--red); }
+  .tl-item.today .tl-date { color:var(--orange); }
+  .tl-text { font-size:.84rem; }
+
+  /* FILTER */
+  .filter-bar { display:flex; gap:6px; margin:14px 0; flex-wrap:wrap; align-items:center; }
+  .filter-bar label { font-size:.78rem; color:var(--text-muted); margin-right:4px; }
+  .filter-btn { padding:4px 12px; font-size:.76rem; border-radius:100px; border:1px solid var(--border); background:none; color:var(--text-muted); cursor:pointer; transition:all .15s; }
+  .filter-btn:hover { border-color:var(--text-muted); color:var(--text); }
+  .filter-btn.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+
+  /* WORKLOAD BARS */
+  .workload-bars { display:flex; gap:20px; flex-wrap:wrap; margin-bottom:22px; }
+  .wl-bar { flex:1; min-width:280px; }
+  .wl-label { font-size:.85rem; font-weight:600; margin-bottom:6px; display:flex; justify-content:space-between; }
+  .wl-track { height:26px; background:var(--surface2); border-radius:6px; overflow:hidden; display:flex; }
+  .wl-seg { height:100%; display:flex; align-items:center; justify-content:center; font-size:.68rem; font-weight:700; color:#fff; }
+  .wl-seg.active { background:var(--accent); }
+  .wl-seg.blocked { background:var(--red); }
+  .wl-seg.near { background:var(--green); }
+  .wl-legend { display:flex; gap:12px; margin-top:6px; }
+  .wl-legend span { font-size:.7rem; color:var(--text-muted); display:flex; align-items:center; gap:4px; }
+  .wl-legend span::before { content:''; width:8px; height:8px; border-radius:2px; display:inline-block; }
+  .wl-legend .l-active::before { background:var(--accent); }
+  .wl-legend .l-blocked::before { background:var(--red); }
+  .wl-legend .l-near::before { background:var(--green); }
+
+  /* VELOCITY CARDS */
+  .velocity { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin-bottom:22px; }
+  .vel-item { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:14px 16px; text-align:center; }
+  .vel-item .vel-num { font-size:1.4rem; font-weight:700; }
+  .vel-item .vel-label { font-size:.76rem; color:var(--text-muted); }
+
+  /* PHASE INDICATOR (Booked) */
+  .phase-indicator { display:flex; align-items:center; gap:4px; margin:6px 0; }
+  .phase-pip { width:18px; height:5px; border-radius:3px; background:var(--surface2); }
+  .phase-pip.filled { background:var(--purple); }
+  .phase-label { font-size:.7rem; color:var(--text-muted); margin-left:6px; }
+
+  /* SETTLEMENT CARD */
+  .settle-card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:16px 18px; }
+  .settle-card .settle-amount { font-size:1.2rem; font-weight:700; color:var(--green); }
+  .settle-card .settle-detail { font-size:.82rem; color:var(--text-muted); }
+
+  .footer { text-align:center; color:var(--text-muted); font-size:.76rem; padding:24px 0 8px; border-top:1px solid var(--surface2); margin-top:32px; }
+
+  .search-highlight { background:rgba(59,130,246,.3); border-radius:2px; }
+  .hidden-by-search { display:none !important; }
+  .hidden-by-filter { display:none !important; }
+
+  /* JPA TRACKER */
+  .jpa-toggle { display:inline-flex; align-items:center; gap:8px; padding:8px 16px; background:var(--surface); border:1px solid var(--border); border-radius:10px; color:var(--text-muted); font-size:.82rem; font-weight:600; cursor:pointer; transition:all .2s; }
+  .jpa-toggle:hover { border-color:var(--teal); color:var(--teal); }
+  .jpa-toggle.active { background:var(--teal-bg); border-color:var(--teal); color:var(--teal); }
+  .jpa-toggle .jpa-count { font-size:.7rem; background:var(--teal); color:#fff; padding:1px 7px; border-radius:100px; }
+  .jpa-toggle.active .jpa-count { background:var(--teal); }
+
+  .jpa-panel { display:none; animation:fadeIn .25s; margin-bottom:24px; }
+  .jpa-panel.active { display:block; }
+  .jpa-panel-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:12px; }
+  .jpa-panel-header h2 { font-size:1.1rem; font-weight:700; color:var(--teal); }
+  .jpa-legend { display:flex; gap:16px; flex-wrap:wrap; }
+  .jpa-legend-item { display:flex; align-items:center; gap:5px; font-size:.72rem; color:var(--text-muted); }
+  .jpa-legend-dot { width:10px; height:10px; border-radius:50%; }
+
+  .jpa-pipeline-stages { display:flex; gap:2px; margin-bottom:20px; background:var(--surface); border-radius:10px; padding:12px 16px; border:1px solid var(--border); }
+  .jpa-stage { flex:1; text-align:center; padding:8px 4px; position:relative; }
+  .jpa-stage-num { font-size:1.4rem; font-weight:700; }
+  .jpa-stage-label { font-size:.68rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:.04em; }
+  .jpa-stage-bar { height:4px; border-radius:2px; margin-top:6px; }
+  .jpa-stage[data-stage="1"] .jpa-stage-num { color:var(--text-muted); }
+  .jpa-stage[data-stage="1"] .jpa-stage-bar { background:var(--surface2); }
+  .jpa-stage[data-stage="2"] .jpa-stage-num { color:var(--yellow); }
+  .jpa-stage[data-stage="2"] .jpa-stage-bar { background:var(--yellow); }
+  .jpa-stage[data-stage="3"] .jpa-stage-num { color:var(--orange); }
+  .jpa-stage[data-stage="3"] .jpa-stage-bar { background:var(--orange); }
+  .jpa-stage[data-stage="4"] .jpa-stage-num { color:var(--accent); }
+  .jpa-stage[data-stage="4"] .jpa-stage-bar { background:var(--accent); }
+  .jpa-stage[data-stage="5"] .jpa-stage-num { color:var(--green); }
+  .jpa-stage[data-stage="5"] .jpa-stage-bar { background:var(--green); }
+
+  .jpa-cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(370px,1fr)); gap:12px; }
+  .jpa-card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:16px 18px; position:relative; transition:border-color .15s; }
+  .jpa-card:hover { border-color:var(--teal); }
+  .jpa-card .jpa-card-top { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-bottom:6px; }
+  .jpa-card .jpa-case-name { font-weight:700; font-size:.92rem; }
+  .jpa-card .jpa-firm { font-size:.82rem; color:var(--teal); font-weight:600; }
+  .jpa-card .jpa-detail { font-size:.82rem; color:var(--text-muted); margin-bottom:4px; }
+  .jpa-card .jpa-split { display:inline-block; font-size:.78rem; font-weight:700; padding:2px 10px; border-radius:100px; }
+  .jpa-split-agreed { background:var(--green-bg); color:var(--green); }
+  .jpa-split-pending { background:var(--yellow-bg); color:var(--yellow); }
+  .jpa-split-none { background:var(--surface2); color:var(--text-muted); }
+  .jpa-card .jpa-stage-indicator { display:flex; align-items:center; gap:3px; margin:8px 0 6px; }
+  .jpa-pip { width:22%; height:5px; border-radius:3px; background:var(--surface2); }
+  .jpa-pip.filled-1 { background:var(--text-muted); }
+  .jpa-pip.filled-2 { background:var(--yellow); }
+  .jpa-pip.filled-3 { background:var(--orange); }
+  .jpa-pip.filled-4 { background:var(--accent); }
+  .jpa-pip.filled-5 { background:var(--green); }
+  .jpa-stage-text { font-size:.68rem; color:var(--text-muted); margin-left:6px; white-space:nowrap; }
+  .jpa-card .jpa-action { font-size:.82rem; padding:8px 10px; background:var(--bg); border-radius:6px; border-left:3px solid var(--teal); }
+  .jpa-card .jpa-action strong { color:var(--teal); font-size:.68rem; text-transform:uppercase; letter-spacing:.04em; }
+
+  .jpa-alert { display:inline-flex; align-items:center; gap:5px; font-size:.72rem; font-weight:700; padding:3px 10px; border-radius:100px; background:var(--red-bg); color:var(--red); margin-bottom:6px; }
+  .jpa-alert-topfiles { background:var(--orange-bg); color:var(--orange); }
+  .jpa-negotiator { font-size:.72rem; color:var(--text-muted); margin-top:4px; }
+
+  @media(max-width:700px) {
+    .case-grid { grid-template-columns:1fr; }
+    .stats { grid-template-columns:repeat(2,1fr); }
+    .phase-nav { flex-direction:column; }
+    .header { flex-direction:column; }
+    .header-meta { text-align:left; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div>
+      <h1><span>Mediation</span> Command Center</h1>
+      <div style="color:var(--text-muted);font-size:.88rem;margin-top:4px;">Blackstone Law, APC — Full Lifecycle Dashboard</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button class="jpa-toggle" id="jpaToggle" title="Joint Prosecution Agreements">&#9878; JPA Tracker <span class="jpa-count">9</span></button>
+      <div class="header-meta">
+        <div><strong id="totalCaseCount">0</strong> total cases tracked</div>
+        <div>Report: <strong>March 31, 2026</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GLOBAL SEARCH -->
+  <div class="search-wrap">
+    <span class="search-icon">&#128269;</span>
+    <input type="text" id="globalSearch" placeholder="Search cases across all phases..." autocomplete="off">
+    <span class="search-count" id="searchCount"></span>
+  </div>
+
+  <!-- JPA TRACKER PANEL -->
+  <div class="jpa-panel" id="jpaPanel">
+    <div class="jpa-panel-header">
+      <h2>&#9878; Joint Prosecution Agreement Tracker</h2>
+      <div class="jpa-legend">
+        <div class="jpa-legend-item"><div class="jpa-legend-dot" style="background:var(--text-muted);"></div>Identified</div>
+        <div class="jpa-legend-item"><div class="jpa-legend-dot" style="background:var(--yellow);"></div>Outreach</div>
+        <div class="jpa-legend-item"><div class="jpa-legend-dot" style="background:var(--orange);"></div>Draft Sent</div>
+        <div class="jpa-legend-item"><div class="jpa-legend-dot" style="background:var(--accent);"></div>Negotiation</div>
+        <div class="jpa-legend-item"><div class="jpa-legend-dot" style="background:var(--green);"></div>Executed</div>
+      </div>
+    </div>
+
+    <!-- STAGE SUMMARY BAR -->
+    <div class="jpa-pipeline-stages">
+      <div class="jpa-stage" data-stage="1"><div class="jpa-stage-num">3</div><div class="jpa-stage-label">Identified</div><div class="jpa-stage-bar"></div></div>
+      <div class="jpa-stage" data-stage="2"><div class="jpa-stage-num">0</div><div class="jpa-stage-label">Outreach</div><div class="jpa-stage-bar"></div></div>
+      <div class="jpa-stage" data-stage="3"><div class="jpa-stage-num">0</div><div class="jpa-stage-label">Draft Sent</div><div class="jpa-stage-bar"></div></div>
+      <div class="jpa-stage" data-stage="4"><div class="jpa-stage-num">3</div><div class="jpa-stage-label">Negotiation</div><div class="jpa-stage-bar"></div></div>
+      <div class="jpa-stage" data-stage="5"><div class="jpa-stage-num">3</div><div class="jpa-stage-label">Executed</div><div class="jpa-stage-bar"></div></div>
+    </div>
+
+    <!-- JPA CASE CARDS -->
+    <div class="jpa-cards">
+
+      <!-- EXECUTED -->
+      <div class="jpa-card" data-jpa-stage="5" data-attorney="rq">
+        <div class="jpa-card-top"><span class="jpa-case-name">Control Air Enterprises (Soto)</span><span class="attorney att-rq">RQ</span></div>
+        <div class="jpa-firm">vs. Otkupman Law Group</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin:6px 0;"><span class="jpa-split jpa-split-agreed">85/15 BSL</span><span class="badge badge-green">ON TOP FILES</span></div>
+        <div class="jpa-stage-indicator"><div class="jpa-pip filled-5"></div><div class="jpa-pip filled-5"></div><div class="jpa-pip filled-5"></div><div class="jpa-pip filled-5"></div><div class="jpa-pip filled-5"></div><span class="jpa-stage-text">Stage 5 — Executed</span></div>
+        <div class="jpa-detail">JPA executed with Otkupman Law Group 3/26 (85/15 BSL). PAGA only, union employee. Class belongs to BSL. Defense counsel: Roman (AALRR).</div>
+        <div class="jpa-action"><strong>Next</strong> MOU draft in progress. Monitor for defense documents.</div>
+        <div class="jpa-negotiator">Negotiated by: Jonathan Genish | Karen handling VineSign</div>
+      </div>
+
+      <div class="jpa-card" data-jpa-stage="5" data-attorney="jm">
+        <div class="jpa-card-top"><span class="jpa-case-name">Aguirre/Bowers v. Southwest College</span><span class="attorney att-jm">JM</span></div>
+        <div class="jpa-firm">vs. D. Law (Arsine Grigoryan)</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin:6px 0;"><span class="jpa-split jpa-split-agreed">Executed</span><span class="badge badge-green">ON TOP FILES</span></div>
+        <div class="jpa-stage-indicator"><div class="jpa-pip filled-5"></div><div class="jpa-pip filled-5"></div><div class="jpa-pip filled-5"></div><div class="jpa-pip filled-5"></div><div class="jpa-pip filled-5"></div><span class="jpa-stage-text">Stage 5 — Executed</span></div>
+        <div class="jpa-detail">Signed via VineSign 2/20/2026. D. Law filed competing case.</div>
+        <div class="jpa-action"><strong>Next</strong> No further action. JPA fully executed and in place.</div>
+        <div class="jpa-negotiator">Negotiated by: Jonathan Genish</div>
+      </div>
+
+      <div class="jpa-card" data-jpa-stage="5" data-attorney="rq">
+        <div class="jpa-card-top"><span class="jpa-case-name">Guardant Health (Dizon)</span><span class="attorney att-rq">RQ</span></div>
+        <div class="jpa-firm">vs. BAM Law (De Blouw)</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin:6px 0;"><span class="jpa-split jpa-split-agreed">65/35 BSL</span><span class="badge badge-green">SETTLED $2.65M</span></div>
+        <div class="jpa-stage-indicator"><div class="jpa-pip filled-5"></div><div class="jpa-pip filled-5"></div><div class="jpa-pip filled-5"></div><div class="jpa-pip filled-5"></div><div class="jpa-pip filled-5"></div><span class="jpa-stage-text">Stage 5 — Executed</span></div>
+        <div class="jpa-detail">JPA executed. Case settled at mediation for $2.65M (Eve Wagner, 2/19/26). Fee split 65% BSL / 35% BAM.</div>
+        <div class="jpa-action"><strong>Next</strong> Complete. Settlement docs in progress.</div>
+        <div class="jpa-negotiator">Negotiated by: Jonathan Genish</div>
+      </div>
+
+      <!-- NEGOTIATION -->
+      <div class="jpa-card" data-jpa-stage="4" data-attorney="rq" style="border-left:3px solid var(--accent);">
+        <div class="jpa-card-top"><span class="jpa-case-name">Ridgecrest Regional Hospital (Hoskins/Rosado)</span><span class="attorney att-rq">RQ</span></div>
+        <div class="jpa-firm">vs. L&amp;E Law (Margaux Gundzik / Keith)</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin:6px 0;"><span class="jpa-split jpa-split-pending">Split TBD</span><span class="badge badge-blue">ACTIVE NEGOTIATION</span></div>
+        <div class="jpa-stage-indicator"><div class="jpa-pip filled-4"></div><div class="jpa-pip filled-4"></div><div class="jpa-pip filled-4"></div><div class="jpa-pip filled-4"></div><div class="jpa-pip"></div><span class="jpa-stage-text">Stage 4 — Negotiation</span></div>
+        <div class="jpa-detail">JPA call completed 3/31. Margaux to send JPA draft today. BSL leads mediation orchestration after motion outcome (~60 days). Defense extension to 4/7.</div>
+        <div class="jpa-action"><strong>Next</strong> Review Margaux's JPA draft when received. Counter if needed. BSL to handle mediator selection.</div>
+        <div class="jpa-negotiator">Ryan handling directly</div>
+      </div>
+
+      <div class="jpa-card" data-jpa-stage="4" data-attorney="jm" style="border-left:3px solid var(--accent);">
+        <div class="jpa-card-top"><span class="jpa-case-name">PRS/Yang/Munoz (Pavement Recycling)</span><span class="attorney att-jm">JM</span></div>
+        <div class="jpa-firm">vs. Wheeler Employment Law (Debi)</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin:6px 0;"><span class="jpa-split jpa-split-pending">1/3 Equal Split</span><span class="badge badge-blue">SETTLEMENT SPLIT</span></div>
+        <div class="jpa-stage-indicator"><div class="jpa-pip filled-4"></div><div class="jpa-pip filled-4"></div><div class="jpa-pip filled-4"></div><div class="jpa-pip filled-4"></div><div class="jpa-pip"></div><span class="jpa-stage-text">Stage 4 — Negotiation</span></div>
+        <div class="jpa-detail">1/3 equal split for settlement agreed. BSL has separate defendants. Multiple competing cases (Yang, Munoz). 40+ days no discovery produced.</div>
+        <div class="jpa-action"><strong>Next</strong> Send M&amp;C letter. Finalize JPA terms. Threaten MTC if discovery continues stalling.</div>
+        <div class="jpa-negotiator">Negotiated by: Jonathan Genish</div>
+      </div>
+
+      <div class="jpa-card" data-jpa-stage="4" data-attorney="jm" style="border-left:3px solid var(--accent);">
+        <div class="jpa-card-top"><span class="jpa-case-name">Keenan Farms (Cervantez)</span><span class="attorney att-jm">JM</span></div>
+        <div class="jpa-firm">vs. Sentinel Firm (Seung Yang / Tiffany Hyun)</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin:6px 0;"><span class="jpa-split jpa-split-pending">Split TBD</span><span class="badge badge-blue">COORDINATING MEDIATION</span></div>
+        <div class="jpa-stage-indicator"><div class="jpa-pip filled-4"></div><div class="jpa-pip filled-4"></div><div class="jpa-pip filled-4"></div><div class="jpa-pip filled-4"></div><div class="jpa-pip"></div><span class="jpa-stage-text">Stage 4 — Negotiation</span></div>
+        <div class="jpa-detail">Sentinel filed competing class (Romero, 25CU0260, 6/4/25) and PAGA (11/21/25). Sentinel reached out 8/25 after defense informed them of BSL case. Mediation costs split 3 ways. Mediation 10/20/26 with Gig Kyriacou via Zoom. Defense: Kahn Soares &amp; Conway (Rissa Stuart).</div>
+        <div class="jpa-action"><strong>Next</strong> Confirm JPA terms with Sentinel. Formalize fee split before mediation. No signed JPA on file yet.</div>
+        <div class="jpa-negotiator">Needs: JPA formalization before 10/20/26 mediation</div>
+      </div>
+
+      <!-- IDENTIFIED — NEED ATTENTION -->
+      <div class="jpa-card" data-jpa-stage="1" data-attorney="jm" style="border-left:3px solid var(--orange);">
+        <div class="jpa-card-top"><span class="jpa-case-name">General Coatings (Lopez/Gabet)</span><span class="attorney att-jm">JM</span></div>
+        <div class="jpa-firm">vs. Falakassa Law / Bokhour Law</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin:6px 0;"><span class="jpa-split jpa-split-none">No Split Yet</span><span class="jpa-alert jpa-alert-topfiles">&#9888; CHECK TOP FILES — MAY NEED NATALIA</span></div>
+        <div class="jpa-stage-indicator"><div class="jpa-pip filled-1"></div><div class="jpa-pip"></div><div class="jpa-pip"></div><div class="jpa-pip"></div><div class="jpa-pip"></div><span class="jpa-stage-text">Stage 1 — Identified</span></div>
+        <div class="jpa-detail">Topfiled 3/19/2026. Dinger alert from Asher. Settlement negotiations in parallel — confidentiality agreement being revised.</div>
+        <div class="jpa-action"><strong>Next</strong> Confirm with Natalia Michele if on Top Files spreadsheet. If not, flag to JG. Continue settlement talks.</div>
+        <div class="jpa-negotiator">Needs: Jonathan Genish awareness | Contact: nmichele@blackstonepc.com</div>
+      </div>
+
+      <div class="jpa-card" data-jpa-stage="1" data-attorney="jm" style="border-left:3px solid var(--orange);">
+        <div class="jpa-card-top"><span class="jpa-case-name">Food Ventures North America</span><span class="attorney att-jm">JM</span></div>
+        <div class="jpa-firm">vs. Diversity Law Group</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin:6px 0;"><span class="jpa-split jpa-split-none">No Split Yet</span><span class="jpa-alert jpa-alert-topfiles">&#9888; CHECK TOP FILES — MAY NEED NATALIA</span></div>
+        <div class="jpa-stage-indicator"><div class="jpa-pip filled-1"></div><div class="jpa-pip"></div><div class="jpa-pip"></div><div class="jpa-pip"></div><div class="jpa-pip"></div><span class="jpa-stage-text">Stage 1 — Identified</span></div>
+        <div class="jpa-detail">Topfiled 3/20/2026. Dinger alert from Asher. Recent case — no JPA discussions initiated yet.</div>
+        <div class="jpa-action"><strong>Next</strong> Confirm with Natalia Michele if on Top Files. If not, add and flag to JG for outreach to Diversity Law.</div>
+        <div class="jpa-negotiator">Needs: Jonathan Genish awareness | Contact: nmichele@blackstonepc.com</div>
+      </div>
+
+      <div class="jpa-card" data-jpa-stage="1" data-attorney="rq" style="border-left:3px solid var(--orange);">
+        <div class="jpa-card-top"><span class="jpa-case-name">Hyatt Regency Indian Wells (Jean, Nadine)</span><span class="attorney att-rq">RQ</span></div>
+        <div class="jpa-firm">vs. Abramson Labor Group</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin:6px 0;"><span class="jpa-split jpa-split-none">No Split Yet</span><span class="jpa-alert jpa-alert-topfiles">&#9888; CHECK TOP FILES — MAY NEED NATALIA</span></div>
+        <div class="jpa-stage-indicator"><div class="jpa-pip filled-1"></div><div class="jpa-pip"></div><div class="jpa-pip"></div><div class="jpa-pip"></div><div class="jpa-pip"></div><span class="jpa-stage-text">Stage 1 — Identified</span></div>
+        <div class="jpa-detail">Abramson filed PAGA 1/23/2026. Dinger alert identified competing case. No JPA outreach yet.</div>
+        <div class="jpa-action"><strong>Next</strong> Confirm with Natalia Michele if on Top Files. Flag to JG. Determine if Abramson outreach is warranted.</div>
+        <div class="jpa-negotiator">Needs: Jonathan Genish awareness | Contact: nmichele@blackstonepc.com</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PHASE NAV -->
+  <div class="phase-nav" id="phaseNav">
+    <button class="phase-btn active" data-phase="pipeline">
+      <span>1. Pipeline</span><span class="count" id="count-pipeline">42</span>
+    </button>
+    <button class="phase-btn" data-phase="booked">
+      <span>2. Booked &amp; Preparing</span><span class="count" id="count-booked">14</span>
+    </button>
+    <button class="phase-btn" data-phase="resolved">
+      <span>3. Resolved</span><span class="count" id="count-resolved">15</span>
+    </button>
+  </div>
+
+  <!-- ================================================================== -->
+  <!-- PHASE 1: PIPELINE -->
+  <!-- ================================================================== -->
+  <div class="phase active" data-id="pipeline" id="phase-pipeline">
+
+    <div class="phase-updated">Last updated: <strong>Wednesdays</strong> (Pipeline Monitor scan) | Last scan: March 26, 2026</div>
+
+    <!-- ATTORNEY FILTER (Global for Phase 1) -->
+    <div class="filter-bar" data-filter-scope="pipeline"><label>Attorney:</label>
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="sm">SM</button>
+      <button class="filter-btn" data-filter="jm">JM</button>
+      <button class="filter-btn" data-filter="rq">RQ</button>
+    </div>
+
+    <div class="stats">
+      <div class="stat-card green"><div class="label">Ready to Book</div><div class="value">5</div><div class="sub">3 booked, 2 near-booking</div></div>
+      <div class="stat-card blue"><div class="label">New Activity</div><div class="value">25</div><div class="sub">Movement since last scan</div></div>
+      <div class="stat-card orange"><div class="label">Going Stale</div><div class="value">6</div><div class="sub">30+ days no activity</div></div>
+      <div class="stat-card red"><div class="label">Blocked (MTCA)</div><div class="value">8</div><div class="sub">Pending motions</div></div>
+      <div class="stat-card purple"><div class="label">Booked This Cycle</div><div class="value">4</div><div class="sub">Transfer to Phase 2</div></div>
+      <div class="stat-card yellow"><div class="label">No OC Yet</div><div class="value">6</div><div class="sub">Awaiting defense</div></div>
+    </div>
+
+    <div class="tabs" data-group="pipeline">
+      <button class="tab active" data-tab="p-ready">Ready to Book</button>
+      <button class="tab" data-tab="p-activity">New Activity</button>
+      <button class="tab" data-tab="p-stale">Going Stale</button>
+      <button class="tab" data-tab="p-blocked">Blocked</button>
+      <button class="tab" data-tab="p-health">Pipeline Health</button>
+      <button class="tab" data-tab="p-actions">This Week</button>
+    </div>
+
+    <!-- READY TO BOOK -->
+    <div class="section active" id="p-ready">
+      <div class="section-header"><h2>Ready to Book</h2><span class="badge badge-green">5 cases</span></div>
+      <div class="case-grid">
+        <div class="case-card" data-attorney="sm"><div class="status-dot dot-green"></div><div class="cc-top"><span class="case-name">Southland Box Company (Chavez)</span><span class="attorney att-sm">SM</span></div><div class="cc-status"><span class="badge badge-green">BOOKED</span> — Marc Feder confirmed <strong>Jan 7, 2027</strong>. CaseAnywhere launched 3/27.</div><div class="cc-action"><strong>Next</strong> Transfer to Phase 2. Begin MDRL prep.</div></div>
+        <div class="case-card" data-attorney="sm"><div class="status-dot dot-orange"></div><div class="cc-top"><span class="case-name">Outdoor Dimensions (Richards)</span><span class="attorney att-sm">SM</span></div><div class="cc-status"><span class="badge badge-orange">VACATED</span> — Sept 11 date cancelled 3/28. OC (Shannon Jenkins, Tredway Lumsdaine) rejected Friday — client fee-sensitive. No 2026 dates available with Monique. On cancellation list. Earliest: <strong>Feb 2027</strong>.</div><div class="cc-action"><strong>Next</strong> Pick Mon-Thu date in 2027 with Monique. Coordinate with OC on Feb-April 2027 availability.</div></div>
+        <div class="case-card" data-attorney="sm"><div class="status-dot dot-green"></div><div class="cc-top"><span class="case-name">Imperial Valley FMG (Miranda)</span><span class="attorney att-sm">SM</span></div><div class="cc-status"><span class="badge badge-green">BOOKED</span> — Allison Eckstrom confirmed <strong>July 31, 2026</strong>. Discovery stayed.</div><div class="cc-action"><strong>Next</strong> Transfer to Phase 2. Begin MDRL.</div></div>
+        <div class="case-card" data-attorney="jm"><div class="status-dot dot-green"></div><div class="cc-top"><span class="case-name">Int'l Cosmetics (Orihuela)</span><span class="attorney att-jm">JM</span></div><div class="cc-status"><span class="badge badge-green">BOOKED</span> — Mediation <strong>June 18, 2026</strong>. Only 80 days out.</div><div class="cc-action"><strong>Next</strong> Transfer to Phase 2. MDRL already sent. Engage BCG.</div></div>
+        <div class="case-card" data-attorney="sm"><div class="status-dot dot-green"></div><div class="cc-top"><span class="case-name">Ecology Control Industries (Ruge/Rivera)</span><span class="attorney att-sm">SM</span><span class="badge badge-green" style="margin-left:auto;font-size:.65rem;">UPDATED 3/31</span></div><div class="cc-status"><span class="badge badge-green">BOOKING</span> — Intro call completed 3/31. Both sides agreed on early mediation. Defense willing to share employee data pre-mediation. Mediators proposed: Monique, Feder, McKelvey, Mike Dress (defense suggestion — former plaintiff's lawyer, better rates). Targeting 2026 dates.</div><div class="cc-action"><strong>Next</strong> Exchange mediator availability. Lock date. Defense answer due <strong>4/17</strong>.</div></div>
+        <div class="case-card" data-attorney="sm"><div class="status-dot dot-yellow"></div><div class="cc-top"><span class="case-name">ISU Petasys (Garfias)</span><span class="attorney att-sm">SM</span></div><div class="cc-status"><span class="badge badge-yellow">NEAR-BOOKING</span> — Data sent to BCG 3/26-27. Feder &amp; Judge West proposed. ~62 class members.</div><div class="cc-action"><strong>Next</strong> Follow up on BCG analysis. Lock mediator date.</div></div>
+      </div>
+    </div>
+
+    <!-- NEW ACTIVITY -->
+    <div class="section" id="p-activity">
+      <div class="section-header"><h2>New Activity</h2><span class="badge badge-blue">25 cases</span></div>
+      <div class="case-grid" id="activity-grid">
+        <div class="case-card" data-attorney="sm"><div class="cc-top"><span class="case-name">Behavior Treatment &amp; Analysis (Ines)</span><span class="attorney att-sm">SM</span></div><div class="cc-status">Mediation dates being discussed. OC wants to mediate.</div><div class="cc-action"><strong>Next</strong> Finalize mediator (Eve, Monique, or McKelvey) and lock date.</div></div>
+        <div class="case-card" data-attorney="sm"><div class="status-dot dot-green"></div><div class="cc-top"><span class="case-name">Benq America (Naquin)</span><span class="attorney att-sm">SM</span><span class="badge badge-green" style="margin-left:auto;font-size:.65rem;">BOOKED 3/31</span></div><div class="cc-status"><span class="badge badge-green">BOOKED</span> — <strong>Sept 11, 2026</strong> with Monique Ngo-Bonnici. Client authorized mediation 3/31. 73 class members, 7,337 work weeks. Discovery stay agreed — informal exchange before mediation. 50-record sample across classifications. PMK depo (4/28) removed.</div><div class="cc-action"><strong>Next</strong> Transfer to Phase 2. SM — draft stay agreement. Begin informal data exchange.</div></div>
+        <div class="case-card" data-attorney="sm"><div class="cc-top"><span class="case-name">Caleres (Ramirez)</span><span class="attorney att-sm">SM</span></div><div class="cc-status">Remand motion <strong>DENIED</strong> 3/19 (Judge Bernal). Remains in federal court (C.D. Cal. 5:26-cv-00054-JGB-SP). Ogletree Deakins OC (Chris Decker).</div><div class="cc-action"><strong>Next</strong> Raise mediation with Ogletree. Sage knows Chris Decker.</div></div>
+        <div class="case-card" data-attorney="jm"><div class="cc-top"><span class="case-name">Cargomatic (Duenas)</span><span class="attorney att-jm">JM</span></div><div class="cc-status">MTCA hearing 5/5. Negotiating continuance with Fisher Phillips.</div><div class="cc-action"><strong>Next</strong> Finalize stipulation. <span class="badge badge-red">MTCA BLOCKED</span></div></div>
+        <div class="case-card" data-attorney="sm"><div class="cc-top"><span class="case-name">CCL Tube (Andino Matute)</span><span class="attorney att-sm">SM</span></div><div class="cc-status">PAGA filed. Arb disputes. CMC <strong>April 2 at 9:00 AM</strong>.</div><div class="cc-action"><strong>Next</strong> Prepare for CMC 4/2.</div></div>
+        <div class="case-card" data-attorney="jm"><div class="cc-top"><span class="case-name">General Coatings (Lopez, Gabet)</span><span class="attorney att-jm">JM</span></div><div class="cc-status">Settlement negotiations. Confidentiality agreement <strong>SIGNED 3/30</strong> (Amanda Luna, GRSM). Financial data exchange next.</div><div class="cc-action"><strong>Next</strong> Begin financial data exchange per agreement terms.</div></div>
+        <div class="case-card" data-attorney="sm"><div class="cc-top"><span class="case-name">Hikvision (Fernald)</span><span class="attorney att-sm">SM</span></div><div class="cc-status">MTCA denied. Gordon Rees amenable to mediation. Mediator selection in progress.</div><div class="cc-action"><strong>Next</strong> Lock mediator and propose dates.</div></div>
+        <div class="case-card" data-attorney="jm"><div class="cc-top"><span class="case-name">Snap-On Logistics (Galvez)</span><span class="attorney att-jm">JM</span></div><div class="cc-status">ISC held. Depo scheduled. RFPs due 4/28.</div><div class="cc-action"><strong>Next</strong> Gauge OC interest after initial exchange.</div></div>
+        <div class="case-card" data-attorney="sm"><div class="cc-top"><span class="case-name">Ridgecrest Regional Hospital (Rosado)</span><span class="attorney att-sm">SM</span><span class="badge badge-green" style="margin-left:auto;font-size:.65rem;">UPDATED 3/31</span></div><div class="cc-status">JPA call with L&amp;E Law (Margaux) completed 3/31. Margaux sending JPA draft. BSL leads mediation orchestration after motion outcome (~60 days). Defense extension to <strong>April 7</strong>.</div><div class="cc-action"><strong>Next</strong> Review JPA draft. BSL to handle mediator selection post-motion.</div></div>
+        <div class="case-card" data-attorney="jm"><div class="cc-top"><span class="case-name">Slater (Paz)</span><span class="attorney att-jm">JM</span></div><div class="cc-status">MTCA filed by Jackson Lewis 3/24.</div><div class="cc-action"><strong>Next</strong> Prepare opposition. <span class="badge badge-red">MTCA BLOCKED</span></div></div>
+        <div class="case-card not-interested" data-attorney="jm"><div class="cc-top"><span class="case-name">Truitt Oilfield (Carias-Paredes)</span><span class="attorney att-jm">JM</span></div><div class="cc-status"><span class="badge badge-orange">NOT INTERESTED</span> per RQ (3/30). Discovery continues.</div><div class="cc-action"><strong>Next</strong> Revisit after next discovery round.</div></div>
+        <div class="case-card" data-attorney="sm"><div class="cc-top"><span class="case-name">Acushnet Golf / Marquee Staffing (Garcia)</span><span class="attorney att-sm">SM</span></div><div class="cc-status">PAGA filed 3/25. Same OC as Guardant Health (JoAnna).</div><div class="cc-action"><strong>Next</strong> Intro call with OC.</div></div>
+        <div class="case-card" data-attorney="jm"><div class="cc-top"><span class="case-name">Hope Program (Brown)</span><span class="attorney att-jm">JM</span></div><div class="cc-status">Direct settlement discussions with Koul (OC). May resolve without mediation. OC doesn't want to mediate.</div><div class="cc-action"><strong>Next</strong> Continue settlement negotiations. Evaluate direct resolution.</div></div>
+        <div class="case-card" data-attorney="jm"><div class="cc-top"><span class="case-name">Hyatt / Carmel Valley Ranch (Seybold)</span><span class="attorney att-jm">JM</span></div><div class="cc-status">PAGA filed. CMC &amp; ADR deadlines set. Seyfarth Shaw OC.</div><div class="cc-action"><strong>Next</strong> File FAC. Gauge mediation interest.</div></div>
+        <div class="case-card" data-attorney="jm"><div class="status-dot dot-green"></div><div class="cc-top"><span class="case-name">Med-Pharmex (Flores)</span><span class="attorney att-jm">JM</span><span class="badge badge-green" style="margin-left:auto;font-size:.65rem;">UPDATED 3/31</span></div><div class="cc-status">Intro call with Perkins Coie 3/31. Both sides interested in <strong>early mediation</strong> — defense will reserve arb/class waiver motion until after mediation. Mediators: Judge West, Saratori, McKelvey, Monique (Sept 11 available). Joint CMC statement due <strong>Friday 4/3</strong>.</div><div class="cc-action"><strong>Next</strong> Send draft joint CMC statement + mediator options by <strong>EOD Wednesday</strong>. Perkins Coie to return edits Friday. Lock mediator.</div></div>
+        <div class="case-card" data-attorney="sm"><div class="cc-top"><span class="case-name">Oleander Holdings (Cazares)</span><span class="attorney att-sm">SM</span></div><div class="cc-status">Answers filed. Fisher Phillips engaged. Ready for intro call.</div><div class="cc-action"><strong>Next</strong> SM intro call with Fisher Phillips.</div></div>
+        <div class="case-card" data-attorney="jm"><div class="cc-top"><span class="case-name">Mountain Shadows (Lopez, Christian)</span><span class="attorney att-jm">JM</span></div><div class="cc-status">Complaint filed 2/6. Responsive pleading phase.</div><div class="cc-action"><strong>Next</strong> Monitor for OC appearance.</div></div>
+        <div class="case-card" data-attorney="jm"><div class="cc-top"><span class="case-name">Hobie Cat (Soria Gonzalez/Favela)</span><span class="attorney att-jm">JM</span></div><div class="cc-status">Service phase. Multiple defendants.</div><div class="cc-action"><strong>Next</strong> Monitor for OC appearance.</div></div>
+        <div class="case-card" data-attorney="jm"><div class="cc-top"><span class="case-name">Peterson Tractor (Saephan)</span><span class="attorney att-jm">JM</span><span class="badge badge-green" style="margin-left:auto;font-size:.65rem;">UPDATED 3/31</span></div><div class="cc-status">Intro call with Ogletree (Paul Smith) completed 3/31. Conflict letter being reviewed. Extension decision pending.</div><div class="cc-action"><strong>Next</strong> JM — review conflict letter with RQ. Confirm extension. Gauge mediation interest.</div></div>
+        <div class="case-card" data-attorney="jm"><div class="cc-top"><span class="case-name">Childnet Youth (Valenzuela)</span><span class="attorney att-jm">JM</span></div><div class="cc-status">CMC <strong>April 1 at 8:30 AM</strong>. MTCA granted. Motion to Designate pending.</div><div class="cc-action"><strong>Next</strong> CMC 4/1. PAGA survives. <span class="badge badge-red">BLOCKED</span></div></div>
+        <div class="case-card" data-attorney="sm"><div class="status-dot dot-green"></div><div class="cc-top"><span class="case-name">Bluestone Lane Holdings (Crespo-Valdez)</span><span class="attorney att-sm">SM</span><span class="badge badge-green" style="margin-left:auto;font-size:.65rem;">NEW 3/26</span></div><div class="cc-status">PAGA client. Complaint filed 3/26 (LASC, Stanley Mosk). Judge Carolyn B. Kuhl — <strong>170.6 being prepared</strong>. No OC yet. Prior w/h litigation against defendant.</div><div class="cc-action"><strong>Next</strong> SM — file 170.6. Karen check for hearings in 1 week. Propound discovery.</div></div>
+        <div class="case-card" data-attorney="jm"><div class="status-dot dot-green"></div><div class="cc-top"><span class="case-name">VCA / Antech Diagnostics (Cabrera)</span><span class="attorney att-jm">JM</span><span class="badge badge-green" style="margin-left:auto;font-size:.65rem;">NEW 1/24</span></div><div class="cc-status">Class/PAGA. San Diego (Judge Euketa Oliver, Dept. C-75). CMC <strong>June 18, 2026</strong>. PAGA first-day 3/19 (passed). TOPFILE on Lavi.</div><div class="cc-action"><strong>Next</strong> File PAGA complaint / amend. Responsive pleading phase. Service at agent address complete.</div></div>
+        <div class="case-card" data-attorney="jm"><div class="cc-top"><span class="case-name">A to Z Enterprises / Road One (Rodriguez)</span><span class="attorney att-jm">JM</span></div><div class="cc-status">PAGA. San Diego. CMC <strong>Sept 11, 2026</strong>. Stipulation to consolidate with related class case (Cooper Law PC). PAGA complaint filed 3/11.</div><div class="cc-action"><strong>Next</strong> JM — finalize stip to consolidate. Coordinate with Stacey Cooper.</div></div>
+        <div class="case-card" data-attorney="jm"><div class="cc-top"><span class="case-name">Fox Factory (Sanchez)</span><span class="attorney att-jm">JM</span></div><div class="cc-status">PAGA. Littler Mendelson OC (Curt Graham). Signed order from 1/28. CMC statement due <strong>April 2</strong>. New hearing calendared 3/24.</div><div class="cc-action"><strong>Next</strong> JM — file CMC statement by 4/2. Follow up on stipulations with Graham.</div></div>
+        <div class="case-card" data-attorney="rq"><div class="status-dot dot-green"></div><div class="cc-top"><span class="case-name">St. Supery Estate Vineyards (Adame)</span><span class="attorney att-rq">RQ</span><span class="badge badge-green" style="margin-left:auto;font-size:.65rem;">NEW 3/31</span></div><div class="cc-status">Intro call 3/31. Both sides favor early mediation over discovery. Client receptive to ADR. Mediator availability crisis — top mediators booking into 2027. Sept 11 (24-hr hold), April 29 McKelvey cancellation available.</div><div class="cc-action"><strong>Next</strong> Follow-up call late next week. Monitor for mediator cancellations. Coordinate calendars before Brandon's Sept date release <strong>4/15</strong>.</div></div>
+      </div>
+    </div>
+
+    <!-- GOING STALE -->
+    <div class="section" id="p-stale">
+      <div class="section-header"><h2>Going Stale</h2><span class="badge badge-orange">6 cases — 30+ days</span></div>
+      <div class="case-grid">
+        <div class="case-card not-interested" data-attorney="jm"><div class="status-dot dot-orange"></div><div class="cc-top"><span class="case-name">LA Solar Group (Steves)</span><span class="attorney att-jm">JM</span></div><div class="cc-status"><span class="badge badge-orange">NOT INTERESTED</span> per RQ (3/30). MTCA denied but not engaging.</div><div class="cc-action"><strong>Next</strong> Revisit after next case development.</div></div>
+        <div class="case-card" data-attorney="jm"><div class="status-dot dot-orange"></div><div class="cc-top"><span class="case-name">PRS Holdings / Pavement Recycling (Yang)</span><span class="attorney att-jm">JM</span></div><div class="cc-status"><span class="badge badge-orange">40+ DAYS</span> — No discovery produced. Competing cases.</div><div class="cc-action"><strong>Next</strong> Send M&amp;C letter. Threaten MTC.</div></div>
+        <div class="case-card" data-attorney="sm"><div class="status-dot dot-yellow"></div><div class="cc-top"><span class="case-name">Parkwood Landscape (Dickinson)</span><span class="attorney att-sm">SM</span></div><div class="cc-status"><span class="badge badge-yellow">41 DAYS</span> — Newly retained 3/27. Dashboard data may be stale.</div><div class="cc-action"><strong>Next</strong> SM confirm status. Propound discovery.</div></div>
+        <div class="case-card" data-attorney="sm"><div class="status-dot dot-red"></div><div class="cc-top"><span class="case-name">So. Cal. Sandbags (Bielman)</span><span class="attorney att-sm">SM</span></div><div class="cc-status"><span class="badge badge-red">222 DAYS</span> — MTCA opposition filed 2/5. Awaiting ruling.</div><div class="cc-action"><strong>Next</strong> Check docket. Inquire with clerk.</div></div>
+        <div class="case-card" data-attorney="sm"><div class="status-dot dot-orange"></div><div class="cc-top"><span class="case-name">Martis Camp Club (Nithya)</span><span class="attorney att-sm">SM</span></div><div class="cc-status"><span class="badge badge-orange">75 DAYS</span> — Discovery active but mediation follow-up stale.</div><div class="cc-action"><strong>Next</strong> Push for mediation after damages analysis.</div></div>
+        <div class="case-card" data-attorney="sm"><div class="status-dot dot-red"></div><div class="cc-top"><span class="case-name">Upper Deck (Cohee)</span><span class="attorney att-sm">SM</span></div><div class="cc-status"><span class="badge badge-red">212 DAYS</span> — Arb conference not until 3/5/2027.</div><div class="cc-action"><strong>Next</strong> Consider parallel mediation.</div></div>
+      </div>
+    </div>
+
+    <!-- BLOCKED -->
+    <div class="section" id="p-blocked">
+      <div class="section-header"><h2>Blocked — MTCA Pending</h2><span class="badge badge-red">8 cases</span></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Case</th><th>Attorney</th><th>Hearing / Status</th><th>OC Firm</th><th>Unblock Trigger</th></tr></thead>
+        <tbody>
+          <tr data-attorney="jm"><td><strong>Cargomatic</strong></td><td><span class="badge badge-blue">JM</span></td><td>5/5/26</td><td>Fisher Phillips</td><td>MTCA ruling or withdrawal</td></tr>
+          <tr data-attorney="sm"><td><strong>NNA Services</strong></td><td><span class="badge badge-purple">SM</span></td><td>6/25/26</td><td>Littler Mendelson</td><td>Ruling. PAGA carve-out possible.</td></tr>
+          <tr data-attorney="jm"><td><strong>Slater</strong></td><td><span class="badge badge-blue">JM</span></td><td>Just filed 3/24</td><td>Jackson Lewis</td><td>File opposition.</td></tr>
+          <tr data-attorney="jm"><td><strong>Childnet Youth</strong></td><td><span class="badge badge-blue">JM</span></td><td>Granted</td><td>—</td><td>Motion to Designate. PAGA-only.</td></tr>
+          <tr data-attorney="sm"><td><strong>Weatherford Motors</strong></td><td><span class="badge badge-purple">SM</span></td><td>Pending (100d)</td><td>GRSM</td><td>MTCA ruling.</td></tr>
+          <tr data-attorney="sm"><td><strong>So. Cal. Sandbags</strong></td><td><span class="badge badge-purple">SM</span></td><td>Pending (222d)</td><td>—</td><td>Riverside ruling.</td></tr>
+          <tr data-attorney="jm"><td><strong>Wellness Together</strong></td><td><span class="badge badge-blue">JM</span></td><td>Tentative grant</td><td>—</td><td>Final ruling. PAGA survives.</td></tr>
+          <tr data-attorney="sm"><td><strong>Upper Deck</strong></td><td><span class="badge badge-purple">SM</span></td><td>Arb conf 3/5/27</td><td>—</td><td>Agreement to mediate.</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <!-- PIPELINE HEALTH -->
+    <div class="section" id="p-health">
+      <div class="section-header"><h2>Pipeline Health</h2></div>
+      <h3 style="font-size:.92rem;margin:16px 0 10px;color:var(--text-muted);">Pipeline Velocity</h3>
+      <div class="velocity">
+        <div class="vel-item"><div class="vel-num" style="color:var(--green);">4</div><div class="vel-label">Booked this cycle</div></div>
+        <div class="vel-item"><div class="vel-num" style="color:var(--red);">1</div><div class="vel-label">Closed</div></div>
+        <div class="vel-item"><div class="vel-num" style="color:var(--accent);">5</div><div class="vel-label">Net reduction (42 to 37)</div></div>
+        <div class="vel-item"><div class="vel-num" style="color:var(--yellow);">2</div><div class="vel-label">New OC appearances</div></div>
+        <div class="vel-item"><div class="vel-num" style="color:var(--orange);">4</div><div class="vel-label">Stale (60+ days)</div></div>
+      </div>
+      <h3 style="font-size:.92rem;margin:16px 0 10px;color:var(--text-muted);">Attorney Workload — Pipeline</h3>
+      <div class="workload-bars">
+        <div class="wl-bar"><div class="wl-label"><span>JM — Joe Marshall</span><span>23 cases</span></div><div class="wl-track"><div class="wl-seg active" style="width:74%;">17</div><div class="wl-seg blocked" style="width:22%;">5</div><div class="wl-seg near" style="width:4%;">1</div></div><div class="wl-legend"><span class="l-active">Active (17)</span><span class="l-blocked">Blocked (5)</span><span class="l-near">Near (1)</span></div></div>
+        <div class="wl-bar"><div class="wl-label"><span>SM — Shelby Miner</span><span>22 cases</span></div><div class="wl-track"><div class="wl-seg active" style="width:64%;">14</div><div class="wl-seg blocked" style="width:14%;">3</div><div class="wl-seg near" style="width:22%;">5</div></div><div class="wl-legend"><span class="l-active">Active (14)</span><span class="l-blocked">Blocked (3)</span><span class="l-near">Near (5)</span></div></div>
+      </div>
+    </div>
+
+    <!-- THIS WEEK -->
+    <div class="section" id="p-actions">
+      <div class="section-header"><h2>Key Actions This Week</h2></div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">This Week</div><div class="tl-text">Caleres — remand denied 3/19, raise mediation with Ogletree (Sage knows Chris Decker)</div></div>
+        <div class="tl-item today"><div class="tl-dot"></div><div class="tl-date">Today 3/31</div><div class="tl-text">&#10003; Ecology Control intro call — early mediation agreed, exchanging mediator names</div></div>
+        <div class="tl-item today"><div class="tl-dot"></div><div class="tl-date">Today 3/31</div><div class="tl-text">&#10003; BenQ — client authorized mediation. Sept 11 with Monique BOOKED</div></div>
+        <div class="tl-item today"><div class="tl-dot"></div><div class="tl-date">Today 3/31</div><div class="tl-text">&#10003; Med-Pharmex intro call — early mediation path agreed with Perkins Coie</div></div>
+        <div class="tl-item today"><div class="tl-dot"></div><div class="tl-date">Today 3/31</div><div class="tl-text">&#10003; St. Supery Estate intro call — both sides favor early mediation</div></div>
+        <div class="tl-item today"><div class="tl-dot"></div><div class="tl-date">Today 3/31</div><div class="tl-text">&#10003; Ridgecrest JPA call — Margaux sending JPA draft, BSL leads mediation</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">4/1</div><div class="tl-text">Childnet CMC at 8:30 AM — Motion to Designate, PAGA path</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">4/2</div><div class="tl-text">CCL Tube CMC at 9:00 AM — arb agreement, PAGA track</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">4/2</div><div class="tl-text">Fox Factory — CMC statement due (JM + Curt Graham / Littler)</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">4/7</div><div class="tl-text">Ridgecrest extension expires — follow up on mediation</div></div>
+        <div class="tl-item urgent"><div class="tl-dot"></div><div class="tl-date">ASAP</div><div class="tl-text">SM intro call: Oleander Holdings (Fisher Phillips)</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Wed 4/2</div><div class="tl-text">Send draft joint CMC statement + mediator options to Perkins Coie (Med-Pharmex)</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================================================================== -->
+  <!-- PHASE 2: BOOKED & PREPARING (Pre-Mediation Only) -->
+  <!-- ================================================================== -->
+  <div class="phase" data-id="booked" id="phase-booked">
+
+    <div class="phase-updated">Last updated: <strong>Mondays</strong> (Prep Lifecycle scan) | Last scan: March 31, 2026</div>
+
+    <!-- FEE ALERT BANNER -->
+    <div class="fee-alert">
+      <span class="fee-alert-icon">&#9888;</span>
+      <div class="fee-alert-text"><strong>$16,000 FEE PAST DUE</strong> — Kreutzer v. iBUYPOWER (Invoice #6878, McKelvey). 14+ days overdue. Karen must process ASAP. Cancel deadline: <strong>June 12, 2026</strong>.</div>
+    </div>
+
+    <!-- ATTORNEY FILTER (Global for Phase 2) -->
+    <div class="filter-bar" data-filter-scope="booked"><label>Attorney:</label>
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="sm">SM</button>
+      <button class="filter-btn" data-filter="jm">JM</button>
+      <button class="filter-btn" data-filter="rq">RQ</button>
+    </div>
+
+    <div class="stats">
+      <div class="stat-card red"><div class="label">Critical (This Week)</div><div class="value">4</div><div class="sub">Bassell, Lulu's, Agpalza, Santamaria</div></div>
+      <div class="stat-card orange"><div class="label">Action Needed</div><div class="value">4</div><div class="sub">Redd, Kidztopros, Orihuela, Cotton</div></div>
+      <div class="stat-card blue"><div class="label">On Track</div><div class="value">5</div><div class="sub">Kreutzer, Miranda, Conant, BenQ, Lee</div></div>
+      <div class="stat-card purple"><div class="label">Early Stage</div><div class="value">17</div><div class="sub">Touch, Waddell, Chavez, Lopez, Soto + 12 new</div></div>
+      <div class="stat-card yellow"><div class="label">Fee Past Due</div><div class="value">$16K</div><div class="sub">Kreutzer — 14+ days</div></div>
+    </div>
+
+    <div class="tabs" data-group="booked">
+      <button class="tab active" data-tab="b-critical">Critical</button>
+      <button class="tab" data-tab="b-action">Action Needed</button>
+      <button class="tab" data-tab="b-ontrack">On Track</button>
+      <button class="tab" data-tab="b-early">Early Stage</button>
+      <button class="tab" data-tab="b-fees">Fees</button>
+    </div>
+
+    <!-- CRITICAL -->
+    <div class="section active" id="b-critical">
+      <div class="section-header"><h2>Critical — Action Needed Today</h2><span class="badge badge-red">4 cases</span></div>
+      <div class="case-grid">
+        <div class="case-card" data-attorney="jm" data-mediation="2026-04-02" style="border-left:3px solid var(--red);">
+          <div class="status-dot dot-red"></div>
+          <div class="cc-top"><span class="case-name">Bassell v. Golden Rain Foundation</span><span class="attorney att-jm">JM</span></div>
+          <div style="display:flex;gap:8px;margin-bottom:6px;flex-wrap:wrap;"><span class="badge badge-red">THIS THURSDAY 4/2</span><span class="badge badge-purple">Phase 7 — Final Logistics</span><span class="countdown cd-urgent" data-meddate="2026-04-02"></span></div>
+          <div class="cc-status">Mediator: <strong>Marc Feder</strong> | 9:30 AM via Zoom. BCG analysis delivered 3/25. On-call gap for Noel — unsupported by data.</div>
+          <div class="phase-indicator"><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-label">Phase 7/7</div></div>
+          <div class="cc-action"><strong>Next</strong> JM — confirm brief submitted. Final prep. Review BCG on-call analysis. RQ to attend.</div>
+        </div>
+        <div class="case-card" data-attorney="jm" data-mediation="2026-04-03" style="border-left:3px solid var(--red);">
+          <div class="status-dot dot-red"></div>
+          <div class="cc-top"><span class="case-name">Vasquez v. Lulu's (Town &amp; Country)</span><span class="attorney att-jm">JM</span></div>
+          <div style="display:flex;gap:8px;margin-bottom:6px;flex-wrap:wrap;"><span class="badge badge-red">THIS FRIDAY 4/3</span><span class="badge badge-orange">Phase 6 — Behind Schedule</span><span class="countdown cd-urgent" data-meddate="2026-04-03"></span></div>
+          <div class="cc-status">Mediator: <strong>Steven Rottman</strong> | 10:00 AM. Brief NOT submitted — promised Mon/Tues. No orientation call evidence.</div>
+          <div class="phase-indicator"><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip"></div><div class="phase-label">Phase 6/7</div></div>
+          <div class="cc-action"><strong>Next</strong> JM — submit brief TODAY. #1 deliverable. Supplement with BCG if needed later.</div>
+        </div>
+        <div class="case-card" data-attorney="jm" data-mediation="2026-04-13" style="border-left:3px solid var(--orange);">
+          <div class="status-dot dot-orange"></div>
+          <div class="cc-top"><span class="case-name">Agpalza v. Mission Wells / Magnolia Springs</span><span class="attorney att-jm">JM</span></div>
+          <div style="display:flex;gap:8px;margin-bottom:6px;flex-wrap:wrap;"><span class="badge badge-orange">~APRIL 13</span><span class="badge badge-purple">Phase 4-5 — Data Analysis</span><span class="countdown cd-soon" data-meddate="2026-04-13"></span></div>
+          <div class="cc-status">Mediator: <strong>Marc Feder</strong>. BCG 25% sampling agreed 3/23. No status update in 7 days. Brief due ~4/10.</div>
+          <div class="phase-indicator"><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-label">Phase 4-5/7</div></div>
+          <div class="cc-action"><strong>Next</strong> Follow up with Bennett Berger TODAY. If not on track for 4/7 delivery, postpone. Start brief outline.</div>
+        </div>
+        <div class="case-card" data-attorney="rq" data-mediation="2026-04-10" style="border-left:3px solid var(--orange);">
+          <div class="status-dot dot-orange"></div>
+          <div class="cc-top"><span class="case-name">Santamaria v. America Central Corp</span><span class="attorney att-rq">RQ</span></div>
+          <div style="display:flex;gap:8px;margin-bottom:6px;flex-wrap:wrap;"><span class="badge badge-orange">APRIL 10 (Zoom)</span><span class="badge badge-purple">Phase 3 — Data Exchange</span><span class="countdown cd-soon" data-meddate="2026-04-10"></span></div>
+          <div class="cc-status">Mediator: <strong>M Resolution</strong>. KG partnering. Class case. Littler OC (SSamie). Date moved from 4/16 to 4/10.</div>
+          <div class="phase-indicator"><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-label">Phase 3/7</div></div>
+          <div class="cc-action"><strong>Next</strong> Finalize brief. Confirm Zoom logistics. Data exchange status check.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTION NEEDED -->
+    <div class="section" id="b-action">
+      <div class="section-header"><h2>Action Needed This Month</h2><span class="badge badge-orange">4 cases</span></div>
+      <div class="case-grid">
+        <div class="case-card" data-attorney="sm" data-mediation="2026-05-07"><div class="cc-top"><span class="case-name">Redd v. LeFiell Manufacturing</span><span class="attorney att-sm">SM</span><span class="badge badge-green" style="margin-left:auto;font-size:.65rem;">UPDATED 3/31</span></div><div style="display:flex;gap:8px;margin-bottom:6px;"><span class="badge badge-yellow">May 7, 2026</span><span class="badge badge-purple">Phase 5 — Data Exchange</span><span class="countdown cd-ok" data-meddate="2026-05-07"></span></div><div class="cc-status">37 days out. Mediator: <strong>Monique Ngo-Bonnici</strong>. Fee approved 3/31 — Karen processing. Mediation production incoming from Ogletree (Kyle Wende) via link. Brief due ~4/30.</div><div class="phase-indicator"><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-label">Phase 5/7</div></div><div class="cc-action"><strong>Next</strong> SM — monitor for Ogletree production link. Begin brief outline by 4/6. BCG timeline confirmation.</div></div>
+        <div class="case-card" data-attorney="sm" data-mediation="2026-05-07"><div class="cc-top"><span class="case-name">White v. Kidztopros</span><span class="attorney att-sm">SM</span><span class="badge badge-green" style="margin-left:auto;font-size:.65rem;">UPDATED 3/31</span></div><div style="display:flex;gap:8px;margin-bottom:6px;"><span class="badge badge-yellow">May 7, 2026</span><span class="badge badge-orange">Phase 3-4 — Obstructed</span><span class="countdown cd-ok" data-meddate="2026-05-07"></span></div><div class="cc-status">Mediator: <strong>Brandon McKelvey</strong>. Defense REFUSES contact info AND witness declarations. <strong>Wizzy witnesses found 3/31</strong> — Astrid adding to outreach tracker.</div><div class="phase-indicator"><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-label">Phase 3-4/7</div></div><div class="cc-action"><strong>Next</strong> Astrid — outreach to Wizzy witnesses. Escalate with McKelvey re: defense obstructionism.</div></div>
+        <div class="case-card" data-attorney="jm" data-mediation="2026-06-18"><div class="cc-top"><span class="case-name">Orihuela v. Int'l Cosmetics</span><span class="attorney att-jm">JM</span></div><div style="display:flex;gap:8px;margin-bottom:6px;"><span class="badge badge-yellow">June 18, 2026</span><span class="badge badge-purple">Phase 3 — MDRL Sent / Data Exchange</span><span class="countdown cd-ok" data-meddate="2026-06-18"></span></div><div class="cc-status">Mediator: <strong>Allison Eckstrom</strong>. 80 days. Depo transcripts just received. MDRL sent.</div><div class="phase-indicator"><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-label">Phase 3/7</div></div><div class="cc-action"><strong>Next</strong> JM — review depo transcripts. Engage BCG by mid-April. Begin data exchange.</div></div>
+        <div class="case-card" data-attorney="rq" data-mediation="2026-05-29"><div class="cc-top"><span class="case-name">Cotton v. Taylor Communications</span><span class="attorney att-rq">RQ</span></div><div style="display:flex;gap:8px;margin-bottom:6px;"><span class="badge badge-yellow">May 29, 2026</span><span class="badge badge-purple">Phase 3 — Data Exchange</span><span class="countdown cd-ok" data-meddate="2026-05-29"></span></div><div class="cc-status">Mediator: <strong>Ortman Mediation</strong>. KG partnering. Littler OC (AWang). Case 25STCV04887. Past due invoice. Discovery M&amp;C active.</div><div class="phase-indicator"><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-label">Phase 3/7</div></div><div class="cc-action"><strong>Next</strong> Resolve past due invoice. Continue M&amp;C. Begin brief outline by May 1.</div></div>
+      </div>
+    </div>
+
+    <!-- ON TRACK -->
+    <div class="section" id="b-ontrack">
+      <div class="section-header"><h2>On Track</h2><span class="badge badge-blue">5 cases</span></div>
+      <div class="case-grid">
+        <div class="case-card" data-attorney="jm" data-mediation="2026-07-24"><div class="cc-top"><span class="case-name">Kreutzer v. iBUYPOWER</span><span class="attorney att-jm">JM</span></div><div style="display:flex;gap:8px;margin-bottom:6px;"><span class="badge badge-blue">July 24, 2026</span><span class="badge badge-purple">Phase 2</span><span class="countdown cd-far" data-meddate="2026-07-24"></span></div><div class="cc-status">Mediator: <strong>Brandon McKelvey</strong>. Cancel deadline 6/12. <span class="badge badge-red">FEE PAST DUE $16K</span></div><div class="phase-indicator"><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-label">Phase 2/7</div></div><div class="cc-action"><strong>Next</strong> Karen — pay $16K invoice IMMEDIATELY. JM — calendar MDRL for May.</div></div>
+        <div class="case-card" data-attorney="sm" data-mediation="2026-07-31"><div class="cc-top"><span class="case-name">Miranda v. Imperial Valley FMG</span><span class="attorney att-sm">SM</span></div><div style="display:flex;gap:8px;margin-bottom:6px;"><span class="badge badge-blue">July 31, 2026</span><span class="badge badge-purple">Phase 1-2</span><span class="countdown cd-far" data-meddate="2026-07-31"></span></div><div class="cc-status">Mediator: <strong>Allison Eckstrom</strong> via Zoom. Discovery stay agreed 3/13.</div><div class="phase-indicator"><div class="phase-pip filled"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-label">Phase 1-2/7</div></div><div class="cc-action"><strong>Next</strong> SM — calendar MDRL for May. Plan informal data exchange.</div></div>
+        <div class="case-card" data-attorney="jm" data-mediation="2026-08-06"><div class="cc-top"><span class="case-name">Conant v. Evergreen Alliance / Arcis Golf</span><span class="attorney att-jm">JM</span></div><div style="display:flex;gap:8px;margin-bottom:6px;"><span class="badge badge-blue">Aug 6, 2026</span><span class="badge badge-purple">Phase 2</span><span class="countdown cd-far" data-meddate="2026-08-06"></span></div><div class="cc-status">Mediator: <strong>Brandon McKelvey</strong>. MTC hearing 4/23 could affect posture.</div><div class="phase-indicator"><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-label">Phase 2/7</div></div><div class="cc-action"><strong>Next</strong> JM — calendar MDRL for June. Continue MTC prep for 4/23.</div></div>
+        <div class="case-card" data-attorney="sm" data-mediation="2026-09-11"><div class="cc-top"><span class="case-name">Naquin v. BenQ America</span><span class="attorney att-sm">SM</span></div><div style="display:flex;gap:8px;margin-bottom:6px;"><span class="badge badge-blue">Sept 11, 2026</span><span class="badge badge-purple">Phase 1-2</span><span class="countdown cd-far" data-meddate="2026-09-11"></span></div><div class="cc-status">Mediator: <strong>Monique Ngo-Bonnici</strong>. Client authorized 3/31. 73 class members, 7,337 work weeks. Discovery stay agreed — informal 50-record sample exchange.</div><div class="phase-indicator"><div class="phase-pip filled"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-label">Phase 1-2/7</div></div><div class="cc-action"><strong>Next</strong> SM — draft stay agreement. Begin informal data exchange. Calendar MDRL for June/July.</div></div>
+        <div class="case-card" data-attorney="rq" data-mediation="2026-10-22"><div class="cc-top"><span class="case-name">Lee v. IMC Logistics</span><span class="attorney att-rq">RQ</span></div><div style="display:flex;gap:8px;margin-bottom:6px;"><span class="badge badge-blue">Oct 22, 2026</span><span class="badge badge-purple">Phase 2</span><span class="countdown cd-far" data-meddate="2026-10-22"></span></div><div class="cc-status">Mediator: <strong>Marc Feder</strong>. Orientation call 3/27. Co-mediation (Lee + Chatman + Benjamin) under discussion.</div><div class="phase-indicator"><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-label">Phase 2/7</div></div><div class="cc-action"><strong>Next</strong> Finalize co-mediation structure. Calendar MDRL for July/Aug.</div></div>
+      </div>
+    </div>
+
+    <!-- EARLY STAGE -->
+    <div class="section" id="b-early">
+      <div class="section-header"><h2>Early Stage</h2><span class="badge badge-purple">17 cases</span></div>
+      <div class="case-grid">
+        <div class="case-card" data-attorney="rq" data-mediation="2026-12-01"><div class="cc-top"><span class="case-name">Touch v. Dublin Toyota (Hamcor)</span><span class="attorney att-rq">RQ</span></div><div style="display:flex;gap:8px;margin-bottom:6px;"><span class="badge badge-purple">Dec 1, 2026</span><span class="badge badge-purple">Phase 1</span><span class="countdown cd-far" data-meddate="2026-12-01"></span></div><div class="cc-status">Mediator: <strong>Marc Feder</strong>. Payment due 10/20. Brief due 11/17. 8+ months out.</div><div class="cc-action"><strong>Next</strong> No immediate action. Calendar MDRL for September.</div></div>
+        <div class="case-card" data-attorney="sm"><div class="cc-top"><span class="case-name">Waddell v. Santa Teresita</span><span class="attorney att-sm">SM</span></div><div class="cc-status">Pre-Phase 1. No mediation date scheduled yet.</div><div class="cc-action"><strong>Next</strong> Schedule mediation once discovery posture clearer.</div></div>
+        <div class="case-card" data-attorney="sm"><div class="cc-top"><span class="case-name">Chavez v. Southland Box</span><span class="attorney att-sm">SM</span></div><div class="cc-status"><span class="badge badge-green">BOOKED</span> — Marc Feder confirmed <strong>Jan 7, 2027</strong>. Payment due 11/26. Brief due 12/24. CaseAnywhere launched 3/27.</div><div class="cc-action"><strong>Next</strong> Calendar MDRL. No immediate action — 9+ months out.</div></div>
+        <div class="case-card" data-attorney="jm"><div class="cc-top"><span class="case-name">Lopez v. General Coatings</span><span class="attorney att-jm">JM</span></div><div class="cc-status">Pre-Phase 1. Confidentiality agreement <strong>executed 3/30</strong>. Financial data exchange follows.</div><div class="cc-action"><strong>Next</strong> JM — begin data exchange per signed agreement. Seek mediation date.</div></div>
+        <div class="case-card" data-attorney="sm"><div class="cc-top"><span class="case-name">Douglas v. Veridiam</span><span class="attorney att-sm">SM</span></div><div class="cc-status">Pre-Phase 1. SD County 25CU011565C. Ogletree OC (Briana LaBriola). Data production for mediation underway. Wizzy witnesses identified.</div><div class="cc-action"><strong>Next</strong> SM — complete data production. Engage mediator. Lock date.</div></div>
+        <div class="case-card" data-attorney="jm"><div class="cc-top"><span class="case-name">Flintridge Preparatory School (Shurance)</span><span class="attorney att-jm">JM</span></div><div class="cc-status">Pre-Phase 1. CLASS. Witness contacts for brief identified. Wizzy contacts found.</div><div class="cc-action"><strong>Next</strong> JM — gather witness declarations. Engage mediator.</div></div>
+        <div class="case-card" data-attorney="rq"><div class="cc-top"><span class="case-name">Rucker v. River City Medical Group</span><span class="attorney att-rq">RQ</span><span class="badge badge-green" style="margin-left:auto;font-size:.65rem;">NEW 3/31</span></div><div class="cc-status">Pre-Phase 1. Brand new — Wizzy request submitted 3/31. No OC yet.</div><div class="cc-action"><strong>Next</strong> RQ — confirm case details. Begin mediator selection.</div></div>
+        <div class="case-card" data-attorney="rq"><div class="cc-top"><span class="case-name">Helpline Youth Counseling (Mayers)</span><span class="attorney att-rq">RQ</span></div><div class="cc-status">Pre-Phase 1. CLASS. AALRR OC (April Szabo). Mediator: <strong>Eve Wagner</strong>. Was June 5 — rebooking to weekday. Targeting 2027 dates.</div><div class="cc-action"><strong>Next</strong> Finalize rescheduled date with Eve. Prepare MDRL.</div></div>
+        <div class="case-card" data-attorney="rq"><div class="cc-top"><span class="case-name">Front Porch Communities (Rouse-Hasan)</span><span class="attorney att-rq">RQ</span></div><div class="cc-status">Pre-Phase 1. Alameda 25CV131553 / 25CV143716. Judge Han Tran. Stip to continue mediation in progress.</div><div class="cc-action"><strong>Next</strong> RQ — finalize stip. Set mediation date.</div></div>
+        <div class="case-card" data-attorney="sm"><div class="cc-top"><span class="case-name">Parker Palm Springs (Diaz)</span><span class="attorney att-sm">SM</span></div><div class="cc-status">Pre-Phase 1. KG partnering. Riverside CVRI2500988 / CVPS2503114. Littler OC. Stip to stay pending mediation <strong>filed</strong>.</div><div class="cc-action"><strong>Next</strong> SM — select mediator. Propose dates once stay granted.</div></div>
+        <div class="case-card" data-attorney="sm"><div class="cc-top"><span class="case-name">Wisk Aero (Acevedo)</span><span class="attorney att-sm">SM</span></div><div class="cc-status">Pre-Phase 1. CLASS/PAGA. Alameda 25CV126405 / 25CV136785. Jay J. Wang OC (HN Employment Law). Witness declarations for mediation in progress.</div><div class="cc-action"><strong>Next</strong> SM — complete witness declarations. Select mediator.</div></div>
+        <div class="case-card" data-attorney="jm"><div class="cc-top"><span class="case-name">Cervantez v. Keenan Farms</span><span class="attorney att-jm">JM</span></div><div class="cc-status">Pre-Phase 1. KCSC 25CU0190. KSCHanford OC (mmoran). Mediation calendared. Proposing stip to stay.</div><div class="cc-action"><strong>Next</strong> JM — finalize stip to stay. Confirm mediation date.</div></div>
+        <div class="case-card" data-attorney="jm"><div class="cc-top"><span class="case-name">Caceres v. Thornton Winery</span><span class="attorney att-jm">JM</span></div><div class="cc-status">Pre-Phase 1. Riverside CVRI2503025. Ogletree OC (Cameron Davila). Stip to stay pending mediation.</div><div class="cc-action"><strong>Next</strong> JM — execute stip to stay. Select mediator and date.</div></div>
+        <div class="case-card" data-attorney="jm"><div class="cc-top"><span class="case-name">McKee v. Danco Builders</span><span class="attorney att-jm">JM</span></div><div class="cc-status">Pre-Phase 1. Humboldt CV2501549. Cook Brown OC (ljohnston). Stip to stay filed. CMC continued to <strong>12/11/26</strong>.</div><div class="cc-action"><strong>Next</strong> JM — select mediator. Propose dates.</div></div>
+        <div class="case-card" data-attorney="sm"><div class="cc-top"><span class="case-name">JVS SoCal (Mendez)</span><span class="attorney att-sm">SM</span></div><div class="cc-status">Pre-Phase 1. CLASS+PAGA. Mediator: <strong>Eve Wagner</strong> (Signature Resolution). Rescheduled — new date TBD. Swerdlow Law OC (amusante). Fees 50/50.</div><div class="cc-action"><strong>Next</strong> SM — confirm new mediation date with Eve. Begin data exchange.</div></div>
+        <div class="case-card" data-attorney="rq"><div class="cc-top"><span class="case-name">Cryoquip (Balas)</span><span class="attorney att-rq">RQ</span></div><div class="cc-status">Pre-Phase 1. CLASS. Riverside CVRI2505249. Mediator: <strong>Eve Wagner</strong>. Burkhalter Kessler OC (Ros Lockwood). Stip being drafted. Settlement communications 2/11.</div><div class="cc-action"><strong>Next</strong> RQ — finalize stip. Confirm mediation date with Eve.</div></div>
+        <div class="case-card" data-attorney="rq"><div class="cc-top"><span class="case-name">Soto v. Control Air Enterprises</span><span class="attorney att-rq">RQ</span></div><div class="cc-status">Pre-Phase 1. JPA with Otkupman Law Group executed (85/15 BSL). Defense counsel: Roman (AALRR) — shared files via TitanFile 3/28. No mediation date set yet.</div><div class="cc-action"><strong>Next</strong> RQ — select mediator and propose dates. Begin pre-mediation data exchange with defense.</div></div>
+      </div>
+    </div>
+
+    <!-- FEES -->
+    <div class="section" id="b-fees">
+      <div class="section-header"><h2>Fee Summary</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Case</th><th>Mediator</th><th>P's Share</th><th>Paid?</th><th>Cancel Deadline</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr data-attorney="jm"><td>Bassell v. Golden Rain</td><td>Feder</td><td>TBD</td><td><span class="badge badge-green">Paid</span></td><td>Passed</td><td>Committed — mediation 4/2</td></tr>
+          <tr data-attorney="jm"><td>Vasquez v. Lulu's</td><td>Rottman</td><td>TBD</td><td>TBD</td><td>Passed</td><td>Committed — mediation 4/3</td></tr>
+          <tr data-attorney="jm" style="background:var(--red-bg);"><td><strong>Kreutzer v. iBUYPOWER</strong></td><td>McKelvey</td><td><strong>$16,000</strong></td><td><span class="badge badge-red">PAST DUE 14+D</span></td><td><strong style="color:var(--red);">June 12, 2026</strong></td><td>Invoice #6878 — Karen must process ASAP</td></tr>
+          <tr data-attorney="sm"><td>Miranda v. Imperial Valley</td><td>Eckstrom</td><td>50/50</td><td>Invoiced</td><td>TBD</td><td>Early</td></tr>
+          <tr data-attorney="jm"><td>Conant v. Evergreen</td><td>McKelvey</td><td>TBD</td><td>TBD</td><td>TBD</td><td>Date confirmed 8/6</td></tr>
+          <tr data-attorney="rq"><td>Lee v. IMC Logistics</td><td>Feder</td><td>Split w/ Abramson</td><td>TBD</td><td>TBD</td><td>Fee split agreed</td></tr>
+          <tr data-attorney="rq"><td>Touch v. Dublin Toyota</td><td>Feder</td><td>TBD</td><td>Not yet</td><td><strong>Oct 20, 2026</strong></td><td>Payment due 10/20/2026</td></tr>
+          <tr data-attorney="sm"><td>Redd v. LeFiell</td><td>Monique Ngo-Bonnici</td><td>TBD</td><td><span class="badge badge-green">Approved 3/31</span></td><td>TBD</td><td>Karen processing — mediation 5/7</td></tr>
+          <tr data-attorney="sm"><td>Naquin v. BenQ America</td><td>Monique Ngo-Bonnici</td><td>TBD</td><td>TBD</td><td>TBD</td><td>Booked Sept 11 — fee TBD</td></tr>
+          <tr data-attorney="rq"><td>Santamaria v. America Central</td><td>M Resolution</td><td>TBD</td><td>TBD</td><td>Passed</td><td>Mediation 4/10 — confirm fee status</td></tr>
+          <tr data-attorney="rq"><td>Cotton v. Taylor Communications</td><td>Ortman</td><td>TBD</td><td><span class="badge badge-red">PAST DUE</span></td><td>TBD</td><td>Past due invoice — resolve ASAP</td></tr>
+          <tr data-attorney="sm"><td>JVS SoCal (Mendez)</td><td>Eve Wagner</td><td>50/50</td><td>TBD</td><td>TBD</td><td>Rescheduling — new date TBD</td></tr>
+          <tr data-attorney="rq"><td>Cryoquip (Balas)</td><td>Eve Wagner</td><td>TBD</td><td>TBD</td><td>TBD</td><td>Stip pending — date TBD</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+  </div>
+
+  <!-- ================================================================== -->
+  <!-- PHASE 3: RESOLVED (Post-Med Active + Settled + Not Settled) -->
+  <!-- ================================================================== -->
+  <div class="phase" data-id="resolved" id="phase-resolved">
+
+    <div class="phase-updated">Last updated: <strong>Mondays</strong> (Prep Lifecycle scan) + <strong>Manual</strong> (settled data) | Last scan: March 31, 2026</div>
+
+    <!-- ATTORNEY FILTER (Global for Phase 3) -->
+    <div class="filter-bar" data-filter-scope="resolved"><label>Attorney:</label>
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="sm">SM</button>
+      <button class="filter-btn" data-filter="jm">JM</button>
+      <button class="filter-btn" data-filter="rq">RQ</button>
+      <button class="filter-btn" data-filter="tt">TT</button>
+      <button class="filter-btn" data-filter="lm">LM</button>
+      <button class="filter-btn" data-filter="jg">JG</button>
+    </div>
+
+    <div class="stats">
+      <div class="stat-card teal"><div class="label">Post-Med Active</div><div class="value">4</div><div class="sub">Settlement docs in progress</div></div>
+      <div class="stat-card green"><div class="label">Total Settled</div><div class="value">8</div><div class="sub">Since June 2025</div></div>
+      <div class="stat-card teal"><div class="label">Total Recovery</div><div class="value">$10.4M</div><div class="sub">$10,427,524 in settlements</div></div>
+      <div class="stat-card blue"><div class="label">Avg Settlement</div><div class="value">$1.3M</div><div class="sub">$1,303,441 average</div></div>
+      <div class="stat-card yellow"><div class="label">Not Settled</div><div class="value">1</div><div class="sub">Nova — $349K proposal pending</div></div>
+      <div class="stat-card purple"><div class="label">Largest Settlement</div><div class="value">$2.65M</div><div class="sub">Guardant Health (Dizon)</div></div>
+    </div>
+
+    <div class="tabs" data-group="resolved">
+      <button class="tab active" data-tab="r-postmed">Post-Med Active</button>
+      <button class="tab" data-tab="r-settled">Settled</button>
+      <button class="tab" data-tab="r-notsettled">Not Settled</button>
+    </div>
+
+    <!-- POST-MEDIATION ACTIVE -->
+    <div class="section active" id="r-postmed">
+      <div class="section-header"><h2>Post-Mediation — Settlement Documentation In Progress</h2><span class="badge badge-teal">4 cases</span></div>
+      <div class="case-grid">
+        <div class="case-card" data-attorney="jg"><div class="cc-top"><span class="case-name">Estrada/Nava v. Maruichi American</span><span class="attorney att-jg">JG</span></div><div class="cc-status"><span class="badge badge-green">SETTLED — $525K GSA</span>. Settlement documentation being prepared.</div><div class="cc-action"><strong>Next</strong> Finalize settlement docs.</div></div>
+        <div class="case-card" data-attorney="tt"><div class="cc-top"><span class="case-name">Hernandez v. Liberty Utilities</span><span class="attorney att-tt">TT</span></div><div class="cc-status"><span class="badge badge-teal">SETTLEMENT AGREEMENT SENT</span> — Draft longform SA + 3 admin bids sent to defense 3/29.</div><div class="cc-action"><strong>Next</strong> Await defendant election on administration.</div></div>
+        <div class="case-card" data-attorney="lm"><div class="cc-top"><span class="case-name">Sherwood v. [Defendant]</span><span class="attorney att-lm">LM</span></div><div class="cc-status"><span class="badge badge-teal">SETTLEMENT DOCS EXCHANGED</span> — Draft SA and class notice with edits. Cy pres recipient discussion.</div><div class="cc-action"><strong>Next</strong> Finalize SA and class notice. Resolve cy pres.</div></div>
+        <div class="case-card" data-attorney="sm"><div class="cc-top"><span class="case-name">Zhang v. Halrec (Stevens Creek Toyota)</span><span class="attorney att-sm">SM</span></div><div class="cc-status"><span class="badge badge-green">SETTLED — $1.69M</span>. Mediator's proposal submitted 1/27. Settlement documentation in progress.</div><div class="cc-action"><strong>Next</strong> Finalize settlement documentation.</div></div>
+      </div>
+    </div>
+
+    <!-- SETTLED -->
+    <div class="section" id="r-settled">
+      <div class="section-header"><h2>Settled Cases</h2><span class="badge badge-green">8 cases — $10.4M total</span></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Case</th><th>Attorney</th><th>Mediator</th><th>Mediation Date</th><th>Settlement Amount</th><th>Settlement Date</th><th>Type</th><th>MOU</th></tr></thead>
+        <tbody>
+          <tr data-attorney="rq"><td><strong>Guardant Health</strong> (Dizon)</td><td><span class="badge badge-green">RQ</span></td><td>Eve Wagner</td><td>2/19/26</td><td style="color:var(--green);font-weight:700;">$2,650,000</td><td>2/26/26</td><td>Class, PAGA &amp; Indiv.</td><td>—</td></tr>
+          <tr data-attorney="tt"><td><strong>Liberty Utilities</strong> (Hernandez)</td><td><span class="badge badge-yellow">TT</span></td><td>Eve Wagner</td><td>1/21/26</td><td style="color:var(--green);font-weight:700;">$1,800,000</td><td>2/13/26</td><td>Class, PAGA &amp; Indiv.</td><td>Def. Drafting</td></tr>
+          <tr data-attorney="sm"><td><strong>Halrec / Stevens Creek Toyota</strong> (Zhang)</td><td><span class="badge badge-purple">SM</span></td><td>Brandon McKelvey</td><td>1/27/26</td><td style="color:var(--green);font-weight:700;">$1,690,000</td><td>2/24/26</td><td>Class, PAGA &amp; Indiv.</td><td>—</td></tr>
+          <tr data-attorney="rq"><td><strong>Rapid Manufacturing / LCR</strong> (Benitez/Ellis)</td><td><span class="badge badge-green">RQ</span></td><td>Monique Ngo-Bonnici</td><td>2/23/26</td><td style="color:var(--green);font-weight:700;">$1,342,524</td><td>2/24/26</td><td>Class, PAGA &amp; Indiv.</td><td>—</td></tr>
+          <tr data-attorney="lm"><td><strong>Sherwood Mechanical</strong> (Jimenez)</td><td><span class="badge badge-orange">LM</span></td><td>Brandon McKelvey</td><td>1/20/26</td><td style="color:var(--green);font-weight:700;">$1,295,000</td><td>1/20/26</td><td>Class, PAGA &amp; Indiv.</td><td>&#10003;</td></tr>
+          <tr data-attorney="rq"><td><strong>San Diego Family Care</strong> (Rodriguez Padilla)</td><td><span class="badge badge-green">RQ</span></td><td>Gig Kyriacou</td><td>6/23/25</td><td style="color:var(--green);font-weight:700;">$830,000</td><td>7/2/25</td><td>Class, PAGA &amp; Indiv.</td><td>—</td></tr>
+          <tr data-attorney="jg"><td><strong>Maruichi American</strong> (Estrada/Nava)</td><td><span class="badge badge-teal">JG</span></td><td>Marc Feder</td><td>2/5/26</td><td style="color:var(--green);font-weight:700;">$525,000</td><td>2/13/26</td><td>Class, PAGA &amp; Indiv.</td><td>&#10003; (MFA)</td></tr>
+          <tr data-attorney="rq"><td><strong>Funlab USA</strong> (Vega)</td><td><span class="badge badge-green">RQ</span></td><td>Eve Wagner</td><td>11/13/25</td><td style="color:var(--green);font-weight:700;">$295,000</td><td>11/13/25</td><td>Class, PAGA &amp; Indiv.</td><td>&#10003;</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <!-- NOT SETTLED -->
+    <div class="section" id="r-notsettled">
+      <div class="section-header"><h2>Not Settled / Mediator's Proposal Pending</h2></div>
+      <div class="case-grid">
+        <div class="case-card" data-attorney="sm" style="border-left:3px solid var(--yellow);">
+          <div class="cc-top"><span class="case-name">Nova Measuring Instruments (Nash)</span><span class="attorney att-sm">SM</span></div>
+          <div class="cc-status">Mediator: <strong>Brandon McKelvey</strong> | Mediation: 2/4/26. Target: $500K. Mediator's proposal: <strong>$349K</strong> (respond by 2/12). Data issues flagged. Individual settlement obstacles.</div>
+          <div class="cc-action"><strong>Next</strong> Confirm acceptance/rejection. If rejected, evaluate re-mediation or litigation path.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="footer">
+  Mediation Command Center — Blackstone Law, APC — Report generated March 31, 2026 | Pipeline: Wednesdays | Prep Lifecycle: Mondays
+</div>
+
+<script>
+  // ===== PHASE NAVIGATION =====
+  document.querySelectorAll('.phase-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.phase-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.phase').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('phase-' + btn.dataset.phase).classList.add('active');
+    });
+  });
+
+  // ===== TAB SWITCHING (scoped to each phase) =====
+  document.querySelectorAll('.tabs').forEach(tabGroup => {
+    tabGroup.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const phase = tab.closest('.phase');
+        phase.querySelectorAll('.tabs .tab').forEach(t => t.classList.remove('active'));
+        phase.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.tab).classList.add('active');
+      });
+    });
+  });
+
+  // ===== ATTORNEY FILTER (scoped per phase) =====
+  document.querySelectorAll('.filter-bar').forEach(bar => {
+    bar.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        bar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        const scope = bar.dataset.filterScope;
+        const phase = document.getElementById('phase-' + scope);
+        if (!phase) return;
+        // Filter case cards
+        phase.querySelectorAll('.case-card[data-attorney]').forEach(card => {
+          if (filter === 'all' || card.dataset.attorney === filter) {
+            card.classList.remove('hidden-by-filter');
+          } else {
+            card.classList.add('hidden-by-filter');
+          }
+        });
+        // Filter table rows
+        phase.querySelectorAll('tbody tr[data-attorney]').forEach(row => {
+          if (filter === 'all' || row.dataset.attorney === filter) {
+            row.classList.remove('hidden-by-filter');
+          } else {
+            row.classList.add('hidden-by-filter');
+          }
+        });
+      });
+    });
+  });
+
+  // ===== GLOBAL SEARCH =====
+  const searchInput = document.getElementById('globalSearch');
+  const searchCountEl = document.getElementById('searchCount');
+  searchInput.addEventListener('input', () => {
+    const q = searchInput.value.trim().toLowerCase();
+    if (!q) {
+      document.querySelectorAll('.case-card, tbody tr').forEach(el => el.classList.remove('hidden-by-search'));
+      searchCountEl.style.display = 'none';
+      // Show all phases normally
+      return;
+    }
+    searchCountEl.style.display = 'inline';
+    let matches = 0;
+    // Search case cards
+    document.querySelectorAll('.case-card').forEach(card => {
+      const text = card.textContent.toLowerCase();
+      if (text.includes(q)) { card.classList.remove('hidden-by-search'); matches++; }
+      else { card.classList.add('hidden-by-search'); }
+    });
+    // Search table rows
+    document.querySelectorAll('tbody tr').forEach(row => {
+      const text = row.textContent.toLowerCase();
+      if (text.includes(q)) { row.classList.remove('hidden-by-search'); matches++; }
+      else { row.classList.add('hidden-by-search'); }
+    });
+    // Search JPA cards
+    document.querySelectorAll('.jpa-card').forEach(card => {
+      const text = card.textContent.toLowerCase();
+      if (text.includes(q)) {
+        card.classList.remove('hidden-by-search'); matches++;
+        // Auto-expand JPA panel if match found
+        if (!jpaPanel.classList.contains('active')) { jpaPanel.classList.add('active'); jpaToggle.classList.add('active'); }
+      } else { card.classList.add('hidden-by-search'); }
+    });
+    searchCountEl.textContent = matches + ' match' + (matches !== 1 ? 'es' : '');
+  });
+
+  // ===== DAYS-TO-MEDIATION COUNTDOWN =====
+  (function() {
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    document.querySelectorAll('.countdown[data-meddate]').forEach(el => {
+      const med = new Date(el.dataset.meddate + 'T00:00:00');
+      const diff = Math.ceil((med - today) / (1000*60*60*24));
+      if (diff < 0) { el.textContent = 'PASSED'; el.className = 'countdown cd-urgent'; }
+      else if (diff === 0) { el.textContent = 'TODAY'; el.className = 'countdown cd-urgent'; }
+      else if (diff === 1) { el.textContent = 'TOMORROW'; el.className = 'countdown cd-urgent'; }
+      else if (diff <= 7) { el.textContent = diff + ' DAYS'; el.className = 'countdown cd-urgent'; }
+      else if (diff <= 30) { el.textContent = diff + ' DAYS'; el.className = 'countdown cd-soon'; }
+      else if (diff <= 90) { el.textContent = diff + ' DAYS'; el.className = 'countdown cd-ok'; }
+      else { el.textContent = diff + ' DAYS'; el.className = 'countdown cd-far'; }
+    });
+  })();
+
+  // ===== JPA TRACKER TOGGLE =====
+  const jpaToggle = document.getElementById('jpaToggle');
+  const jpaPanel = document.getElementById('jpaPanel');
+  jpaToggle.addEventListener('click', () => {
+    jpaToggle.classList.toggle('active');
+    jpaPanel.classList.toggle('active');
+  });
+
+  // Include JPA cards in global search
+  const origSearchHandler = searchInput.oninput;
+
+  // ===== DYNAMIC CASE COUNT =====
+  (function() {
+    // Count unique cases across all phases
+    // Phase 1: count case cards in pipeline sections (Ready + Activity + Stale + Blocked table rows)
+    const p1Cards = document.querySelectorAll('#phase-pipeline .case-card').length;
+    const p1BlockedRows = document.querySelectorAll('#p-blocked tbody tr').length;
+    // Blocked cases overlap with Activity/Stale, so use the stated 42
+    const p1 = 42;
+    // Phase 2: count case cards
+    const p2Cards = document.querySelectorAll('#phase-booked .case-card').length;
+    const p2 = p2Cards; // 14
+    // Phase 3: Post-Med + Settled table rows + Not Settled cards
+    const p3PostMed = document.querySelectorAll('#r-postmed .case-card').length;
+    const p3Settled = document.querySelectorAll('#r-settled tbody tr').length;
+    const p3NotSettled = document.querySelectorAll('#r-notsettled .case-card').length;
+    // Some post-med cases overlap with settled (Estrada, Zhang, Hernandez, Sherwood)
+    // Deduplicated count: settled table has 8, post-med has 5, not-settled has 1
+    // Overlaps: Estrada/Maruichi, Zhang/Halrec, Hernandez/Liberty, Sherwood = 4 overlaps
+    const p3 = p3PostMed + p3Settled + p3NotSettled - 4; // 5+8+1-4 = 10
+    const total = p1 + p2 + p3; // But some Phase 1 Ready cases overlap Phase 2 (Orihuela, Miranda)
+    // Actually, the pipeline has cases that WILL transfer; they haven't yet. So no overlap.
+    // Post-med/settled overlap is the real dedup issue. Let's just use the actual unique count.
+    document.getElementById('totalCaseCount').textContent = p1 + p2 + p3;
+    document.getElementById('count-pipeline').textContent = p1;
+    document.getElementById('count-booked').textContent = p2;
+    document.getElementById('count-resolved').textContent = p3;
+  })();
+</script>
+</body>
+</html>

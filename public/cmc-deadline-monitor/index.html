@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blackstone Law — CMC Deadline Monitor</title>
+<style>
+  :root {
+    --bg: #0f172a; --surface: #1e293b; --surface2: #334155; --border: #475569;
+    --text: #f1f5f9; --text-muted: #94a3b8; --accent: #3b82f6;
+    --green: #22c55e; --green-bg: rgba(34,197,94,.12);
+    --yellow: #eab308; --yellow-bg: rgba(234,179,8,.12);
+    --orange: #f97316; --orange-bg: rgba(249,115,22,.12);
+    --red: #ef4444; --red-bg: rgba(239,68,68,.12);
+    --purple: #a855f7; --purple-bg: rgba(168,85,247,.12);
+    --blue-bg: rgba(59,130,246,.12);
+    --teal: #14b8a6; --teal-bg: rgba(20,184,166,.12);
+    --cyan: #06b6d4; --cyan-bg: rgba(6,182,212,.12);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Segoe UI',system-ui,-apple-system,sans-serif; background:var(--bg); color:var(--text); line-height:1.5; }
+  .container { max-width:1500px; margin:0 auto; padding:24px; }
+
+  /* HEADER */
+  .header { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:20px; }
+  .header h1 { font-size:1.75rem; font-weight:700; letter-spacing:-.02em; }
+  .header h1 span { color:var(--cyan); }
+  .header-meta { text-align:right; color:var(--text-muted); font-size:.85rem; }
+  .header-meta strong { color:var(--text); }
+
+  /* SEARCH */
+  .search-wrap { margin-bottom:18px; position:relative; }
+  .search-wrap input { width:100%; padding:12px 18px 12px 44px; background:var(--surface); border:1px solid var(--border); border-radius:10px; color:var(--text); font-size:.9rem; outline:none; transition:border-color .2s; }
+  .search-wrap input:focus { border-color:var(--cyan); }
+  .search-wrap input::placeholder { color:var(--text-muted); }
+  .search-icon { position:absolute; left:16px; top:50%; transform:translateY(-50%); color:var(--text-muted); font-size:1rem; pointer-events:none; }
+  .search-count { position:absolute; right:16px; top:50%; transform:translateY(-50%); color:var(--text-muted); font-size:.78rem; display:none; }
+
+  /* ALERT BANNER */
+  .alert-banner { border-radius:10px; padding:12px 18px; margin-bottom:18px; display:flex; align-items:center; gap:12px; }
+  .alert-red { background:var(--red-bg); border:1px solid var(--red); }
+  .alert-orange { background:var(--orange-bg); border:1px solid var(--orange); }
+  .alert-icon { font-size:1.3rem; }
+  .alert-text { font-size:.88rem; }
+  .alert-text strong { color:var(--red); }
+  .alert-orange .alert-text strong { color:var(--orange); }
+
+  /* TAB NAV */
+  .tab-nav { display:flex; gap:6px; margin-bottom:24px; background:var(--surface); border-radius:12px; padding:6px; border:1px solid var(--border); }
+  .tab-btn { flex:1; padding:14px 20px; border:none; background:none; color:var(--text-muted); font-size:.9rem; font-weight:600; border-radius:8px; cursor:pointer; transition:all .2s; display:flex; align-items:center; justify-content:center; gap:10px; }
+  .tab-btn:hover { color:var(--text); background:var(--surface2); }
+  .tab-btn.active { color:#fff; }
+  .tab-btn.active[data-tab="action"] { background:var(--red); }
+  .tab-btn.active[data-tab="upcoming"] { background:var(--cyan); }
+  .tab-btn.active[data-tab="completed"] { background:var(--green); }
+  .tab-btn .count { font-size:.75rem; background:rgba(255,255,255,.15); padding:2px 8px; border-radius:100px; }
+  .tab-btn.active .count { background:rgba(255,255,255,.25); }
+
+  /* TAB CONTENT */
+  .tab-content { display:none; animation:fadeIn .25s; }
+  .tab-content.active { display:block; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+
+  /* STAT CARDS */
+  .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin-bottom:24px; }
+  .stat-card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:16px 18px; }
+  .stat-card .label { font-size:.72rem; text-transform:uppercase; letter-spacing:.06em; color:var(--text-muted); margin-bottom:4px; }
+  .stat-card .value { font-size:1.6rem; font-weight:700; }
+  .stat-card .sub { font-size:.78rem; color:var(--text-muted); margin-top:2px; }
+  .stat-card.green .value { color:var(--green); }
+  .stat-card.yellow .value { color:var(--yellow); }
+  .stat-card.orange .value { color:var(--orange); }
+  .stat-card.red .value { color:var(--red); }
+  .stat-card.blue .value { color:var(--accent); }
+  .stat-card.purple .value { color:var(--purple); }
+  .stat-card.teal .value { color:var(--teal); }
+  .stat-card.cyan .value { color:var(--cyan); }
+
+  /* FILTER */
+  .filter-bar { display:flex; gap:6px; margin:14px 0; flex-wrap:wrap; align-items:center; }
+  .filter-bar label { font-size:.78rem; color:var(--text-muted); margin-right:4px; }
+  .filter-btn { padding:4px 12px; font-size:.76rem; border-radius:100px; border:1px solid var(--border); background:none; color:var(--text-muted); cursor:pointer; transition:all .15s; }
+  .filter-btn:hover { border-color:var(--text-muted); color:var(--text); }
+  .filter-btn.active { background:var(--cyan); border-color:var(--cyan); color:#fff; }
+
+  /* BADGES */
+  .badge { display:inline-block; font-size:.68rem; font-weight:700; padding:2px 8px; border-radius:100px; text-transform:uppercase; letter-spacing:.04em; }
+  .badge-green { background:var(--green-bg); color:var(--green); }
+  .badge-yellow { background:var(--yellow-bg); color:var(--yellow); }
+  .badge-orange { background:var(--orange-bg); color:var(--orange); }
+  .badge-red { background:var(--red-bg); color:var(--red); }
+  .badge-blue { background:var(--blue-bg); color:var(--accent); }
+  .badge-purple { background:var(--purple-bg); color:var(--purple); }
+  .badge-teal { background:var(--teal-bg); color:var(--teal); }
+  .badge-cyan { background:var(--cyan-bg); color:var(--cyan); }
+
+  /* COUNTDOWN */
+  .countdown { display:inline-block; font-size:.72rem; font-weight:700; padding:3px 10px; border-radius:100px; margin-bottom:6px; }
+  .cd-urgent { background:var(--red-bg); color:var(--red); }
+  .cd-soon { background:var(--orange-bg); color:var(--orange); }
+  .cd-ok { background:var(--yellow-bg); color:var(--yellow); }
+  .cd-far { background:var(--cyan-bg); color:var(--cyan); }
+
+  /* CASE CARDS */
+  .case-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(400px,1fr)); gap:12px; margin-bottom:22px; }
+  .case-card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:16px 18px; transition:border-color .15s; position:relative; }
+  .case-card:hover { border-color:var(--cyan); }
+  .case-card .cc-top { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-bottom:6px; }
+  .case-card .case-name { font-weight:700; font-size:.92rem; }
+  .case-card .attorney { font-size:.68rem; font-weight:700; padding:2px 8px; border-radius:100px; }
+  .att-sm { background:rgba(168,85,247,.15); color:var(--purple); }
+  .att-jm { background:rgba(59,130,246,.15); color:var(--accent); }
+  .att-rq { background:rgba(34,197,94,.15); color:var(--green); }
+  .case-card .cc-meta { font-size:.8rem; color:var(--text-muted); margin-bottom:8px; }
+  .case-card .cc-meta span { margin-right:14px; }
+
+  /* DRAFT STATUS PIPELINE */
+  .draft-pipeline { display:flex; align-items:center; gap:2px; margin:10px 0 8px; }
+  .draft-step { flex:1; height:6px; border-radius:3px; background:var(--surface2); position:relative; }
+  .draft-step.reached { background:var(--cyan); }
+  .draft-step.active-step { background:var(--cyan); animation:pulse-step 2s ease-in-out infinite; }
+  .draft-step.overdue-step { background:var(--red); animation:pulse-step 1.5s ease-in-out infinite; }
+  @keyframes pulse-step { 0%,100%{opacity:1} 50%{opacity:.5} }
+  .draft-labels { display:flex; justify-content:space-between; margin-bottom:10px; }
+  .draft-label { font-size:.62rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:.03em; text-align:center; flex:1; }
+  .draft-label.reached { color:var(--cyan); font-weight:700; }
+  .draft-label.current { color:var(--text); font-weight:700; }
+
+  /* ACTION ROW */
+  .case-card .cc-action { font-size:.82rem; padding:8px 10px; background:var(--bg); border-radius:6px; border-left:3px solid var(--cyan); }
+  .case-card .cc-action.action-urgent { border-left-color:var(--red); }
+  .case-card .cc-action.action-warn { border-left-color:var(--orange); }
+  .case-card .cc-action strong { color:var(--cyan); font-size:.68rem; text-transform:uppercase; letter-spacing:.04em; }
+  .case-card .cc-action.action-urgent strong { color:var(--red); }
+  .case-card .cc-action.action-warn strong { color:var(--orange); }
+
+  /* HEARING TYPE BADGE */
+  .hearing-type { display:inline-block; font-size:.66rem; font-weight:700; padding:2px 8px; border-radius:4px; text-transform:uppercase; letter-spacing:.04em; margin-left:8px; }
+  .ht-cmc { background:var(--cyan-bg); color:var(--cyan); }
+  .ht-isc { background:var(--purple-bg); color:var(--purple); }
+  .ht-idc { background:var(--teal-bg); color:var(--teal); }
+  .ht-sc { background:var(--yellow-bg); color:var(--yellow); }
+
+  /* FORMAT BADGE */
+  .format-badge { font-size:.62rem; font-weight:600; padding:1px 6px; border-radius:3px; background:var(--surface2); color:var(--text-muted); margin-left:6px; }
+
+  /* TABLES */
+  .table-wrap { overflow-x:auto; margin-bottom:22px; }
+  table { width:100%; border-collapse:collapse; font-size:.84rem; }
+  th { text-align:left; padding:10px 14px; background:var(--surface2); color:var(--text-muted); font-weight:600; font-size:.73rem; text-transform:uppercase; letter-spacing:.04em; border-bottom:1px solid var(--border); white-space:nowrap; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); }
+  tr:hover td { background:rgba(6,182,212,.04); }
+
+  /* TIMELINE */
+  .timeline { position:relative; padding-left:24px; margin-bottom:22px; }
+  .timeline::before { content:''; position:absolute; left:7px; top:4px; bottom:4px; width:2px; background:var(--surface2); }
+  .tl-item { position:relative; padding-bottom:14px; }
+  .tl-item:last-child { padding-bottom:0; }
+  .tl-dot { position:absolute; left:-20px; top:5px; width:10px; height:10px; border-radius:50%; border:2px solid var(--cyan); background:var(--bg); }
+  .tl-item.urgent .tl-dot { border-color:var(--red); background:var(--red); }
+  .tl-item.soon .tl-dot { border-color:var(--orange); background:var(--orange); }
+  .tl-item.ok .tl-dot { border-color:var(--yellow); background:var(--yellow); }
+  .tl-date { font-size:.73rem; font-weight:700; color:var(--cyan); text-transform:uppercase; }
+  .tl-item.urgent .tl-date { color:var(--red); }
+  .tl-item.soon .tl-date { color:var(--orange); }
+  .tl-text { font-size:.84rem; }
+
+  /* AUTO-DRAFT LEGEND */
+  .autodraft-legend { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:14px 18px; margin-bottom:20px; }
+  .autodraft-legend h3 { font-size:.82rem; font-weight:700; color:var(--cyan); margin-bottom:8px; text-transform:uppercase; letter-spacing:.04em; }
+  .legend-pipeline { display:flex; align-items:center; gap:0; margin-bottom:6px; }
+  .legend-step { flex:1; height:8px; border-radius:4px; margin:0 1px; }
+  .legend-labels { display:flex; justify-content:space-between; }
+  .legend-label { font-size:.68rem; color:var(--text-muted); text-align:center; flex:1; }
+
+  /* SECTION HEADERS */
+  .section-header { display:flex; align-items:center; gap:10px; margin:20px 0 14px; }
+  .section-header h2 { font-size:1.05rem; font-weight:600; }
+
+  .footer { text-align:center; color:var(--text-muted); font-size:.76rem; padding:24px 0 8px; border-top:1px solid var(--surface2); margin-top:32px; }
+
+  .search-highlight { background:rgba(6,182,212,.3); border-radius:2px; }
+  .hidden-by-search { display:none !important; }
+  .hidden-by-filter { display:none !important; }
+
+  /* WORKLOAD BARS */
+  .workload-bars { display:flex; gap:20px; flex-wrap:wrap; margin-bottom:22px; }
+  .wl-bar { flex:1; min-width:280px; }
+  .wl-label { font-size:.85rem; font-weight:600; margin-bottom:6px; display:flex; justify-content:space-between; }
+  .wl-track { height:26px; background:var(--surface2); border-radius:6px; overflow:hidden; display:flex; }
+  .wl-seg { height:100%; display:flex; align-items:center; justify-content:center; font-size:.68rem; font-weight:700; color:#fff; }
+
+  /* OUTCOME TAG */
+  .outcome-tag { display:inline-block; font-size:.7rem; font-weight:600; padding:2px 8px; border-radius:4px; }
+  .ot-continued { background:var(--yellow-bg); color:var(--yellow); }
+  .ot-resolved { background:var(--green-bg); color:var(--green); }
+  .ot-set-trial { background:var(--purple-bg); color:var(--purple); }
+  .ot-pending-mo { background:var(--surface2); color:var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div>
+      <h1>CMC <span>Deadline Monitor</span></h1>
+      <div style="color:var(--text-muted);font-size:.85rem;margin-top:4px;">Court Appearance Statements — Auto-Draft Pipeline</div>
+    </div>
+    <div class="header-meta">
+      <div>Last sync: <strong>Apr 2, 2026 7:00 AM</strong></div>
+      <div>Next sync: <strong>Apr 7, 2026</strong></div>
+      <div style="margin-top:4px;"><span class="badge badge-cyan">AUTO-DRAFT ON</span></div>
+    </div>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="search-wrap">
+    <span class="search-icon">&#128269;</span>
+    <input type="text" id="globalSearch" placeholder="Search cases, attorneys, courts, hearing types...">
+    <span class="search-count" id="searchCount"></span>
+  </div>
+
+  <!-- CRITICAL ALERT BANNERS -->
+  <div class="alert-banner alert-red">
+    <span class="alert-icon">&#128226;</span>
+    <span class="alert-text"><strong>CRITICAL:</strong> Anguiano v. Kinecta — 5 days to file (Apr 7)</span>
+  </div>
+  <div class="alert-banner alert-red">
+    <span class="alert-icon">&#128226;</span>
+    <span class="alert-text"><strong>CRITICAL:</strong> Lee v. IMC Logistics — 7 days to file (Apr 9)</span>
+  </div>
+
+  <!-- STAT CARDS -->
+  <div class="stats">
+    <div class="stat-card orange">
+      <div class="label">Due This Week</div>
+      <div class="value" id="stat-thisweek">2</div>
+      <div class="sub">Apr 7, Apr 9</div>
+    </div>
+    <div class="stat-card yellow">
+      <div class="label">Due Next 2 Weeks</div>
+      <div class="value" id="stat-next2wk">7</div>
+      <div class="sub">Apr 14 - Apr 29</div>
+    </div>
+    <div class="stat-card purple">
+      <div class="label">Awaiting OC</div>
+      <div class="value" id="stat-awaitoc">0</div>
+      <div class="sub">None currently</div>
+    </div>
+    <div class="stat-card cyan">
+      <div class="label">Drafts in Review</div>
+      <div class="value" id="stat-review">0</div>
+      <div class="sub">All queued for auto-draft</div>
+    </div>
+    <div class="stat-card green">
+      <div class="label">Filed This Month</div>
+      <div class="value" id="stat-filed">0</div>
+      <div class="sub">Ready to sync</div>
+    </div>
+    <div class="stat-card teal">
+      <div class="label">Next Hearing</div>
+      <div class="value" id="stat-nexthearing">12d</div>
+      <div class="sub">Steves — Apr 14</div>
+    </div>
+  </div>
+
+  <!-- AUTO-DRAFT PIPELINE LEGEND -->
+  <div class="autodraft-legend">
+    <h3>Auto-Draft Pipeline</h3>
+    <div class="legend-pipeline">
+      <div class="legend-step" style="background:var(--surface2);"></div>
+      <div class="legend-step" style="background:var(--cyan);"></div>
+      <div class="legend-step" style="background:var(--accent);"></div>
+      <div class="legend-step" style="background:var(--purple);"></div>
+      <div class="legend-step" style="background:var(--green);"></div>
+    </div>
+    <div class="legend-labels">
+      <div class="legend-label">Not Started</div>
+      <div class="legend-label">Auto-Drafted</div>
+      <div class="legend-label">Sent to OC</div>
+      <div class="legend-label">Redlines Received</div>
+      <div class="legend-label">Filed</div>
+    </div>
+    <div style="font-size:.72rem;color:var(--text-muted);margin-top:8px;">
+      Triggers at <strong style="color:var(--text);">21 days</strong> before filing deadline &middot;
+      OC outreach at <strong style="color:var(--text);">14 days</strong> &middot;
+      Escalation at <strong style="color:var(--text);">7 days</strong> &middot;
+      Red alert at <strong style="color:var(--text);">3 days</strong>
+    </div>
+  </div>
+
+  <!-- TAB NAV -->
+  <div class="tab-nav">
+    <button class="tab-btn active" data-tab="action">&#9888; Action Needed <span class="count" id="action-count">4</span></button>
+    <button class="tab-btn" data-tab="upcoming">&#128197; All Upcoming <span class="count" id="upcoming-count">15</span></button>
+    <button class="tab-btn" data-tab="completed">&#9989; Recently Completed <span class="count" id="completed-count">0</span></button>
+  </div>
+
+  <!-- ==================== TAB 1: ACTION NEEDED ==================== -->
+  <div class="tab-content active" data-id="action">
+
+    <div class="filter-bar">
+      <label>Attorney:</label>
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="jm">Joe</button>
+      <button class="filter-btn" data-filter="sm">Shelby</button>
+      <button class="filter-btn" data-filter="rq">Ryan</button>
+      <span style="margin-left:16px;"></span>
+      <label>Status:</label>
+      <button class="filter-btn active" data-sfilter="all">All</button>
+      <button class="filter-btn" data-sfilter="not-started">Not Started</button>
+      <button class="filter-btn" data-sfilter="drafted">Drafted</button>
+      <button class="filter-btn" data-sfilter="sent-oc">Sent to OC</button>
+    </div>
+
+    <!-- CRITICAL: Filing deadline 0-7 days -->
+    <div class="section-header">
+      <h2 style="color:var(--red);">&#128308; Critical — Filing Within 7 Days</h2>
+    </div>
+    <div class="case-grid" id="grid-critical">
+
+      <!-- Card 1: Anguiano v. Kinecta -->
+      <div class="case-card" data-attorney="sm" data-status="not-started" style="border-left:3px solid var(--red);">
+        <div class="cc-top">
+          <div>
+            <span class="countdown cd-urgent" data-filedate="2026-04-07">5 DAYS TO FILE</span>
+            <div class="case-name">Anguiano v. Kinecta Federal Credit Union<span class="hearing-type ht-cmc">CMC</span></div>
+          </div>
+          <span class="attorney att-sm">SM</span>
+        </div>
+        <div class="cc-meta">
+          <span>LASC</span>
+          <span class="format-badge">PLEADING PAPER</span>
+        </div>
+        <div class="cc-meta">
+          <span>Hearing: <strong style="color:var(--text);">Apr 14, 2026 8:30 AM</strong></span>
+          <span>Filing deadline: <strong style="color:var(--red);">Apr 7</strong></span>
+        </div>
+        <div class="draft-pipeline">
+          <div class="draft-step active-step"></div>
+          <div class="draft-step"></div>
+          <div class="draft-step"></div>
+          <div class="draft-step"></div>
+          <div class="draft-step"></div>
+        </div>
+        <div class="draft-labels">
+          <div class="draft-label current">Not Started</div>
+          <div class="draft-label">Draft</div>
+          <div class="draft-label">Send to OC</div>
+          <div class="draft-label">Redlines</div>
+          <div class="draft-label">Filed</div>
+        </div>
+        <div class="cc-action action-urgent">
+          <strong>ESCALATION REQUIRED</strong><br>
+          5 days to file — Brief must start immediately. Class action.
+        </div>
+      </div>
+
+      <!-- Card 2: Lee v. IMC Logistics -->
+      <div class="case-card" data-attorney="jm" data-status="not-started" style="border-left:3px solid var(--red);">
+        <div class="cc-top">
+          <div>
+            <span class="countdown cd-urgent" data-filedate="2026-04-09">7 DAYS TO FILE</span>
+            <div class="case-name">Lee v. IMC Logistics<span class="hearing-type ht-cmc">CMC</span></div>
+          </div>
+          <span class="attorney att-jm">JM</span>
+        </div>
+        <div class="cc-meta">
+          <span>Sacramento Superior Court</span>
+          <span class="format-badge">PLEADING PAPER</span>
+        </div>
+        <div class="cc-meta">
+          <span>Hearing: <strong style="color:var(--text);">Apr 24, 2026 10:30 AM</strong></span>
+          <span>Filing deadline: <strong style="color:var(--red);">Apr 9</strong></span>
+        </div>
+        <div class="draft-pipeline">
+          <div class="draft-step active-step"></div>
+          <div class="draft-step"></div>
+          <div class="draft-step"></div>
+          <div class="draft-step"></div>
+          <div class="draft-step"></div>
+        </div>
+        <div class="draft-labels">
+          <div class="draft-label current">Not Started</div>
+          <div class="draft-label">Draft</div>
+          <div class="draft-label">Send to OC</div>
+          <div class="draft-label">Redlines</div>
+          <div class="draft-label">Filed</div>
+        </div>
+        <div class="cc-action action-urgent">
+          <strong>ESCALATION REQUIRED</strong><br>
+          7 days to file — Brief must start immediately. PAGA case.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SOON: Filing deadline 7-14 days -->
+    <div class="section-header">
+      <h2 style="color:var(--orange);">&#128992; Soon — Filing Within 14 Days</h2>
+    </div>
+    <div class="case-grid" id="grid-soon">
+
+      <!-- Card 3: Steves v. LA Solar -->
+      <div class="case-card" data-attorney="jm" data-status="not-started" style="border-left:3px solid var(--orange);">
+        <div class="cc-top">
+          <div>
+            <span class="countdown cd-soon" data-filedate="2026-04-14">12 DAYS TO FILE</span>
+            <div class="case-name">Steves v. LA Solar Group, Inc.<span class="hearing-type ht-sc">STATUS</span></div>
+          </div>
+          <span class="attorney att-jm">JM</span>
+        </div>
+        <div class="cc-meta">
+          <span>LASC</span>
+          <span class="format-badge">PLEADING PAPER</span>
+        </div>
+        <div class="cc-meta">
+          <span>Hearing: <strong style="color:var(--text);">Apr 21, 2026 8:30 AM</strong></span>
+          <span>Filing deadline: <strong style="color:var(--orange);">Apr 14</strong></span>
+        </div>
+        <div class="draft-pipeline">
+          <div class="draft-step active-step"></div>
+          <div class="draft-step"></div>
+          <div class="draft-step"></div>
+          <div class="draft-step"></div>
+          <div class="draft-step"></div>
+        </div>
+        <div class="draft-labels">
+          <div class="draft-label current">Not Started</div>
+          <div class="draft-label">Draft</div>
+          <div class="draft-label">Send to OC</div>
+          <div class="draft-label">Redlines</div>
+          <div class="draft-label">Filed</div>
+        </div>
+        <div class="cc-action action-warn">
+          <strong>Auto-draft queued</strong><br>
+          Within 21-day window. Auto-draft will trigger at next sync (Apr 7).
+        </div>
+      </div>
+
+    </div>
+
+    <!-- APPROACHING: Filing deadline 14-21 days -->
+    <div class="section-header">
+      <h2 style="color:var(--yellow);">&#128993; Approaching — Filing Within 21 Days</h2>
+    </div>
+    <div class="case-grid" id="grid-approaching">
+
+      <!-- Card 4: Edmiston v. Weatherford -->
+      <div class="case-card" data-attorney="sm" data-status="not-started" style="border-left:3px solid var(--yellow);">
+        <div class="cc-top">
+          <div>
+            <span class="countdown cd-ok" data-filedate="2026-04-22">20 DAYS TO FILE</span>
+            <div class="case-name">Edmiston v. Weatherford<span class="hearing-type ht-cmc">CMC</span></div>
+          </div>
+          <span class="attorney att-sm">SM</span>
+        </div>
+        <div class="cc-meta">
+          <span>Alameda Superior Court</span>
+          <span class="format-badge">PLEADING PAPER</span>
+        </div>
+        <div class="cc-meta">
+          <span>Hearing: <strong style="color:var(--text);">Apr 29, 2026 1:30 PM</strong></span>
+          <span>Filing deadline: <strong style="color:var(--yellow);">Apr 22</strong></span>
+        </div>
+        <div class="draft-pipeline">
+          <div class="draft-step active-step"></div>
+          <div class="draft-step"></div>
+          <div class="draft-step"></div>
+          <div class="draft-step"></div>
+          <div class="draft-step"></div>
+        </div>
+        <div class="draft-labels">
+          <div class="draft-label current">Not Started</div>
+          <div class="draft-label">Draft</div>
+          <div class="draft-label">Send to OC</div>
+          <div class="draft-label">Redlines</div>
+          <div class="draft-label">Filed</div>
+        </div>
+        <div class="cc-action action-warn">
+          <strong>Auto-draft queued</strong><br>
+          Within 21-day window. Also has MTCA hearing Apr 22.
+        </div>
+      </div>
+
+      <!-- Card 5: Soto v. Control Air -->
+      <div class="case-card" data-attorney="sm" data-status="not-started" style="border-left:3px solid var(--yellow);">
+        <div class="cc-top">
+          <div>
+            <span class="countdown cd-ok" data-filedate="2026-04-22">20 DAYS TO FILE</span>
+            <div class="case-name">Soto v. Control Air Enterprises, LLC <span class="badge badge-orange">NOT ON ASTRID'S LIST</span><span class="hearing-type ht-sc">STATUS</span></div>
+          </div>
+          <span class="attorney att-sm">SM</span>
+        </div>
+        <div class="cc-meta">
+          <span>OC Superior &middot; Case 30-2025-01477443-CU-OE-CXC</span>
+          <span class="format-badge">PLEADING PAPER</span>
+        </div>
+        <div class="cc-meta">
+          <span>Hearing: <strong style="color:var(--text);">Apr 29, 2026 8:30 AM</strong></span>
+          <span>Filing deadline: <strong style="color:var(--yellow);">Apr 22</strong></span>
+        </div>
+        <div class="draft-pipeline">
+          <div class="draft-step active-step"></div>
+          <div class="draft-step"></div>
+          <div class="draft-step"></div>
+          <div class="draft-step"></div>
+          <div class="draft-step"></div>
+        </div>
+        <div class="draft-labels">
+          <div class="draft-label current">Not Started</div>
+          <div class="draft-label">Draft</div>
+          <div class="draft-label">Send to OC</div>
+          <div class="draft-label">Redlines</div>
+          <div class="draft-label">Filed</div>
+        </div>
+        <div class="cc-action">
+          <strong>Auto-draft queued</strong><br>
+          Within 21-day window. Found in calendar but not on Astrid's list — flag for reconciliation.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== TAB 2: ALL UPCOMING ==================== -->
+  <div class="tab-content" data-id="upcoming">
+
+    <div class="filter-bar">
+      <label>Attorney:</label>
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="jm">Joe</button>
+      <button class="filter-btn" data-filter="sm">Shelby</button>
+      <button class="filter-btn" data-filter="rq">Ryan</button>
+    </div>
+
+    <!-- FILING DEADLINE TIMELINE -->
+    <div class="section-header">
+      <h2>Filing Deadline Timeline</h2>
+    </div>
+    <div class="timeline" id="timeline-upcoming">
+      <div class="tl-item urgent">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Apr 7 — In 5 days</div>
+        <div class="tl-text"><strong>Anguiano v. Kinecta Federal Credit Union</strong> — CMC stmt due <span class="badge badge-red">CRITICAL</span></div>
+      </div>
+      <div class="tl-item urgent">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Apr 9 — In 7 days</div>
+        <div class="tl-text"><strong>Lee v. IMC Logistics</strong> — CMC stmt due <span class="badge badge-red">CRITICAL</span></div>
+      </div>
+      <div class="tl-item soon">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Apr 14 — In 12 days</div>
+        <div class="tl-text"><strong>Steves v. LA Solar Group</strong> — Status conf stmt due <span class="badge badge-yellow">QUEUED</span></div>
+      </div>
+      <div class="tl-item ok">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Apr 22 — In 20 days</div>
+        <div class="tl-text"><strong>Edmiston v. Weatherford</strong> — CMC stmt due <span class="badge badge-yellow">QUEUED</span></div>
+      </div>
+      <div class="tl-item ok">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Apr 22 — In 20 days</div>
+        <div class="tl-text"><strong>Soto v. Control Air Enterprises</strong> — Status conf stmt due <span class="badge badge-yellow">QUEUED</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Apr 27 — In 25 days</div>
+        <div class="tl-text"><strong>Evergreen Alliance (PAGA - state)</strong> — CM-110 filing <span class="badge badge-teal">FUTURE</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Apr 28 — In 26 days</div>
+        <div class="tl-text"><strong>Ruge v. Ecology Control Industries</strong> — CM-110 filing <span class="badge badge-teal">FUTURE</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Apr 28 — In 26 days</div>
+        <div class="tl-text"><strong>Agpalza v. Magnolia Springs Care Center</strong> — CM-110 filing <span class="badge badge-teal">FUTURE</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Apr 29 — In 27 days</div>
+        <div class="tl-text"><strong>Paz v. Slater, Inc.</strong> — CMC stmt due <span class="badge badge-teal">FUTURE</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Apr 30 — In 28 days</div>
+        <div class="tl-text"><strong>Gonzalez v. Hobie Cat Company</strong> — CM-110 filing <span class="badge badge-teal">FUTURE</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">May 8 — In 36 days</div>
+        <div class="tl-text"><strong>Conant v. Evergreen Alliance Golf</strong> — FRCP 26(f) stmt due <span class="badge badge-teal">FUTURE</span> <span class="badge badge-blue">[FEDERAL]</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">May 14 — In 42 days</div>
+        <div class="tl-text"><strong>Ramirez v. Apoyo Financiero, Inc.</strong> — CMC stmt due <span class="badge badge-teal">FUTURE</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Jun 18 — In 77 days</div>
+        <div class="tl-text"><strong>Chavez v. Southland Box Company</strong> — ISC stmt due <span class="badge badge-teal">FUTURE</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Oct 28 — In 209 days</div>
+        <div class="tl-text"><strong>Dickinson v. Parkwood Landscape</strong> — Status conf stmt due <span class="badge badge-teal">FUTURE</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Mar 26, 2027 — In 358 days</div>
+        <div class="tl-text"><strong>Galvez v. Snap-On Logistics</strong> — Post-Med status conf stmt due <span class="badge badge-teal">FUTURE</span></div>
+      </div>
+    </div>
+
+    <!-- FULL TABLE -->
+    <div class="section-header">
+      <h2>Full Schedule</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Case</th>
+            <th>Type</th>
+            <th>Court / Case #</th>
+            <th>Hearing Date</th>
+            <th>Filing Deadline</th>
+            <th>Days Left</th>
+            <th>Attorney</th>
+            <th>Format</th>
+            <th>Draft Status</th>
+          </tr>
+        </thead>
+        <tbody id="upcoming-table-body">
+          <tr data-attorney="sm">
+            <td><strong>Anguiano v. Kinecta Federal Credit Union</strong></td>
+            <td><span class="hearing-type ht-cmc" style="margin:0;">CMC</span></td>
+            <td>LASC</td>
+            <td>Apr 14, 2026</td>
+            <td style="color:var(--red);font-weight:600;">Apr 7</td>
+            <td><span class="badge badge-red">5 DAYS</span></td>
+            <td><span class="attorney att-sm">SM</span></td>
+            <td>Pleading</td>
+            <td><span class="badge badge-red">CRITICAL</span></td>
+          </tr>
+          <tr data-attorney="jm">
+            <td><strong>Lee v. IMC Logistics</strong></td>
+            <td><span class="hearing-type ht-cmc" style="margin:0;">CMC</span></td>
+            <td>Sacramento Superior</td>
+            <td>Apr 24, 2026</td>
+            <td style="color:var(--red);font-weight:600;">Apr 9</td>
+            <td><span class="badge badge-red">7 DAYS</span></td>
+            <td><span class="attorney att-jm">JM</span></td>
+            <td>Pleading</td>
+            <td><span class="badge badge-red">CRITICAL</span></td>
+          </tr>
+          <tr data-attorney="jm">
+            <td><strong>Steves v. LA Solar Group, Inc.</strong></td>
+            <td><span class="hearing-type ht-sc" style="margin:0;">STATUS</span></td>
+            <td>LASC</td>
+            <td>Apr 21, 2026</td>
+            <td style="color:var(--orange);font-weight:600;">Apr 14</td>
+            <td><span class="badge badge-orange">12 DAYS</span></td>
+            <td><span class="attorney att-jm">JM</span></td>
+            <td>Pleading</td>
+            <td><span class="badge badge-yellow">QUEUED</span></td>
+          </tr>
+          <tr data-attorney="sm">
+            <td><strong>Edmiston v. Weatherford</strong></td>
+            <td><span class="hearing-type ht-cmc" style="margin:0;">CMC</span></td>
+            <td>Alameda Superior</td>
+            <td>Apr 29, 2026</td>
+            <td style="color:var(--yellow);font-weight:600;">Apr 22</td>
+            <td><span class="badge badge-yellow">20 DAYS</span></td>
+            <td><span class="attorney att-sm">SM</span></td>
+            <td>Pleading</td>
+            <td><span class="badge badge-yellow">QUEUED</span></td>
+          </tr>
+          <tr data-attorney="sm">
+            <td><strong>Soto v. Control Air Enterprises, LLC</strong></td>
+            <td><span class="hearing-type ht-sc" style="margin:0;">STATUS</span></td>
+            <td>OC Superior, 30-2025-01477443</td>
+            <td>Apr 29, 2026</td>
+            <td style="color:var(--yellow);font-weight:600;">Apr 22</td>
+            <td><span class="badge badge-yellow">20 DAYS</span></td>
+            <td><span class="attorney att-sm">SM</span></td>
+            <td>Pleading</td>
+            <td><span class="badge badge-yellow">QUEUED</span></td>
+          </tr>
+          <tr data-attorney="sm">
+            <td><strong>Evergreen Alliance (PAGA - state)</strong></td>
+            <td><span class="hearing-type ht-cmc" style="margin:0;">CMC</span></td>
+            <td>California State</td>
+            <td>TBD</td>
+            <td>Apr 27</td>
+            <td><span class="badge badge-teal">25 DAYS</span></td>
+            <td><span class="attorney att-sm">SM</span></td>
+            <td>CM-110</td>
+            <td><span class="badge badge-teal">FUTURE</span></td>
+          </tr>
+          <tr data-attorney="sm">
+            <td><strong>Ruge v. Ecology Control Industries</strong></td>
+            <td><span class="hearing-type ht-cmc" style="margin:0;">CMC</span></td>
+            <td>LASC, 25STCV33403</td>
+            <td>TBD</td>
+            <td>Apr 28</td>
+            <td><span class="badge badge-teal">26 DAYS</span></td>
+            <td><span class="attorney att-sm">SM</span></td>
+            <td>CM-110</td>
+            <td><span class="badge badge-teal">FUTURE</span></td>
+          </tr>
+          <tr data-attorney="jm">
+            <td><strong>Agpalza v. Magnolia Springs Care Center</strong></td>
+            <td><span class="hearing-type ht-cmc" style="margin:0;">CMC</span></td>
+            <td>Kern Superior</td>
+            <td>May 13, 2026</td>
+            <td>Apr 28</td>
+            <td><span class="badge badge-teal">26 DAYS</span></td>
+            <td><span class="attorney att-jm">JM</span></td>
+            <td>CM-110</td>
+            <td><span class="badge badge-teal">FUTURE</span></td>
+          </tr>
+          <tr data-attorney="jm">
+            <td><strong>Paz v. Slater, Inc.</strong></td>
+            <td><span class="hearing-type ht-cmc" style="margin:0;">CMC</span></td>
+            <td>San Bernardino Superior</td>
+            <td>May 6, 2026</td>
+            <td>Apr 29</td>
+            <td><span class="badge badge-teal">27 DAYS</span></td>
+            <td><span class="attorney att-jm">JM</span></td>
+            <td>Pleading</td>
+            <td><span class="badge badge-teal">FUTURE</span></td>
+          </tr>
+          <tr data-attorney="jm">
+            <td><strong>Gonzalez v. Hobie Cat Company</strong></td>
+            <td><span class="hearing-type ht-sc" style="margin:0;">STATUS</span></td>
+            <td>San Diego Superior</td>
+            <td>May 15, 2026</td>
+            <td>Apr 30</td>
+            <td><span class="badge badge-teal">28 DAYS</span></td>
+            <td><span class="attorney att-jm">JM</span></td>
+            <td>CM-110</td>
+            <td><span class="badge badge-teal">FUTURE</span></td>
+          </tr>
+          <tr data-attorney="jm">
+            <td><strong>Conant v. Evergreen Alliance Golf Limited, L.P.</strong></td>
+            <td><span class="hearing-type ht-cmc" style="margin:0;">CMC</span></td>
+            <td>USDC N.D. Cal., 4:26-cv-01964</td>
+            <td>May 15, 2026</td>
+            <td>May 8</td>
+            <td><span class="badge badge-teal">36 DAYS</span></td>
+            <td><span class="attorney att-jm">JM</span></td>
+            <td>FRCP 26(f)</td>
+            <td><span class="badge badge-teal">FUTURE</span></td>
+          </tr>
+          <tr data-attorney="sm">
+            <td><strong>Ramirez v. Apoyo Financiero, Inc.</strong></td>
+            <td><span class="hearing-type ht-cmc" style="margin:0;">CMC</span></td>
+            <td>CA Superior, Santa Clara</td>
+            <td>May 21, 2026</td>
+            <td>May 14</td>
+            <td><span class="badge badge-teal">42 DAYS</span></td>
+            <td><span class="attorney att-sm">SM</span></td>
+            <td>Pleading</td>
+            <td><span class="badge badge-teal">FUTURE</span></td>
+          </tr>
+          <tr data-attorney="sm">
+            <td><strong>Chavez v. Southland Box Company</strong></td>
+            <td><span class="hearing-type ht-isc" style="margin:0;">ISC</span></td>
+            <td>LASC, 25STCV38048</td>
+            <td>Jun 25, 2026</td>
+            <td>Jun 18</td>
+            <td><span class="badge badge-teal">77 DAYS</span></td>
+            <td><span class="attorney att-sm">SM</span></td>
+            <td>Pleading</td>
+            <td><span class="badge badge-teal">FUTURE</span></td>
+          </tr>
+          <tr data-attorney="sm">
+            <td><strong>Dickinson v. Parkwood Landscape Maintenance, Inc.</strong></td>
+            <td><span class="hearing-type ht-sc" style="margin:0;">STATUS</span></td>
+            <td>LASC, 25STCV34534</td>
+            <td>Nov 4, 2026</td>
+            <td>Oct 28</td>
+            <td><span class="badge badge-teal">209 DAYS</span></td>
+            <td><span class="attorney att-sm">SM</span></td>
+            <td>Pleading</td>
+            <td><span class="badge badge-teal">FUTURE</span></td>
+          </tr>
+          <tr data-attorney="jm">
+            <td><strong>Galvez v. Snap-On Logistics Company</strong></td>
+            <td><span class="hearing-type ht-sc" style="margin:0;">STATUS</span></td>
+            <td>LASC, 25STCV38027</td>
+            <td>Apr 2, 2027</td>
+            <td>Mar 26, 2027</td>
+            <td><span class="badge badge-teal">358 DAYS</span></td>
+            <td><span class="attorney att-jm">JM</span></td>
+            <td>Pleading</td>
+            <td><span class="badge badge-teal">FUTURE</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- WORKLOAD DISTRIBUTION -->
+    <div class="section-header"><h2>Attorney Workload Distribution</h2></div>
+    <div class="workload-bars">
+      <div class="wl-bar">
+        <div class="wl-label"><span><span class="attorney att-jm" style="font-size:.72rem;">JM</span> Joe Harper</span><span>8 statements</span></div>
+        <div class="wl-track">
+          <div class="wl-seg" style="width:12.5%;background:var(--red);" title="1 critical">1</div>
+          <div class="wl-seg" style="width:12.5%;background:var(--orange);" title="1 soon">1</div>
+          <div class="wl-seg" style="width:75%;background:var(--cyan);" title="6 future">6</div>
+        </div>
+      </div>
+      <div class="wl-bar">
+        <div class="wl-label"><span><span class="attorney att-sm" style="font-size:.72rem;">SM</span> Shelby Miner</span><span>7 statements</span></div>
+        <div class="wl-track">
+          <div class="wl-seg" style="width:14.3%;background:var(--red);" title="1 critical">1</div>
+          <div class="wl-seg" style="width:28.6%;background:var(--yellow);" title="2 approaching">2</div>
+          <div class="wl-seg" style="width:57.1%;background:var(--cyan);" title="4 future">4</div>
+        </div>
+      </div>
+      <div class="wl-bar">
+        <div class="wl-label"><span><span class="attorney att-rq" style="font-size:.72rem;">RQ</span> Ryan Quadrel</span><span>0 statements</span></div>
+        <div class="wl-track">
+          <div style="width:100%;text-align:center;font-size:.72rem;color:var(--text-muted);padding:6px 0;">No upcoming deadlines</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TAB 3: RECENTLY COMPLETED ==================== -->
+  <div class="tab-content" data-id="completed">
+
+    <div class="section-header"><h2>Hearings — Last 30 Days</h2></div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px 18px;text-align:center;">
+      <div style="font-size:.9rem;color:var(--text-muted);">No hearings in the last 30 days. Completed hearings will appear here automatically after the sync skill processes minute orders.</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    Blackstone Law, APC — CMC Deadline Monitor v1.0 — Auto-synced weekly from Outlook Calendar
+  </div>
+
+</div>
+
+<script>
+// ===== TAB SWITCHING =====
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    const target = btn.getAttribute('data-tab');
+    document.querySelector(`.tab-content[data-id="${target}"]`).classList.add('active');
+  });
+});
+
+// ===== COUNTDOWN ENGINE =====
+(function updateCountdowns() {
+  const today = new Date();
+  today.setHours(0,0,0,0);
+
+  document.querySelectorAll('.countdown[data-filedate]').forEach(el => {
+    const parts = el.getAttribute('data-filedate').split('-');
+    const fileDate = new Date(parseInt(parts[0]), parseInt(parts[1])-1, parseInt(parts[2]));
+    const diff = Math.ceil((fileDate - today) / (1000*60*60*24));
+
+    if (diff <= 0) {
+      el.textContent = 'OVERDUE';
+      el.className = 'countdown cd-urgent';
+    } else if (diff <= 3) {
+      el.textContent = diff + ' DAY' + (diff !== 1 ? 'S' : '') + ' TO FILE';
+      el.className = 'countdown cd-urgent';
+    } else if (diff <= 7) {
+      el.textContent = diff + ' DAYS TO FILE';
+      el.className = 'countdown cd-urgent';
+    } else if (diff <= 14) {
+      el.textContent = diff + ' DAYS TO FILE';
+      el.className = 'countdown cd-soon';
+    } else {
+      el.textContent = diff + ' DAYS TO FILE';
+      el.className = 'countdown cd-ok';
+    }
+  });
+})();
+
+// ===== ATTORNEY FILTER =====
+document.querySelectorAll('.filter-bar .filter-btn[data-filter]').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const bar = this.closest('.filter-bar');
+    bar.querySelectorAll('.filter-btn[data-filter]').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    const filter = this.getAttribute('data-filter');
+    const tab = this.closest('.tab-content');
+
+    // Filter case cards
+    tab.querySelectorAll('.case-card[data-attorney]').forEach(card => {
+      if (filter === 'all' || card.getAttribute('data-attorney') === filter) {
+        card.classList.remove('hidden-by-filter');
+      } else {
+        card.classList.add('hidden-by-filter');
+      }
+    });
+
+    // Filter table rows
+    tab.querySelectorAll('tbody tr[data-attorney]').forEach(row => {
+      if (filter === 'all' || row.getAttribute('data-attorney') === filter) {
+        row.classList.remove('hidden-by-filter');
+      } else {
+        row.classList.add('hidden-by-filter');
+      }
+    });
+  });
+});
+
+// ===== STATUS FILTER =====
+document.querySelectorAll('.filter-bar .filter-btn[data-sfilter]').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const bar = this.closest('.filter-bar');
+    bar.querySelectorAll('.filter-btn[data-sfilter]').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    const filter = this.getAttribute('data-sfilter');
+    const tab = this.closest('.tab-content');
+
+    tab.querySelectorAll('.case-card[data-status]').forEach(card => {
+      if (filter === 'all' || card.getAttribute('data-status') === filter) {
+        card.classList.remove('hidden-by-filter');
+      } else {
+        card.classList.add('hidden-by-filter');
+      }
+    });
+  });
+});
+
+// ===== GLOBAL SEARCH =====
+const searchInput = document.getElementById('globalSearch');
+const searchCount = document.getElementById('searchCount');
+
+searchInput.addEventListener('input', function() {
+  const query = this.value.trim().toLowerCase();
+
+  // Remove existing highlights
+  document.querySelectorAll('.search-highlight').forEach(el => {
+    el.replaceWith(el.textContent);
+  });
+
+  if (!query) {
+    document.querySelectorAll('.hidden-by-search').forEach(el => el.classList.remove('hidden-by-search'));
+    searchCount.style.display = 'none';
+    return;
+  }
+
+  let matchCount = 0;
+
+  // Search case cards
+  document.querySelectorAll('.case-card').forEach(card => {
+    const text = card.textContent.toLowerCase();
+    if (text.includes(query)) {
+      card.classList.remove('hidden-by-search');
+      matchCount++;
+    } else {
+      card.classList.add('hidden-by-search');
+    }
+  });
+
+  // Search table rows
+  document.querySelectorAll('tbody tr').forEach(row => {
+    const text = row.textContent.toLowerCase();
+    if (text.includes(query)) {
+      row.classList.remove('hidden-by-search');
+      matchCount++;
+    } else {
+      row.classList.add('hidden-by-search');
+    }
+  });
+
+  // Search timeline items
+  document.querySelectorAll('.tl-item').forEach(item => {
+    const text = item.textContent.toLowerCase();
+    if (text.includes(query)) {
+      item.classList.remove('hidden-by-search');
+      matchCount++;
+    } else {
+      item.classList.add('hidden-by-search');
+    }
+  });
+
+  searchCount.textContent = matchCount + ' match' + (matchCount !== 1 ? 'es' : '');
+  searchCount.style.display = 'block';
+});
+
+// ===== DYNAMIC STAT: Next hearing countdown =====
+(function() {
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const nextHearing = new Date(2026, 3, 14); // Apr 14 — Anguiano
+  const diff = Math.ceil((nextHearing - today) / (1000*60*60*24));
+  const el = document.getElementById('stat-nexthearing');
+  if (el && diff > 0) el.textContent = diff + 'd';
+})();
+</script>
+</body>
+</html>

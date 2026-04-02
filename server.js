@@ -8,6 +8,7 @@ app.use('/mediation-pipeline', express.static(path.join(__dirname, 'public', 'me
 app.use('/motion-dashboard', express.static(path.join(__dirname, 'public', 'motion-dashboard')));
 app.use('/discovery-tracker', express.static(path.join(__dirname, 'public', 'discovery-tracker')));
 app.use('/daily-briefing', express.static(path.join(__dirname, 'public', 'daily-briefing')));
+app.use('/command-center', express.static(path.join(__dirname, 'public', 'command-center')));
 
 app.get('/', (req, res) => {
   res.send(`
@@ -26,6 +27,7 @@ app.get('/', (req, res) => {
     </head>
     <body>
       <h1>Blackstone Law Dashboards</h1>
+      <a href="/command-center" style="background:#1e293b;color:#f1f5f9;font-weight:600;">Active Case Command Center</a>
       <a href="/mediation-pipeline">Mediation Pipeline Dashboard</a>
       <a href="/motion-dashboard">Motion Dashboard</a>
       <a href="/discovery-tracker">Discovery Tracker</a>

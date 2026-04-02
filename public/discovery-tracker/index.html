@@ -119,7 +119,7 @@
 
 <div class="phase-nav">
   <button class="phase-btn active" data-phase="dashboard" onclick="showPhase('dashboard')">📊 Dashboard</button>
-  <button class="phase-btn" data-phase="pre-discovery" onclick="showPhase('pre-discovery')">Pre-Discovery <span class="count">51</span></button>
+  <button class="phase-btn" data-phase="pre-discovery" onclick="showPhase('pre-discovery')">Pre-Discovery <span class="count">47</span></button>
   <button class="phase-btn" data-phase="awaiting" onclick="showPhase('awaiting')">Awaiting Response <span class="count">8</span></button>
   <button class="phase-btn" data-phase="followup" onclick="showPhase('followup')">Follow-Up <span class="count">10</span></button>
   <button class="phase-btn" data-phase="completed" onclick="showPhase('completed')">Completed <span class="count">10</span></button>
@@ -129,7 +129,7 @@
 <div class="phase active" data-id="dashboard">
   <div class="phase-updated">Last updated: April 1, 2026 (Discovery Tracker Sync)</div>
   <div class="stats">
-    <div class="stat-card teal"><div class="label">Pre-Discovery</div><div class="value">51</div><div class="sub">Not yet propounded</div></div>
+    <div class="stat-card teal"><div class="label">Pre-Discovery</div><div class="value">47</div><div class="sub">Not yet propounded</div></div>
     <div class="stat-card yellow"><div class="label">Awaiting Response</div><div class="value">8</div><div class="sub">Discovery served</div></div>
     <div class="stat-card orange"><div class="label">Follow-Up</div><div class="value">10</div><div class="sub">M&amp;C / MTC track</div></div>
     <div class="stat-card green"><div class="label">Completed</div><div class="value">10</div><div class="sub">Resolved / Settled</div></div>
@@ -170,27 +170,19 @@
 
 <!-- PRE-DISCOVERY PHASE -->
 <div class="phase" data-id="pre-discovery">
-  <div class="phase-updated">Phase 1 — 51 entries (22 PAGA companions removed) | 18 need drafting | 8 mediation track | 22 stayed</div>
+  <div class="phase-updated">Phase 1 — 47 entries | 15 need drafting | 8 mediation track | 21 stayed</div>
   
   <div class="sub-tabs" style="display:flex;gap:6px;margin-bottom:16px;">
-    <button class="sub-tab active" onclick="showSubTab('active-discovery', this)" style="flex:1;padding:10px 16px;border:2px solid var(--teal);background:var(--teal);color:#fff;font-size:.85rem;font-weight:600;border-radius:8px;cursor:pointer;transition:all .2s;">Active Discovery <span style="font-size:.75rem;background:rgba(255,255,255,.25);padding:2px 8px;border-radius:100px;margin-left:6px;">27</span></button>
-    <button class="sub-tab" onclick="showSubTab('inactive-discovery', this)" style="flex:1;padding:10px 16px;border:2px solid var(--border);background:var(--surface);color:var(--text-muted);font-size:.85rem;font-weight:600;border-radius:8px;cursor:pointer;transition:all .2s;">Inactive Discovery <span style="font-size:.75rem;background:rgba(255,255,255,.15);padding:2px 8px;border-radius:100px;margin-left:6px;">24</span></button>
+    <button class="sub-tab active" onclick="showSubTab('active-discovery', this)" style="flex:1;padding:10px 16px;border:2px solid var(--teal);background:var(--teal);color:#fff;font-size:.85rem;font-weight:600;border-radius:8px;cursor:pointer;transition:all .2s;">Active Discovery <span style="font-size:.75rem;background:rgba(255,255,255,.25);padding:2px 8px;border-radius:100px;margin-left:6px;">18</span></button>
+    <button class="sub-tab" onclick="showSubTab('inactive-discovery', this)" style="flex:1;padding:10px 16px;border:2px solid var(--border);background:var(--surface);color:var(--text-muted);font-size:.85rem;font-weight:600;border-radius:8px;cursor:pointer;transition:all .2s;">Inactive Discovery <span style="font-size:.75rem;background:rgba(255,255,255,.15);padding:2px 8px;border-radius:100px;margin-left:6px;">29</span></button>
   </div>
 
   <div id="active-discovery" class="sub-phase" style="display:block;">
-    <div style="font-size:.76rem;color:var(--text-muted);margin-bottom:12px;padding:4px 10px;background:var(--surface);border-radius:6px;display:inline-block;">18 needs drafting · 1 drafted · 8 mediation track | 9 with arbitration agreement</div>
+    <div style="font-size:.76rem;color:var(--text-muted);margin-bottom:12px;padding:4px 10px;background:var(--surface);border-radius:6px;display:inline-block;">15 needs drafting · 1 drafted · 1 MTCA pending · 1 arb pending | 7 with arbitration agreement</div>
     <div class="table-wrap"><div class="table-scroll">
     <table>
       <tr><th>Case Name</th><th>Filing Date</th><th>County</th><th>Discovery Status</th><th>Arbitration</th><th>Notes</th></tr>
       <tr class="searchable">
-      <td class="case-name">Nova Measuring Instruments Inc. (Nash, Selinda) (PAGA) (KG PARTNERING)</td>
-      <td>Apr 12, 2025</td>
-      <td>Alameda</td>
-      <td><span class="badge badge-red">Needs to be Drafted</span></td>
-      <td>No</td>
-      <td class="text-muted" style="max-width:200px;font-size:.78rem">[2026-03-10] Sync: Per Shelby&#39;s 9/26/25 email, parties agreed to formal discover</td>
-    </tr>
-<tr class="searchable">
       <td class="case-name">Wellness Together (Neeley, Janelle) (Class)</td>
       <td>Jul 03, 2025</td>
       <td>Alameda</td>
@@ -221,14 +213,6 @@
       <td><span class="badge badge-red">Needs to be Drafted</span></td>
       <td>Yes</td>
       <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — DISCO: &quot;PAGA.&quot; Tracking class case.<br>- Mediation with Eve Wagner</td>
-    </tr>
-<tr class="searchable">
-      <td class="case-name">The Upper Deck Company (Cohee, Sharisse) (PAGA)</td>
-      <td>Sep 20, 2025</td>
-      <td>San Diego (SDSC)</td>
-      <td><span class="badge badge-red">Needs to be Drafted</span></td>
-      <td>Yes</td>
-      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — no formal discovery. Call w/ OC on 01/13 re informal disco for </td>
     </tr>
 <tr class="searchable">
       <td class="case-name">Weatherford Motors, Inc. (Edmiston, Ricky) (Class)</td>
@@ -295,14 +279,6 @@
       <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — no discovery. D&#39;s Response: 03/18/2026. Intro call 01/29/2026. </td>
     </tr>
 <tr class="searchable">
-      <td class="case-name">Hope Program, a Licensed Clinical Social Worker Professional Corporation (Brown, Neecha) (PAGA)</td>
-      <td>Feb 02, 2026</td>
-      <td>Alameda</td>
-      <td><span class="badge badge-red">Needs to be Drafted</span></td>
-      <td>No</td>
-      <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — no discovery propounded yet. Fully Executed PAGA NAR due 03/04/</td>
-    </tr>
-<tr class="searchable">
       <td class="case-name">St. Supery, Inc. (Adame, Gema)</td>
       <td>Feb 06, 2026</td>
       <td>Napa</td>
@@ -335,6 +311,30 @@
       <td class="text-muted" style="max-width:200px;font-size:.78rem">- ACTION NEEDED: Discovery Served Date not found in source data — verify via ema</td>
     </tr>
 <tr class="searchable">
+      <td class="case-name">CCL Tube, Inc. (Andino Matute, Cesar Alexander) (Class)<span class="contingent-tag">⏸ MTCA anticipated</span></td>
+      <td>Dec 26, 2025</td>
+      <td>Los Angeles (LASC)</td>
+      <td><span class="badge badge-purple">MTCA Pending</span></td>
+      <td>Yes</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Plaintiff refused arbitration stip 3/25/26. Defendant expected to file MTCA. CMC 4/2/26.</td>
+    </tr>
+<tr class="searchable">
+      <td class="case-name">Med-Pharmex, Inc., et al. (Flores, Assir) (Class)<span class="contingent-tag">⏸ Arbitration discussions underway</span></td>
+      <td>Jan 10, 2026</td>
+      <td>Los Angeles (LASC)</td>
+      <td><span class="badge badge-purple">Arb Pending</span></td>
+      <td>Yes</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Arbitration discussions active with Perkins Coie. Joint CMC statement in prep. Multiple defendants.</td>
+    </tr>
+    </table></div></div>
+  </div>
+
+  <div id="inactive-discovery" class="sub-phase" style="display:none;">
+    <div style="font-size:.76rem;color:var(--text-muted);margin-bottom:12px;padding:4px 10px;background:var(--surface);border-radius:6px;display:inline-block;">8 mediation track · 21 stayed | 9 with arbitration agreement</div>
+    <div class="table-wrap"><div class="table-scroll">
+    <table>
+      <tr><th>Case Name</th><th>Filing Date</th><th>County</th><th>Discovery Status</th><th>Arbitration</th><th>Notes</th></tr>
+      <tr class="searchable">
       <td class="case-name">Southwest College of Medical-Dental Assistants &amp; Practical Nurses (Bowers, Guy) (Class) (BDC PARTNERING)<span class="contingent-tag">⏸ Mediation scheduled — informal discovery only (see Mediation Pipeline)</span></td>
       <td>Feb 26, 2025</td>
       <td>Los Angeles (LASC)</td>
@@ -398,15 +398,7 @@
       <td>No</td>
       <td class="text-muted" style="max-width:200px;font-size:.78rem">- Phase 1 case — no discovery. D&#39;s Response: 02/13/2026. CBA possible. Peremptor</td>
     </tr>
-    </table></div></div>
-  </div>
-
-  <div id="inactive-discovery" class="sub-phase" style="display:none;">
-    <div style="font-size:.76rem;color:var(--text-muted);margin-bottom:12px;padding:4px 10px;background:var(--surface);border-radius:6px;display:inline-block;">22 stayed · 1 MTCA pending · 1 arb pending | 8 with arbitration agreement</div>
-    <div class="table-wrap"><div class="table-scroll">
-    <table>
-      <tr><th>Case Name</th><th>Filing Date</th><th>County</th><th>Discovery Status</th><th>Arbitration</th><th>Notes</th></tr>
-      <tr class="searchable">
+<tr class="searchable">
       <td class="case-name">Parker Palm Springs, LLC (Diaz, Marcella and Haraksin, Andrew) (Class) (KG PARTNERING)</td>
       <td>Feb 14, 2025</td>
       <td>Riverside</td>
@@ -551,14 +543,6 @@
       <td class="text-muted" style="max-width:200px;font-size:.78rem">Stayed until the CMC date.</td>
     </tr>
 <tr class="searchable">
-      <td class="case-name">Thornton Winery (Lopez, Jessica) (PAGA)</td>
-      <td>Oct 17, 2025</td>
-      <td>Riverside</td>
-      <td><span class="badge badge-orange">Stayed</span></td>
-      <td>No</td>
-      <td class="text-muted" style="max-width:200px;font-size:.78rem"></td>
-    </tr>
-<tr class="searchable">
       <td class="case-name">Fox Factory, Inc. (Sanchez, Christian) (Class)</td>
       <td>Oct 27, 2025</td>
       <td>San Diego</td>
@@ -581,22 +565,6 @@
       <td><span class="badge badge-orange">Stayed</span></td>
       <td>No</td>
       <td class="text-muted" style="max-width:200px;font-size:.78rem"></td>
-    </tr>
-<tr class="searchable">
-      <td class="case-name">CCL Tube, Inc. (Andino Matute, Cesar Alexander) (Class)<span class="contingent-tag">⏸ MTCA anticipated</span></td>
-      <td>Dec 26, 2025</td>
-      <td>Los Angeles (LASC)</td>
-      <td><span class="badge badge-purple">MTCA Pending</span></td>
-      <td>Yes</td>
-      <td class="text-muted" style="max-width:200px;font-size:.78rem">Plaintiff refused arbitration stip 3/25/26. Defendant expected to file MTCA. CMC 4/2/26.</td>
-    </tr>
-<tr class="searchable">
-      <td class="case-name">Med-Pharmex, Inc., et al. (Flores, Assir) (Class)<span class="contingent-tag">⏸ Arbitration discussions underway</span></td>
-      <td>Jan 10, 2026</td>
-      <td>Los Angeles (LASC)</td>
-      <td><span class="badge badge-purple">Arb Pending</span></td>
-      <td>Yes</td>
-      <td class="text-muted" style="max-width:200px;font-size:.78rem">Arbitration discussions active with Perkins Coie. Joint CMC statement in prep. Multiple defendants.</td>
     </tr>
     </table></div></div>
   </div>

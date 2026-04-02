@@ -703,24 +703,51 @@
 
     <!-- FEES -->
     <div class="section" id="b-fees">
-      <div class="section-header"><h2>Fee Summary</h2></div>
+      <div class="section-header"><h2>Fee Summary</h2><span class="badge badge-blue">33 cases</span></div>
       <div class="table-wrap"><table>
         <thead><tr><th>Case</th><th>Mediator</th><th>P's Share</th><th>Paid?</th><th>Cancel Deadline</th><th>Status</th></tr></thead>
         <tbody>
-          <tr data-attorney="jm"><td>Bassell v. Golden Rain</td><td>Feder</td><td>TBD</td><td><span class="badge badge-green">Paid</span></td><td>Passed</td><td>Committed — mediation 4/2</td></tr>
-          <tr data-attorney="jm"><td>Vasquez v. Lulu's</td><td>Rottman</td><td>TBD</td><td>TBD</td><td>Passed</td><td>Committed — mediation 4/3</td></tr>
-          <tr data-attorney="jm" style="background:var(--red-bg);"><td><strong>Kreutzer v. iBUYPOWER</strong></td><td>McKelvey</td><td><strong>$16,000</strong></td><td><span class="badge badge-red">PAST DUE 14+D</span></td><td><strong style="color:var(--red);">June 12, 2026</strong></td><td>Invoice #6878 — Karen must process ASAP</td></tr>
-          <tr data-attorney="sm"><td>Miranda v. Imperial Valley</td><td>Eckstrom</td><td>50/50</td><td>Invoiced</td><td>TBD</td><td>Early</td></tr>
-          <tr data-attorney="jm"><td>Conant v. Evergreen</td><td>McKelvey</td><td>TBD</td><td>TBD</td><td>TBD</td><td>Date confirmed 8/6</td></tr>
-          <tr data-attorney="rq"><td>Lee v. IMC Logistics</td><td>Feder</td><td>Split w/ Abramson</td><td>TBD</td><td>TBD</td><td>Fee split agreed</td></tr>
-          <tr data-attorney="rq"><td>Touch v. Dublin Toyota</td><td>Feder</td><td>TBD</td><td>Not yet</td><td><strong>Oct 20, 2026</strong></td><td>Payment due 10/20/2026</td></tr>
-          <tr data-attorney="sm"><td>Redd v. LeFiell</td><td>Monique Ngo-Bonnici</td><td>TBD</td><td><span class="badge badge-green">Approved 3/31</span></td><td>TBD</td><td>Karen processing — mediation 5/7</td></tr>
-          <tr data-attorney="sm"><td>Naquin v. BenQ America</td><td>Monique Ngo-Bonnici</td><td>TBD</td><td>TBD</td><td>TBD</td><td>Booked Sept 11 — fee TBD</td></tr>
-          <tr data-attorney="jm"><td>Brown v. Hope Program</td><td>Monique Ngo-Bonnici</td><td>TBD</td><td>N</td><td>TBD</td><td>Booked June 8 — PAGA only</td></tr>
-          <tr data-attorney="rq"><td>Santamaria v. America Central</td><td>M Resolution</td><td>TBD</td><td>TBD</td><td>Passed</td><td>Mediation 4/10 — confirm fee status</td></tr>
-          <tr data-attorney="rq"><td>Cotton v. Taylor Communications</td><td>Ortman</td><td>TBD</td><td><span class="badge badge-red">PAST DUE</span></td><td>TBD</td><td>Past due invoice — resolve ASAP</td></tr>
+          <!-- ═══ IMMINENT (This Week) ═══ -->
+          <tr data-attorney="jm"><td>Bassell v. Golden Rain</td><td>Feder</td><td>In attachment</td><td><span class="badge badge-green">Paid</span></td><td>Passed</td><td>Committed — mediation <strong>4/2</strong></td></tr>
+          <tr data-attorney="jm"><td>Vasquez v. Lulu's</td><td>Rottman</td><td><strong>$17,000</strong></td><td><span class="badge badge-yellow">Invoiced 2/13</span></td><td>Passed</td><td>Invoice #5654 — mediation <strong>4/3</strong></td></tr>
+          <!-- ═══ PAST DUE / ACTION REQUIRED ═══ -->
+          <tr data-attorney="jm" style="background:var(--red-bg);"><td><strong>Kreutzer v. iBUYPOWER</strong></td><td>McKelvey</td><td><strong>$16,000</strong></td><td><span class="badge badge-red">PAST DUE 21+D</span></td><td><strong style="color:var(--red);">June 12, 2026</strong></td><td>Invoice #6878 due 3/11 — Karen must process ASAP</td></tr>
+          <tr data-attorney="rq" style="background:var(--red-bg);"><td><strong>Cotton v. Taylor</strong></td><td>Ortman</td><td>TBD</td><td><span class="badge badge-red">PAST DUE</span></td><td>TBD</td><td>Past due invoice — resolve ASAP</td></tr>
+          <!-- ═══ UPCOMING (April) ═══ -->
+          <tr data-attorney="rq"><td>Santamaria v. America Central</td><td>McKelvey</td><td><strong>$14,000</strong></td><td><span class="badge badge-yellow">Invoiced 10/23</span></td><td>Passed</td><td>Invoice #6754 — mediation <strong>4/10</strong></td></tr>
+          <tr data-attorney="rq"><td>Douglas v. Veridiam</td><td>Rottman</td><td><strong>$17,000</strong></td><td><span class="badge badge-yellow">Invoiced</span></td><td>TBD</td><td>Mediation <strong>4/27</strong> — 26 days out</td></tr>
+          <!-- ═══ MAY ═══ -->
+          <tr data-attorney="sm"><td>Redd v. LeFiell</td><td>Ngo-Bonnici</td><td>TBD</td><td><span class="badge badge-green">Approved 3/31</span></td><td>TBD</td><td>Karen processing — mediation <strong>5/7</strong></td></tr>
+          <tr data-attorney="jm"><td>White v. Kidztopros</td><td>McKelvey</td><td>TBD</td><td>Not yet</td><td>TBD</td><td>Confirmed — mediation <strong>5/7</strong></td></tr>
+          <tr data-attorney="rq"><td>Rucker v. River City</td><td>McKelvey</td><td>TBD</td><td>Not yet</td><td>TBD</td><td>Confirmed — mediation <strong>5/15</strong></td></tr>
+          <!-- ═══ JUNE ═══ -->
+          <tr data-attorney="jm"><td>Brown v. Hope Program</td><td>Ngo-Bonnici</td><td>TBD</td><td>Not yet</td><td>TBD</td><td>PAGA only — mediation <strong>6/8</strong></td></tr>
+          <tr data-attorney="jm"><td>Orihuela v. Int'l Cosmetics</td><td>Eckstrom</td><td>TBD</td><td><span class="badge badge-yellow">Invoiced 3/17</span></td><td>TBD</td><td>Hearing notice sent — date TBD</td></tr>
+          <tr data-attorney="jm"><td>Conant v. Evergreen</td><td>McKelvey</td><td><strong>$16,000</strong></td><td><span class="badge badge-yellow">Due 4/14</span></td><td>TBD</td><td>Invoice #6931 — mediation <strong>8/6</strong></td></tr>
+          <!-- ═══ JULY+ ═══ -->
+          <tr data-attorney="sm"><td>Miranda v. Imperial Valley</td><td>Eckstrom</td><td>50/50</td><td><span class="badge badge-yellow">Invoiced 3/10</span></td><td>TBD</td><td>Hearing notice sent — <strong>7/31</strong></td></tr>
+          <tr data-attorney="sm"><td>Naquin v. BenQ America</td><td>Ngo-Bonnici</td><td>50/50</td><td><span class="badge badge-yellow">Invoiced 4/1</span></td><td>TBD</td><td>Hearing notice sent — <strong>9/11</strong></td></tr>
+          <tr data-attorney="rq"><td>Lee v. IMC Logistics</td><td>Feder</td><td>Split w/ Abramson</td><td>Not yet</td><td><strong>Sep 10, 2026</strong></td><td>Payment due 9/10 — mediation <strong>10/22</strong></td></tr>
+          <tr data-attorney="rq"><td>Touch v. Dublin Toyota</td><td>Feder</td><td>TBD</td><td>Not yet</td><td><strong>Oct 20, 2026</strong></td><td>Payment due 10/20 — mediation <strong>12/1</strong></td></tr>
+          <tr data-attorney="sm"><td>Chavez v. Southland Box</td><td>Feder</td><td>TBD</td><td>Not yet</td><td><strong>Nov 26, 2026</strong></td><td>Payment due 11/26 — mediation <strong>1/7/27</strong></td></tr>
+          <!-- ═══ BOOKED — INVOICED / PENDING ═══ -->
+          <tr data-attorney="sm"><td>Wisk Aero (Acevedo)</td><td>Eve Wagner</td><td>TBD</td><td><span class="badge badge-yellow">Invoiced 2/3</span></td><td>TBD</td><td>Hearing notice sent</td></tr>
           <tr data-attorney="sm"><td>JVS SoCal (Mendez)</td><td>Eve Wagner</td><td>50/50</td><td>TBD</td><td>TBD</td><td>Rescheduling — new date TBD</td></tr>
           <tr data-attorney="rq"><td>Cryoquip (Balas)</td><td>Eve Wagner</td><td>TBD</td><td>TBD</td><td>TBD</td><td>Stip pending — date TBD</td></tr>
+          <!-- ═══ EARLY STAGE — MEDIATOR TBD ═══ -->
+          <tr data-attorney="sm" style="opacity:0.7;"><td>Agpalza v. Mission Wells</td><td>—</td><td>—</td><td>—</td><td>—</td><td>Early — mediator TBD</td></tr>
+          <tr data-attorney="rq" style="opacity:0.7;"><td>Soto v. Control Air</td><td>—</td><td>—</td><td>—</td><td>—</td><td>Early — mediator TBD</td></tr>
+          <tr data-attorney="sm" style="opacity:0.7;"><td>Bowers v. Southwest College</td><td>—</td><td>—</td><td>—</td><td>—</td><td>Early — mediator TBD</td></tr>
+          <tr data-attorney="sm" style="opacity:0.7;"><td>Waddell v. Santa Teresita</td><td>—</td><td>—</td><td>—</td><td>—</td><td>Early — mediator TBD</td></tr>
+          <tr data-attorney="sm" style="opacity:0.7;"><td>Flintridge Prep (Shurance)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>Early — mediator TBD</td></tr>
+          <tr data-attorney="sm" style="opacity:0.7;"><td>Helpline Youth (Mayers)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>Early — mediator TBD</td></tr>
+          <tr data-attorney="rq" style="opacity:0.7;"><td>Front Porch (Rouse-Hasan)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>Early — mediator TBD</td></tr>
+          <tr data-attorney="sm" style="opacity:0.7;"><td>Parker Palm Springs (Diaz)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>Early — mediator TBD</td></tr>
+          <tr data-attorney="sm" style="opacity:0.7;"><td>Cervantez v. Keenan Farms</td><td>—</td><td>—</td><td>—</td><td>—</td><td>Early — mediator TBD</td></tr>
+          <tr data-attorney="sm" style="opacity:0.7;"><td>Caceres v. Thornton Winery</td><td>—</td><td>—</td><td>—</td><td>—</td><td>Early — mediator TBD</td></tr>
+          <tr data-attorney="sm" style="opacity:0.7;"><td>McKee v. Danco Builders</td><td>—</td><td>—</td><td>—</td><td>—</td><td>Early — mediator TBD</td></tr>
+          <tr data-attorney="sm" style="opacity:0.7;"><td>Fox Factory (Sanchez)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>Early — mediator TBD</td></tr>
+          <tr data-attorney="sm" style="opacity:0.7;"><td>Robinson v. Wild Fork Foods</td><td>—</td><td>—</td><td>—</td><td>—</td><td>Early — mediator TBD</td></tr>
         </tbody>
       </table></div>
     </div>

@@ -11,30 +11,7 @@ app.use('/daily-briefing', express.static(path.join(__dirname, 'public', 'daily-
 app.use('/command-center', express.static(path.join(__dirname, 'public', 'command-center')));
 
 app.get('/', (req, res) => {
-  res.send(`
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Blackstone Law Dashboards</title>
-      <style>
-        body { font-family: system-ui, -apple-system, sans-serif; max-width: 600px; margin: 80px auto; padding: 0 20px; color: #1a1a1a; }
-        h1 { font-size: 1.5rem; margin-bottom: 2rem; }
-        a { display: block; padding: 12px 16px; margin-bottom: 8px; background: #f5f5f5; border-radius: 6px; color: #1a1a1a; text-decoration: none; font-weight: 500; }
-        a:hover { background: #e8e8e8; }
-      </style>
-    </head>
-    <body>
-      <h1>Blackstone Law Dashboards</h1>
-      <a href="/command-center" style="background:#1e293b;color:#f1f5f9;font-weight:600;">Active Case Command Center</a>
-      <a href="/mediation-pipeline">Mediation Pipeline Dashboard</a>
-      <a href="/motion-dashboard">Motion Dashboard</a>
-      <a href="/discovery-tracker">Discovery Tracker</a>
-      <a href="/daily-briefing">Daily Case Briefing</a>
-    </body>
-    </html>
-  `);
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.use((req, res) => {

@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RQ Team — Mission Control</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface-light: #334155;
+      --border: #475569;
+      --text: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --accent-blue: #3b82f6;
+      --accent-purple: #a855f7;
+      --accent-teal: #14b8a6;
+      --accent-orange: #f97316;
+      --accent-red: #ef4444;
+      --accent-green: #10b981;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* ===== LAYOUT ===== */
+    .container {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-left h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      letter-spacing: -0.5px;
+    }
+
+    .header-left p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .header-right {
+      text-align: right;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .header-right .refresh-time {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .header-right .team {
+      font-weight: 600;
+      color: var(--text-secondary);
+      letter-spacing: 0.5px;
+    }
+
+    /* ===== PULSE STRIP (4-column) ===== */
+    .pulse-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .pulse-card {
+      background: linear-gradient(135deg, var(--surface-light) 0%, var(--surface) 100%);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+
+    .pulse-card:hover {
+      border-color: var(--accent-blue);
+      transform: translateY(-2px);
+    }
+
+    .pulse-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, currentColor 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .pulse-card:hover::before {
+      opacity: 1;
+    }
+
+    .pulse-card.mediation { color: var(--accent-blue); }
+    .pulse-card.motion { color: var(--accent-orange); }
+    .pulse-card.discovery { color: var(--accent-teal); }
+    .pulse-card.command { color: var(--accent-purple); }
+
+    .pulse-icon {
+      font-size: 1.75rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .pulse-metric {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      letter-spacing: -0.5px;
+    }
+
+    .pulse-label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      opacity: 0.9;
+    }
+
+    .pulse-detail {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .pulse-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: currentColor;
+      opacity: 0.8;
+      transition: opacity 0.2s ease;
+    }
+
+    .pulse-link:hover {
+      opacity: 1;
+    }
+
+    .pulse-link::after {
+      content: '→';
+      transition: transform 0.2s ease;
+    }
+
+    .pulse-link:hover::after {
+      transform: translateX(3px);
+    }
+
+    /* ===== MAIN GRID (2 columns) ===== */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    /* ===== TIMELINE ===== */
+    .timeline {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+    }
+
+    .timeline h2 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .timeline h2::before {
+      content: '📅';
+      font-size: 1.25rem;
+    }
+
+    .timeline-items {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 1rem;
+      padding: 0.75rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 0.5rem;
+      border-left: 3px solid var(--border);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .timeline-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .timeline-item.motion { border-left-color: var(--accent-orange); }
+    .timeline-item.mediation { border-left-color: var(--accent-purple); }
+    .timeline-item.discovery { border-left-color: var(--accent-teal); }
+    .timeline-item.urgent { border-left-color: var(--accent-red); }
+
+    .timeline-date {
+      font-weight: 700;
+      font-size: 0.875rem;
+      min-width: 50px;
+      color: var(--text-secondary);
+    }
+
+    .timeline-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .timeline-case {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+      color: var(--text);
+    }
+
+    .timeline-event {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      margin-top: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .timeline-badge.motion {
+      background: rgba(249, 115, 22, 0.2);
+      color: var(--accent-orange);
+    }
+
+    .timeline-badge.mediation {
+      background: rgba(168, 85, 247, 0.2);
+      color: var(--accent-purple);
+    }
+
+    .timeline-badge.discovery {
+      background: rgba(20, 184, 166, 0.2);
+      color: var(--accent-teal);
+    }
+
+    .timeline-badge.urgent {
+      background: rgba(239, 68, 68, 0.2);
+      color: var(--accent-red);
+    }
+
+    /* ===== RIGHT COLUMN ===== */
+    .right-column {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    /* ===== SETTLEMENT SCORECARD ===== */
+    .scorecard {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+    }
+
+    .scorecard h2 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .scorecard h2::before {
+      content: '💰';
+      font-size: 1.25rem;
+    }
+
+    .recovery-total {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent-green);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.5px;
+    }
+
+    .recovery-bar {
+      width: 100%;
+      height: 8px;
+      background: var(--surface-light);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+
+    .recovery-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
+      width: 78%;
+      border-radius: 4px;
+    }
+
+    .top-settlements {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .settlement-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .settlement-case {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .settlement-amount {
+      color: var(--accent-green);
+      font-weight: 700;
+    }
+
+    .scorecard-stats {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .scorecard-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--accent-blue);
+      opacity: 0.8;
+      transition: opacity 0.2s ease;
+    }
+
+    .scorecard-link:hover {
+      opacity: 1;
+    }
+
+    /* ===== PORTFOLIO SNAPSHOT ===== */
+    .snapshot {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+    }
+
+    .snapshot h2 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .snapshot h2::before {
+      content: '📊';
+      font-size: 1.25rem;
+    }
+
+    .snapshot-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .snapshot-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      text-align: center;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .snapshot-card:hover {
+      border-color: var(--accent-blue);
+      background: rgba(59, 130, 246, 0.1);
+    }
+
+    .snapshot-number {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--accent-blue);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.5px;
+    }
+
+    .snapshot-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ===== DASHBOARD NAV STRIP ===== */
+    .nav-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .nav-tile {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: linear-gradient(135deg, var(--surface-light) 0%, var(--surface) 100%);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.2s ease;
+      min-height: 140px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-tile::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .nav-tile:hover {
+      border-color: var(--accent-blue);
+      transform: translateY(-4px);
+    }
+
+    .nav-tile:hover::before {
+      opacity: 1;
+    }
+
+    .nav-tile-icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .nav-tile-title {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .nav-tile-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .nav-tile-arrow {
+      align-self: flex-start;
+      color: var(--accent-blue);
+      font-weight: 700;
+      font-size: 1.25rem;
+      opacity: 0.6;
+      transition: opacity 0.2s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .nav-tile:hover .nav-tile-arrow {
+      opacity: 1;
+      transform: translateX(3px);
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1200px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .right-column {
+        flex-direction: column;
+      }
+
+      .pulse-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+
+      .header {
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .header-right {
+        text-align: left;
+      }
+
+      .header-left h1 {
+        font-size: 1.5rem;
+      }
+
+      .pulse-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .snapshot-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-item {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- HEADER -->
+    <div class="header">
+      <div class="header-left">
+        <h1>RQ Team — Mission Control</h1>
+        <p>Blackstone Law, APC — Wage & Hour Litigation Command Surface</p>
+      </div>
+      <div class="header-right">
+        <span class="refresh-time">Last refresh: April 2, 2026</span>
+        <span class="team">RQ · SM · JM · KA</span>
+      </div>
+    </div>
+
+    <!-- PULSE STRIP -->
+    <div class="pulse-strip">
+      <a href="/mediation-pipeline" class="pulse-card mediation" style="text-decoration: none; color: inherit;">
+        <span class="pulse-icon">💰</span>
+        <div class="pulse-metric">$10.4M</div>
+        <div class="pulse-label">Total Recovery</div>
+        <div class="pulse-detail">8 settled · 18 booked · 40 pipeline</div>
+        <span class="pulse-link">View Dashboard</span>
+      </a>
+
+      <a href="/motion-dashboard" class="pulse-card motion" style="text-decoration: none; color: inherit;">
+        <span class="pulse-icon">⚡</span>
+        <div class="pulse-metric">6</div>
+        <div class="pulse-label">Urgent Deadlines</div>
+        <div class="pulse-detail">14 active · 60% MTCA win rate</div>
+        <span class="pulse-link">View Dashboard</span>
+      </a>
+
+      <a href="/discovery-tracker" class="pulse-card discovery" style="text-decoration: none; color: inherit;">
+        <span class="pulse-icon">📋</span>
+        <div class="pulse-metric">100</div>
+        <div class="pulse-label">Cases Tracked</div>
+        <div class="pulse-detail">8 awaiting · 10 follow-up · 7 upcoming</div>
+        <span class="pulse-link">View Dashboard</span>
+      </a>
+
+      <a href="/command-center" class="pulse-card command" style="text-decoration: none; color: inherit;">
+        <span class="pulse-icon">🎯</span>
+        <div class="pulse-metric">Active</div>
+        <div class="pulse-label">Portfolio Surface</div>
+        <div class="pulse-detail">Attention-driven operating view</div>
+        <span class="pulse-link">View Dashboard</span>
+      </a>
+    </div>
+
+    <!-- MAIN GRID -->
+    <div class="main-grid">
+      <!-- LEFT: TIMELINE -->
+      <div class="timeline">
+        <h2>14-Day Action Timeline</h2>
+        <div class="timeline-items">
+          <div class="timeline-item urgent">
+            <div class="timeline-date">Apr 2</div>
+            <div class="timeline-content">
+              <div class="timeline-case">Conant v. Evergreen</div>
+              <div class="timeline-event">MTCA Opposition due TODAY</div>
+              <span class="timeline-badge urgent">URGENT</span>
+            </div>
+          </div>
+
+          <div class="timeline-item mediation">
+            <div class="timeline-date">Apr 3</div>
+            <div class="timeline-content">
+              <div class="timeline-case">Bassell v. Golden Rain</div>
+              <div class="timeline-event">Mediation scheduled</div>
+              <span class="timeline-badge mediation">3 DAYS</span>
+            </div>
+          </div>
+
+          <div class="timeline-item motion">
+            <div class="timeline-date">Apr 6</div>
+            <div class="timeline-content">
+              <div class="timeline-case">Conant v. Evergreen</div>
+              <div class="timeline-event">Motion to Remand filing due</div>
+              <span class="timeline-badge motion">MOTION</span>
+            </div>
+          </div>
+
+          <div class="timeline-item motion">
+            <div class="timeline-date">Apr 9</div>
+            <div class="timeline-content">
+              <div class="timeline-case">Edmiston v. Weatherford</div>
+              <div class="timeline-event">MTCA Opposition due</div>
+              <span class="timeline-badge motion">MOTION</span>
+            </div>
+          </div>
+
+          <div class="timeline-item motion">
+            <div class="timeline-date">Apr 9</div>
+            <div class="timeline-content">
+              <div class="timeline-case">Caleres / Ramirez</div>
+              <div class="timeline-event">Consolidation + Demurrer Opposition due</div>
+              <span class="timeline-badge motion">MOTION</span>
+            </div>
+          </div>
+
+          <div class="timeline-item discovery">
+            <div class="timeline-date">Apr 9</div>
+            <div class="timeline-content">
+              <div class="timeline-case">Truitt / Carias-Paredes</div>
+              <div class="timeline-event">MTC Deadline</div>
+              <span class="timeline-badge discovery">DISCOVERY</span>
+            </div>
+          </div>
+
+          <div class="timeline-item discovery">
+            <div class="timeline-date">Apr 14</div>
+            <div class="timeline-content">
+              <div class="timeline-case">Outdoor Dimensions</div>
+              <div class="timeline-event">MTC Deadline</div>
+              <span class="timeline-badge discovery">DISCOVERY</span>
+            </div>
+          </div>
+
+          <div class="timeline-item discovery">
+            <div class="timeline-date">Apr 16</div>
+            <div class="timeline-content">
+              <div class="timeline-case">Cargomatic (Duenas)</div>
+              <div class="timeline-event">RFP MTC Deadline</div>
+              <span class="timeline-badge discovery">DISCOVERY</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="right-column">
+        <!-- SETTLEMENT SCORECARD -->
+        <div class="scorecard">
+          <h2>Settlement Scorecard</h2>
+          <div class="recovery-total">$10.4M</div>
+          <div class="recovery-bar">
+            <div class="recovery-bar-fill"></div>
+          </div>
+          <div class="top-settlements">
+            <div class="settlement-item">
+              <span class="settlement-case">Guardant Health</span>
+              <span class="settlement-amount">$2.65M</span>
+            </div>
+            <div class="settlement-item">
+              <span class="settlement-case">Liberty Utilities</span>
+              <span class="settlement-amount">$1.8M</span>
+            </div>
+            <div class="settlement-item">
+              <span class="settlement-case">Halrec</span>
+              <span class="settlement-amount">$1.69M</span>
+            </div>
+          </div>
+          <div class="scorecard-stats">
+            8 settled since June 2025 · Avg settlement $1.3M
+          </div>
+          <a href="/mediation-pipeline" class="scorecard-link">View all settlements →</a>
+        </div>
+
+        <!-- PORTFOLIO SNAPSHOT -->
+        <div class="snapshot">
+          <h2>Portfolio Snapshot</h2>
+          <div class="snapshot-grid">
+            <a href="/mediation-pipeline" class="snapshot-card" style="text-decoration: none; color: inherit;">
+              <div class="snapshot-number">18</div>
+              <div class="snapshot-label">Mediations Booked</div>
+            </a>
+            <a href="/motion-dashboard" class="snapshot-card" style="text-decoration: none; color: inherit;">
+              <div class="snapshot-number">14</div>
+              <div class="snapshot-label">Active Motions</div>
+            </a>
+            <a href="/discovery-tracker" class="snapshot-card" style="text-decoration: none; color: inherit;">
+              <div class="snapshot-number">47</div>
+              <div class="snapshot-label">Pre-Discovery</div>
+            </a>
+            <a href="/discovery-tracker" class="snapshot-card" style="text-decoration: none; color: inherit;">
+              <div class="snapshot-number">8</div>
+              <div class="snapshot-label">Awaiting Response</div>
+            </a>
+            <a href="/command-center" class="snapshot-card" style="text-decoration: none; color: inherit;">
+              <div class="snapshot-number">14</div>
+              <div class="snapshot-label">CMCs (90d)</div>
+            </a>
+            <a href="/command-center" class="snapshot-card" style="text-decoration: none; color: inherit;">
+              <div class="snapshot-number">4</div>
+              <div class="snapshot-label">Arb Track</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DASHBOARD NAV STRIP -->
+    <div class="nav-strip">
+      <a href="/command-center" class="nav-tile" style="text-decoration: none; color: inherit;">
+        <div>
+          <div class="nav-tile-icon">🎯</div>
+          <div class="nav-tile-title">Command Center</div>
+          <div class="nav-tile-desc">Portfolio management & attention-driven view</div>
+        </div>
+        <div class="nav-tile-arrow">→</div>
+      </a>
+
+      <a href="/mediation-pipeline" class="nav-tile" style="text-decoration: none; color: inherit;">
+        <div>
+          <div class="nav-tile-icon">💰</div>
+          <div class="nav-tile-title">Mediation Pipeline</div>
+          <div class="nav-tile-desc">Settlement tracking & recovery analysis</div>
+        </div>
+        <div class="nav-tile-arrow">→</div>
+      </a>
+
+      <a href="/motion-dashboard" class="nav-tile" style="text-decoration: none; color: inherit;">
+        <div>
+          <div class="nav-tile-icon">⚡</div>
+          <div class="nav-tile-title">Motion Dashboard</div>
+          <div class="nav-tile-desc">Deadlines, filings & procedural tracking</div>
+        </div>
+        <div class="nav-tile-arrow">→</div>
+      </a>
+
+      <a href="/discovery-tracker" class="nav-tile" style="text-decoration: none; color: inherit;">
+        <div>
+          <div class="nav-tile-icon">📋</div>
+          <div class="nav-tile-title">Discovery Tracker</div>
+          <div class="nav-tile-desc">Document requests & deadline management</div>
+        </div>
+        <div class="nav-tile-arrow">→</div>
+      </a>
+
+      <a href="/daily-briefing" class="nav-tile" style="text-decoration: none; color: inherit;">
+        <div>
+          <div class="nav-tile-icon">📰</div>
+          <div class="nav-tile-title">Daily Briefing</div>
+          <div class="nav-tile-desc">Morning standup & action items</div>
+        </div>
+        <div class="nav-tile-arrow">→</div>
+      </a>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      Mission Control — Blackstone Law, APC | Dashboards auto-refresh on scan schedule
+    </div>
+  </div>
+</body>
+</html>

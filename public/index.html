@@ -676,7 +676,7 @@ function buildTicker(){
     var halfWidth=0;
     var items=track.children;
     for(var i=0;i<items.length/2;i++) halfWidth+=items[i].offsetWidth;
-    var pxPerSec=150; // pixels per second scroll speed
+    var pxPerSec=100; // pixels per second scroll speed
     var duration=halfWidth/pxPerSec;
     var style=document.createElement('style');
     style.textContent='@keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-'+halfWidth+'px)}}';

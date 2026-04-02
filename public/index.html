@@ -37,13 +37,12 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 /* ═══ TEAM TICKER ═══ */
 .ticker-wrap{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0;margin-bottom:24px;overflow:hidden;position:relative;height:44px}
 .ticker-label{position:absolute;left:0;top:0;bottom:0;z-index:2;display:flex;align-items:center;padding:0 14px;background:linear-gradient(90deg,var(--surface) 80%,transparent);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--purple);white-space:nowrap}
-.ticker-track{display:flex;animation:scroll 22s linear infinite;padding-left:120px}
+.ticker-track{display:flex;padding-left:120px;will-change:transform}
 .ticker-track:hover{animation-play-state:paused}
 .ticker-item{white-space:nowrap;padding:12px 40px;font-size:.82rem;color:var(--muted);flex-shrink:0}
 .ticker-item strong{color:var(--text)}
 .ticker-item .q{color:var(--blue);font-style:italic}
 .ticker-item .src{color:var(--dim);font-size:.7rem;margin-left:8px}
-@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 /* ═══ TOP METRICS (4 ring cards) ═══ */
 .rings{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
@@ -235,65 +234,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 <!-- ═══ TEAM TICKER ═══ -->
 <div class="ticker-wrap">
   <div class="ticker-label">TEAM FEED</div>
-  <div class="ticker-track" id="ticker">
-    <div class="ticker-item">&#128520; <strong>Shelby:</strong> <span class="q">"My solution to that one that I did not post for everyone to see would be choosing violence, aka arb terrorism"</span> <span class="src">&mdash; Shelby's signature move, 11/21</span></div>
-    <div class="ticker-item">&#129302; <strong>Ryan:</strong> <span class="q">"I'm just dabbling in AI coding and app development, but in this case it might come in handy!"</span> <span class="src">&mdash; understatement of the year, 3/2</span></div>
-    <div class="ticker-item">&#128170; <strong>Astrid:</strong> <span class="q">"I feel like I'm failing everyone HAHA I promise my RD isn't always like this! Thanks for your patience"</span> <span class="src">&mdash; narrator: she was not failing anyone, 9/24</span></div>
-    <div class="ticker-item">&#128526; <strong>Joe:</strong> <span class="q">"Checked in for the LA Solar Hearing. Very excited to see how Judge Traber and OC interact"</span> <span class="src">&mdash; courtroom nerd energy, 2/13</span></div>
-    <div class="ticker-item">&#128081; <strong>Karen:</strong> <span class="q">"I updated the entire excel sheet and added my call notes... I also let Astrid know she can take this off her to-do list"</span> <span class="src">&mdash; Karen running the show, 4/2</span></div>
-    <div class="ticker-item">&#129504; <strong>Ryan</strong> to Joe: <span class="q">"we can hop on early if you're ready, since our brains are already synced up, haha"</span> <span class="src">&mdash; the RQ-JM hive mind, 11/19</span></div>
-    <div class="ticker-item">&#128293; <strong>Shelby:</strong> <span class="q">"hahahah they lose and still have to suffer arb terrorism"</span> <span class="src">&mdash; no mercy, 2/6</span></div>
-    <div class="ticker-item">&#127925; <strong>Astrid:</strong> <span class="q">"I do like a lot Adele, Beyonce and Taylor Swift. But don't think I'm a paranoid swiftie"</span> <span class="src">&mdash; she's a swiftie, 10/2</span></div>
-    <div class="ticker-item">&#128064; <strong>Ryan:</strong> <span class="q">"Sorry I jumped in, he was getting squirley, haha"</span> <span class="src">&mdash; senior attorney instincts, 12/5</span></div>
-    <div class="ticker-item">&#128525; <strong>Shelby:</strong> <span class="q">"I played around with the mediation tracker last night and I am honestly so excited about it"</span> <span class="src">&mdash; dashboard superfan, 3/31</span></div>
-    <div class="ticker-item">&#128514; <strong>Astrid:</strong> <span class="q">"LOL I was about to send a GIF but then I saw OC sent the joint report, so I started getting the POS ready instead hahaha"</span> <span class="src">&mdash; GIF interrupted by professionalism, 10/17</span></div>
-    <div class="ticker-item">&#128588; <strong>Ryan:</strong> <span class="q">"Yes, please keep using FU Karen Arellano, I was just kidding about the f/u. We all know what they both mean and what they really mean, haha"</span> <span class="src">&mdash; Follow Up vs. FU: a love story, 10/29</span></div>
-    <div class="ticker-item">&#128170; <strong>Joe:</strong> <span class="q">"You're not failing anyone! Tech issues happen. There's nothing to worry about"</span> <span class="src">&mdash; Joe being everyone's rock, 9/24</span></div>
-    <div class="ticker-item">&#128293; <strong>Guardant Health &mdash; $2.65M</strong> &mdash; largest single settlement (Eve Wagner, 2/19/26)</div>
-    <div class="ticker-item">&#129315; <strong>Ryan</strong> to Joe: <span class="q">"I am happy to give you that experience Joe, you'll either thank me or never forgive me for it, maybe both, haha"</span> <span class="src">&mdash; mentorship by fire, 11/21</span></div>
-    <div class="ticker-item">&#128517; <strong>Joe:</strong> <span class="q">"Rain check??"</span> <span class="src">&mdash; Joe's response to Ryan's ominous offer, 11/21</span></div>
-    <div class="ticker-item">&#128293; <strong>Ryan:</strong> <span class="q">"Don't go flipping our tentative, P.J.!"</span> <span class="src">&mdash; pre-oral-argument anxiety, 1/6</span></div>
-    <div class="ticker-item">&#127758; <strong>Astrid:</strong> <span class="q">"Tegucigalpa is one of the 'coldest' cities here hahaha just imagine what San Pedro Sula is like!"</span> <span class="src">&mdash; proud Honduran energy, 11/5</span></div>
-    <div class="ticker-item">&#128640; <strong>Ryan:</strong> <span class="q">"Shelby, your energy was contagious &mdash; makes it easy to get excited about Eve! Thank you for making us the Eve power team!"</span> <span class="src">&mdash; team hype man, 12/17</span></div>
-    <div class="ticker-item">&#9889; <strong>MTCA Win Rate: 60%</strong> &mdash; 6W / 4L decided &mdash; keep climbing</div>
-    <div class="ticker-item">&#128526; <strong>Shelby:</strong> <span class="q">"Cue me being excited to not do a call for a second and then realizing all my calls today are with OC &#9785;"</span> <span class="src">&mdash; the five stages of calendar grief, 1/29</span></div>
-    <div class="ticker-item">&#128640; <strong>Astrid:</strong> <span class="q">"HAHAHAAHA I have to confess that I was actually expecting this"</span> <span class="src">&mdash; on Ryan's YouTube channel joke, 12/9</span></div>
-    <div class="ticker-item">&#128176; <strong>Ryan:</strong> <span class="q">"That's a real good news/bad news situation, haha"</span> <span class="src">&mdash; the eternal Ryan framing, 3/23</span></div>
-    <div class="ticker-item">&#128155; <strong>Karen:</strong> <span class="q">"Hello! Excited to be here"</span> <span class="src">&mdash; Karen's first message to the team, 9/22</span></div>
-    <div class="ticker-item">&#129302; <strong>Ryan:</strong> <span class="q">"I am still learning how the whole PTO thing works in Paylocity so I can't help you much with submitting the request, haha"</span> <span class="src">&mdash; managing attorney things, 12/29</span></div>
-    <div class="ticker-item">&#128588; <strong>Shelby:</strong> <span class="q">"Haha love it, true spirit of teamwork"</span> <span class="src">&mdash; Shelby's seal of approval, 9/24</span></div>
-    <div class="ticker-item">&#127775; <strong>Astrid:</strong> <span class="q">"Happy New Year! Here's to 2026 bringing success, health and happiness with loved ones. Excited to continue working together!"</span> <span class="src">&mdash; team cheerleader, 12/31</span></div>
-    <div class="ticker-item">&#128187; <strong>Ryan</strong> to team: <span class="q">"Open up a blank Word document and save it somewhere you can find easily. Keep it open all the time..."</span> <span class="src">&mdash; the gospel of command center notes, 4/2</span></div>
-    <!-- duplicate for seamless scroll -->
-    <div class="ticker-item">&#128520; <strong>Shelby:</strong> <span class="q">"My solution to that one that I did not post for everyone to see would be choosing violence, aka arb terrorism"</span> <span class="src">&mdash; Shelby's signature move, 11/21</span></div>
-    <div class="ticker-item">&#129302; <strong>Ryan:</strong> <span class="q">"I'm just dabbling in AI coding and app development, but in this case it might come in handy!"</span> <span class="src">&mdash; understatement of the year, 3/2</span></div>
-    <div class="ticker-item">&#128170; <strong>Astrid:</strong> <span class="q">"I feel like I'm failing everyone HAHA I promise my RD isn't always like this! Thanks for your patience"</span> <span class="src">&mdash; narrator: she was not failing anyone, 9/24</span></div>
-    <div class="ticker-item">&#128526; <strong>Joe:</strong> <span class="q">"Checked in for the LA Solar Hearing. Very excited to see how Judge Traber and OC interact"</span> <span class="src">&mdash; courtroom nerd energy, 2/13</span></div>
-    <div class="ticker-item">&#128081; <strong>Karen:</strong> <span class="q">"I updated the entire excel sheet and added my call notes... I also let Astrid know she can take this off her to-do list"</span> <span class="src">&mdash; Karen running the show, 4/2</span></div>
-    <div class="ticker-item">&#129504; <strong>Ryan</strong> to Joe: <span class="q">"we can hop on early if you're ready, since our brains are already synced up, haha"</span> <span class="src">&mdash; the RQ-JM hive mind, 11/19</span></div>
-    <div class="ticker-item">&#128293; <strong>Shelby:</strong> <span class="q">"hahahah they lose and still have to suffer arb terrorism"</span> <span class="src">&mdash; no mercy, 2/6</span></div>
-    <div class="ticker-item">&#127925; <strong>Astrid:</strong> <span class="q">"I do like a lot Adele, Beyonce and Taylor Swift. But don't think I'm a paranoid swiftie"</span> <span class="src">&mdash; she's a swiftie, 10/2</span></div>
-    <div class="ticker-item">&#128064; <strong>Ryan:</strong> <span class="q">"Sorry I jumped in, he was getting squirley, haha"</span> <span class="src">&mdash; senior attorney instincts, 12/5</span></div>
-    <div class="ticker-item">&#128525; <strong>Shelby:</strong> <span class="q">"I played around with the mediation tracker last night and I am honestly so excited about it"</span> <span class="src">&mdash; dashboard superfan, 3/31</span></div>
-    <div class="ticker-item">&#128514; <strong>Astrid:</strong> <span class="q">"LOL I was about to send a GIF but then I saw OC sent the joint report, so I started getting the POS ready instead hahaha"</span> <span class="src">&mdash; GIF interrupted by professionalism, 10/17</span></div>
-    <div class="ticker-item">&#128588; <strong>Ryan:</strong> <span class="q">"Yes, please keep using FU Karen Arellano, I was just kidding about the f/u. We all know what they both mean and what they really mean, haha"</span> <span class="src">&mdash; Follow Up vs. FU: a love story, 10/29</span></div>
-    <div class="ticker-item">&#128170; <strong>Joe:</strong> <span class="q">"You're not failing anyone! Tech issues happen. There's nothing to worry about"</span> <span class="src">&mdash; Joe being everyone's rock, 9/24</span></div>
-    <div class="ticker-item">&#128293; <strong>Guardant Health &mdash; $2.65M</strong> &mdash; largest single settlement (Eve Wagner, 2/19/26)</div>
-    <div class="ticker-item">&#129315; <strong>Ryan</strong> to Joe: <span class="q">"I am happy to give you that experience Joe, you'll either thank me or never forgive me for it, maybe both, haha"</span> <span class="src">&mdash; mentorship by fire, 11/21</span></div>
-    <div class="ticker-item">&#128517; <strong>Joe:</strong> <span class="q">"Rain check??"</span> <span class="src">&mdash; Joe's response to Ryan's ominous offer, 11/21</span></div>
-    <div class="ticker-item">&#128293; <strong>Ryan:</strong> <span class="q">"Don't go flipping our tentative, P.J.!"</span> <span class="src">&mdash; pre-oral-argument anxiety, 1/6</span></div>
-    <div class="ticker-item">&#127758; <strong>Astrid:</strong> <span class="q">"Tegucigalpa is one of the 'coldest' cities here hahaha just imagine what San Pedro Sula is like!"</span> <span class="src">&mdash; proud Honduran energy, 11/5</span></div>
-    <div class="ticker-item">&#128640; <strong>Ryan:</strong> <span class="q">"Shelby, your energy was contagious &mdash; makes it easy to get excited about Eve! Thank you for making us the Eve power team!"</span> <span class="src">&mdash; team hype man, 12/17</span></div>
-    <div class="ticker-item">&#9889; <strong>MTCA Win Rate: 60%</strong> &mdash; 6W / 4L decided &mdash; keep climbing</div>
-    <div class="ticker-item">&#128526; <strong>Shelby:</strong> <span class="q">"Cue me being excited to not do a call for a second and then realizing all my calls today are with OC &#9785;"</span> <span class="src">&mdash; the five stages of calendar grief, 1/29</span></div>
-    <div class="ticker-item">&#128640; <strong>Astrid:</strong> <span class="q">"HAHAHAAHA I have to confess that I was actually expecting this"</span> <span class="src">&mdash; on Ryan's YouTube channel joke, 12/9</span></div>
-    <div class="ticker-item">&#128176; <strong>Ryan:</strong> <span class="q">"That's a real good news/bad news situation, haha"</span> <span class="src">&mdash; the eternal Ryan framing, 3/23</span></div>
-    <div class="ticker-item">&#128155; <strong>Karen:</strong> <span class="q">"Hello! Excited to be here"</span> <span class="src">&mdash; Karen's first message to the team, 9/22</span></div>
-    <div class="ticker-item">&#129302; <strong>Ryan:</strong> <span class="q">"I am still learning how the whole PTO thing works in Paylocity so I can't help you much with submitting the request, haha"</span> <span class="src">&mdash; managing attorney things, 12/29</span></div>
-    <div class="ticker-item">&#128588; <strong>Shelby:</strong> <span class="q">"Haha love it, true spirit of teamwork"</span> <span class="src">&mdash; Shelby's seal of approval, 9/24</span></div>
-    <div class="ticker-item">&#127775; <strong>Astrid:</strong> <span class="q">"Happy New Year! Here's to 2026 bringing success, health and happiness with loved ones. Excited to continue working together!"</span> <span class="src">&mdash; team cheerleader, 12/31</span></div>
-    <div class="ticker-item">&#128187; <strong>Ryan</strong> to team: <span class="q">"Open up a blank Word document and save it somewhere you can find easily. Keep it open all the time..."</span> <span class="src">&mdash; the gospel of command center notes, 4/2</span></div>
-  </div>
+  <div class="ticker-track" id="ticker"></div>
 </div>
 
 <!-- ═══ RING METRICS ═══ -->
@@ -679,6 +620,71 @@ function animateChaos(){
   },level.n*100);
 }
 
+// ═══ TICKER ENGINE ═══
+function buildTicker(){
+  var quotes=[
+    {e:'\u{1F608}',h:'Shelby:',q:'My solution to that one that I did not post for everyone to see would be choosing violence, aka arb terrorism',s:"Shelby's signature move, 11/21"},
+    {e:'\u{1F916}',h:'Ryan:',q:"I'm just dabbling in AI coding and app development, but in this case it might come in handy!",s:'understatement of the year, 3/2'},
+    {e:'\u{1F4AA}',h:'Astrid:',q:"I feel like I'm failing everyone HAHA I promise my RD isn't always like this! Thanks for your patience",s:'narrator: she was not failing anyone, 9/24'},
+    {e:'\u{1F60E}',h:'Joe:',q:'Checked in for the LA Solar Hearing. Very excited to see how Judge Traber and OC interact',s:'courtroom nerd energy, 2/13'},
+    {e:'\u{1F451}',h:'Karen:',q:'I updated the entire excel sheet and added my call notes... I also let Astrid know she can take this off her to-do list',s:'Karen running the show, 4/2'},
+    {e:'\u{1F9E0}',h:'Ryan to Joe:',q:"we can hop on early if you're ready, since our brains are already synced up, haha",s:'the RQ-JM hive mind, 11/19'},
+    {e:'\u{1F525}',h:'Shelby:',q:'hahahah they lose and still have to suffer arb terrorism',s:'no mercy, 2/6'},
+    {e:'\u{1F3B5}',h:'Astrid:',q:"I do like a lot Adele, Beyonce and Taylor Swift. But don't think I'm a paranoid swiftie",s:"she's a swiftie, 10/2"},
+    {e:'\u{1F440}',h:'Ryan:',q:'Sorry I jumped in, he was getting squirley, haha',s:'senior attorney instincts, 12/5'},
+    {e:'\u{1F60D}',h:'Shelby:',q:'I played around with the mediation tracker last night and I am honestly so excited about it',s:'dashboard superfan, 3/31'},
+    {e:'\u{1F602}',h:'Astrid:',q:'LOL I was about to send a GIF but then I saw OC sent the joint report, so I started getting the POS ready instead hahaha',s:'GIF interrupted by professionalism, 10/17'},
+    {e:'\u{1F64C}',h:'Ryan:',q:'Yes, please keep using FU Karen Arellano, I was just kidding about the f/u. We all know what they both mean and what they really mean, haha',s:'Follow Up vs. FU: a love story, 10/29'},
+    {e:'\u{1F4AA}',h:'Joe:',q:"You're not failing anyone! Tech issues happen. There's nothing to worry about",s:"Joe being everyone's rock, 9/24"},
+    {e:'\u{1F525}',h:'Guardant Health \u2014 $2.65M',q:null,s:'largest single settlement (Eve Wagner, 2/19/26)'},
+    {e:'\u{1F923}',h:'Ryan to Joe:',q:"I am happy to give you that experience Joe, you'll either thank me or never forgive me for it, maybe both, haha",s:'mentorship by fire, 11/21'},
+    {e:'\u{1F605}',h:'Joe:',q:'Rain check??',s:"Joe's response to Ryan's ominous offer, 11/21"},
+    {e:'\u{1F525}',h:'Ryan:',q:"Don't go flipping our tentative, P.J.!",s:'pre-oral-argument anxiety, 1/6'},
+    {e:'\u{1F30E}',h:'Astrid:',q:"Tegucigalpa is one of the 'coldest' cities here hahaha just imagine what San Pedro Sula is like!",s:'proud Honduran energy, 11/5'},
+    {e:'\u{1F680}',h:'Ryan:',q:"Shelby, your energy was contagious \u2014 makes it easy to get excited about Eve! Thank you for making us the Eve power team!",s:'team hype man, 12/17'},
+    {e:'\u26A1',h:'MTCA Win Rate: 60%',q:null,s:'6W / 4L decided \u2014 keep climbing'},
+    {e:'\u{1F60E}',h:'Shelby:',q:'Cue me being excited to not do a call for a second and then realizing all my calls today are with OC \u2639',s:'the five stages of calendar grief, 1/29'},
+    {e:'\u{1F680}',h:'Astrid:',q:'HAHAHAAHA I have to confess that I was actually expecting this',s:"on Ryan's YouTube channel joke, 12/9"},
+    {e:'\u{1F4B0}',h:'Ryan:',q:"That's a real good news/bad news situation, haha",s:'the eternal Ryan framing, 3/23'},
+    {e:'\u{1F49B}',h:'Karen:',q:'Hello! Excited to be here',s:"Karen's first message to the team, 9/22"},
+    {e:'\u{1F916}',h:'Ryan:',q:"I am still learning how the whole PTO thing works in Paylocity so I can't help you much with submitting the request, haha",s:'managing attorney things, 12/29'},
+    {e:'\u{1F64C}',h:'Shelby:',q:'Haha love it, true spirit of teamwork',s:"Shelby's seal of approval, 9/24"},
+    {e:'\u{1F31F}',h:'Astrid:',q:"Happy New Year! Here's to 2026 bringing success, health and happiness with loved ones. Excited to continue working together!",s:'team cheerleader, 12/31'},
+    {e:'\u{1F4BB}',h:'Ryan to team:',q:'Open up a blank Word document and save it somewhere you can find easily. Keep it open all the time...',s:'the gospel of command center notes, 4/2'}
+  ];
+  // Fisher-Yates shuffle
+  for(var i=quotes.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=quotes[i];quotes[i]=quotes[j];quotes[j]=t;}
+  // Build HTML for one set
+  function makeItem(q){
+    var d=document.createElement('div');
+    d.className='ticker-item';
+    if(q.q){
+      d.innerHTML=q.e+' <strong>'+q.h+'</strong> <span class="q">\u201C'+q.q+'\u201D</span> <span class="src">\u2014 '+q.s+'</span>';
+    }else{
+      d.innerHTML=q.e+' <strong>'+q.h+'</strong> \u2014 '+q.s;
+    }
+    return d;
+  }
+  var track=document.getElementById('ticker');
+  track.innerHTML='';
+  // First set
+  for(var i=0;i<quotes.length;i++) track.appendChild(makeItem(quotes[i]));
+  // Duplicate for seamless loop
+  for(var i=0;i<quotes.length;i++) track.appendChild(makeItem(quotes[i]));
+  // Measure half-width (one set) and create pixel-based animation
+  requestAnimationFrame(function(){
+    var halfWidth=0;
+    var items=track.children;
+    for(var i=0;i<items.length/2;i++) halfWidth+=items[i].offsetWidth;
+    var pxPerSec=150; // pixels per second scroll speed
+    var duration=halfWidth/pxPerSec;
+    var style=document.createElement('style');
+    style.textContent='@keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-'+halfWidth+'px)}}';
+    document.head.appendChild(style);
+    track.style.animation='tickerScroll '+duration+'s linear infinite';
+  });
+}
+
 // ═══ INIT ═══
 window.addEventListener('load',function(){
   setTimeout(animateRings,200);
@@ -686,6 +692,7 @@ window.addEventListener('load',function(){
   setTimeout(animateBars,300);
   setTimeout(animateCounter,200);
   setTimeout(animateChaos,600);
+  buildTicker();
 });
 </script>
 </body>

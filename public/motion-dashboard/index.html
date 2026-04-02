@@ -123,6 +123,29 @@ tbody tr:last-child td{border-bottom:none;}
 .notes ul{list-style:none;padding:0;}
 .notes li{padding:1px 0;} .notes li::before{content:'\2022';color:var(--accent);margin-right:7px;}
 
+
+/* ── Arbitration Track ── */
+.arb-phase{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:10px;font-size:10px;font-weight:600;white-space:nowrap;}
+.arb-phase .phase-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.arb-demand{background:var(--accent-dim);color:var(--accent);}
+.arb-demand .phase-dot{background:var(--accent);}
+.arb-discovery{background:var(--orange-dim);color:var(--orange);}
+.arb-discovery .phase-dot{background:var(--orange);}
+.arb-hearing-set{background:var(--yellow-dim);color:var(--yellow);}
+.arb-hearing-set .phase-dot{background:var(--yellow);}
+.arb-hearing-done{background:var(--purple-dim);color:var(--purple);}
+.arb-hearing-done .phase-dot{background:var(--purple);}
+.arb-award{background:var(--green-dim);color:var(--green);}
+.arb-award .phase-dot{background:var(--green);}
+.arb-pre{background:rgba(139,143,163,.12);color:var(--text-dim);}
+.arb-pre .phase-dot{background:var(--text-dim);}
+.arb-pipeline{display:flex;gap:3px;align-items:center;}
+.arb-pip-dot{width:10px;height:10px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;}
+.arb-pip-dot.done{border-color:var(--green);background:var(--green);}
+.arb-pip-dot.active{border-color:var(--accent);background:var(--accent);box-shadow:0 0 6px rgba(108,140,255,.4);}
+.arb-pip-dot.future{border-color:var(--border);background:transparent;}
+.arb-pip-line{width:12px;height:2px;background:var(--border);}
+.arb-pip-line.done{background:var(--green);}
 /* ── Footer ── */
 .footer{padding:18px 40px;border-top:1px solid var(--border);font-size:11px;color:var(--text-dim);text-align:center;}
 @media(max-width:640px){.header,.controls,.content,.footer,.strip{padding-left:16px;padding-right:16px;}}
@@ -142,6 +165,7 @@ tbody tr:last-child td{border-bottom:none;}
   <div class="header-meta">
     <span>Generated: <strong>Tue, April 1, 2026</strong></span>
     <span>Team: <strong>RQ, SM, JM, KA</strong></span>
+    <span>Arb Track: <strong>5 cases</strong> (Mersich / Makrakis / Madan)</span>
     <span>Next refresh: <strong>April 8, 2026</strong></span>
   </div>
 </div>
@@ -512,6 +536,62 @@ tbody tr:last-child td{border-bottom:none;}
   </tr>
 </tbody>
 </table>
+
+<h3 style="font-size:13px;color:var(--accent);text-transform:uppercase;letter-spacing:.5px;margin:24px 0 4px;">Arbitration Track</h3>
+<p style="font-size:11px;color:var(--text-dim);margin-bottom:10px;">Cases referred to the arbitration team after MTCA granted. Blackstone maintains oversight; day-to-day handled by arb team (Mersich, Makrakis, Madan).</p>
+<table>
+<thead><tr>
+  <th onclick="sortT(this,0)">Case <span class="sa">&#9650;</span></th>
+  <th>MTCA Granted</th>
+  <th>Arb Team</th>
+  <th>Phase</th>
+  <th>Progress</th>
+  <th>Key Dates / Notes</th>
+</tr></thead>
+<tbody class="ft">
+  <tr data-a="RQ" data-m="MTCA" data-c="Hoskins v. Ridgecrest">
+    <td><div class="case-name">Hoskins v. Ridgecrest</div><div class="case-num">Kern Sup.</div></td>
+    <td>Mar 17, 2026</td>
+    <td>TBD</td>
+    <td><span class="arb-phase arb-pre"><span class="phase-dot"></span>Pre-Demand</span></td>
+    <td><div class="arb-pipeline"><span class="arb-pip-dot active"></span><span class="arb-pip-line"></span><span class="arb-pip-dot future"></span><span class="arb-pip-line"></span><span class="arb-pip-dot future"></span><span class="arb-pip-line"></span><span class="arb-pip-dot future"></span><span class="arb-pip-line"></span><span class="arb-pip-dot future"></span></div></td>
+    <td>JPA discussions with Gundzik (Lavi &amp; Ebrahimian). Awaiting arb team assignment.</td>
+  </tr>
+  <tr data-a="SM" data-m="MTCA" data-c="Cohee v. Upper Deck">
+    <td><div class="case-name">Cohee v. Upper Deck</div><div class="case-num">San Diego, Dept. N-28</div></td>
+    <td>Pre-period</td>
+    <td>TBD</td>
+    <td><span class="arb-phase arb-pre"><span class="phase-dot"></span>Pre-Demand</span></td>
+    <td><div class="arb-pipeline"><span class="arb-pip-dot active"></span><span class="arb-pip-line"></span><span class="arb-pip-dot future"></span><span class="arb-pip-line"></span><span class="arb-pip-dot future"></span><span class="arb-pip-line"></span><span class="arb-pip-dot future"></span><span class="arb-pip-line"></span><span class="arb-pip-dot future"></span></div></td>
+    <td>Status Conf re Arb 3/5/2027 (Dept N-28). Arb team TBD.</td>
+  </tr>
+  <tr data-a="" data-m="MTCA" data-c="Touch / Hamcor (Dublin Toyota)">
+    <td><div class="case-name">Touch / Hamcor (Dublin Toyota)</div><div class="case-num">Alameda</div></td>
+    <td>Pre-period</td>
+    <td>TBD</td>
+    <td><span class="arb-phase arb-pre"><span class="phase-dot"></span>Pre-Demand</span></td>
+    <td><div class="arb-pipeline"><span class="arb-pip-dot active"></span><span class="arb-pip-line"></span><span class="arb-pip-dot future"></span><span class="arb-pip-line"></span><span class="arb-pip-dot future"></span><span class="arb-pip-line"></span><span class="arb-pip-dot future"></span><span class="arb-pip-line"></span><span class="arb-pip-dot future"></span></div></td>
+    <td>Defense: Littler (Courtney Chambers). Zhang/Halrec MTCA withdrawal status unconfirmed.</td>
+  </tr>
+  <tr data-a="" data-m="MTCA" data-c="Truitt / Carias-Paredes">
+    <td><div class="case-name">Truitt / Carias-Paredes (Class)</div><div class="case-num">Kern, Dept. H</div></td>
+    <td>Pre-period</td>
+    <td>TBD</td>
+    <td><span class="arb-phase arb-pre"><span class="phase-dot"></span>Pre-Demand</span></td>
+    <td><div class="arb-pipeline"><span class="arb-pip-dot active"></span><span class="arb-pip-line"></span><span class="arb-pip-dot future"></span><span class="arb-pip-line"></span><span class="arb-pip-dot future"></span><span class="arb-pip-line"></span><span class="arb-pip-dot future"></span><span class="arb-pip-line"></span><span class="arb-pip-dot future"></span></div></td>
+    <td>Only De Oilers bound by arb agreement. PAGA stayed pending arb outcome. Defense: Belden Blaine Raytis.</td>
+  </tr>
+  <tr data-a="" data-m="MTCA" data-c="Valenzuela v. Childnet">
+    <td><div class="case-name">Valenzuela v. Childnet</div><div class="case-num">LASC</div></td>
+    <td>Nov 14, 2025</td>
+    <td>TBD</td>
+    <td><span class="arb-phase arb-pre"><span class="phase-dot"></span>Pre-Demand</span></td>
+    <td><div class="arb-pipeline"><span class="arb-pip-dot active"></span><span class="arb-pip-line"></span><span class="arb-pip-dot future"></span><span class="arb-pip-line"></span><span class="arb-pip-dot future"></span><span class="arb-pip-line"></span><span class="arb-pip-dot future"></span><span class="arb-pip-line"></span><span class="arb-pip-dot future"></span></div></td>
+    <td>PAGA only. Case stayed. Motion to Lift Stay denied 1/20/26. Defense: Martorell Law.</td>
+  </tr>
+</tbody>
+</table>
+
 </div>
 
 <!-- ──── TAB 4: CLOSED ──── -->
@@ -657,6 +737,13 @@ tbody tr:last-child td{border-bottom:none;}
     <li>Richards v. Outdoor Dimensions: [CALENDAR &mdash; verified] MTC Further to SROGS S1, RFP S1 &mdash; 2-wk reminder 3/31. Ds deadline to supplement 4/3.</li>
     <li>Cabrera v. VCA: [EMAIL 4/1] Ogletree (Christenson) granted responsive pleading extension to April 3.</li>
     <li>Saephan v. Peterson Tractor: [EMAIL 3/31] Ogletree (Paul Smith) conflict/disqualification issue &mdash; Peterson Tractor subsidiary of Peterson Holding.</li>
+  </ul>
+  <h3>Arbitration Track</h3>
+  <ul>
+    <li>Phases: Pre-Demand &rarr; Demand Filed &rarr; Discovery &rarr; Hearing Set &rarr; Hearing Complete &rarr; Award Issued</li>
+    <li>Arb team: Vince Mersich, Hallie Makrakis, Sarah Madan</li>
+    <li>All 5 cases currently at Pre-Demand (placeholder). Arb team assignments and phase updates pending FileVine folder activation.</li>
+    <li>Future runs will source arb phase data from FileVine arb folders once live, not Outlook (RQ not on day-to-day arb correspondence).</li>
   </ul>
   <h3>Scoping Notes</h3>
   <ul>

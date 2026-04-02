@@ -180,8 +180,9 @@
   <div id="active-discovery" class="sub-phase" style="display:block;">
     <div style="font-size:.76rem;color:var(--text-muted);margin-bottom:12px;padding:4px 10px;background:var(--surface);border-radius:6px;display:inline-block;">15 needs drafting · 1 drafted · 1 MTCA pending · 1 arb pending | 7 with arbitration agreement</div>
     <div class="table-wrap"><div class="table-scroll">
-    <table>
-      <tr><th>Case Name</th><th>Filing Date</th><th>County</th><th>Discovery Status</th><th>Arbitration</th><th>Notes</th></tr>
+    <table id="table-active-discovery">
+    <thead><tr><th>Case Name</th><th>Filing Date</th><th>County</th><th>Discovery Status</th><th>Arbitration</th><th>Notes</th></tr></thead>
+    <tbody id="active-discovery-body">
       <tr class="searchable">
       <td class="case-name">Wellness Together (Neeley, Janelle) (Class)</td>
       <td>Jul 03, 2025</td>
@@ -326,14 +327,16 @@
       <td>Yes</td>
       <td class="text-muted" style="max-width:200px;font-size:.78rem">Arbitration discussions active with Perkins Coie. Joint CMC statement in prep. Multiple defendants.</td>
     </tr>
-    </table></div></div>
+    </tbody>
+  </table></div></div>
   </div>
 
   <div id="inactive-discovery" class="sub-phase" style="display:none;">
     <div style="font-size:.76rem;color:var(--text-muted);margin-bottom:12px;padding:4px 10px;background:var(--surface);border-radius:6px;display:inline-block;">8 mediation track · 21 stayed | 9 with arbitration agreement</div>
     <div class="table-wrap"><div class="table-scroll">
-    <table>
-      <tr><th>Case Name</th><th>Filing Date</th><th>County</th><th>Discovery Status</th><th>Arbitration</th><th>Notes</th></tr>
+    <table id="table-inactive-discovery">
+    <thead><tr><th>Case Name</th><th>Filing Date</th><th>County</th><th>Discovery Status</th><th>Arbitration</th><th>Notes</th></tr></thead>
+    <tbody id="inactive-discovery-body">
       <tr class="searchable">
       <td class="case-name">Southwest College of Medical-Dental Assistants &amp; Practical Nurses (Bowers, Guy) (Class) (BDC PARTNERING)<span class="contingent-tag">⏸ Mediation scheduled — informal discovery only (see Mediation Pipeline)</span></td>
       <td>Feb 26, 2025</td>
@@ -566,7 +569,8 @@
       <td>No</td>
       <td class="text-muted" style="max-width:200px;font-size:.78rem"></td>
     </tr>
-    </table></div></div>
+    </tbody>
+  </table></div></div>
   </div>
 </div>
 
@@ -574,8 +578,9 @@
 <div class="phase" data-id="awaiting">
   <div class="phase-updated">Phase 2 — 8 entries awaiting defense responses</div>
   <div class="table-wrap"><div class="table-scroll">
-  <table>
-    <tr><th>Case Name</th><th>Device</th><th>Propounding Party</th><th>Date Served</th><th>Orig. Deadline</th><th>Extensions</th><th>New Deadline</th><th>Status</th></tr>
+  <table id="table-awaiting">
+    <thead><tr><th>Case Name</th><th>Device</th><th>Propounding Party</th><th>Date Served</th><th>Orig. Deadline</th><th>Extensions</th><th>New Deadline</th><th>Status</th></tr></thead>
+    <tbody id="awaiting-body">
     <tr class="searchable">
       <td class="case-name">Hikvision USA Inc. (Fernald, James) (Class Only)<span class="contingent-tag">⏳ Defense amenable to stay per 3/27/26 email. Mediator selection ongoing. Formal discovery may be stayed.</span></td>
       <td>SROGs, RFPs — Set 1</td>
@@ -656,6 +661,7 @@
       <td>N/A</td>
       <td><span class="badge badge-orange">Stayed</span></td>
     </tr>
+  </tbody>
   </table></div></div>
 </div>
 
@@ -663,8 +669,9 @@
 <div class="phase" data-id="followup">
   <div class="phase-updated">Phase 3 — 10 entries in M&amp;C / MTC pipeline</div>
   <div class="table-wrap"><div class="table-scroll">
-  <table>
-    <tr><th>Case Name</th><th>Device</th><th>Response Date</th><th>M&amp;C Sent</th><th>Supp. Resp. Due</th><th>MTC Deadline</th><th>MTC Drafted</th><th>MTC Filed</th><th>Status</th></tr>
+  <table id="table-followup">
+    <thead><tr><th>Case Name</th><th>Device</th><th>Response Date</th><th>M&amp;C Sent</th><th>Supp. Resp. Due</th><th>MTC Deadline</th><th>MTC Drafted</th><th>MTC Filed</th><th>Status</th></tr></thead>
+    <tbody id="followup-body">
     <tr class="searchable">
       <td class="case-name">Outdoor Dimensions, LLC (Richards, Carly) (Class Only)<span class="contingent-tag">⏳ Defense requested 2-wk extension to 4/17/26 (email 4/1/26) — AWAITING CONFIRMATION</span></td>
       <td>SROGs, RFPs — Set 1</td>
@@ -775,6 +782,7 @@
       <td>No</td>
       <td><span class="badge badge-purple">MTC Drafted</span></td>
     </tr>
+  </tbody>
   </table></div></div>
 </div>
 
@@ -782,8 +790,9 @@
 <div class="phase" data-id="completed">
   <div class="phase-updated">Completed — 10 entries resolved</div>
   <div class="table-wrap"><div class="table-scroll">
-  <table>
-    <tr><th>Case Name</th><th>Device</th><th>Completed Date</th><th>Notes</th></tr>
+  <table id="table-completed">
+    <thead><tr><th>Case Name</th><th>Device</th><th>Completed Date</th><th>Notes</th></tr></thead>
+    <tbody id="completed-body">
     <tr class="searchable">
       <td class="case-name">General Coatings Corporation (Lopez, Gabet) (Class)</td>
       <td></td>
@@ -844,6 +853,7 @@
       <td>May 07, 2025</td>
       <td class="text-muted" style="max-width:300px;font-size:.78rem">Discovery withdrawn</td>
     </tr>
+  </tbody>
   </table></div></div>
 </div>
 

@@ -247,6 +247,7 @@ function truncate(s,n){if(!s)return'';s=String(s).replace(/\n/g,' ');return s.le
 function slugify(s){return(s||'').replace(/[^a-zA-Z0-9]/g,'_').slice(0,60);}
 function caseId(c){return slugify(c.case_name)+'_'+c._idx;}
 function daysBetween(a,b){return Math.floor((a-b)/86400000);}
+function parseDate(d){if(!d)return null;var s=String(d);if(/^\d{4}-\d{2}-\d{2}$/.test(s)){var p=s.split('-');return new Date(+p[0],+p[1]-1,+p[2]);}var dt=new Date(d);return isNaN(dt)?null:dt;}
 
 // Cross-dashboard matching: fuzzy match defendant name against lookup keys
 function matchLookup(lookup, defendant){
@@ -303,16 +304,16 @@ function scoreCase(c){
   var score=0,reasons=[];
   // 1. Client contact — only flag at 90+ (medium) and 120+ (critical)
   if(c.last_client_contact){
-    var lcd=new Date(c.last_client_contact);
-    if(!isNaN(lcd)){var d=daysBetween(TODAY,lcd);
+    var lcd=parseDate(c.last_client_contact);
+    if(lcd){var d=daysBetween(TODAY,lcd);
       if(d>120){score+=25;reasons.push({text:'No client contact '+d+'d',level:'critical'});}
       else if(d>90){score+=12;reasons.push({text:'Client contact stale '+d+'d',level:'medium'});}
     }
   } else {score+=15;reasons.push({text:'No client contact on file',level:'high'});}
 
   // 2. Hearing proximity — only 7d is critical, 14d is high
-  if(c.next_hearing_date){var hd=new Date(c.next_hearing_date);
-    if(!isNaN(hd)){var hdays=daysBetween(hd,TODAY);
+  if(c.next_hearing_date){var hd=parseDate(c.next_hearing_date);
+    if(hd){var hdays=daysBetween(hd,TODAY);
       if(hdays>=0&&hdays<=7){score+=30;reasons.push({text:'Hearing in '+hdays+'d',level:'critical'});}
       else if(hdays>7&&hdays<=14){score+=15;reasons.push({text:'Hearing in '+hdays+'d',level:'high'});}
     }
@@ -320,7 +321,7 @@ function scoreCase(c){
 
   // 3. Pending motion with upcoming deadline (from Motion Dashboard)
   if(c._motion){var m=c._motion;
-    if(m.opp_due){var od=new Date(m.opp_due);if(!isNaN(od)){var md=daysBetween(od,TODAY);
+    if(m.opp_due){var od=parseDate(m.opp_due);if(od){var md=daysBetween(od,TODAY);
       if(md>=0&&md<=7){score+=25;reasons.push({text:m.motion+' opp due '+md+'d',level:'critical'});}
       else if(md>7&&md<=14){score+=12;reasons.push({text:m.motion+' opp due '+md+'d',level:'high'});}
     }}
@@ -331,8 +332,8 @@ function scoreCase(c){
   if(c.arb==='?'){score+=8;reasons.push({text:'Arb unanalyzed',level:'medium'});}
 
   // 5. Team update >45d stale
-  if(c.last_team_update){var ltd=new Date(c.last_team_update);
-    if(!isNaN(ltd)){var td=daysBetween(TODAY,ltd);
+  if(c.last_team_update){var ltd=parseDate(c.last_team_update);
+    if(ltd){var td=daysBetween(TODAY,ltd);
       if(td>60){score+=10;reasons.push({text:'Team update stale '+td+'d',level:'high'});}
     }
   }
@@ -346,8 +347,8 @@ function scoreCase(c){
   }
 
   // 7. Mediation this week (from Mediation CC)
-  if(c._mediation&&c._mediation.med_date){var md2=new Date(c._mediation.med_date);
-    if(!isNaN(md2)){var mdd=daysBetween(md2,TODAY);
+  if(c._mediation&&c._mediation.med_date){var md2=parseDate(c._mediation.med_date);
+    if(md2){var mdd=daysBetween(md2,TODAY);
       if(mdd>=0&&mdd<=7){score+=20;reasons.push({text:'Mediation in '+mdd+'d',level:'critical'});}
     }
   }
@@ -384,9 +385,9 @@ function renderHealthStrip(){
   var jm=fc.filter(function(c){return c.attorney==='JM'}).length;
   var sm=fc.filter(function(c){return c.attorney==='SM'}).length;
   var urgent=fc.filter(function(c){return c._score>=25}).length;
-  var hearingSoon=fc.filter(function(c){if(!c.next_hearing_date)return false;var d=new Date(c.next_hearing_date);if(isNaN(d))return false;var dd=daysBetween(d,TODAY);return dd>=0&&dd<=14;}).length;
+  var hearingSoon=fc.filter(function(c){if(!c.next_hearing_date)return false;var d=parseDate(c.next_hearing_date);if(!d)return false;var dd=daysBetween(d,TODAY);return dd>=0&&dd<=14;}).length;
   var pendingMotions=fc.filter(function(c){return c._motion&&(c._motion.status==='PENDING'||c._motion.status==="CONT'D")}).length;
-  var medThisMonth=fc.filter(function(c){if(!c._mediation||!c._mediation.med_date)return false;var d=new Date(c._mediation.med_date);if(isNaN(d))return false;var dd=daysBetween(d,TODAY);return dd>=0&&dd<=30;}).length;
+  var medThisMonth=fc.filter(function(c){if(!c._mediation||!c._mediation.med_date)return false;var d=parseDate(c._mediation.med_date);if(!d)return false;var dd=daysBetween(d,TODAY);return dd>=0&&dd<=30;}).length;
   var arbUnknown=fc.filter(function(c){return c.arb==='?'}).length;
   var stayed=fc.filter(function(c){return c.is_stayed}).length;
   document.getElementById('healthStrip').innerHTML=

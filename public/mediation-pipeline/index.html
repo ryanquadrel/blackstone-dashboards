@@ -281,6 +281,15 @@
 .ca-red.ca-pulse{animation:pulse-red 2s infinite;}
 @keyframes pulse-red{0%,100%{opacity:1;}50%{opacity:.7;}}
   .outreach-badge.ob-muted { border-color:var(--border); opacity:.7; }
+
+  /* Fee status toggle */
+  .fee-toggle { cursor:pointer; user-select:none; }
+  .fee-toggle:hover { opacity:0.8; }
+  .fee-toggle-hint { display:none; font-size:.65rem; color:var(--text-muted); }
+  .fee-toggle:hover .fee-toggle-hint { display:inline; }
+  tr[data-fee-status="paid"] { opacity:0.85; }
+  tr[data-fee-status="manual-paid"] td:nth-child(4) span.badge { background:var(--green) !important; color:white !important; }
+
 </style>
 </head>
 <body>
@@ -597,7 +606,7 @@
     <!-- FEE ALERT BANNER -->
     <div class="fee-alert">
       <span class="fee-alert-icon">&#9888;</span>
-      <div class="fee-alert-text"><strong>$16,000 FEE PAST DUE</strong> — Kreutzer v. iBUYPOWER (Invoice #6878, McKelvey). 14+ days overdue. Karen must process ASAP. Cancel deadline: <strong>June 12, 2026</strong>.</div>
+      <div class="fee-alert-text"><strong>$16,000 FEE PAYMENT PENDING</strong> — Kreutzer v. iBUYPOWER (Invoice #6878, McKelvey). Routed to KR 3/25 — confirm payment received. Cancel deadline: <strong>June 12, 2026</strong>.</div>
     </div>
 
     <!-- ATTORNEY FILTER (Global for Phase 2) -->
@@ -694,7 +703,7 @@
     <div class="section" id="b-ontrack">
       <div class="section-header"><h2>On Track</h2><span class="badge badge-blue">5 cases</span></div>
       <div class="case-grid">
-        <div class="case-card" data-attorney="jm" data-mediation="2026-07-24"><div class="cc-top"><span class="case-name">Kreutzer v. iBUYPOWER</span><span class="attorney att-jm">JM</span></div><div style="display:flex;gap:8px;margin-bottom:6px;"><span class="badge badge-blue">July 24, 2026</span><span class="badge badge-purple">Phase 2</span><span class="countdown cd-far" data-meddate="2026-07-24"></span></div><div class="cc-status">Mediator: <strong>Brandon McKelvey</strong>. Cancel deadline 6/12. <span class="badge badge-red">FEE PAST DUE $16K</span></div><div class="phase-indicator"><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-label">Phase 2/7</div></div><div class="cc-action"><strong>Next</strong> Karen — pay $16K invoice IMMEDIATELY. JM — calendar MDRL for May.</div>
+        <div class="case-card" data-attorney="jm" data-mediation="2026-07-24"><div class="cc-top"><span class="case-name">Kreutzer v. iBUYPOWER</span><span class="attorney att-jm">JM</span></div><div style="display:flex;gap:8px;margin-bottom:6px;"><span class="badge badge-blue">July 24, 2026</span><span class="badge badge-purple">Phase 2</span><span class="countdown cd-far" data-meddate="2026-07-24"></span></div><div class="cc-status">Mediator: <strong>Brandon McKelvey</strong>. Cancel deadline 6/12. <span class="badge badge-yellow">FEE ROUTED — CONFIRM PAYMENT</span></div><div class="phase-indicator"><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-label">Phase 2/7</div></div><div class="cc-action"><strong>Next</strong> Confirm $16K payment (routed KA→KR 3/25). JM — calendar MDRL for May.</div>
 <div class="countdown-action ca-green"><span class="ca-icon">✅</span><span class="ca-text">On track — 71d to cancel</span><span class="ca-deadline"></span></div></div>
         <div class="case-card" data-attorney="sm" data-mediation="2026-07-31"><div class="cc-top"><span class="case-name">Miranda v. Imperial Valley FMG</span><span class="attorney att-sm">SM</span></div><div style="display:flex;gap:8px;margin-bottom:6px;"><span class="badge badge-blue">July 31, 2026</span><span class="badge badge-purple">Phase 1-2</span><span class="countdown cd-far" data-meddate="2026-07-31"></span></div><div class="cc-status">Mediator: <strong>Allison Eckstrom</strong> via Zoom. Discovery stay agreed 3/13. MDRL sent to defense 3/31.</div><div class="phase-indicator"><div class="phase-pip filled"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-label">Phase 1-2/7</div></div><div class="cc-action"><strong>Next</strong> SM — calendar MDRL for May. Plan informal data exchange.</div>
 <div class="countdown-action ca-green"><span class="ca-icon">✅</span><span class="ca-text">On track — early stage</span><span class="ca-deadline">120d to med</span></div></div>
@@ -747,10 +756,10 @@
         <thead><tr><th>Case</th><th>Mediator</th><th>P's Share</th><th>Paid?</th><th>Cancel Deadline</th><th>Status</th></tr></thead>
         <tbody>
           <!-- ═══ IMMINENT (This Week) ═══ -->
-          <tr data-attorney="jm"><td>Bassell v. Golden Rain</td><td>Feder</td><td>In attachment</td><td><span class="badge badge-green">Paid</span></td><td>Passed</td><td>Committed — mediation <strong>4/2</strong></td></tr>
-          <tr data-attorney="jm"><td>Vasquez v. Lulu's</td><td>Rottman</td><td><strong>$17,000</strong></td><td><span class="badge badge-green">Paid</span></td><td>Passed</td><td>Committed — mediation <strong>4/3</strong></td></tr>
+          <tr data-attorney="jm"><td>Bassell v. Golden Rain</td><td>Feder</td><td>In attachment</td><td data-fee-status="paid"><span class="badge badge-green">Paid</span></td><td>Passed</td><td>Committed — mediation <strong>4/2</strong></td></tr>
+          <tr data-attorney="jm"><td>Vasquez v. Lulu's</td><td>Rottman</td><td><strong>$17,000</strong></td><td data-fee-status="paid"><span class="badge badge-green">Paid</span></td><td>Passed</td><td>Committed — mediation <strong>4/3</strong></td></tr>
           <!-- ═══ PAST DUE / ACTION REQUIRED ═══ -->
-          <tr data-attorney="jm" style="background:var(--red-bg);"><td><strong>Kreutzer v. iBUYPOWER</strong></td><td>McKelvey</td><td><strong>$16,000</strong></td><td><span class="badge badge-red">PAST DUE 21+D</span></td><td style="background:color-mix(in srgb, var(--orange,#f59e0b) 15%, transparent);"><strong style="color:var(--red);">June 12, 2026</strong></td><td>Invoice #6878 due 3/11 — Karen must process ASAP</td></tr>
+          <tr data-attorney="jm" data-fee-status="routed"><td><strong>Kreutzer v. iBUYPOWER</strong></td><td>McKelvey</td><td><strong>$16,000</strong></td><td><span class="badge badge-yellow">ROUTED 3/25</span></td><td style="background:color-mix(in srgb, var(--orange,#f59e0b) 15%, transparent);"><strong style="color:var(--red);">June 12, 2026</strong></td><td>Invoice #6878 — KA routed to KR 3/25. Confirm payment.</td></tr>
           <tr data-attorney="rq" style="background:var(--red-bg);"><td><strong>Cotton v. Taylor</strong></td><td>Ortman</td><td>TBD</td><td><span class="badge badge-red">PAST DUE</span></td><td>TBD</td><td>Past due invoice — resolve ASAP</td></tr>
           <!-- ═══ UPCOMING (April) ═══ -->
           <tr data-attorney="rq"><td>Santamaria v. America Central</td><td>McKelvey</td><td><strong>$14,000</strong></td><td><span class="badge badge-yellow">Invoiced 10/23</span></td><td>Passed</td><td>Invoice #6754 — mediation <strong>4/10</strong></td></tr>
@@ -1110,6 +1119,53 @@
         findDuplicates();
       }
     })();
+
+  // ===== FEE STATUS TOGGLE =====
+  // Allows clicking "Paid?" column to toggle payment status.
+  // Stores overrides in a data-fee-status attribute that the pipeline scan
+  // should respect (if data-fee-status="manual-paid", don't re-flag as past due).
+  (function() {
+    const feeTable = document.querySelector('#b-fees table');
+    if (!feeTable) return;
+
+    // Add click handlers to Paid? column (4th column)
+    feeTable.querySelectorAll('tbody tr').forEach(row => {
+      const paidCell = row.cells[3];
+      if (!paidCell) return;
+
+      // Skip rows that are early stage (no fee data)
+      const badge = paidCell.querySelector('.badge');
+      if (!badge && paidCell.textContent.trim() === '—') return;
+
+      paidCell.classList.add('fee-toggle');
+      paidCell.title = 'Click to mark as paid';
+
+      paidCell.addEventListener('click', () => {
+        const currentStatus = row.dataset.feeStatus;
+        if (currentStatus === 'paid' || currentStatus === 'manual-paid') {
+          // Already paid — toggle back to unpaid
+          row.dataset.feeStatus = '';
+          row.style.background = '';
+          if (badge) {
+            badge.className = 'badge badge-yellow';
+            badge.textContent = badge.dataset.originalText || 'Not yet';
+          }
+        } else {
+          // Mark as paid
+          if (badge) {
+            badge.dataset.originalText = badge.dataset.originalText || badge.textContent;
+            badge.className = 'badge badge-green';
+            badge.textContent = 'Paid ✓';
+          } else {
+            paidCell.innerHTML = '<span class="badge badge-green">Paid ✓</span>';
+          }
+          row.dataset.feeStatus = 'manual-paid';
+          row.style.background = '';
+        }
+      });
+    });
+  })();
+
 </script>
 </body>
 </html>

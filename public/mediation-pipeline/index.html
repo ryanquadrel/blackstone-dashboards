@@ -416,7 +416,7 @@
       <span>2. Booked &amp; Preparing</span><span class="count" id="count-booked">18</span>
     </button>
     <button class="phase-btn" data-phase="resolved">
-      <span>3. Resolved</span><span class="count" id="count-resolved">15</span>
+      <span>3. Post Settlement</span><span class="count" id="count-resolved">12</span>
     </button>
   </div>
 
@@ -437,7 +437,7 @@
 
     <div class="stats">
       <div class="stat-card green"><div class="label">Ready to Book</div><div class="value">3</div><div class="sub">1 vacated, 2 near-booking</div></div>
-      <div class="stat-card blue"><div class="label">New Activity</div><div class="value">20</div><div class="sub">Movement since last scan</div></div>
+      <div class="stat-card blue"><div class="label">New Activity</div><div class="value">21</div><div class="sub">Movement since last scan</div></div>
       <div class="stat-card orange"><div class="label">Going Stale</div><div class="value">4</div><div class="sub">30+ days no activity</div></div>
       <div class="stat-card red"><div class="label">Blocked (MTCA)</div><div class="value">8</div><div class="sub">Pending motions</div></div>
       <div class="stat-card purple"><div class="label">Booked This Cycle</div><div class="value">0</div><div class="sub">All transferred to Phase 2</div></div>
@@ -465,8 +465,9 @@
 
     <!-- NEW ACTIVITY -->
     <div class="section" id="p-activity">
-      <div class="section-header"><h2>New Activity</h2><span class="badge badge-blue">23 cases</span></div>
+      <div class="section-header"><h2>New Activity</h2><span class="badge badge-blue">24 cases</span></div>
       <div class="case-grid" id="activity-grid">
+        <div class="case-card" data-attorney="sm" style="border-left:3px solid var(--orange);"><div class="cc-top"><span class="case-name">Nova Measuring Instruments (Nash)</span><span class="attorney att-sm">SM</span><span class="badge badge-orange" style="margin-left:auto;font-size:.65rem;">RETURNED FROM MEDIATION</span></div><div class="cc-status">Mediation: <strong>2/4/26</strong> (McKelvey). Mediator's proposal $349K — <strong>expired</strong>. Not settled. Data issues flagged. Individual settlement obstacles. Court continued CMC; neither side contested tentative.</div><div class="cc-action"><strong>Next</strong> Evaluate re-mediation or litigation path. Consider discovery posture.</div></div>
         <div class="case-card" data-attorney="sm"><div class="cc-top"><span class="case-name">Behavior Treatment &amp; Analysis (Ines)</span><span class="attorney att-sm">SM</span></div><div class="cc-status">RQ emailed OC (Sara) 3/30 circling back on reserving mediation date. OC wants to mediate. PAGA case filed (C26-00112).</div><div class="cc-action"><strong>Next</strong> Finalize mediator (Eve, Monique, or McKelvey) and lock date.</div></div>
         <div class="case-card" data-attorney="sm"><div class="cc-top"><span class="case-name">Caleres (Ramirez)</span><span class="attorney att-sm">SM</span></div><div class="cc-status">Remand motion <strong>DENIED</strong> 3/19 (Judge Bernal). Remains in federal court (C.D. Cal. 5:26-cv-00054-JGB-SP). Ogletree Deakins OC (Chris Decker).</div><div class="cc-action"><strong>Next</strong> Raise mediation with Ogletree. Sage knows Chris Decker.</div></div>
         <div class="case-card" data-attorney="jm"><div class="cc-top"><span class="case-name">Cargomatic (Duenas)</span><span class="attorney att-jm">JM</span></div><div class="cc-status">MTCA hearing 5/5. Negotiating continuance with Fisher Phillips.</div><div class="cc-action"><strong>Next</strong> Finalize stipulation. <span class="badge badge-red">MTCA BLOCKED</span></div></div>
@@ -591,6 +592,7 @@
       <div class="stat-card blue"><div class="label">On Track</div><div class="value">5</div><div class="sub">Kreutzer, Miranda, Conant, BenQ, Lee</div></div>
       <div class="stat-card purple"><div class="label">Early Stage</div><div class="value">16</div><div class="sub">Touch, Waddell, Chavez, Lopez + 12 others</div></div>
       <div class="stat-card yellow"><div class="label">Fee Past Due</div><div class="value">$16K</div><div class="sub">Kreutzer — 14+ days</div></div>
+          <div class="stat-card yellow"><div class="label">Pending Proposal</div><div class="value">0</div><div class="sub">No active proposals</div></div>
     </div>
 
     <div class="tabs" data-group="booked">
@@ -599,6 +601,7 @@
       <button class="tab" data-tab="b-ontrack">On Track</button>
       <button class="tab" data-tab="b-early">Early Stage</button>
       <button class="tab" data-tab="b-fees">Fees</button>
+      <button class="tab" data-tab="b-proposal">Pending Proposal</button>
     </div>
 
     <!-- CRITICAL -->
@@ -722,10 +725,18 @@
       </table></div>
     </div>
 
+    <!-- PENDING MEDIATOR'S PROPOSAL -->
+    <div class="section" id="b-proposal">
+      <div class="section-header"><h2>Pending Mediator's Proposal</h2><span class="badge badge-yellow">0 cases</span></div>
+      <div class="case-grid" id="proposal-grid">
+        <div style="padding:2rem;text-align:center;color:var(--text-muted);font-style:italic;">No pending mediator's proposals. Cases will appear here automatically when a proposal is detected in Outlook.</div>
+      </div>
+    </div>
+
   </div>
 
   <!-- ================================================================== -->
-  <!-- PHASE 3: RESOLVED (Post-Med Active + Settled + Not Settled) -->
+  <!-- PHASE 3: POST SETTLEMENT (Post Settlement + Settled) -->
   <!-- ================================================================== -->
   <div class="phase" data-id="resolved" id="phase-resolved">
 
@@ -743,23 +754,21 @@
     </div>
 
     <div class="stats">
-      <div class="stat-card teal"><div class="label">Post-Med Active</div><div class="value">4</div><div class="sub">Settlement docs in progress</div></div>
+      <div class="stat-card teal"><div class="label">Post Settlement</div><div class="value">4</div><div class="sub">Settlement docs in progress</div></div>
       <div class="stat-card green"><div class="label">Total Settled</div><div class="value">8</div><div class="sub">Since June 2025</div></div>
       <div class="stat-card teal"><div class="label">Total Recovery</div><div class="value">$10.4M</div><div class="sub">$10,427,524 in settlements</div></div>
       <div class="stat-card blue"><div class="label">Avg Settlement</div><div class="value">$1.3M</div><div class="sub">$1,303,441 average</div></div>
-      <div class="stat-card yellow"><div class="label">Not Settled</div><div class="value">1</div><div class="sub">Nova — $349K proposal pending</div></div>
       <div class="stat-card purple"><div class="label">Largest Settlement</div><div class="value">$2.65M</div><div class="sub">Guardant Health (Dizon)</div></div>
     </div>
 
     <div class="tabs" data-group="resolved">
-      <button class="tab active" data-tab="r-postmed">Post-Med Active</button>
+      <button class="tab active" data-tab="r-postmed">Post Settlement</button>
       <button class="tab" data-tab="r-settled">Settled</button>
-      <button class="tab" data-tab="r-notsettled">Not Settled</button>
     </div>
 
     <!-- POST-MEDIATION ACTIVE -->
     <div class="section active" id="r-postmed">
-      <div class="section-header"><h2>Post-Mediation — Settlement Documentation In Progress</h2><span class="badge badge-teal">4 cases</span></div>
+      <div class="section-header"><h2>Post Settlement — Documentation In Progress</h2><span class="badge badge-teal">4 cases</span></div>
       <div class="case-grid">
         <div class="case-card" data-attorney="jg"><div class="cc-top"><span class="case-name">Estrada/Nava v. Maruichi American</span><span class="attorney att-jg">JG</span></div><div class="cc-status"><span class="badge badge-green">SETTLED — $525K GSA</span>. Settlement documentation being prepared.</div><div class="cc-action"><strong>Next</strong> Finalize settlement docs.</div></div>
         <div class="case-card" data-attorney="tt"><div class="cc-top"><span class="case-name">Hernandez v. Liberty Utilities</span><span class="attorney att-tt">TT</span></div><div class="cc-status"><span class="badge badge-teal">SETTLEMENT AGREEMENT SENT</span> — Draft longform SA + 3 admin bids sent to defense 3/29.</div><div class="cc-action"><strong>Next</strong> Await defendant election on administration.</div></div>
@@ -786,17 +795,6 @@
       </table></div>
     </div>
 
-    <!-- NOT SETTLED -->
-    <div class="section" id="r-notsettled">
-      <div class="section-header"><h2>Not Settled / Mediator's Proposal Pending</h2></div>
-      <div class="case-grid">
-        <div class="case-card" data-attorney="sm" style="border-left:3px solid var(--yellow);">
-          <div class="cc-top"><span class="case-name">Nova Measuring Instruments (Nash)</span><span class="attorney att-sm">SM</span></div>
-          <div class="cc-status">Mediator: <strong>Brandon McKelvey</strong> | Mediation: 2/4/26. Target: $500K. Mediator's proposal: <strong>$349K</strong> (respond by 2/12). Data issues flagged. Individual settlement obstacles.</div>
-          <div class="cc-action"><strong>Next</strong> Confirm acceptance/rejection. If rejected, evaluate re-mediation or litigation path.</div>
-        </div>
-      </div>
-    </div>
 
   </div>
 
@@ -932,18 +930,18 @@
     const p1Cards = document.querySelectorAll('#phase-pipeline .case-card').length;
     const p1BlockedRows = document.querySelectorAll('#p-blocked tbody tr').length;
     // Blocked cases overlap with Activity/Stale, so use the stated 42
-    const p1 = 42;
+    const p1 = 43;
     // Phase 2: count case cards
     const p2Cards = document.querySelectorAll('#phase-booked .case-card').length;
     const p2 = p2Cards; // 14
-    // Phase 3: Post-Med + Settled table rows + Not Settled cards
-    const p3PostMed = document.querySelectorAll('#r-postmed .case-card').length;
+    // Phase 3: Post Settlement + Settled table rows
+    const p3PostSettlement = document.querySelectorAll('#r-postmed .case-card').length;
     const p3Settled = document.querySelectorAll('#r-settled tbody tr').length;
-    const p3NotSettled = document.querySelectorAll('#r-notsettled .case-card').length;
-    // Some post-med cases overlap with settled (Estrada, Zhang, Hernandez, Sherwood)
-    // Deduplicated count: settled table has 8, post-med has 5, not-settled has 1
+    // Some post-settlement cases overlap with settled (Estrada, Zhang, Hernandez, Sherwood)
     // Overlaps: Estrada/Maruichi, Zhang/Halrec, Hernandez/Liberty, Sherwood = 4 overlaps
-    const p3 = p3PostMed + p3Settled + p3NotSettled - 4; // 5+8+1-4 = 10
+    const p3 = p3PostSettlement + p3Settled - 4; // 4+8-4 = 8
+    // Also count pending proposals in Phase 2
+    const p2Proposals = document.querySelectorAll('#b-proposal .case-card').length;
     const total = p1 + p2 + p3; // But some Phase 1 Ready cases overlap Phase 2 (Orihuela, Miranda)
     // Actually, the pipeline has cases that WILL transfer; they haven't yet. So no overlap.
     // Post-med/settled overlap is the real dedup issue. Let's just use the actual unique count.

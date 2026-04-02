@@ -196,9 +196,22 @@
   .ot-resolved { background:var(--green-bg); color:var(--green); }
   .ot-set-trial { background:var(--purple-bg); color:var(--purple); }
   .ot-pending-mo { background:var(--surface2); color:var(--text-muted); }
+
+  /* MISSION CONTROL PILL */
+  .mc-home { position:fixed; top:14px; left:50%; transform:translateX(-50%); z-index:9999; display:inline-flex; align-items:center; gap:8px; padding:8px 16px 8px 12px; background:linear-gradient(135deg,rgba(79,143,255,.12),rgba(168,85,247,.12)); border:1px solid rgba(79,143,255,.25); border-radius:24px; text-decoration:none; color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:.78rem; font-weight:600; letter-spacing:.01em; transition:.3s cubic-bezier(.4,0,.2,1); backdrop-filter:blur(12px); box-shadow:0 2px 12px rgba(0,0,0,.3); }
+  .mc-home:hover { border-color:rgba(79,143,255,.5); transform:translateX(-50%) translateY(-1px) scale(1.03); box-shadow:0 4px 20px rgba(79,143,255,.2),0 0 30px rgba(168,85,247,.1); background:linear-gradient(135deg,rgba(79,143,255,.2),rgba(168,85,247,.18)); }
+  .mc-home .mc-icon { font-size:1.1rem; transition:transform .3s; }
+  .mc-home:hover .mc-icon { transform:scale(1.15); }
+  .mc-home .mc-arrow { font-size:.9rem; opacity:.6; transition:all .3s; }
+  .mc-home:hover .mc-arrow { opacity:1; transform:translateX(-2px); }
+  .mc-home .mc-label { transition:color .3s; }
+  .mc-home:hover .mc-label { color:#4f8fff; }
 </style>
 </head>
 <body>
+
+<a href="/" class="mc-home" title="Back to Mission Control"><span class="mc-arrow">←</span><span class="mc-icon">🚀</span><span class="mc-label">Mission Control</span></a>
+
 <div class="container">
 
   <!-- HEADER -->

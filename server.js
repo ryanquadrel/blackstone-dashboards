@@ -9,7 +9,6 @@ app.use('/motion-dashboard', express.static(path.join(__dirname, 'public', 'moti
 app.use('/discovery-tracker', express.static(path.join(__dirname, 'public', 'discovery-tracker')));
 app.use('/daily-briefing', express.static(path.join(__dirname, 'public', 'daily-briefing')));
 app.use('/command-center', express.static(path.join(__dirname, 'public', 'command-center')));
-app.use('/cmc-deadline-monitor', express.static(path.join(__dirname, 'public', 'cmc-deadline-monitor')));
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));

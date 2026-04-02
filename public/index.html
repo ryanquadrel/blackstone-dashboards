@@ -275,9 +275,9 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
       <text x="50" y="60" fill="var(--muted)" font-size="7" text-anchor="middle" font-weight="600">URGENT</text>
     </svg>
     <div class="ring-info">
-      <div class="ri-val glow-orange">14 Active</div>
+      <div class="ri-val glow-orange">20 Active</div>
       <div class="ri-label">Motion Dashboard</div>
-      <div class="ri-sub">6 urgent &middot; 5 anticipated</div>
+      <div class="ri-sub">6 urgent &middot; 14 briefing</div>
     </div>
     <div class="arrow">&rarr;</div>
   </a>
@@ -285,13 +285,13 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
     <svg class="ring-svg" viewBox="0 0 100 100">
       <circle class="ring-bg" cx="50" cy="50" r="42"/>
       <circle class="ring-fill" cx="50" cy="50" r="42" stroke="var(--teal)" stroke-dasharray="264" stroke-dashoffset="264" transform="rotate(-90 50 50)" id="ring4"/>
-      <text x="50" y="46" fill="var(--teal)" font-size="14" font-weight="800" text-anchor="middle">100</text>
+      <text x="50" y="46" fill="var(--teal)" font-size="14" font-weight="800" text-anchor="middle">95</text>
       <text x="50" y="60" fill="var(--muted)" font-size="7" text-anchor="middle" font-weight="600">TRACKED</text>
     </svg>
     <div class="ring-info">
-      <div class="ri-val glow-blue">7 Due</div>
+      <div class="ri-val glow-blue">18 Due</div>
       <div class="ri-label">Discovery Tracker</div>
-      <div class="ri-sub">47 pre-disco &middot; 8 awaiting &middot; 10 follow-up</div>
+      <div class="ri-sub">19 pre-disco &middot; 8 awaiting &middot; 11 follow-up</div>
     </div>
     <div class="arrow">&rarr;</div>
   </a>
@@ -330,7 +330,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
         <div class="donut-legend">
           <div class="dl-item"><div class="dl-dot" style="background:var(--green)"></div><strong>6 Won</strong>&nbsp;&mdash; kept in court</div>
           <div class="dl-item"><div class="dl-dot" style="background:var(--red)"></div><strong>4 Lost</strong>&nbsp;&mdash; sent to arb</div>
-          <div class="dl-item"><div class="dl-dot" style="background:var(--orange)"></div><strong>4 Active</strong>&nbsp;&mdash; arb track</div>
+          <div class="dl-item"><div class="dl-dot" style="background:var(--orange)"></div><strong>9 Active</strong>&nbsp;&mdash; arb track</div>
           <div class="dl-item" style="margin-top:6px"><a href="/motion-dashboard" style="color:var(--blue);font-size:.78rem;text-decoration:none;font-weight:600">View Motion Dashboard &rarr;</a></div>
         </div>
       </div>
@@ -340,17 +340,25 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
     <div class="tl-panel">
       <h2><span class="icon">&#9889;</span> 14-Day Action Timeline</h2>
       <div class="tl-items">
+        <div class="tl-item s-med" onclick="window.location='/mediation-pipeline'">
+          <div class="tl-date">APR 2</div>
+          <div class="tl-body"><div class="tl-case">Bassell v. Golden Rain</div><div class="tl-event">Mediation &mdash; Marc Feder (Zoom, 9:30 AM)</div><span class="tl-badge b-med">MEDIATION TODAY</span></div>
+        </div>
         <div class="tl-item s-urgent" onclick="window.location='/motion-dashboard'">
           <div class="tl-date">APR 2</div>
           <div class="tl-body"><div class="tl-case">Conant v. Evergreen</div><div class="tl-event">MTCA Opposition due TODAY</div><span class="tl-badge b-urgent">URGENT &mdash; TODAY</span></div>
         </div>
         <div class="tl-item s-med" onclick="window.location='/mediation-pipeline'">
           <div class="tl-date">APR 3</div>
-          <div class="tl-body"><div class="tl-case">Bassell v. Golden Rain</div><div class="tl-event">Mediation &mdash; Marc Feder</div><span class="tl-badge b-med">MEDIATION TOMORROW</span></div>
+          <div class="tl-body"><div class="tl-case">Vasquez v. Lulu&rsquo;s (Town &amp; Country)</div><div class="tl-event">Mediation &mdash; Steven Rottman</div><span class="tl-badge b-med">MEDIATION TOMORROW</span></div>
         </div>
         <div class="tl-item s-motion" onclick="window.location='/motion-dashboard'">
           <div class="tl-date">APR 6</div>
           <div class="tl-body"><div class="tl-case">Conant v. Evergreen</div><div class="tl-event">Motion to Remand filing due</div><span class="tl-badge b-motion">MOTION</span></div>
+        </div>
+        <div class="tl-item s-disco" onclick="window.location='/cmc-deadline-monitor/'">
+          <div class="tl-date">APR 7</div>
+          <div class="tl-body"><div class="tl-case">Anguiano v. Kinecta FCU</div><div class="tl-event">CMC Statement filing deadline</div><span class="tl-badge b-disco">CMC FILING</span></div>
         </div>
         <div class="tl-item s-motion" onclick="window.location='/motion-dashboard'">
           <div class="tl-date">APR 9</div>
@@ -360,21 +368,29 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
           <div class="tl-date">APR 9</div>
           <div class="tl-body"><div class="tl-case">Caleres / Ramirez</div><div class="tl-event">Consolidation + Demurrer Opp due</div><span class="tl-badge b-motion">MOTION</span></div>
         </div>
-        <div class="tl-item s-disco" onclick="window.location='/discovery-tracker'">
+        <div class="tl-item s-med" onclick="window.location='/mediation-pipeline'">
           <div class="tl-date">APR 9</div>
-          <div class="tl-body"><div class="tl-case">Truitt / Carias-Paredes</div><div class="tl-event">MTC Deadline &mdash; Original deficient responses</div><span class="tl-badge b-disco">DISCOVERY</span></div>
+          <div class="tl-body"><div class="tl-case">Soto v. Control Air</div><div class="tl-event">Mediation &mdash; Gig Kyriacou</div><span class="tl-badge b-med">MEDIATION</span></div>
         </div>
-        <div class="tl-item s-disco" onclick="window.location='/discovery-tracker'">
+        <div class="tl-item s-disco" onclick="window.location='/cmc-deadline-monitor/'">
+          <div class="tl-date">APR 9</div>
+          <div class="tl-body"><div class="tl-case">Lee v. IMC Logistics</div><div class="tl-event">CMC Statement filing deadline</div><span class="tl-badge b-disco">CMC FILING</span></div>
+        </div>
+        <div class="tl-item s-med" onclick="window.location='/mediation-pipeline'">
+          <div class="tl-date">APR 10</div>
+          <div class="tl-body"><div class="tl-case">Santamaria v. America Central</div><div class="tl-event">Mediation &mdash; M Resolution</div><span class="tl-badge b-med">MEDIATION</span></div>
+        </div>
+        <div class="tl-item s-med" onclick="window.location='/mediation-pipeline'">
+          <div class="tl-date">APR 13</div>
+          <div class="tl-body"><div class="tl-case">Agpalza v. Mission Wells</div><div class="tl-event">Mediation &mdash; Marc Feder</div><span class="tl-badge b-med">MEDIATION</span></div>
+        </div>
+        <div class="tl-item s-motion" onclick="window.location='/motion-dashboard'">
           <div class="tl-date">APR 14</div>
-          <div class="tl-body"><div class="tl-case">Outdoor Dimensions (Richards)</div><div class="tl-event">MTC Deadline &mdash; SROGs, RFPs Set 1</div><span class="tl-badge b-disco">DISCOVERY</span></div>
+          <div class="tl-body"><div class="tl-case">Richards v. Outdoor Dimensions</div><div class="tl-event">MTC Deadline &mdash; SROGs, RFPs Set 1</div><span class="tl-badge b-motion">MOTION</span></div>
         </div>
-        <div class="tl-item s-disco" onclick="window.location='/discovery-tracker'">
-          <div class="tl-date">APR 16</div>
-          <div class="tl-body"><div class="tl-case">Cargomatic (Duenas)</div><div class="tl-event">RFP MTC Deadline</div><span class="tl-badge b-disco">DISCOVERY</span></div>
-        </div>
-        <div class="tl-item s-disco" onclick="window.location='/discovery-tracker'">
-          <div class="tl-date">APR 20</div>
-          <div class="tl-body"><div class="tl-case">Snap-On Logistics (Galvez)</div><div class="tl-event">Response Deadline &mdash; FROG, RFPs</div><span class="tl-badge b-disco">DISCOVERY</span></div>
+        <div class="tl-item s-disco" onclick="window.location='/cmc-deadline-monitor/'">
+          <div class="tl-date">APR 14</div>
+          <div class="tl-body"><div class="tl-case">Steves v. LA Solar Group</div><div class="tl-event">Status Conference Statement filing deadline</div><span class="tl-badge b-disco">CMC FILING</span></div>
         </div>
       </div>
     </div>
@@ -422,21 +438,21 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
         <div class="cmc-up-info"><div class="ui-case">Soto v. Control Air</div><div class="ui-date">Apr 22 filing &middot; SM</div></div>
       </div>
       <div class="cmc-up-item" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'">
-        <div class="cmc-up-days d-yellow">25d</div>
-        <div class="cmc-up-info"><div class="ui-case">Evergreen Alliance (PAGA)</div><div class="ui-date">Apr 27 filing &middot; SM</div></div>
+        <div class="cmc-up-days d-yellow">27d</div>
+        <div class="cmc-up-info"><div class="ui-case">Evergreen Alliance (PAGA)</div><div class="ui-date">Apr 29 filing &middot; SM</div></div>
       </div>
       <div class="cmc-up-item" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'">
-        <div class="cmc-up-days d-muted">+10</div>
-        <div class="cmc-up-info"><div class="ui-case">more in pipeline</div><div class="ui-date">through Apr 2027</div></div>
+        <div class="cmc-up-days d-muted">+11</div>
+        <div class="cmc-up-info"><div class="ui-case">more in pipeline</div><div class="ui-date">through 2027</div></div>
       </div>
     </div>
     <!-- STATS -->
     <div class="cmc-stats">
-      <div class="cmc-stat-box"><div class="sb-num" style="color:var(--yellow);text-shadow:0 0 16px rgba(234,179,8,.3)">15</div><div class="sb-label">Statements Tracked</div></div>
-      <div class="cmc-stat-box"><div class="sb-num glow-red">2</div><div class="sb-label">Critical (&lt;7 days)</div></div>
+      <div class="cmc-stat-box"><div class="sb-num" style="color:var(--yellow);text-shadow:0 0 16px rgba(234,179,8,.3)">19</div><div class="sb-label">Statements Tracked</div></div>
+      <div class="cmc-stat-box"><div class="sb-num glow-red">4</div><div class="sb-label">Critical (&lt;7 days)</div></div>
       <div class="cmc-workload">
-        <div class="cmc-wl-bar"><span style="color:var(--blue)">8</span><div class="wl-name">JM</div></div>
-        <div class="cmc-wl-bar"><span style="color:var(--purple)">7</span><div class="wl-name">SM</div></div>
+        <div class="cmc-wl-bar"><span style="color:var(--blue)">10</span><div class="wl-name">JM</div></div>
+        <div class="cmc-wl-bar"><span style="color:var(--purple)">12</span><div class="wl-name">SM</div></div>
       </div>
     </div>
   </div>
@@ -449,18 +465,18 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
     <div class="snap-grid">
       <a href="/mediation-pipeline" class="snap-card"><div class="snap-num glow-purple">36</div><div class="snap-label">Mediations Booked</div></a>
       <a href="/mediation-pipeline" class="snap-card"><div class="snap-num glow-green">33</div><div class="snap-label">Pipeline Cases</div></a>
-      <a href="/motion-dashboard" class="snap-card"><div class="snap-num glow-orange">14</div><div class="snap-label">Active Motions</div></a>
-      <a href="/discovery-tracker" class="snap-card"><div class="snap-num glow-blue">47</div><div class="snap-label">Pre-Discovery</div></a>
-      <a href="/cmc-deadline-monitor/" class="snap-card"><div class="snap-num" style="color:var(--yellow);text-shadow:0 0 20px rgba(234,179,8,.3)">15</div><div class="snap-label">CMC Statements</div></a>
-      <a href="/motion-dashboard" class="snap-card"><div class="snap-num glow-red">4</div><div class="snap-label">Arb Track</div></a>
+      <a href="/motion-dashboard" class="snap-card"><div class="snap-num glow-orange">20</div><div class="snap-label">Active Motions</div></a>
+      <a href="/discovery-tracker" class="snap-card"><div class="snap-num glow-blue">19</div><div class="snap-label">Pre-Discovery</div></a>
+      <a href="/cmc-deadline-monitor/" class="snap-card"><div class="snap-num" style="color:var(--yellow);text-shadow:0 0 20px rgba(234,179,8,.3)">19</div><div class="snap-label">CMC Statements</div></a>
+      <a href="/motion-dashboard" class="snap-card"><div class="snap-num glow-red">9</div><div class="snap-label">Arb Track</div></a>
     </div>
   </div>
   <div class="nav-panel">
     <a href="/command-center" class="nav-tile"><span class="nav-icon">&#127919;</span><div class="nav-text"><div class="nt-title">Active Case Command Center</div><div class="nt-desc">Portfolio management &mdash; attention-driven operating surface</div></div></a>
     <a href="/mediation-pipeline" class="nav-tile"><span class="nav-icon">&#128176;</span><div class="nav-text"><div class="nt-title">Mediation Pipeline</div><div class="nt-desc">Pipeline &rarr; Booked &rarr; Resolved &mdash; settlement tracking &amp; recovery</div></div></a>
     <a href="/motion-dashboard" class="nav-tile"><span class="nav-icon">&#9889;</span><div class="nav-text"><div class="nt-title">Motion Dashboard</div><div class="nt-desc">Deadlines, filings, MTCA scorecard &amp; CMC tracker</div></div></a>
-    <a href="/discovery-tracker" class="nav-tile"><span class="nav-icon">&#128203;</span><div class="nav-text"><div class="nt-title">Discovery Tracker</div><div class="nt-desc">100 entries &mdash; RFPs, SROGs, deadlines &amp; M&amp;C status</div></div></a>
-    <a href="/cmc-deadline-monitor/" class="nav-tile"><span class="nav-icon">&#128197;</span><div class="nav-text"><div class="nt-title">CMC Deadline Monitor</div><div class="nt-desc">15 statements tracked &mdash; auto-draft pipeline &amp; filing deadlines</div></div></a>
+    <a href="/discovery-tracker" class="nav-tile"><span class="nav-icon">&#128203;</span><div class="nav-text"><div class="nt-title">Discovery Tracker</div><div class="nt-desc">95 entries &mdash; RFPs, SROGs, deadlines &amp; M&amp;C status</div></div></a>
+    <a href="/cmc-deadline-monitor/" class="nav-tile"><span class="nav-icon">&#128197;</span><div class="nav-text"><div class="nt-title">CMC Deadline Monitor</div><div class="nt-desc">19 statements tracked &mdash; auto-draft pipeline &amp; filing deadlines</div></div></a>
     <a href="/daily-briefing" class="nav-tile"><span class="nav-icon">&#128240;</span><div class="nav-text"><div class="nt-title">Daily Case Briefing</div><div class="nt-desc">Morning standup &mdash; hearings, mediations &amp; action items</div></div></a>
   </div>
 </div>
@@ -502,8 +518,8 @@ setInterval(updateClock,30000);
 function animateRings(){
   animateRing('ring1',0.80);
   animateRing('ring2',0.49);
-  animateRing('ring3',0.43);
-  animateRing('ring4',0.18);
+  animateRing('ring3',0.3);
+  animateRing('ring4',0.19);
 }
 function animateRing(id,pct){
   var el=document.getElementById(id);
@@ -591,7 +607,7 @@ function animateChaos(){
     {n:7,text:'FULL SEND',color:'var(--pink)'}
   ];
   // Real data: 6 urgent motions + 1 TODAY deadline + 1 mediation tomorrow
-  var score=6+1*2+1;
+  var score=6+2*2+5;
   var level;
   if(score<=2)level=levels[0];
   else if(score<=4)level=levels[1];

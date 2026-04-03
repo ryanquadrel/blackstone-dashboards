@@ -35,6 +35,16 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 .hdr-meta strong{color:var(--text)}
 
 
+
+/* ═══ EMOJI OF THE DAY ═══ */
+.eotd{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;background:var(--surface2);border:1px solid var(--border);cursor:default;transition:all .3s;position:relative;user-select:none}
+.eotd:hover{border-color:var(--purple);transform:scale(1.08);box-shadow:0 4px 16px rgba(168,85,247,.2)}
+.eotd-emoji{font-size:1.4rem;animation:eotd-bounce 2s ease infinite}
+.eotd-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--dim)}
+@keyframes eotd-bounce{0%,100%{transform:translateY(0) rotate(0deg)}25%{transform:translateY(-3px) rotate(-5deg)}50%{transform:translateY(0) rotate(0deg)}75%{transform:translateY(-2px) rotate(5deg)}}
+.eotd-tooltip{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:.72rem;color:var(--muted);white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;box-shadow:0 4px 20px rgba(0,0,0,.4);z-index:10}
+.eotd:hover .eotd-tooltip{opacity:1}
+
 /* ═══ HEADER ACTION BUTTONS ═══ */
 .hdr-actions{display:flex;align-items:center;gap:10px}
 .hdr-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:10px;font-size:.82rem;font-weight:700;text-decoration:none;transition:all .25s;border:1px solid var(--border);white-space:nowrap}
@@ -237,6 +247,11 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
     <div class="hdr-sub">Blackstone Law, APC &mdash; Wage &amp; Hour Litigation</div>
   </div>
   <div class="hdr-actions">
+    <div class="eotd" id="eotdPill">
+      <span class="eotd-emoji" id="eotdEmoji"></span>
+      <span class="eotd-label">MOOD</span>
+      <div class="eotd-tooltip" id="eotdTooltip"></div>
+    </div>
     <a href="/daily-briefing" class="hdr-btn hdr-btn-briefing"><span class="hb-icon">&#128240;</span><span class="hb-label">Daily Briefing</span></a>
     <a href="/mediation-strategy/vasquez-lulus" class="hdr-btn hdr-btn-strategy" id="strategyBtn" style="display:none"><span class="hb-live"></span><span class="hb-icon">&#9876;</span><span class="hb-label">Mediation Strategy</span></a>
   </div>
@@ -756,6 +771,50 @@ window.addEventListener('load',function(){
       items[i].setAttribute('data-med-link','/mediation-strategy/vasquez-lulus');
     }
   }
+})();
+
+
+// ═══ EMOJI OF THE DAY ═══
+(function(){
+  var zoo = [
+    {e:'\ud83d\udc14',t:'Cluckin\u2019 through depositions'},
+    {e:'\ud83d\udc30',t:'Hopping over deadlines'},
+    {e:'\ud83d\udc35',t:'Monkey see, monkey compel'},
+    {e:'\ud83e\udd86',t:'Duck, duck, discovery'},
+    {e:'\ud83d\udc27',t:'Cool under cross-examination'},
+    {e:'\ud83e\udd89',t:'Owl\u2019s reviewing the brief'},
+    {e:'\ud83e\udd9c',t:'Polly wants a settlement'},
+    {e:'\ud83d\udc38',t:'Leaping to mediation'},
+    {e:'\ud83e\udd8a',t:'Foxy objections sustained'},
+    {e:'\ud83d\udc3c',t:'Bamboo-zling defense counsel'},
+    {e:'\ud83e\udd84',t:'Unicorn settlement incoming'},
+    {e:'\ud83d\udc99',t:'Blue heart energy today'},
+    {e:'\ud83d\udc19',t:'Eight arms, eight deadlines'},
+    {e:'\ud83e\udd96',t:'T-Rex arms can\u2019t reach that extension'},
+    {e:'\ud83d\udc1d',t:'Busy bee briefing day'},
+    {e:'\ud83e\udda5',t:'Sloth mode: brief day'},
+    {e:'\ud83e\udd8d',t:'800-lb gorilla in the room'},
+    {e:'\ud83d\udc2c',t:'Dolphin-itely settling today'},
+    {e:'\ud83e\udd85',t:'Eagle-eyed on those responses'},
+    {e:'\ud83d\udc09',t:'Dragon energy for oral argument'},
+    {e:'\ud83e\udd99',t:'Llama drama in dept. 3'},
+    {e:'\ud83d\udc3b',t:'Bear-ing down on deadlines'},
+    {e:'\ud83d\udc31',t:'Purrfect motion practice'},
+    {e:'\ud83e\udda6',t:'Otter chaos, otter fun'},
+    {e:'\ud83e\udd80',t:'Crabby about that discovery'},
+    {e:'\ud83e\udd94',t:'Hedgehog\u2019s taking no risks'},
+    {e:'\ud83d\udc22',t:'Slow and steady wins the MTC'},
+    {e:'\ud83e\udd87',t:'Bat signal: mediation day'},
+    {e:'\ud83e\udda9',t:'Flamingo standing on one deadline'},
+    {e:'\ud83d\udc0d',t:'Ssssettlement dissscussions'}
+  ];
+  var d = new Date();
+  var doy = Math.floor((d - new Date(d.getFullYear(),0,0)) / 86400000);
+  var pick = zoo[doy % zoo.length];
+  var el = document.getElementById('eotdEmoji');
+  var tip = document.getElementById('eotdTooltip');
+  if(el) el.textContent = pick.e;
+  if(tip) tip.textContent = pick.t;
 })();
 
 </script>

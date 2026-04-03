@@ -132,6 +132,9 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 .tl-item.s-motion{border-left-color:var(--orange)}
 .tl-item.s-med{border-left-color:var(--purple)}
 .tl-item.s-disco{border-left-color:var(--teal)}
+.s-brief{border-left:3px solid #e879f9;cursor:pointer;}
+.b-brief{background:#e879f9;color:#000;}
+.b-urgent{background:var(--red);color:#fff;}
 .tl-date{font-size:.72rem;font-weight:700;color:var(--muted);min-width:44px;padding-top:2px}
 .tl-body{flex:1;min-width:0}
 .tl-case{font-size:.84rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -383,6 +386,10 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
           <div class="tl-date">APR 6</div>
           <div class="tl-body"><div class="tl-case">Conant v. Evergreen</div><div class="tl-event">Motion to Remand filing due Apr 6</div><span class="tl-badge b-motion">MOTION</span></div>
         </div>
+        <div class="tl-item s-brief" onclick="window.location='/mediation-pipeline'">
+          <div class="tl-date">APR 6</div>
+          <div class="tl-body"><div class="tl-case">Soto v. Control Air Enterprises</div><div class="tl-event">Mediation brief deadline (SM)</div><span class="tl-badge b-urgent">BRIEF DUE</span></div>
+        </div>
         <div class="tl-item s-disco" onclick="window.location='/cmc-deadline-monitor/'">
           <div class="tl-date">APR 7</div>
           <div class="tl-body"><div class="tl-case">Anguiano v. Kinecta Federal Credit Union</div><div class="tl-event">CMC Statement filing deadline</div><span class="tl-badge b-disco">CMC FILING</span></div>
@@ -411,6 +418,10 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
           <div class="tl-date">APR 10</div>
           <div class="tl-body"><div class="tl-case">Santamaria v. America Central Corp</div><div class="tl-event">Mediation &mdash; M Resolution</div><span class="tl-badge b-med">MEDIATION</span></div>
         </div>
+        <div class="tl-item s-brief" onclick="window.location='/mediation-pipeline'">
+          <div class="tl-date">APR 10</div>
+          <div class="tl-body"><div class="tl-case">Agpalza v. Mission Wells / Magnolia Springs</div><div class="tl-event">Mediation brief deadline (JM)</div><span class="tl-badge b-brief">BRIEF DUE</span></div>
+        </div>
         <div class="tl-item s-med" data-med-link="/mediation-pipeline" onclick="window.location=this.getAttribute('data-med-link')">
           <div class="tl-date">APR 13</div>
           <div class="tl-body"><div class="tl-case">Agpalza v. Mission Wells / Magnolia Springs</div><div class="tl-event">Mediation &mdash; Marc Feder</div><span class="tl-badge b-med">MEDIATION</span></div>
@@ -422,6 +433,10 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
         <div class="tl-item s-motion" onclick="window.location='/motion-dashboard'">
           <div class="tl-date">APR 14</div>
           <div class="tl-body"><div class="tl-case">Richards v. Outdoor Dimensions</div><div class="tl-event">MTC Discovery deadline Apr 14</div><span class="tl-badge b-motion">MOTION</span></div>
+        </div>
+        <div class="tl-item s-brief" onclick="window.location='/mediation-pipeline'">
+          <div class="tl-date">APR 15</div>
+          <div class="tl-body"><div class="tl-case">Rucker v. River City Medical Group</div><div class="tl-event">Mediation brief deadline (RQ)</div><span class="tl-badge b-brief">BRIEF DUE</span></div>
         </div>
       </div>
     </div>

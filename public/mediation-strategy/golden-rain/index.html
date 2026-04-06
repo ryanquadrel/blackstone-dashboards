@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="case-slug" content="golden-rain">
+<meta name="case-name" content="Bassell, Mayoka v. Golden Rain Foundation">
+<meta name="mediation-date" content="2026-04-02">
+<meta name="mediator" content="TBD">
+<meta name="generated" content="2026-04-02">
+<meta name="status" content="Archived">
+<title>Golden Rain Foundation — Mediation Strategy</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --card-alt: #21242f;
+    --border: #2a2d3a;
+    --text: #e4e4e7;
+    --text-dim: #9ca3af;
+    --accent: #6366f1;
+    --accent-light: #818cf8;
+    --green: #22c55e;
+    --green-dim: #16a34a;
+    --red: #ef4444;
+    --red-dim: #dc2626;
+    --yellow: #eab308;
+    --yellow-dim: #ca8a04;
+    --orange: #f97316;
+    --blue: #3b82f6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  .header-meta {
+    text-align: right;
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+  .header-meta strong { color: var(--text); }
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .badge-settle { background: rgba(34,197,94,0.15); color: var(--green); }
+  .badge-conf { background: rgba(99,102,241,0.15); color: var(--accent-light); }
+
+  /* Grid layout */
+  .grid { display: grid; gap: 16px; }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .grid-top { grid-template-columns: 300px 1fr 1fr; }
+
+  /* Cards */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .card h2 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .card.full-width { grid-column: 1 / -1; }
+
+  /* Snapshot KV pairs */
+  .kv-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(42,45,58,0.5);
+  }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-label { color: var(--text-dim); }
+  .kv-value { font-weight: 600; text-align: right; }
+  .kv-value.big { font-size: 15px; color: var(--accent-light); }
+
+  /* Strength / weakness lists */
+  .sw-list { list-style: none; }
+  .sw-list li {
+    font-size: 12.5px;
+    padding: 6px 0;
+    padding-left: 20px;
+    position: relative;
+    border-bottom: 1px solid rgba(42,45,58,0.3);
+  }
+  .sw-list li:last-child { border-bottom: none; }
+  .sw-list li::before {
+    position: absolute;
+    left: 0;
+    top: 6px;
+    font-size: 12px;
+  }
+  .sw-list.pro li::before { content: "▲"; color: var(--green); }
+  .sw-list.con li::before { content: "▼"; color: var(--red); }
+  .sw-list li strong { color: var(--text); }
+
+  /* Numbers table */
+  .num-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .num-table th {
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-dim);
+    padding: 6px 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .num-table td {
+    padding: 7px 8px;
+    border-bottom: 1px solid rgba(42,45,58,0.4);
+  }
+  .num-table tr:last-child td { border-bottom: none; }
+  .num-table .label-cell { color: var(--text-dim); }
+  .num-table .money { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .num-table .highlight-row td {
+    background: rgba(99,102,241,0.08);
+    font-weight: 600;
+  }
+  .num-table .target-row td {
+    background: rgba(34,197,94,0.08);
+  }
+  .num-table .floor-row td {
+    background: rgba(239,68,68,0.08);
+  }
+
+  /* Game plan - visual pipeline */
+  .pipeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .pipeline-step {
+    display: grid;
+    grid-template-columns: 100px 120px 70px 1fr;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-left: 3px solid var(--border);
+    font-size: 13px;
+    position: relative;
+  }
+  .pipeline-step::before {
+    content: "";
+    position: absolute;
+    left: -7px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 2px solid var(--border);
+  }
+  .pipeline-step .step-label {
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .pipeline-step .step-amount { font-weight: 700; font-variant-numeric: tabular-nums; }
+  .pipeline-step .step-ww { color: var(--text-dim); font-size: 12px; }
+  .pipeline-step .step-msg { color: var(--text-dim); font-size: 12px; font-style: italic; }
+
+  .pipeline-step.open { border-left-color: var(--accent); }
+  .pipeline-step.open::before { border-color: var(--accent); background: var(--accent); }
+  .pipeline-step.move { border-left-color: var(--blue); }
+  .pipeline-step.move::before { border-color: var(--blue); }
+  .pipeline-step.signal { border-left-color: var(--yellow); }
+  .pipeline-step.signal::before { border-color: var(--yellow); background: var(--yellow); }
+  .pipeline-step.bracket { border-left-color: var(--orange); }
+  .pipeline-step.bracket::before { border-color: var(--orange); }
+  .pipeline-step.target { border-left-color: var(--green); }
+  .pipeline-step.target::before { border-color: var(--green); background: var(--green); }
+  .pipeline-step.floor { border-left-color: var(--red); }
+  .pipeline-step.floor::before { border-color: var(--red); background: var(--red); }
+
+  /* Messaging cards */
+  .msg-card {
+    padding: 10px 12px;
+    background: var(--card-alt);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-size: 12.5px;
+  }
+  .msg-card:last-child { margin-bottom: 0; }
+  .msg-card .msg-num {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: var(--accent);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 4px;
+    margin-right: 8px;
+    flex-shrink: 0;
+  }
+  .msg-card .msg-title { font-weight: 700; margin-bottom: 4px; }
+  .msg-card .msg-body { color: var(--text-dim); }
+
+  /* Bracket options */
+  .bracket-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .bracket-opt {
+    background: var(--card-alt);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+  .bracket-opt .bracket-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+  }
+  .bracket-opt .bracket-range {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .bracket-opt .bracket-mid {
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+  .bracket-opt.agg { border-color: var(--orange); }
+  .bracket-opt.mod { border-color: var(--yellow); }
+  .bracket-opt.con { border-color: var(--green); }
+  .bracket-opt.agg .bracket-range { color: var(--orange); }
+  .bracket-opt.mod .bracket-range { color: var(--yellow); }
+  .bracket-opt.con .bracket-range { color: var(--green); }
+
+  /* OC read */
+  .oc-read { font-size: 13px; color: var(--text-dim); line-height: 1.7; }
+  .oc-read strong { color: var(--text); }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  @media (max-width: 900px) {
+    .grid-2, .grid-3, .grid-top { grid-template-columns: 1fr; }
+    .bracket-grid { grid-template-columns: 1fr; }
+    .pipeline-step { grid-template-columns: 80px 100px 60px 1fr; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div>
+    <h1>Golden Rain Foundation</h1>
+    <div style="color:var(--text-dim); font-size:13px; margin-top:4px;">Bassell, Mayoka v. Golden Rain Foundation</div>
+    <div style="margin-top:8px;">
+      <span class="badge badge-settle">Goal: Settlement</span>
+      <span class="badge badge-conf">Confidential</span>
+    </div>
+  </div>
+  <div class="header-meta">
+    <strong>April 2, 2026</strong> &middot; 9:30 AM<br>
+    Mediator: <strong>Marc Feder</strong><br>
+    OC Superior Court, Dept. CX105<br>
+    Hon. Melissa R. McCormick
+  </div>
+</div>
+
+<!-- TOP ROW: Snapshot + Strengths + Weaknesses -->
+<div class="grid grid-top" style="margin-bottom:16px;">
+
+  <!-- Case Snapshot -->
+  <div class="card">
+    <h2>Case Snapshot</h2>
+    <div class="kv-row"><span class="kv-label">Workweeks</span><span class="kv-value big">44,645</span></div>
+    <div class="kv-row"><span class="kv-label">Class Members</span><span class="kv-value">364</span></div>
+    <div class="kv-row"><span class="kv-label">PAGA Members</span><span class="kv-value">223</span></div>
+    <div class="kv-row"><span class="kv-label">Full Exposure</span><span class="kv-value big">$15,854,833</span></div>
+    <div class="kv-row"><span class="kv-label">OC</span><span class="kv-value">Holland & Robertson</span></div>
+    <div class="kv-row"><span class="kv-label">Other Room</span><span class="kv-value">2 Board Members + OC</span></div>
+    <div class="kv-row"><span class="kv-label">Plaintiffs Attending</span><span class="kv-value">No</span></div>
+    <div class="kv-row"><span class="kv-label">Referral / JPA</span><span class="kv-value" style="color:var(--green);">None — Full Fee</span></div>
+  </div>
+
+  <!-- Strengths -->
+  <div class="card">
+    <h2 style="color:var(--green);">&#9650; Our Strengths</h2>
+    <ul class="sw-list pro">
+      <li><strong>Repeat violator</strong> — Brock settled $550K (2013-2019), violations continued</li>
+      <li><strong>Zero rest premiums paid</strong> — ever, across 60K+ shifts</li>
+      <li><strong>80.1% of meal punches at exactly 30 min</strong> — suspicious rounding pattern</li>
+      <li><strong>Strong testimony</strong> — 3 named plaintiffs + 4 class members (5 interviewed)</li>
+      <li><strong>PAGA survives arb</strong> (Viking River) — 223 aggrieved employees</li>
+      <li><strong>Mass arb threat understood by OC</strong> — ~$18K+ per filing x 100+ claimants</li>
+      <li><strong>Bassell:</strong> wrongful termination + EDD ruling in her favor</li>
+      <li><strong>Valencia:</strong> LC 1102.5 retaliation, PIP after 3.6/4.0 review, fired on fabricated grounds</li>
+      <li><strong>Insurance carrier involved</strong> — OC needed "insurance approval" for mediator</li>
+      <li><strong>OC cooperative</strong> — they want to resolve</li>
+    </ul>
+  </div>
+
+  <!-- Weaknesses -->
+  <div class="card">
+    <h2 style="color:var(--red);">&#9660; Their Arguments</h2>
+    <ul class="sw-list con">
+      <li><strong>Policies facially lawful</strong> — compliant on paper</li>
+      <li><strong>Low facial meal violation rate</strong> — 10.2% gross, 7.1% net of premiums</li>
+      <li><strong>Rest break = 100% assumption</strong> — testimony only, no hard clock data</li>
+      <li><strong>Brock settlement gravitational pull</strong> — prior case anchors low</li>
+      <li><strong>Nonprofit / Leisure World</strong> — ~1/3 of class are residents</li>
+      <li><strong>Arb agreements across class</strong> — "among the better agreements"</li>
+      <li><strong>Board approval ceiling</strong> — undisclosed cap, further approval above it</li>
+      <li><strong>Violation rates declining</strong> — year over year during class period</li>
+    </ul>
+  </div>
+</div>
+
+<!-- MIDDLE ROW: Numbers + Game Plan -->
+<div class="grid grid-2" style="margin-bottom:16px;">
+
+  <!-- JG Framework Numbers -->
+  <div class="card">
+    <h2>The Numbers (JG Framework + Firm Norm)</h2>
+    <table class="num-table">
+      <thead>
+        <tr><th>Concept</th><th>$/WW</th><th>Amount</th><th style="font-size:10px;">Source</th></tr>
+      </thead>
+      <tbody>
+        <tr class="highlight-row"><td>Best Case (BCS)</td><td class="money">$35–40</td><td class="money">$1.56M – $1.79M</td><td style="font-size:11px; color:var(--text-dim);">JG</td></tr>
+        <tr><td class="label-cell">BCS Midpoint</td><td class="money">$37.50</td><td class="money">$1.71M</td><td style="font-size:11px; color:var(--text-dim);">JG</td></tr>
+        <tr class="highlight-row"><td>Signal (BCS + 20%)</td><td class="money">$45</td><td class="money">$2.05M</td><td style="font-size:11px; color:var(--text-dim);">JG</td></tr>
+        <tr><td class="label-cell">JG Opening (4x signal)</td><td class="money" style="color:var(--text-dim);">$184</td><td class="money" style="color:var(--text-dim);">$8.2M</td><td style="font-size:11px; color:var(--text-dim);">JG</td></tr>
+        <tr><td class="label-cell">Firm Norm Range</td><td class="money" style="color:var(--accent-light);">$200–250</td><td class="money" style="color:var(--accent-light);">$8.9M – $11.2M</td><td style="font-size:11px; color:var(--text-dim);">Norm</td></tr>
+        <tr style="background:rgba(99,102,241,0.12);"><td style="font-weight:700;">Opening (Norm, low end)</td><td class="money" style="font-size:15px;">$202</td><td class="money" style="font-size:15px;">$9.0M</td><td style="font-size:11px; color:var(--accent-light);">4.4x signal</td></tr>
+        <tr class="target-row"><td>Target / Landing</td><td class="money">$36–40</td><td class="money">$1.60M – $1.79M</td><td></td></tr>
+        <tr class="floor-row"><td>Walk-Away</td><td class="money">$30</td><td class="money">$1.34M</td><td></td></tr>
+        <tr class="floor-row"><td>Hard Floor</td><td class="money">$28</td><td class="money">$1.25M</td><td></td></tr>
+        <tr><td class="label-cell">Individual (Bassell + Valencia)</td><td class="label-cell">—</td><td class="money">$40K folded in</td><td></td></tr>
+        <tr><td class="label-cell">PAGA apportionment</td><td class="label-cell">—</td><td class="label-cell">Minimal</td><td></td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:10px; padding:8px 10px; background:var(--card-alt); border-radius:6px; font-size:11px; color:var(--text-dim); line-height:1.6;">
+      <strong style="color:var(--accent-light);">Opening logic:</strong> JG formula yields $184/ww (4x signal). Firm norm is $200–250/ww. Case-specific factors (low facial violations, nonprofit, Brock gravitational pull, board members who may check out at high numbers) push toward low end of norm. <strong style="color:var(--text);">$9M ($202/ww)</strong> satisfies both — 4.4x signal and within the $200–250 norm. 57% of stated exposure.
+    </div>
+  </div>
+
+  <!-- Negotiation Pipeline -->
+  <div class="card">
+    <h2>Negotiation Game Plan</h2>
+    <div class="pipeline">
+      <div class="pipeline-step open">
+        <span class="step-label">Open</span>
+        <span class="step-amount">$9.0M</span>
+        <span class="step-ww">$202/ww</span>
+        <span class="step-msg">Firm norm low end (4.4x signal, 57% of exposure)</span>
+      </div>
+      <div class="pipeline-step move">
+        <span class="step-label">Move 2</span>
+        <span class="step-amount">$6.5M</span>
+        <span class="step-ww">$146/ww</span>
+        <span class="step-msg">Big good-faith drop, still 3x+ signal</span>
+      </div>
+      <div class="pipeline-step move">
+        <span class="step-label">Move 3</span>
+        <span class="step-amount">$4.2M</span>
+        <span class="step-ww">$94/ww</span>
+        <span class="step-msg">Getting real, above signal zone</span>
+      </div>
+      <div class="pipeline-step signal">
+        <span class="step-label">Signal</span>
+        <span class="step-amount">$2.0–2.1M</span>
+        <span class="step-ww">$45–47</span>
+        <span class="step-msg">"$45/ww case; we don't settle under $30/ww"</span>
+      </div>
+      <div class="pipeline-step bracket">
+        <span class="step-label">Bracket</span>
+        <span class="step-amount">$1.5–2.25M</span>
+        <span class="step-ww">$34–50</span>
+        <span class="step-msg">One-time use — first concession below $2M</span>
+      </div>
+      <div class="pipeline-step target">
+        <span class="step-label">Target</span>
+        <span class="step-amount">$1.6–1.8M</span>
+        <span class="step-ww">$36–40</span>
+        <span class="step-msg">BCS range — this is where we want to land</span>
+      </div>
+      <div class="pipeline-step floor">
+        <span class="step-label">Walk-Away</span>
+        <span class="step-amount">$1.34M</span>
+        <span class="step-ww">$30</span>
+        <span class="step-msg">Floor — below this, better off litigating</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM ROW: Messaging + Brackets + OC Read -->
+<div class="grid grid-3">
+
+  <!-- Messaging Points for Feder -->
+  <div class="card" style="grid-column: span 2;">
+    <h2>Key Messaging Points for Feder</h2>
+    <div class="msg-card">
+      <div class="msg-title"><span class="msg-num">1</span>Repeat Violator</div>
+      <div class="msg-body">Settled Brock, promised to fix practices, didn't. Zero rest premiums. Suspicious 30-min punch patterns. Violations got more sophisticated, not less.</div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-title"><span class="msg-num">2</span>$30/ww Is the Floor, Not the Target</div>
+      <div class="msg-body">Brock paid ~$1,400/class member with worse violation rates. More class members here, PAGA exposure, and individual retaliation claims on top.</div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-title"><span class="msg-num">3</span>Arb Agreements Cut Both Ways</div>
+      <div class="msg-body">OC thinks arb shields them — mass arb at $18K+ per filing for 100+ claimants makes litigation more expensive for them, not less. PAGA survives regardless.</div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-title"><span class="msg-num">4</span>Insurance Is Paying</div>
+      <div class="msg-body">If they play the "retirement community" card, push on who's actually funding the settlement. Insurance approval was needed for the mediator — carrier is at the table.</div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-title"><span class="msg-num">5</span>We're Ready to Litigate</div>
+      <div class="msg-body">Formal discovery propounded April 2025, just stayed. Five class members interviewed and willing. EEOC complaint filed. Stay lifts and we move fast.</div>
+    </div>
+  </div>
+
+  <!-- Right column: Brackets + OC Read -->
+  <div style="display:flex; flex-direction:column; gap:16px;">
+
+    <!-- Bracket Strategy -->
+    <div class="card">
+      <h2>Bracket Options (Use Once)</h2>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <div class="bracket-opt agg">
+          <div class="bracket-label">Aggressive</div>
+          <div class="bracket-range">$1.6M – $2.5M</div>
+          <div class="bracket-mid">Mid $2.05M &middot; $46/ww</div>
+        </div>
+        <div class="bracket-opt mod">
+          <div class="bracket-label">Moderate</div>
+          <div class="bracket-range">$1.5M – $2.25M</div>
+          <div class="bracket-mid">Mid $1.88M &middot; $42/ww</div>
+        </div>
+        <div class="bracket-opt con">
+          <div class="bracket-label">Conservative</div>
+          <div class="bracket-range">$1.4M – $2.0M</div>
+          <div class="bracket-mid">Mid $1.70M &middot; $38/ww</div>
+        </div>
+      </div>
+      <div style="margin-top:10px; font-size:11px; color:var(--text-dim); font-style:italic; text-align:center;">
+        Their counter-bracket top number tells you where they actually are.
+      </div>
+    </div>
+
+    <!-- OC Read -->
+    <div class="card">
+      <h2>OC Read</h2>
+      <div class="oc-read">
+        <strong>Sue Holland</strong> is cooperative and pragmatic. <strong>Robertson</strong> is nominally lead but Sue runs point. They want to resolve — agreed to everything procedurally. <strong>Two board members</strong> in the room means decisions may be emotional, not purely legal. Board may have a real authority ceiling. Expect early lowball, expect the "residents are paying" speech. Stay patient, gather information, maintain credibility.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  No referral fee &middot; No JPA &middot; Full fee on resolution
+</div>
+
+</body>
+</html>

@@ -142,6 +142,7 @@ table.sortable-table th.sort-desc::after{content:'↓';opacity:1;color:var(--acc
   <button class="chip" data-filter="rq">RQ</button>
   <button class="chip" data-filter="cmc">CMC only</button>
   <button class="chip" data-filter="motion">Motions only</button>
+  <button class="chip" data-filter="all-cmcs">All CMCs (no day cap)</button>
 </div>
 
 <div class="section">
@@ -489,6 +490,7 @@ table.sortable-table th.sort-desc::after{content:'↓';opacity:1;color:var(--acc
 </div>
 </details>
 
+<div class="section" id="all-cmcs-section" style="display:none"><div class="section-head"><h2>📚 All Upcoming CMC Hearings</h2><div class="section-count" id="all-cmcs-count">—</div></div><div id="all-cmcs-body"></div></div>
 <div class="section">
   <div class="section-head"><h2>📋 All CMC Filing Deadlines (next 30 days)</h2><div class="section-count">click any column to sort ↕</div></div>
   <table id="all-cmc-table" class="sortable-table">
@@ -582,6 +584,75 @@ document.getElementById('search').addEventListener('input', e => {
       var hint=document.createElement('div'); hint.className='teaser-hint'; hint.textContent='click to expand ▾';
       sum.appendChild(hint);
     }
+  });
+})();
+</script>
+
+<script>
+(function(){
+  if(typeof HDATA==='undefined') return;
+  var today=new Date(); today.setHours(0,0,0,0);
+  var TYPE_COLORS={CMC:'#6c8cff',ISC:'#a571ff',SC:'#a571ff',IDC:'#1ac8b8',NACR:'#8b8fa3'};
+  function esc(s){return String(s||'').replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function dbadge(d){
+    if(d<=0) return '<span class="badge crit">TODAY</span>';
+    if(d<=2) return '<span class="badge crit">'+d+'d</span>';
+    if(d<=7) return '<span class="badge warn">'+d+'d</span>';
+    return '<span class="badge ok">'+d+'d</span>';
+  }
+  var rows=HDATA.filter(function(h){
+    var t=(h.type||'').toUpperCase();
+    if(['CMC','ISC','IDC','SC','NACR'].indexOf(t)<0) return false;
+    if(!(h.time||'').trim()) return false; // real hearings only
+    var d=new Date(h.date+'T00:00:00');
+    return d>=today;
+  }).sort(function(a,b){return a.date.localeCompare(b.date);});
+  var body=document.getElementById('all-cmcs-body');
+  var count=document.getElementById('all-cmcs-count');
+  if(!body||!count) return;
+  count.textContent=rows.length+' upcoming';
+  body.innerHTML=rows.map(function(h){
+    var t=(h.type||'').toUpperCase();
+    var color=TYPE_COLORS[t]||'#6c8cff';
+    var atty=(h.attorney||'—').toUpperCase();
+    var d=new Date(h.date+'T00:00:00');
+    var days=Math.round((d-today)/86400000);
+    var lbl=d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
+    var dept=esc(h.dept||h.jurisdiction||'');
+    var stmt=(h.statement||'').trim();
+    var stmtPill=stmt&&stmt!=='—'?'<span class="pill pill-na">'+esc(stmt.slice(0,50))+'</span>':'<span class="pill pill-na">stmt: not started</span>';
+    return '<div class="hcard" data-attorney="'+esc(atty.toLowerCase())+'" data-type="'+esc(t)+'">'+
+      '<div class="hcard-l" style="background:'+color+'"></div>'+
+      '<div class="hcard-body">'+
+        '<div class="hcard-row1"><div class="hcard-case">'+esc(h.case)+'</div>'+dbadge(days)+'</div>'+
+        '<div class="hcard-meta">'+
+          '<span class="type-pill" style="background:'+color+'22;color:'+color+'">'+esc(t)+'</span>'+
+          '<span class="meta-item">📅 '+esc(lbl)+' '+esc(h.time||'')+'</span>'+
+          '<span class="meta-item">'+dept+'</span>'+
+          '<span class="atty-chip">'+esc(atty)+'</span>'+
+        '</div>'+
+        '<div class="hcard-foot">'+stmtPill+'<span class="last-action">'+esc((h.last_action||'').slice(0,90))+'</span></div>'+
+      '</div></div>';
+  }).join('');
+
+  // Hook chip clicks: when "all-cmcs" active, hide everything except header strip,
+  // stat bar, controls, timeline, and our new section. When any other chip is
+  // active, hide our new section and let the existing handler do its thing.
+  var newSec=document.getElementById('all-cmcs-section');
+  // Sections to toggle off when in all-cmcs view
+  var toHide=Array.from(document.querySelectorAll('.section, details.section-collapsible')).filter(function(s){return s!==newSec;});
+  document.querySelectorAll('.chip').forEach(function(c){
+    c.addEventListener('click',function(){
+      if(c.dataset.filter==='all-cmcs'){
+        toHide.forEach(function(s){s.style.display='none';});
+        newSec.style.display='';
+        // make all our cards visible (override existing handler that ran first)
+        newSec.querySelectorAll('.hcard').forEach(function(card){card.style.display='';});
+      } else {
+        toHide.forEach(function(s){s.style.display='';});
+        newSec.style.display='none';
+      }
+    });
   });
 })();
 </script>

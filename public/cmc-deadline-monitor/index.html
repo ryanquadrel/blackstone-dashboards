@@ -100,11 +100,18 @@ table.sortable-table th::after{content:'↕';position:absolute;right:6px;opacity
 table.sortable-table th.sort-asc::after{content:'↑';opacity:1;color:var(--accent)}
 table.sortable-table th.sort-desc::after{content:'↓';opacity:1;color:var(--accent)}
 
-/* teaser peek for collapsed dropdowns */
 .section-collapsible:not([open]) > *:not(summary){display:block!important;max-height:110px;overflow:hidden;position:relative;padding-top:8px;padding-bottom:0;pointer-events:none;opacity:.75;-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 30%,transparent 95%);mask-image:linear-gradient(to bottom,#000 0%,#000 30%,transparent 95%)}
 .section-collapsible:not([open])::after{content:'click to expand ▾';display:block;text-align:center;padding:6px 0 12px;color:var(--dim);font-size:11px;letter-spacing:.5px;text-transform:uppercase}
 .section-collapsible:not([open]) .hcard:nth-of-type(n+2){display:none}
 .section-collapsible:not([open]) .section-head{display:none}
+
+/* teaser peek v2 — clone first card into summary */
+.section-collapsible>.section-summary{flex-direction:column;align-items:stretch;gap:10px}
+.section-summary-row{display:flex;justify-content:space-between;align-items:center;width:100%}
+.section-summary .teaser-wrap{position:relative;max-height:90px;overflow:hidden;pointer-events:none;opacity:.7;-webkit-mask-image:linear-gradient(to bottom,#000 30%,transparent 95%);mask-image:linear-gradient(to bottom,#000 30%,transparent 95%)}
+.section-summary .teaser-wrap .hcard{margin:0}
+.section-collapsible[open] .teaser-wrap,.section-collapsible[open] .teaser-hint{display:none}
+.section-summary .teaser-hint{text-align:center;font-size:11px;color:var(--dim);letter-spacing:.5px;text-transform:uppercase;margin-top:-4px}
 </style></head>
 <body>
 <header>
@@ -554,6 +561,27 @@ document.getElementById('search').addEventListener('input', e => {
       });
       rows.forEach(function(r){tbody.appendChild(r);});
     });
+  });
+})();
+</script>
+
+<script>
+(function(){
+  document.querySelectorAll('details.section-collapsible').forEach(function(d){
+    var sum=d.querySelector('summary'); if(!sum) return;
+    // wrap existing summary content in a row
+    var existing=Array.from(sum.childNodes);
+    var row=document.createElement('div'); row.className='section-summary-row';
+    existing.forEach(function(n){row.appendChild(n);});
+    sum.appendChild(row);
+    var first=d.querySelector('.hcard');
+    if(first){
+      var wrap=document.createElement('div'); wrap.className='teaser-wrap';
+      wrap.appendChild(first.cloneNode(true));
+      sum.appendChild(wrap);
+      var hint=document.createElement('div'); hint.className='teaser-hint'; hint.textContent='click to expand ▾';
+      sum.appendChild(hint);
+    }
   });
 })();
 </script>

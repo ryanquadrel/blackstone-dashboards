@@ -263,6 +263,16 @@ function matchLookup(lookup, defendant){
   return null;
 }
 
+function isPostSettlementGated(c){
+  if(c && c.attention_suppressed===true) return true;
+  if(c && c._mediation && c._mediation.phase){
+    var p=String(c._mediation.phase).toLowerCase();
+    if(p.indexOf('post-settlement')>=0||p.indexOf('post settlement')>=0||p.indexOf('settled')>=0||p.indexOf('phase 3')>=0) return true;
+  }
+  var d=(c&&c.defendant?c.defendant:'').toLowerCase();
+  if(d.indexOf('guardant')>=0||d.indexOf('hamcor')>=0) return true;
+  return false;
+}
 var _idxCounter=0;
 function normalizeCase(c){
   var nc = {};
@@ -304,6 +314,7 @@ function inferStage(c){
 // ═══ TIGHTENED SCORING ═══
 function scoreCase(c){
   var score=0,reasons=[];
+  if(isPostSettlementGated(c)) return {score:0,reasons:[]};
   // 1. Client contact — only flag at 90+ (medium) and 120+ (critical)
   if(c.last_client_contact){
     var lcd=parseDate(c.last_client_contact);
@@ -403,7 +414,7 @@ function renderHealthStrip(){
 }
 
 function renderAttentionQueue(){
-  var all=filteredCases.slice().sort(function(a,b){return b._score-a._score;});
+  var all=filteredCases.slice().filter(function(c){return !isPostSettlementGated(c);}).sort(function(a,b){return b._score-a._score;});
   var urgent=all.filter(function(c){return c._score>=25;});
   var watch=all.filter(function(c){return c._score>=12&&c._score<25;});
   var list=document.getElementById('attentionList');

@@ -49,7 +49,10 @@ input.search{background:var(--surface);border:1px solid var(--border);color:var(
 .pill-na{background:var(--surface);color:var(--dim)}
 .ext-link{color:var(--accent);text-decoration:none;font-size:11px}
 .ext-link:hover{text-decoration:underline}
-.timeline{display:grid;grid-template-columns:repeat(14,1fr);gap:6px;margin-top:8px}
+.timeline{display:grid;grid-template-columns:repeat(15,1fr);gap:6px;margin-top:8px}
+.pill-crit{background:rgba(255,77,106,.18);color:var(--red);font-weight:600}
+.pill-draft{background:rgba(165,113,255,.15);color:var(--purple)}
+.pill-meta{color:var(--dim);font-size:10px;margin-left:2px}
 .tl-day{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:8px 4px;text-align:center;min-height:70px}
 .tl-today{border-color:var(--accent);background:rgba(108,140,255,.1)}
 .tl-wknd{opacity:.5}
@@ -73,7 +76,7 @@ th{background:var(--surface2);font-weight:600;color:var(--dim);text-transform:up
     <div style="color:var(--dim);font-size:12px;margin-top:4px">Hearings-first view · CMC/ISC/IDC owned here · motions sourced from /motion-dashboard/</div>
   </div>
   <div class="sync-info">
-    Last sync: <strong>Apr 6, 2026 5:06 PM</strong><br>
+    Last sync: <strong>Apr 6, 2026 5:49 PM</strong><br>
     Next sync: <strong>Apr 13, 2026</strong>
   </div>
 </header>
@@ -82,8 +85,8 @@ th{background:var(--surface2);font-weight:600;color:var(--dim);text-transform:up
   <div class="stat crit"><div class="v">3</div><div class="l">This Week (CMC/ISC)</div></div>
   <div class="stat warn"><div class="v">2</div><div class="l">Next Week</div></div>
   <div class="stat"><div class="v">8</div><div class="l">Motion Hearings (30d)</div></div>
-  <div class="stat"><div class="v">2</div><div class="l">JM Load (14d)</div></div>
-  <div class="stat"><div class="v">3</div><div class="l">SM Load (14d)</div></div>
+  <div class="stat"><div class="v">4</div><div class="l">JM Load (14d)</div></div>
+  <div class="stat"><div class="v">4</div><div class="l">SM Load (14d)</div></div>
 </div>
 
 <div class="controls">
@@ -97,8 +100,8 @@ th{background:var(--surface2);font-weight:600;color:var(--dim);text-transform:up
 </div>
 
 <div class="section">
-  <div class="section-head"><h2>📍 14-Day Hearing Timeline</h2><div class="section-count">CMC/ISC/IDC + Motions · color-coded</div></div>
-  <div class="timeline"><div class="tl-day tl-today"><div class="tl-date">Mon<br><strong>6</strong></div><div class="tl-dots"><span class="dot" style="background:#6c8cff" title="Nithya v. Martis Camp Club, et. al. (Class) (CMC)"></span><span class="dot" style="background:#ff4d6a" title="Conant v. Evergreen (Remand)"></span></div></div><div class="tl-day"><div class="tl-date">Tue<br><strong>7</strong></div><div class="tl-dots"></div></div><div class="tl-day"><div class="tl-date">Wed<br><strong>8</strong></div><div class="tl-dots"><span class="dot" style="background:#6c8cff" title="Cervantez v. Keenan Farms, Inc. (Class) (CMC)"></span></div></div><div class="tl-day"><div class="tl-date">Thu<br><strong>9</strong></div><div class="tl-dots"><span class="dot" style="background:#ff4d6a" title="Edmiston v. Weatherford (MTCA)"></span><span class="dot" style="background:#ff4d6a" title="Caleres / Ramirez (Consolidate)"></span><span class="dot" style="background:#ff4d6a" title="Truitt / Carias-Paredes (MTC)"></span><span class="dot" style="background:#ff4d6a" title="Conant v. Evergreen (MTCA)"></span><span class="dot" style="background:#ff4d6a" title="Caleres / Ramirez (Demurrer)"></span></div></div><div class="tl-day"><div class="tl-date">Fri<br><strong>10</strong></div><div class="tl-dots"><span class="dot" style="background:#6c8cff" title="Flores v. Med (CMC)"></span></div></div><div class="tl-day tl-wknd"><div class="tl-date">Sat<br><strong>11</strong></div><div class="tl-dots"></div></div><div class="tl-day tl-wknd"><div class="tl-date">Sun<br><strong>12</strong></div><div class="tl-dots"></div></div><div class="tl-day"><div class="tl-date">Mon<br><strong>13</strong></div><div class="tl-dots"></div></div><div class="tl-day"><div class="tl-date">Tue<br><strong>14</strong></div><div class="tl-dots"><span class="dot" style="background:#6c8cff" title="Anguiano v. Kinecta Federal Credit Union (Class) (CMC)"></span><span class="dot" style="background:#ff4d6a" title="Richards v. Outdoor Dimensions (MTC)"></span></div></div><div class="tl-day"><div class="tl-date">Wed<br><strong>15</strong></div><div class="tl-dots"></div></div><div class="tl-day"><div class="tl-date">Thu<br><strong>16</strong></div><div class="tl-dots"><span class="dot" style="background:#8b8fa3" title="Waddell v. Santa Teresita Inc. (Class) (NACR)"></span></div></div><div class="tl-day"><div class="tl-date">Fri<br><strong>17</strong></div><div class="tl-dots"></div></div><div class="tl-day tl-wknd"><div class="tl-date">Sat<br><strong>18</strong></div><div class="tl-dots"></div></div><div class="tl-day tl-wknd"><div class="tl-date">Sun<br><strong>19</strong></div><div class="tl-dots"></div></div></div>
+  <div class="section-head"><h2>📍 30-Day Hearing Timeline</h2><div class="section-count">CMC/ISC/IDC + Motions · color-coded</div></div>
+  <div class="timeline"><div class="tl-day tl-today"><div class="tl-date">Mon<br><strong>6</strong></div><div class="tl-dots"><span class="dot" style="background:#6c8cff" title="Nithya v. Martis Camp Club, et. al. (Class) (CMC)"></span><span class="dot" style="background:#ff4d6a" title="Conant v. Evergreen (Remand)"></span></div></div><div class="tl-day"><div class="tl-date">Tue<br><strong>7</strong></div><div class="tl-dots"></div></div><div class="tl-day"><div class="tl-date">Wed<br><strong>8</strong></div><div class="tl-dots"><span class="dot" style="background:#6c8cff" title="Cervantez v. Keenan Farms, Inc. (Class) (CMC)"></span></div></div><div class="tl-day"><div class="tl-date">Thu<br><strong>9</strong></div><div class="tl-dots"><span class="dot" style="background:#ff4d6a" title="Edmiston v. Weatherford (MTCA)"></span><span class="dot" style="background:#ff4d6a" title="Caleres / Ramirez (Consolidate)"></span><span class="dot" style="background:#ff4d6a" title="Truitt / Carias-Paredes (MTC)"></span><span class="dot" style="background:#ff4d6a" title="Conant v. Evergreen (MTCA)"></span><span class="dot" style="background:#ff4d6a" title="Caleres / Ramirez (Demurrer)"></span></div></div><div class="tl-day"><div class="tl-date">Fri<br><strong>10</strong></div><div class="tl-dots"><span class="dot" style="background:#6c8cff" title="Flores v. Med (CMC)"></span></div></div><div class="tl-day tl-wknd"><div class="tl-date">Sat<br><strong>11</strong></div><div class="tl-dots"></div></div><div class="tl-day tl-wknd"><div class="tl-date">Sun<br><strong>12</strong></div><div class="tl-dots"></div></div><div class="tl-day"><div class="tl-date">Mon<br><strong>13</strong></div><div class="tl-dots"></div></div><div class="tl-day"><div class="tl-date">Tue<br><strong>14</strong></div><div class="tl-dots"><span class="dot" style="background:#6c8cff" title="Anguiano v. Kinecta Federal Credit Union (Class) (CMC)"></span><span class="dot" style="background:#ff4d6a" title="Richards v. Outdoor Dimensions (MTC)"></span></div></div><div class="tl-day"><div class="tl-date">Wed<br><strong>15</strong></div><div class="tl-dots"></div></div><div class="tl-day"><div class="tl-date">Thu<br><strong>16</strong></div><div class="tl-dots"><span class="dot" style="background:#8b8fa3" title="Waddell v. Santa Teresita Inc. (Class) (NACR)"></span></div></div><div class="tl-day"><div class="tl-date">Fri<br><strong>17</strong></div><div class="tl-dots"></div></div><div class="tl-day tl-wknd"><div class="tl-date">Sat<br><strong>18</strong></div><div class="tl-dots"></div></div><div class="tl-day tl-wknd"><div class="tl-date">Sun<br><strong>19</strong></div><div class="tl-dots"></div></div><div class="tl-day"><div class="tl-date">Mon<br><strong>20</strong></div><div class="tl-dots"></div></div><div class="tl-day"><div class="tl-date">Tue<br><strong>21</strong></div><div class="tl-dots"><span class="dot" style="background:#6c8cff" title="Seybold v. Hyatt Corporation dba Carmel Valley Ranch (Class) (CMC)"></span><span class="dot" style="background:#6c8cff" title="Steves v. LA Solar Group, Inc. (PAGA) (CMC)"></span></div></div><div class="tl-day"><div class="tl-date">Wed<br><strong>22</strong></div><div class="tl-dots"></div></div><div class="tl-day"><div class="tl-date">Thu<br><strong>23</strong></div><div class="tl-dots"></div></div><div class="tl-day"><div class="tl-date">Fri<br><strong>24</strong></div><div class="tl-dots"><span class="dot" style="background:#a571ff" title="Hernandez v. Liberty Utilities (Apple Valley Ranchos Water) Corp (Class) (SC)"></span><span class="dot" style="background:#ff4d6a" title="Rosado v. Ridgecrest (MTCA)"></span></div></div><div class="tl-day tl-wknd"><div class="tl-date">Sat<br><strong>25</strong></div><div class="tl-dots"></div></div><div class="tl-day tl-wknd"><div class="tl-date">Sun<br><strong>26</strong></div><div class="tl-dots"></div></div><div class="tl-day"><div class="tl-date">Mon<br><strong>27</strong></div><div class="tl-dots"></div></div><div class="tl-day"><div class="tl-date">Tue<br><strong>28</strong></div><div class="tl-dots"></div></div><div class="tl-day"><div class="tl-date">Wed<br><strong>29</strong></div><div class="tl-dots"></div></div><div class="tl-day"><div class="tl-date">Thu<br><strong>30</strong></div><div class="tl-dots"></div></div><div class="tl-day"><div class="tl-date">Fri<br><strong>1</strong></div><div class="tl-dots"></div></div><div class="tl-day tl-wknd"><div class="tl-date">Sat<br><strong>2</strong></div><div class="tl-dots"></div></div><div class="tl-day tl-wknd"><div class="tl-date">Sun<br><strong>3</strong></div><div class="tl-dots"></div></div><div class="tl-day"><div class="tl-date">Mon<br><strong>4</strong></div><div class="tl-dots"></div></div><div class="tl-day"><div class="tl-date">Tue<br><strong>5</strong></div><div class="tl-dots"></div></div></div>
   <div style="margin-top:10px;display:flex;gap:14px;font-size:11px;color:var(--dim);flex-wrap:wrap">
     <span><span class="dot" style="background:#6c8cff"></span> CMC</span>
     <span><span class="dot" style="background:#a571ff"></span> ISC/SC</span>
@@ -118,12 +121,12 @@ th{background:var(--surface2);font-weight:600;color:var(--dim);text-transform:up
     </div>
     <div class="hcard-meta">
       <span class="type-pill" style="background:#6c8cff22;color:#6c8cff">CMC</span>
-      <span class="meta-item">Mon Apr 6 3:00 PM</span>
+      <span class="meta-item">📅 Mon Apr 6 3:00 PM</span>
       <span class="meta-item">California Superior Court Placer</span>
       <span class="atty-chip">SM</span>
     </div>
     <div class="hcard-foot">
-      <span class="pill pill-na">N/A — discovery dispute case (CMC today 4/6)</span>
+      <span class="pill pill-na">N/A</span> <span class="pill-meta">N/A — discovery dispute case (CMC today </span>
       <span class="last-action">4/6 SM received supplemental responses from D. Grow</span>
     </div>
   </div>
@@ -136,12 +139,12 @@ th{background:var(--surface2);font-weight:600;color:var(--dim);text-transform:up
     </div>
     <div class="hcard-meta">
       <span class="type-pill" style="background:#6c8cff22;color:#6c8cff">CMC</span>
-      <span class="meta-item">Wed Apr 8 10:30 AM</span>
+      <span class="meta-item">📅 Wed Apr 8 10:30 AM</span>
       <span class="meta-item">California Superior Court Kings</span>
       <span class="atty-chip">JM</span>
     </div>
     <div class="hcard-foot">
-      <span class="pill pill-ok">FILED 3/23 (KA via Steno)</span>
+      <span class="pill pill-ok">✓ stmt filed</span> <span class="pill-meta">(FILED 3/23 (KA via Steno))</span>
       <span class="last-action">3/24 D mmoran served their CMS</span>
     </div>
   </div>
@@ -154,12 +157,12 @@ th{background:var(--surface2);font-weight:600;color:var(--dim);text-transform:up
     </div>
     <div class="hcard-meta">
       <span class="type-pill" style="background:#6c8cff22;color:#6c8cff">CMC</span>
-      <span class="meta-item">Fri Apr 10 10:00 AM</span>
+      <span class="meta-item">📅 Fri Apr 10 10:00 AM</span>
       <span class="meta-item">California Superior Court Los Angeles</span>
       <span class="atty-chip">JM</span>
     </div>
     <div class="hcard-foot">
-      <span class="pill pill-ok">FILED 4/3 (Joint ISC Statement)</span>
+      <span class="pill pill-ok">✓ stmt filed</span> <span class="pill-meta">(FILED 4/3 (Joint ISC Statement))</span>
       <span class="last-action">4/3 BSachs/Perkins confirmed final, on file</span>
     </div>
   </div>
@@ -177,12 +180,12 @@ th{background:var(--surface2);font-weight:600;color:var(--dim);text-transform:up
     </div>
     <div class="hcard-meta">
       <span class="type-pill" style="background:#6c8cff22;color:#6c8cff">CMC</span>
-      <span class="meta-item">Tue Apr 14 8:30 AM</span>
+      <span class="meta-item">📅 Tue Apr 14 8:30 AM</span>
       <span class="meta-item">California Superior Court Los Angeles</span>
       <span class="atty-chip">SM</span>
     </div>
     <div class="hcard-foot">
-      <span class="pill pill-warn">DRAFT sent 4/6 (SM to Sergio)</span>
+      <span class="pill pill-draft">📝 draft sent</span> <span class="pill-meta">(DRAFT sent 4/6 (SM to Sergio))</span>
       <span class="last-action">4/6 SM sent draft joint statement to OC</span>
     </div>
   </div>
@@ -195,13 +198,72 @@ th{background:var(--surface2);font-weight:600;color:var(--dim);text-transform:up
     </div>
     <div class="hcard-meta">
       <span class="type-pill" style="background:#8b8fa322;color:#8b8fa3">NACR</span>
-      <span class="meta-item">Thu Apr 16 8:30 AM</span>
+      <span class="meta-item">📅 Thu Apr 16 8:30 AM</span>
       <span class="meta-item">General Reminders</span>
       <span class="atty-chip">SM</span>
     </div>
     <div class="hcard-foot">
-      <span class="pill pill-ok">Filed 4/1 (Notice of Rulings ISC)</span>
+      <span class="pill pill-ok">✓ stmt filed</span> <span class="pill-meta">(Filed 4/1 (Notice of Rulings ISC))</span>
       <span class="last-action">4/1 LASC posted notice of rulings</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="section">
+  <div class="section-head"><h2>🗓️ Weeks 3–4 (Days 15–30)</h2><div class="section-count">3 hearings</div></div>
+  <div class="hcard" data-attorney="jm" data-type="CMC" data-filedate="2026-04-21">
+  <div class="hcard-l" style="background:#6c8cff"></div>
+  <div class="hcard-body">
+    <div class="hcard-row1">
+      <div class="hcard-case">Seybold v. Hyatt Corporation dba Carmel Valley Ranch (Class)</div>
+      <span class="badge ok">15d</span>
+    </div>
+    <div class="hcard-meta">
+      <span class="type-pill" style="background:#6c8cff22;color:#6c8cff">CMC</span>
+      <span class="meta-item">📅 Tue Apr 21 9:00 AM</span>
+      <span class="meta-item">California Superior Court Monterey</span>
+      <span class="atty-chip">JM</span>
+    </div>
+    <div class="hcard-foot">
+      <span class="pill pill-warn">⏳ in progress</span> <span class="pill-meta">(Pending — order setting CMC/ADR rcvd 3/2)</span>
+      <span class="last-action">3/24 KC fwd incoming mail re CMC order</span>
+    </div>
+  </div>
+</div><div class="hcard" data-attorney="jm" data-type="CMC" data-filedate="2026-04-21">
+  <div class="hcard-l" style="background:#6c8cff"></div>
+  <div class="hcard-body">
+    <div class="hcard-row1">
+      <div class="hcard-case">Steves v. LA Solar Group, Inc. (PAGA)</div>
+      <span class="badge ok">15d</span>
+    </div>
+    <div class="hcard-meta">
+      <span class="type-pill" style="background:#6c8cff22;color:#6c8cff">CMC</span>
+      <span class="meta-item">📅 Tue Apr 21 8:30 AM</span>
+      <span class="meta-item">California Superior Court Los Angeles</span>
+      <span class="atty-chip">JM</span>
+    </div>
+    <div class="hcard-foot">
+      <span class="pill pill-na">stmt: not started</span>
+      <span class="last-action">4/1 OC Garcia/GRSM raised M&amp;C re discovery</span>
+    </div>
+  </div>
+</div><div class="hcard" data-attorney="sm" data-type="SC" data-filedate="2026-04-24">
+  <div class="hcard-l" style="background:#a571ff"></div>
+  <div class="hcard-body">
+    <div class="hcard-row1">
+      <div class="hcard-case">Hernandez v. Liberty Utilities (Apple Valley Ranchos Water) Corp (Class)</div>
+      <span class="badge ok">18d</span>
+    </div>
+    <div class="hcard-meta">
+      <span class="type-pill" style="background:#a571ff22;color:#a571ff">SC</span>
+      <span class="meta-item">📅 Fri Apr 24 10:00 AM</span>
+      <span class="meta-item">California Superior Court Los Angeles</span>
+      <span class="atty-chip">SM</span>
+    </div>
+    <div class="hcard-foot">
+      <span class="pill pill-na">N/A</span> <span class="pill-meta">N/A — settlement (longform in process)</span>
+      <span class="last-action">3/29 TT sent draft longform + admin bids to OC</span>
     </div>
   </div>
 </div>
@@ -360,8 +422,8 @@ th{background:var(--surface2);font-weight:600;color:var(--dim);text-transform:up
 
 <div class="section">
   <div class="section-head"><h2>👥 Workload by Attorney (next 14 days)</h2></div>
-  <div class="workload-bars"><div>JM</div><div class="wl-bar"><div class="wl-fill" style="width:10%"></div></div><div><strong>2</strong></div></div>
-  <div class="workload-bars"><div>SM</div><div class="wl-bar"><div class="wl-fill" style="width:15%"></div></div><div><strong>3</strong></div></div>
+  <div class="workload-bars"><div>JM</div><div class="wl-bar"><div class="wl-fill" style="width:20%"></div></div><div><strong>4</strong></div></div>
+  <div class="workload-bars"><div>SM</div><div class="wl-bar"><div class="wl-fill" style="width:20%"></div></div><div><strong>4</strong></div></div>
 </div>
 
 <div class="drift ok">

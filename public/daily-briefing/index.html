@@ -1,91 +1,181 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><title>Daily Case Briefing — 2026-04-08</title>
+<html lang="en"><head><meta charset="utf-8">
+<title>Daily Case Briefing — 2026-04-08</title>
 <style>
-:root{--bg-primary:#0a0e17;--bg-card:#141a2a;--bg-card-hover:#1a2236;--border:#1e293b;--text-primary:#e2e8f0;--text-secondary:#94a3b8;--text-muted:#64748b;--accent:#4f8cff;--red:#ff4757;--orange:#ff9f43;--green:#2ed573;--purple:#a77bff;--yellow:#ffd32a;--teal:#00d2d3}
-*{box-sizing:border-box}body{margin:0;background:var(--bg-primary);color:var(--text-primary);font-family:'Segoe UI',system-ui,sans-serif;padding:60px 24px 40px;max-width:1400px;margin-inline:auto}
-.mc-home{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:9999;display:inline-flex;align-items:center;gap:8px;padding:8px 16px 8px 12px;background:linear-gradient(135deg,rgba(79,143,255,.12),rgba(168,85,247,.12));border:1px solid rgba(79,143,255,.25);border-radius:24px;text-decoration:none;color:#e8ecf4;font-size:.78rem;font-weight:600;backdrop-filter:blur(12px);box-shadow:0 2px 12px rgba(0,0,0,.3)}
-.mc-home:hover{border-color:rgba(79,143,255,.5);transform:translateX(-50%) translateY(-1px) scale(1.03)}
-.mc-home .mc-label{background:linear-gradient(135deg,#4f8fff,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;padding-top:20px}
-.logo{display:flex;align-items:center;gap:14px}.logo-sq{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,#4f8cff,#a77bff);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem}
-h1{margin:0;font-size:1.6rem}.sub{color:var(--text-secondary);font-size:.85rem}
-.date-pill{background:var(--bg-card);border:1px solid var(--border);padding:10px 16px;border-radius:10px;text-align:right}.date-pill b{display:block;color:var(--text-primary)}.date-pill span{font-size:.7rem;color:var(--text-muted);text-transform:uppercase}
-.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:20px}
-.stat{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:14px}.stat .n{font-size:1.8rem;font-weight:800}.stat .l{font-size:.65rem;text-transform:uppercase;color:var(--text-muted);letter-spacing:.05em}
-.stat.red .n{color:var(--red)}.stat.purple .n{color:var(--purple)}.stat.blue .n{color:var(--accent)}.stat.orange .n{color:var(--orange)}.stat.yellow .n{color:var(--yellow)}.stat.teal .n{color:var(--teal)}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
-.card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:18px;max-height:min(60vh,520px);overflow-y:auto}
-.card h2{margin:0 0 12px;font-size:1rem;letter-spacing:.03em;text-transform:uppercase;color:var(--text-secondary)}
-.item{padding:10px 0;border-bottom:1px solid var(--border)}.item:last-child{border:0}.item b{color:var(--text-primary)}.item .meta{font-size:.78rem;color:var(--text-muted)}
-.crit{color:var(--red);font-weight:700}.warn{color:var(--orange)}
-.full{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:16px}
-.full h2{margin:0 0 12px;font-size:1rem;text-transform:uppercase;color:var(--text-secondary)}
-</style></head><body>
-<a href="/" class="mc-home"><span>&#8592;</span><span>&#128640;</span><span class="mc-label">Mission Control</span></a>
-<header><div class="logo"><div class="logo-sq">BL</div><div><h1>Daily Case Briefing</h1><div class="sub">Blackstone Law, APC</div></div></div><div class="date-pill"><b>Wed, April 8, 2026</b><span>Generated from Outlook</span></div></header>
+:root{
+--bg-primary:#0a0e17;--bg-card:#141a2a;--bg-card-hover:#1a2236;--border:#1e293b;
+--text-primary:#e2e8f0;--text-secondary:#94a3b8;--text-muted:#64748b;
+--accent:#4f8cff;--accent-glow:rgba(79,140,255,.12);
+--red:#ff4757;--red-glow:rgba(255,71,87,.12);
+--orange:#ff9f43;--orange-glow:rgba(255,159,67,.12);
+--green:#2ed573;--green-glow:rgba(46,213,115,.12);
+--purple:#a77bff;--purple-glow:rgba(167,123,255,.12);
+--yellow:#ffd32a;--yellow-glow:rgba(255,211,42,.12);
+--teal:#00d2d3;--teal-glow:rgba(0,210,211,.12);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg-primary);color:var(--text-primary);font-family:'Segoe UI',system-ui,-apple-system,sans-serif}
+body{padding:70px 28px 48px;max-width:1440px;margin-inline:auto;line-height:1.45}
+
+/* ═══ MISSION CONTROL BACK-LINK ═══ */
+.mc-home{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:9999;display:inline-flex;align-items:center;gap:8px;padding:8px 16px 8px 12px;background:linear-gradient(135deg,rgba(79,143,255,.12),rgba(168,85,247,.12));border:1px solid rgba(79,143,255,.25);border-radius:24px;text-decoration:none;color:#e8ecf4;font-size:.78rem;font-weight:600;letter-spacing:.01em;transition:all .3s cubic-bezier(.4,0,.2,1);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 2px 12px rgba(0,0,0,.3)}
+.mc-home:hover{border-color:rgba(79,143,255,.5);transform:translateX(-50%) translateY(-1px) scale(1.03);box-shadow:0 4px 20px rgba(79,143,255,.2),0 0 30px rgba(168,85,247,.1);background:linear-gradient(135deg,rgba(79,143,255,.2),rgba(168,85,247,.18))}
+.mc-home .mc-icon{font-size:1.1rem;transition:transform .3s}
+.mc-home:hover .mc-icon{transform:rotate(-15deg) scale(1.15)}
+.mc-home .mc-label{background:linear-gradient(135deg,#4f8fff,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.mc-home .mc-arrow{color:#4a5a78;transition:all .2s;font-size:.9rem}
+.mc-home:hover .mc-arrow{color:#4f8fff;transform:translateX(-3px)}
+
+/* ═══ HEADER ═══ */
+header{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
+.logo{display:flex;align-items:center;gap:16px}
+.logo-sq{width:54px;height:54px;border-radius:12px;background:linear-gradient(135deg,#4f8cff,#a77bff);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.2rem;color:#fff;letter-spacing:.02em;box-shadow:0 4px 16px rgba(79,140,255,.25)}
+h1{margin:0;font-size:1.75rem;font-weight:700;letter-spacing:-.01em}
+.sub{color:var(--text-secondary);font-size:.85rem;margin-top:2px}
+.date-pill{background:var(--bg-card);border:1px solid var(--border);padding:12px 18px;border-radius:12px;text-align:right}
+.date-pill b{display:block;color:var(--text-primary);font-size:.95rem}
+.date-pill span{font-size:.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em}
+
+/* ═══ STATS BAR ═══ */
+.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-bottom:22px}
+.stat{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:16px 18px;position:relative;overflow:hidden;transition:all .2s}
+.stat::before{content:"";position:absolute;inset:0;background:var(--glow);opacity:.6;pointer-events:none}
+.stat:hover{border-color:rgba(255,255,255,.15);transform:translateY(-1px)}
+.stat .n{position:relative;font-size:2rem;font-weight:800;line-height:1;letter-spacing:-.02em}
+.stat .l{position:relative;font-size:.66rem;text-transform:uppercase;color:var(--text-muted);letter-spacing:.08em;margin-top:6px;font-weight:600}
+.stat.red{--glow:radial-gradient(circle at top left,var(--red-glow),transparent 70%)} .stat.red .n{color:var(--red)}
+.stat.purple{--glow:radial-gradient(circle at top left,var(--purple-glow),transparent 70%)} .stat.purple .n{color:var(--purple)}
+.stat.blue{--glow:radial-gradient(circle at top left,var(--accent-glow),transparent 70%)} .stat.blue .n{color:var(--accent)}
+.stat.orange{--glow:radial-gradient(circle at top left,var(--orange-glow),transparent 70%)} .stat.orange .n{color:var(--orange)}
+.stat.yellow{--glow:radial-gradient(circle at top left,var(--yellow-glow),transparent 70%)} .stat.yellow .n{color:var(--yellow)}
+.stat.teal{--glow:radial-gradient(circle at top left,var(--teal-glow),transparent 70%)} .stat.teal .n{color:var(--teal)}
+
+/* ═══ LOOK-AHEAD GRID ═══ */
+.lookahead{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:20px;max-height:min(60vh,520px);overflow-y:auto;transition:border-color .2s}
+.card:hover{border-color:rgba(255,255,255,.1)}
+.card h2{margin:0 0 14px;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);font-weight:700;display:flex;align-items:center;gap:8px}
+.card h2::before{content:"";width:3px;height:14px;border-radius:2px}
+.card.hearings h2::before{background:var(--red)}
+.card.mediations h2::before{background:var(--purple)}
+.full{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:16px}
+.full h2{margin:0 0 14px;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);font-weight:700;display:flex;align-items:center;gap:8px}
+.full h2::before{content:"";width:3px;height:14px;border-radius:2px}
+.full.filing h2::before{background:var(--red)}
+.full.calendar h2::before{background:var(--accent)}
+.full.response h2::before{background:var(--orange)}
+.full.docket h2::before{background:var(--accent)}
+.full.followup h2::before{background:var(--yellow)}
+
+/* ═══ ITEMS ═══ */
+.item{padding:12px 0;border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:4px}
+.item:last-child{border-bottom:0}
+.item .top{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.item b{color:var(--text-primary);font-size:.92rem;font-weight:600}
+.item .meta{font-size:.76rem;color:var(--text-muted);line-height:1.5}
+.item .meta .sep{color:var(--border);margin:0 6px}
+
+/* ═══ BADGES ═══ */
+.tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.65rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-left:6px}
+.tag.rq{background:var(--accent-glow);color:var(--accent);border:1px solid rgba(79,140,255,.3)}
+.tag.jm{background:var(--green-glow);color:var(--green);border:1px solid rgba(46,213,115,.3)}
+.tag.sm{background:var(--purple-glow);color:var(--purple);border:1px solid rgba(167,123,255,.3)}
+.tag.kg{background:var(--teal-glow);color:var(--teal);border:1px solid rgba(0,210,211,.3)}
+.tag.crit{background:var(--red-glow);color:var(--red);border:1px solid rgba(255,71,87,.35)}
+.tag.warn{background:var(--orange-glow);color:var(--orange);border:1px solid rgba(255,159,67,.3)}
+.tag.soon{background:var(--yellow-glow);color:var(--yellow);border:1px solid rgba(255,211,42,.3)}
+.days{font-variant-numeric:tabular-nums;color:var(--text-secondary);font-size:.78rem;font-weight:600;white-space:nowrap}
+.days.crit{color:var(--red)}
+.days.warn{color:var(--orange)}
+
+footer{text-align:center;color:var(--text-muted);font-size:.72rem;margin-top:24px;padding-top:18px;border-top:1px solid var(--border)}
+</style></head>
+<body>
+
+<a href="/" class="mc-home" title="Back to Mission Control"><span class="mc-arrow">&#8592;</span><span class="mc-icon">&#128640;</span><span class="mc-label">Mission Control</span></a>
+
+<header>
+  <div class="logo">
+    <div class="logo-sq">BL</div>
+    <div>
+      <h1>Daily Case Briefing</h1>
+      <div class="sub">Blackstone Law, APC &middot; Morning signal across all active matters</div>
+    </div>
+  </div>
+  <div class="date-pill"><b>Wednesday, April 8, 2026</b><span>Generated from Outlook</span></div>
+</header>
 
 <div class="stats">
-<div class="stat red"><div class="n">12</div><div class="l">Hearings 14d</div></div>
-<div class="stat purple"><div class="n">3</div><div class="l">Mediations 30d</div></div>
-<div class="stat blue"><div class="n">6</div><div class="l">Docket 48h</div></div>
-<div class="stat orange"><div class="n">4</div><div class="l">Response Needed</div></div>
-<div class="stat yellow"><div class="n">6</div><div class="l">Awaiting OC</div></div>
-<div class="stat teal"><div class="n">2</div><div class="l">Filing Deadlines</div></div>
+  <div class="stat red"><div class="n">12</div><div class="l">Hearings 14d</div></div>
+  <div class="stat purple"><div class="n">3</div><div class="l">Mediations 30d</div></div>
+  <div class="stat blue"><div class="n">6</div><div class="l">Docket 48h</div></div>
+  <div class="stat orange"><div class="n">4</div><div class="l">Response Needed</div></div>
+  <div class="stat yellow"><div class="n">6</div><div class="l">Awaiting OC</div></div>
+  <div class="stat teal"><div class="n">2</div><div class="l">Filing Deadlines</div></div>
 </div>
 
-<div class="row2">
-<div class="card"><h2>Hearings (Next 14 Days)</h2>
-<div class="item"><b>Lee v. IMC</b> — CMC<div class="meta">4/10 · 2 days · <span class="crit">JOINT CMS DUE 4/9</span></div></div>
-<div class="item"><b>Anguiano v. Kinecta FCU</b> — CMC<div class="meta">4/16 · 8 days · joint stmt 4/14</div></div>
-<div class="item"><b>Edmiston</b> — MTCA hearing<div class="meta">4/22 · 14 days · opposition briefed</div></div>
-<div class="item"><b>Additional CMC/ISC entries</b><div class="meta">See CMC Deadline Monitor dashboard for full list</div></div>
+<div class="lookahead">
+  <div class="card hearings">
+    <h2>Hearings &middot; Next 14 Days</h2>
+    <div class="item"><div class="top"><b>Lee v. IMC</b><span class="days crit">2 days</span></div><div class="meta">CMC &middot; 4/10 <span class="tag crit">Joint CMS due 4/9</span><span class="tag rq">RQ</span></div></div>
+    <div class="item"><div class="top"><b>Anguiano v. Kinecta FCU</b><span class="days">8 days</span></div><div class="meta">CMC &middot; 4/16 &middot; joint stmt due 4/14 <span class="tag jm">JM</span></div></div>
+    <div class="item"><div class="top"><b>Edmiston</b><span class="days">14 days</span></div><div class="meta">MTCA hearing &middot; 4/22 &middot; opposition briefed <span class="tag rq">RQ</span></div></div>
+    <div class="item"><div class="top"><b>Additional CMC / ISC entries</b><span class="days">&mdash;</span></div><div class="meta">Full list: CMC Deadline Monitor dashboard</div></div>
+  </div>
+
+  <div class="card mediations">
+    <h2>Mediations &middot; Next 30 Days</h2>
+    <div class="item"><div class="top"><b>Soto v. Control Air</b><span class="days crit">1 day</span></div><div class="meta">Mediator Kyriacou &middot; 4/9 &middot; Zoom <span class="tag rq">RQ</span></div></div>
+    <div class="item"><div class="top"><b>Santamaria v. America Central</b><span class="days warn">2 days</span></div><div class="meta">Mediator McKelvey &middot; 4/10 &middot; Zoom <span class="tag sm">SM</span></div></div>
+    <div class="item"><div class="top"><b>Agpalza v. Magnolia Springs</b><span class="days">5 days</span></div><div class="meta">Mediator West &middot; 4/13 <span class="tag jm">JM</span></div></div>
+    <div class="item"><div class="top"><b>Lee v. IMC &mdash; internal prep</b><span class="days">9 days</span></div><div class="meta">Teams meet 4/17 &middot; mediation prep sync</div></div>
+  </div>
 </div>
 
-<div class="card"><h2>Mediations (Next 30 Days)</h2>
-<div class="item"><b>Soto v. Control Air</b> — Kyriacou<div class="meta">4/9/2026 · Zoom · 1 day</div></div>
-<div class="item"><b>Santamaria v. America Central</b> — McKelvey<div class="meta">4/10/2026 · Zoom · 2 days</div></div>
-<div class="item"><b>Agpalza v. Magnolia Springs</b> — West<div class="meta">4/13/2026 · 5 days</div></div>
-<div class="item"><b>Lee v. IMC</b> — internal prep<div class="meta">4/17 Teams meet</div></div>
-</div>
+<div class="full filing">
+  <h2>CMC Filing Deadlines &middot; Next 7 Days</h2>
+  <div class="item"><div class="top"><b>Lee v. IMC</b><span class="days crit">1 day</span></div><div class="meta"><span class="tag crit">Critical</span> Joint CMS due 4/9/2026 &middot; CMC 4/10 <span class="tag rq">RQ</span></div></div>
+  <div class="item"><div class="top"><b>Anguiano v. Kinecta FCU</b><span class="days warn">6 days</span></div><div class="meta">Joint CMC Statement due 4/14/2026 <span class="tag jm">JM</span></div></div>
 </div>
 
-<div class="full"><h2>CMC Filing Deadlines (Next 7 Days)</h2>
-<div class="item"><b class="crit">Lee v. IMC</b> — Joint CMS due <b>4/9/2026</b> (1 day) 🔴 CRITICAL</div>
-<div class="item"><b>Anguiano v. Kinecta FCU</b> — Joint CMC Statement due <b>4/14/2026</b> (6 days)</div>
+<div class="full calendar">
+  <h2>Today's Team Calendar &middot; 4/8</h2>
+  <div class="item"><div class="top"><b>9:30 AM &middot; Kevin Horne / Truitt declarations</b></div><div class="meta">Amy, Joe</div></div>
+  <div class="item"><div class="top"><b>10:30 AM &middot; RQ + Joe Magnoli weekly</b></div><div class="meta">Internal sync <span class="tag rq">RQ</span><span class="tag jm">JM</span></div></div>
+  <div class="item"><div class="top"><b>1:00 PM &middot; Ramirez v. Shoe Palace intro call</b></div><div class="meta">New client intro</div></div>
+  <div class="item"><div class="top"><b>2:30 PM &middot; RQ + Shelby weekly</b></div><div class="meta">Internal sync <span class="tag rq">RQ</span><span class="tag sm">SM</span></div></div>
+  <div class="item"><div class="top"><b>4:00 PM &middot; RQ + Alex Lima</b></div><div class="meta">Internal <span class="tag rq">RQ</span></div></div>
+  <div class="item"><div class="top"><b>4:30 PM &middot; RQ + Tracy</b></div><div class="meta">Internal <span class="tag rq">RQ</span></div></div>
 </div>
 
-<div class="full"><h2>Today's Team Calendar — 4/8</h2>
-<div class="item"><b>9:30 AM</b> — Kevin Horne / Truitt declarations<div class="meta">Amy, Joe</div></div>
-<div class="item"><b>10:30 AM</b> — RQ + Joe Magnoli weekly</div>
-<div class="item"><b>1:00 PM</b> — Ramirez v. Shoe Palace intro call</div>
-<div class="item"><b>2:30 PM</b> — RQ + Shelby weekly</div>
-<div class="item"><b>4:00 PM</b> — RQ + Alex Lima</div>
-<div class="item"><b>4:30 PM</b> — RQ + Tracy</div>
+<div class="full response">
+  <h2>Response Needed &middot; Defense Counsel</h2>
+  <div class="item"><div class="top"><b>Rosado v. Ridgecrest</b></div><div class="meta">Extension request from OC <span class="tag rq">RQ</span></div></div>
+  <div class="item"><div class="top"><b>Anguiano v. Kinecta</b></div><div class="meta">M&amp;C response owed <span class="tag jm">JM</span></div></div>
+  <div class="item"><div class="top"><b>Cotton v. Taylor Communications</b></div><div class="meta">Production follow-up <span class="tag sm">SM</span></div></div>
+  <div class="item"><div class="top"><b>Naquin v. BenQ</b></div><div class="meta">Stip to continue <span class="tag rq">RQ</span></div></div>
 </div>
 
-<div class="full"><h2>Response Needed — Defense Counsel</h2>
-<div class="item"><b>Rosado v. Ridgecrest</b> — extension request</div>
-<div class="item"><b>Anguiano v. Kinecta</b> — M&C response</div>
-<div class="item"><b>Cotton v. Taylor Communications</b> — production follow-up</div>
-<div class="item"><b>Naquin v. BenQ</b> — stip to continue</div>
+<div class="full docket">
+  <h2>Docket Activity &middot; Last 48 Hours</h2>
+  <div class="item"><div class="top"><b>Conant v. Evergreen Alliance</b></div><div class="meta">CM/ECF &middot; MTR activity</div></div>
+  <div class="item"><div class="top"><b>Galvez</b></div><div class="meta">CaseAnywhere &middot; Notice of Related Case</div></div>
+  <div class="item"><div class="top"><b>Anguiano v. Kinecta</b></div><div class="meta">Joint Status Report / Notice of Errata</div></div>
+  <div class="item"><div class="top"><b>Valenzuela v. Childnet</b></div><div class="meta">LexisNexis Track &middot; taken under submission</div></div>
+  <div class="item"><div class="top"><b>CCL Tube</b></div><div class="meta">LexisNexis Track &middot; conference set</div></div>
+  <div class="item"><div class="top"><b>Flores v. Med-Pharmex</b></div><div class="meta">LexisNexis Track &middot; statement filed</div></div>
 </div>
 
-<div class="full"><h2>Docket Activity — Last 48 Hours</h2>
-<div class="item"><b>Conant v. Evergreen Alliance</b> — CM/ECF MTR activity</div>
-<div class="item"><b>Galvez</b> — CaseAnywhere: Notice of Related Case</div>
-<div class="item"><b>Anguiano v. Kinecta</b> — Joint Status Report / Notice of Errata</div>
-<div class="item"><b>Valenzuela v. Childnet</b> — taken under submission (LexisNexis)</div>
-<div class="item"><b>CCL Tube</b> — conference set</div>
-<div class="item"><b>Flores v. Med-Pharmex</b> — statement filed</div>
+<div class="full followup">
+  <h2>Follow-Ups Awaiting OC Reply &middot; 5–14 days</h2>
+  <div class="item"><div class="top"><b>Evergreen Alliance</b><span class="days crit">14 days</span></div><div class="meta"><span class="tag crit">Overdue</span> MTR email to OC &middot; sent 3/25 <span class="tag jm">JM</span></div></div>
+  <div class="item"><div class="top"><b>Santamaria</b><span class="days crit">10 days</span></div><div class="meta"><span class="tag crit">Overdue</span> Data follow-up to Littler <span class="tag sm">SM</span></div></div>
+  <div class="item"><div class="top"><b>Vasquez v. Lulu's</b><span class="days warn">7 days</span></div><div class="meta">Follow-up to Lisa <span class="tag rq">RQ</span></div></div>
+  <div class="item"><div class="top"><b>Garfias v. ISU Petasys</b><span class="days warn">6 days</span></div><div class="meta">Rate sheet request <span class="tag rq">RQ</span></div></div>
+  <div class="item"><div class="top"><b>Douglas v. Veridiam</b><span class="days">5 days</span></div><div class="meta">Deficiency letter follow-up <span class="tag sm">SM</span></div></div>
+  <div class="item"><div class="top"><b>Truitt Oilfield / Carias-Paredes</b><span class="days">5 days</span></div><div class="meta">Follow-up pending <span class="tag jm">JM</span></div></div>
 </div>
 
-<div class="full"><h2>Follow-Ups Awaiting OC Reply (5–14 days)</h2>
-<div class="item"><b class="crit">Evergreen Alliance</b> — MTR email to OC<div class="meta">sent 3/25 · 14 days · OVERDUE</div></div>
-<div class="item"><b class="crit">Santamaria</b> — data follow-up to Littler<div class="meta">OVERDUE</div></div>
-<div class="item"><b>Vasquez v. Lulu's</b> — to Lisa<div class="meta">follow-up</div></div>
-<div class="item"><b>Garfias v. ISU Petasys</b> — rate sheet request</div>
-<div class="item"><b>Douglas v. Veridiam</b> — deficiency letter</div>
-<div class="item"><b>Truitt Oilfield / Carias-Paredes</b></div>
-</div>
+<footer>Generated from Outlook + live dashboards &middot; Blackstone Law, APC &middot; Daily Case Briefing pipeline</footer>
 
 </body></html>

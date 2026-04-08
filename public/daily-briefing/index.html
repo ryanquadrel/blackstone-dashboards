@@ -26,7 +26,6 @@ body{padding:70px 28px 48px;max-width:1440px;margin-inline:auto;line-height:1.45
 .mc-home .mc-arrow{color:#4a5a78;transition:all .2s;font-size:.9rem}
 .mc-home:hover .mc-arrow{color:#4f8fff;transform:translateX(-3px)}
 
-/* ═══ HEADER ═══ */
 header{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
 .logo{display:flex;align-items:center;gap:16px}
 .logo-sq{width:54px;height:54px;border-radius:12px;background:linear-gradient(135deg,#4f8cff,#a77bff);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.2rem;color:#fff;letter-spacing:.02em;box-shadow:0 4px 16px rgba(79,140,255,.25)}
@@ -36,7 +35,6 @@ h1{margin:0;font-size:1.75rem;font-weight:700;letter-spacing:-.01em}
 .date-pill b{display:block;color:var(--text-primary);font-size:.95rem}
 .date-pill span{font-size:.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em}
 
-/* ═══ STATS BAR ═══ */
 .stats{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-bottom:22px}
 .stat{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:16px 18px;position:relative;overflow:hidden;transition:all .2s}
 .stat::before{content:"";position:absolute;inset:0;background:var(--glow);opacity:.6;pointer-events:none}
@@ -50,32 +48,26 @@ h1{margin:0;font-size:1.75rem;font-weight:700;letter-spacing:-.01em}
 .stat.yellow{--glow:radial-gradient(circle at top left,var(--yellow-glow),transparent 70%)} .stat.yellow .n{color:var(--yellow)}
 .stat.teal{--glow:radial-gradient(circle at top left,var(--teal-glow),transparent 70%)} .stat.teal .n{color:var(--teal)}
 
-/* ═══ LOOK-AHEAD GRID ═══ */
 .lookahead{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
 .card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:20px;max-height:min(60vh,520px);overflow-y:auto;transition:border-color .2s}
 .card:hover{border-color:rgba(255,255,255,.1)}
-.card h2{margin:0 0 14px;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);font-weight:700;display:flex;align-items:center;gap:8px}
-.card h2::before{content:"";width:3px;height:14px;border-radius:2px}
+.card h2,.full h2{margin:0 0 14px;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);font-weight:700;display:flex;align-items:center;gap:8px}
+.card h2::before,.full h2::before{content:"";width:3px;height:14px;border-radius:2px}
 .card.hearings h2::before{background:var(--red)}
 .card.mediations h2::before{background:var(--purple)}
 .full{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:16px}
-.full h2{margin:0 0 14px;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);font-weight:700;display:flex;align-items:center;gap:8px}
-.full h2::before{content:"";width:3px;height:14px;border-radius:2px}
 .full.filing h2::before{background:var(--red)}
 .full.calendar h2::before{background:var(--accent)}
 .full.response h2::before{background:var(--orange)}
 .full.docket h2::before{background:var(--accent)}
 .full.followup h2::before{background:var(--yellow)}
 
-/* ═══ ITEMS ═══ */
 .item{padding:12px 0;border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:4px}
 .item:last-child{border-bottom:0}
 .item .top{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
 .item b{color:var(--text-primary);font-size:.92rem;font-weight:600}
 .item .meta{font-size:.76rem;color:var(--text-muted);line-height:1.5}
-.item .meta .sep{color:var(--border);margin:0 6px}
 
-/* ═══ BADGES ═══ */
 .tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.65rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-left:6px}
 .tag.rq{background:var(--accent-glow);color:var(--accent);border:1px solid rgba(79,140,255,.3)}
 .tag.jm{background:var(--green-glow);color:var(--green);border:1px solid rgba(46,213,115,.3)}
@@ -115,66 +107,15 @@ footer{text-align:center;color:var(--text-muted);font-size:.72rem;margin-top:24p
 </div>
 
 <div class="lookahead">
-  <div class="card hearings">
-    <h2>Hearings &middot; Next 14 Days</h2>
-    <div class="item"><div class="top"><b>Lee v. IMC</b><span class="days crit">2 days</span></div><div class="meta">CMC &middot; 4/10 <span class="tag crit">Joint CMS due 4/9</span><span class="tag rq">RQ</span></div></div>
-    <div class="item"><div class="top"><b>Anguiano v. Kinecta FCU</b><span class="days">8 days</span></div><div class="meta">CMC &middot; 4/16 &middot; joint stmt due 4/14 <span class="tag jm">JM</span></div></div>
-    <div class="item"><div class="top"><b>Edmiston</b><span class="days">14 days</span></div><div class="meta">MTCA hearing &middot; 4/22 &middot; opposition briefed <span class="tag rq">RQ</span></div></div>
-    <div class="item"><div class="top"><b>Additional CMC / ISC entries</b><span class="days">&mdash;</span></div><div class="meta">Full list: CMC Deadline Monitor dashboard</div></div>
-  </div>
-
-  <div class="card mediations">
-    <h2>Mediations &middot; Next 30 Days</h2>
-    <div class="item"><div class="top"><b>Soto v. Control Air</b><span class="days crit">1 day</span></div><div class="meta">Mediator Kyriacou &middot; 4/9 &middot; Zoom <span class="tag rq">RQ</span></div></div>
-    <div class="item"><div class="top"><b>Santamaria v. America Central</b><span class="days warn">2 days</span></div><div class="meta">Mediator McKelvey &middot; 4/10 &middot; Zoom <span class="tag sm">SM</span></div></div>
-    <div class="item"><div class="top"><b>Agpalza v. Magnolia Springs</b><span class="days">5 days</span></div><div class="meta">Mediator West &middot; 4/13 <span class="tag jm">JM</span></div></div>
-    <div class="item"><div class="top"><b>Lee v. IMC &mdash; internal prep</b><span class="days">9 days</span></div><div class="meta">Teams meet 4/17 &middot; mediation prep sync</div></div>
-  </div>
+  <div class="card hearings"><h2>Hearings &middot; Next 14 Days</h2><div class="item"><div class="top"><b>Lee v. IMC</b><span class="days crit">2 days</span></div><div class="meta">CMC · 4/10<span class="tag crit">Joint CMS due 4/9</span><span class="tag rq">RQ</span></div></div><div class="item"><div class="top"><b>Anguiano v. Kinecta FCU</b><span class="days ">8 days</span></div><div class="meta">CMC · 4/16 · joint stmt due 4/14<span class="tag jm">JM</span></div></div><div class="item"><div class="top"><b>Edmiston</b><span class="days ">14 days</span></div><div class="meta">MTCA hearing · 4/22 · opposition briefed<span class="tag rq">RQ</span></div></div><div class="item"><div class="top"><b>Additional CMC / ISC entries</b><span class="days ">—</span></div><div class="meta">Full list: CMC Deadline Monitor dashboard</div></div></div>
+  <div class="card mediations"><h2>Mediations &middot; Next 30 Days</h2><div class="item"><div class="top"><b>Soto v. Control Air</b><span class="days crit">1 day</span></div><div class="meta">Mediator Kyriacou · 4/9 · Zoom<span class="tag rq">RQ</span></div></div><div class="item"><div class="top"><b>Santamaria v. America Central</b><span class="days warn">2 days</span></div><div class="meta">Mediator McKelvey · 4/10 · Zoom<span class="tag sm">SM</span></div></div><div class="item"><div class="top"><b>Agpalza v. Magnolia Springs</b><span class="days ">5 days</span></div><div class="meta">Mediator West · 4/13<span class="tag jm">JM</span></div></div><div class="item"><div class="top"><b>Lee v. IMC — internal prep</b><span class="days ">9 days</span></div><div class="meta">Teams meet 4/17 · mediation prep sync</div></div></div>
 </div>
 
-<div class="full filing">
-  <h2>CMC Filing Deadlines &middot; Next 7 Days</h2>
-  <div class="item"><div class="top"><b>Lee v. IMC</b><span class="days crit">1 day</span></div><div class="meta"><span class="tag crit">Critical</span> Joint CMS due 4/9/2026 &middot; CMC 4/10 <span class="tag rq">RQ</span></div></div>
-  <div class="item"><div class="top"><b>Anguiano v. Kinecta FCU</b><span class="days warn">6 days</span></div><div class="meta">Joint CMC Statement due 4/14/2026 <span class="tag jm">JM</span></div></div>
-</div>
-
-<div class="full calendar">
-  <h2>Today's Team Calendar &middot; 4/8</h2>
-  <div class="item"><div class="top"><b>9:30 AM &middot; Kevin Horne / Truitt declarations</b></div><div class="meta">Amy, Joe</div></div>
-  <div class="item"><div class="top"><b>10:30 AM &middot; RQ + Joe Magnoli weekly</b></div><div class="meta">Internal sync <span class="tag rq">RQ</span><span class="tag jm">JM</span></div></div>
-  <div class="item"><div class="top"><b>1:00 PM &middot; Ramirez v. Shoe Palace intro call</b></div><div class="meta">New client intro</div></div>
-  <div class="item"><div class="top"><b>2:30 PM &middot; RQ + Shelby weekly</b></div><div class="meta">Internal sync <span class="tag rq">RQ</span><span class="tag sm">SM</span></div></div>
-  <div class="item"><div class="top"><b>4:00 PM &middot; RQ + Alex Lima</b></div><div class="meta">Internal <span class="tag rq">RQ</span></div></div>
-  <div class="item"><div class="top"><b>4:30 PM &middot; RQ + Tracy</b></div><div class="meta">Internal <span class="tag rq">RQ</span></div></div>
-</div>
-
-<div class="full response">
-  <h2>Response Needed &middot; Defense Counsel</h2>
-  <div class="item"><div class="top"><b>Rosado v. Ridgecrest</b></div><div class="meta">Extension request from OC <span class="tag rq">RQ</span></div></div>
-  <div class="item"><div class="top"><b>Anguiano v. Kinecta</b></div><div class="meta">M&amp;C response owed <span class="tag jm">JM</span></div></div>
-  <div class="item"><div class="top"><b>Cotton v. Taylor Communications</b></div><div class="meta">Production follow-up <span class="tag sm">SM</span></div></div>
-  <div class="item"><div class="top"><b>Naquin v. BenQ</b></div><div class="meta">Stip to continue <span class="tag rq">RQ</span></div></div>
-</div>
-
-<div class="full docket">
-  <h2>Docket Activity &middot; Last 48 Hours</h2>
-  <div class="item"><div class="top"><b>Conant v. Evergreen Alliance</b></div><div class="meta">CM/ECF &middot; MTR activity</div></div>
-  <div class="item"><div class="top"><b>Galvez</b></div><div class="meta">CaseAnywhere &middot; Notice of Related Case</div></div>
-  <div class="item"><div class="top"><b>Anguiano v. Kinecta</b></div><div class="meta">Joint Status Report / Notice of Errata</div></div>
-  <div class="item"><div class="top"><b>Valenzuela v. Childnet</b></div><div class="meta">LexisNexis Track &middot; taken under submission</div></div>
-  <div class="item"><div class="top"><b>CCL Tube</b></div><div class="meta">LexisNexis Track &middot; conference set</div></div>
-  <div class="item"><div class="top"><b>Flores v. Med-Pharmex</b></div><div class="meta">LexisNexis Track &middot; statement filed</div></div>
-</div>
-
-<div class="full followup">
-  <h2>Follow-Ups Awaiting OC Reply &middot; 5–14 days</h2>
-  <div class="item"><div class="top"><b>Evergreen Alliance</b><span class="days crit">14 days</span></div><div class="meta"><span class="tag crit">Overdue</span> MTR email to OC &middot; sent 3/25 <span class="tag jm">JM</span></div></div>
-  <div class="item"><div class="top"><b>Santamaria</b><span class="days crit">10 days</span></div><div class="meta"><span class="tag crit">Overdue</span> Data follow-up to Littler <span class="tag sm">SM</span></div></div>
-  <div class="item"><div class="top"><b>Vasquez v. Lulu's</b><span class="days warn">7 days</span></div><div class="meta">Follow-up to Lisa <span class="tag rq">RQ</span></div></div>
-  <div class="item"><div class="top"><b>Garfias v. ISU Petasys</b><span class="days warn">6 days</span></div><div class="meta">Rate sheet request <span class="tag rq">RQ</span></div></div>
-  <div class="item"><div class="top"><b>Douglas v. Veridiam</b><span class="days">5 days</span></div><div class="meta">Deficiency letter follow-up <span class="tag sm">SM</span></div></div>
-  <div class="item"><div class="top"><b>Truitt Oilfield / Carias-Paredes</b><span class="days">5 days</span></div><div class="meta">Follow-up pending <span class="tag jm">JM</span></div></div>
-</div>
+<div class="full filing"><h2>CMC Filing Deadlines &middot; Next 7 Days</h2><div class="item"><div class="top"><b>Lee v. IMC</b><span class="days crit">1 day</span></div><div class="meta"><span class="tag crit">Critical</span> Joint CMS due 4/9/2026 · CMC 4/10<span class="tag rq">RQ</span></div></div><div class="item"><div class="top"><b>Anguiano v. Kinecta FCU</b><span class="days warn">6 days</span></div><div class="meta">Joint CMC Statement due 4/14/2026<span class="tag jm">JM</span></div></div></div>
+<div class="full calendar"><h2>Today's Team Calendar</h2><div class="item"><div class="top"><b>9:30 AM · Kevin Horne / Truitt declarations</b></div><div class="meta">Amy, Joe</div></div><div class="item"><div class="top"><b>10:30 AM · RQ + Joe Magnoli weekly</b></div><div class="meta">Internal sync<span class="tag rq">RQ</span><span class="tag jm">JM</span></div></div><div class="item"><div class="top"><b>1:00 PM · Ramirez v. Shoe Palace intro call</b></div><div class="meta">New client intro</div></div><div class="item"><div class="top"><b>2:30 PM · RQ + Shelby weekly</b></div><div class="meta">Internal sync<span class="tag rq">RQ</span><span class="tag sm">SM</span></div></div><div class="item"><div class="top"><b>4:00 PM · RQ + Alex Lima</b></div><div class="meta">Internal<span class="tag rq">RQ</span></div></div><div class="item"><div class="top"><b>4:30 PM · RQ + Tracy</b></div><div class="meta">Internal<span class="tag rq">RQ</span></div></div></div>
+<div class="full response"><h2>Response Needed &middot; Defense Counsel</h2><div class="item"><div class="top"><b>Rosado v. Ridgecrest</b></div><div class="meta">Extension request from OC<span class="tag rq">RQ</span></div></div><div class="item"><div class="top"><b>Anguiano v. Kinecta</b></div><div class="meta">M&C response owed<span class="tag jm">JM</span></div></div><div class="item"><div class="top"><b>Cotton v. Taylor Communications</b></div><div class="meta">Production follow-up<span class="tag sm">SM</span></div></div><div class="item"><div class="top"><b>Naquin v. BenQ</b></div><div class="meta">Stip to continue<span class="tag rq">RQ</span></div></div></div>
+<div class="full docket"><h2>Docket Activity &middot; Last 48 Hours</h2><div class="item"><div class="top"><b>Conant v. Evergreen Alliance</b></div><div class="meta">CM/ECF · MTR activity</div></div><div class="item"><div class="top"><b>Galvez</b></div><div class="meta">CaseAnywhere · Notice of Related Case</div></div><div class="item"><div class="top"><b>Anguiano v. Kinecta</b></div><div class="meta">Joint Status Report / Notice of Errata</div></div><div class="item"><div class="top"><b>Valenzuela v. Childnet</b></div><div class="meta">LexisNexis Track · taken under submission</div></div><div class="item"><div class="top"><b>CCL Tube</b></div><div class="meta">LexisNexis Track · conference set</div></div><div class="item"><div class="top"><b>Flores v. Med-Pharmex</b></div><div class="meta">LexisNexis Track · statement filed</div></div></div>
+<div class="full followup"><h2>Follow-Ups Awaiting OC Reply &middot; 5–14 days</h2><div class="item"><div class="top"><b>Evergreen Alliance</b><span class="days crit">14 days</span></div><div class="meta"><span class="tag crit">Overdue</span> MTR email to OC · sent 3/25<span class="tag jm">JM</span></div></div><div class="item"><div class="top"><b>Santamaria</b><span class="days crit">10 days</span></div><div class="meta"><span class="tag crit">Overdue</span> Data follow-up to Littler<span class="tag sm">SM</span></div></div><div class="item"><div class="top"><b>Vasquez v. Lulu's</b><span class="days warn">7 days</span></div><div class="meta">Follow-up to Lisa<span class="tag rq">RQ</span></div></div><div class="item"><div class="top"><b>Garfias v. ISU Petasys</b><span class="days warn">6 days</span></div><div class="meta">Rate sheet request<span class="tag rq">RQ</span></div></div><div class="item"><div class="top"><b>Douglas v. Veridiam</b><span class="days ">5 days</span></div><div class="meta">Deficiency letter follow-up<span class="tag sm">SM</span></div></div><div class="item"><div class="top"><b>Truitt Oilfield / Carias-Paredes</b><span class="days ">5 days</span></div><div class="meta">Follow-up pending<span class="tag jm">JM</span></div></div></div>
 
 <footer>Generated from Outlook + live dashboards &middot; Blackstone Law, APC &middot; Daily Case Briefing pipeline</footer>
 

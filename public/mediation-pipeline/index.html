@@ -469,7 +469,7 @@
       <span>2. Booked &amp; Preparing</span><span class="count" id="count-booked">36</span>
     </button>
     <button class="phase-btn" data-phase="resolved">
-      <span>3. Post Settlement</span><span class="count" id="count-resolved">4</span>
+      <span>3. Post Settlement</span><span class="count" id="count-resolved">8</span>
     </button>
   </div>
 
@@ -899,6 +899,7 @@
           <div style="display:flex;gap:8px;margin-bottom:6px;flex-wrap:wrap;"><span class="badge badge-orange">DEADLINE 4/16</span><span class="badge badge-purple">Phase 8 — Pending Proposal</span></div>
           <div class="cc-status">Mediator: <strong>Marc Feder</strong>. Proposal received 4/3: <strong>$950,000 total</strong>, GSA based on 47,500 workweeks, $75K PAGA allocation, 60-day release. Mediation held 4/2. Deadline: <strong>COB Thursday, April 16, 2026</strong>.</div>
           <div class="cc-action"><strong>Next</strong> JM client conference + named-plaintiff individual settlement structuring. Response by 4/16.</div>
+        </div>
       </div>
     </div>
 
@@ -1092,33 +1093,10 @@
   // Include JPA cards in global search
   const origSearchHandler = searchInput.oninput;
 
-  // ===== DYNAMIC CASE COUNT =====
-  (function() {
-    // Count unique cases across all phases
-    // Phase 1: count case cards in pipeline sections (Ready + Activity + Stale + Blocked table rows)
-    const p1Cards = document.querySelectorAll('#phase-pipeline .case-card').length;
-    const p1BlockedRows = document.querySelectorAll('#p-blocked tbody tr').length;
-    // Blocked cases overlap with Activity/Stale, so use the stated 42
-    const p1 = 43;
-    // Phase 2: count case cards
-    const p2Cards = document.querySelectorAll('#phase-booked .case-card').length;
-    const p2 = p2Cards; // 14
-    // Phase 3: Post Settlement + Settled table rows
-    const p3PostSettlement = document.querySelectorAll('#r-postmed .case-card').length;
-    const p3Settled = document.querySelectorAll('#r-settled tbody tr').length;
-    // Some post-settlement cases overlap with settled (Estrada, Zhang, Hernandez, Sherwood)
-    // Overlaps: Estrada/Maruichi, Zhang/Halrec, Hernandez/Liberty, Sherwood = 4 overlaps
-    const p3 = p3PostSettlement + p3Settled - 4; // 4+8-4 = 8
-    // Also count pending proposals in Phase 2
-    const p2Proposals = document.querySelectorAll('#b-proposal .case-card').length;
-    const total = p1 + p2 + p3; // But some Phase 1 Ready cases overlap Phase 2 (Orihuela, Miranda)
-    // Actually, the pipeline has cases that WILL transfer; they haven't yet. So no overlap.
-    // Post-med/settled overlap is the real dedup issue. Let's just use the actual unique count.
-    document.getElementById('totalCaseCount').textContent = p1 + p2 + p3;
-    document.getElementById('count-pipeline').textContent = p1;
-    document.getElementById('count-booked').textContent = p2;
-    document.getElementById('count-resolved').textContent = p3;
-  })();
+  // ===== DYNAMIC CASE COUNT — DISABLED =====
+  // Static HTML counters (#count-pipeline / #count-booked / #count-resolved) are
+  // the single source of truth. Update them directly via landing-page-sync /
+  // mediation-pipeline-audit. Do not re-introduce a JS override here.
 
     // ── CROSS-PHASE DUPLICATION CHECKER ──
     // Ensures no case appears in both Pipeline (Phase 1) and Booked (Phase 2).

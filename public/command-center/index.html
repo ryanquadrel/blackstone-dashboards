@@ -203,6 +203,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
       <select id="filterArb"><option value="">All Arb Status</option><option value="Y">Arb: Yes</option><option value="N">Arb: No</option><option value="?">Arb: Unknown</option></select>
       <select id="filterType"><option value="">All Types</option><option value="Class">Class</option><option value="PAGA">PAGA</option><option value="Class/PAGA">Class/PAGA</option></select>
       <select id="filterStage"><option value="">All Stages</option></select>
+      <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:.85em;color:var(--text-muted)"><input type="checkbox" id="toggleAllFilings" onchange="applyFilters()"> All filings</label>
       <div class="user-selector"><span>Viewing as:</span>
         <select id="userSelect"><option value="Ryan">Ryan</option><option value="Joe">Joe</option><option value="Shelby">Shelby</option><option value="Karen">Karen</option><option value="Astrid">Astrid</option></select>
       </div>
@@ -288,7 +289,48 @@ function normalizeCase(c){
   // Cross-dashboard enrichment
   nc._motion = matchLookup(MOTION_LOOKUP, nc.defendant);
   nc._mediation = matchLookup(MEDIATION_LOOKUP, nc.defendant);
+  // Phase 2 — matter/filing model
+  nc.matter_id = c.matter_id||null;
+  nc.filing_type = c.filing_type||null;
+  nc.is_lead_filing = c.is_lead_filing===true;
+  nc.federal_removal_of = c.federal_removal_of||null;
   return nc;
+}
+
+// Phase 2 — companion lookup + matter rollup
+var COMPANION_LOOKUP={};
+function buildCompanionLookup(){
+  COMPANION_LOOKUP={};
+  allCases.forEach(function(c){
+    var k=c.matter_id||('__nomatter__'+(c.id||c.case_number||c._idx));
+    (COMPANION_LOOKUP[k]=COMPANION_LOOKUP[k]||[]).push(c);
+  });
+  allCases.forEach(function(c){
+    var k=c.matter_id||null;
+    c._companions=k?COMPANION_LOOKUP[k].filter(function(x){return x!==c;}):[];
+  });
+}
+function rollupMatter(lead){
+  var worst=lead._score||0, allReasons=(lead._reasons||[]).slice();
+  (lead._companions||[]).forEach(function(x){
+    var att=scoreCase(x);
+    if(att.score>worst) worst=att.score;
+    att.reasons.forEach(function(r){allReasons.push(r);});
+  });
+  lead._score=worst; lead._reasons=allReasons;
+}
+function companionBadgeHTML(c){
+  if(!c._companions||!c._companions.length) return '';
+  var paga=0, fed=0, fedRemand=0;
+  c._companions.forEach(function(x){
+    if(x.filing_type==='state_paga') paga++;
+    else if(x.filing_type==='federal'){fed++; if(x.federal_removal_of) fedRemand++;}
+  });
+  var out='';
+  if(paga) out+='<span class="pc-tag" style="background:#fef3c7;color:#92400e">+PAGA</span>';
+  if(fed===1) out+='<span class="pc-tag" style="background:#dbeafe;color:#1e40af">+Federal</span>';
+  else if(fed>1) out+='<span class="pc-tag" style="background:#dbeafe;color:#1e40af" title="Multiple federal filings">+'+fed+' Federal'+(fedRemand?' \u2014 remand pending':'')+'</span>';
+  return out;
 }
 
 function inferStage(c){
@@ -388,6 +430,20 @@ function applyFilters(){
   if(user==='Shelby'&&!atty)filteredCases=filteredCases.filter(function(c){return c.attorney==='SM';});
   filteredCases.forEach(function(c){c._stage=inferStage(c);var att=scoreCase(c);c._score=att.score;c._reasons=att.reasons;});
   if(fstage)filteredCases=filteredCases.filter(function(c){return c._stage===fstage;});
+  // Phase 2 — collapse to leads only by default
+  var allFilingsToggle=document.getElementById('toggleAllFilings');
+  var showAll=allFilingsToggle&&allFilingsToggle.checked;
+  if(!showAll){
+    var keep=[];
+    filteredCases.forEach(function(c){
+      if(!c.matter_id){keep.push(c);return;}
+      var group=COMPANION_LOOKUP[c.matter_id]||[];
+      var hasLead=group.some(function(x){return x.is_lead_filing;});
+      if(!hasLead||c.is_lead_filing) keep.push(c);
+    });
+    filteredCases=keep;
+  }
+  filteredCases.forEach(function(c){if(c.is_lead_filing&&c._companions&&c._companions.length) rollupMatter(c);});
   renderAll();
 }
 
@@ -462,6 +518,7 @@ function renderPipelineBoard(){
         '<div class="pc-name" title="'+esc(c.case_name)+'">'+esc(c.defendant||c.case_name)+(c._isDupe?' <span style="opacity:.6;font-size:.75em">('+(c.case_type||'?')+')</span>':'')+'</div><div class="pc-meta">'+
         '<span class="pc-tag tag-'+c.attorney.toLowerCase()+'">'+c.attorney+'</span>'+
         '<span class="pc-tag '+tt+'">'+(c.case_type||'?')+'</span>'+
+        companionBadgeHTML(c)+
         (c._score>=25?'<span class="pc-tag" style="background:var(--red-bg);color:var(--red)">\u26a1'+c._score+'</span>':'')+
         (c._motion?'<span class="pc-tag" style="background:var(--orange-bg);color:var(--orange)">\u2696'+c._motion.motion.split(' ')[0]+'</span>':'')+
         (c._mediation&&c._mediation.med_date?'<span class="pc-tag" style="background:var(--teal-bg);color:var(--teal)">Med</span>':'')+
@@ -649,7 +706,7 @@ async function loadCases(){
     if(res.ok){var data=await res.json();if(data.length>0){allCases=data.map(normalizeCase);isLive=true;return;}}
   }catch(e){}
   _idxCounter=0;
-  allCases=EMBEDDED_CASE_DATA.map(normalizeCase);isLive=false;
+  allCases=EMBEDDED_CASE_DATA.map(normalizeCase);isLive=false;buildCompanionLookup();
 }
 
 async function init(){

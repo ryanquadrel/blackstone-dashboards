@@ -71,7 +71,7 @@ h2{font-size:1rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text
   <div class="stat accent"><div class="n">9</div><div class="l">Docket Events</div></div>
   <div class="stat orange"><div class="n">2</div><div class="l">Response Needed</div></div>
   <div class="stat yellow"><div class="n">8</div><div class="l">Awaiting OC Reply</div></div>
-  <div class="stat teal"><div class="n">0</div><div class="l">Team Mtgs Today</div></div>
+  <div class="stat teal"><div class="n">3</div><div class="l">Team Mtgs Today</div></div>
 </div>
 
 <!-- HEARINGS + MEDIATIONS SIDE BY SIDE -->
@@ -325,10 +325,21 @@ h2{font-size:1rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text
 <!-- TODAY'S TEAM CALENDAR -->
 <div class="team">
   <h2>Today's Team Calendar</h2>
-  <div class="empty">
-    No timed meetings on the team calendar today.<br>
-    <span style="font-size:.7rem">(50 calendar entries scanned — all all-day deadline reminders, none with a real meeting time. The team's day is open for case work.)</span>
-  </div>
+  <ul style="list-style:none;padding:0;margin:0">
+    <li style="padding:10px 12px;border-left:3px solid var(--accent);background:var(--bg-card-hover);margin-bottom:8px;border-radius:6px">
+      <strong>9:30 AM – 10:00 AM PT</strong> &nbsp;·&nbsp; (RQ + AM) Weekly Meeting<br>
+      <span style="color:var(--text-secondary);font-size:.78rem">Aileen Mejia · Microsoft Teams</span>
+    </li>
+    <li style="padding:10px 12px;border-left:3px solid var(--purple);background:var(--bg-card-hover);margin-bottom:8px;border-radius:6px">
+      <strong>10:00 AM – 10:30 AM PT</strong> &nbsp;·&nbsp; Galvez v. Snap-on — Call<br>
+      <span style="color:var(--text-secondary);font-size:.78rem">w/ Greg Fisch &amp; M. Jeewa (Sheppard Mullin) · Jaclyn Marshall on call · Zoom</span>
+    </li>
+    <li style="padding:10px 12px;border-left:3px solid var(--accent);background:var(--bg-card-hover);border-radius:6px">
+      <strong>3:00 PM – 3:30 PM PT</strong> &nbsp;·&nbsp; (RQ / KA) Weekly Meeting<br>
+      <span style="color:var(--text-secondary);font-size:.78rem">Karen Arellano · Microsoft Teams</span>
+    </li>
+  </ul>
+  <div style="font-size:.7rem;color:var(--text-muted);margin-top:10px">Pulled via targeted multi-pass calendar search (call/meeting/zoom/teams/etc.) with isAllDay=false filter — wildcard pull was crowding out real meetings with deadline reminders.</div>
 </div>
 
 <!-- DOCKET ACTIVITY -->

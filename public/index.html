@@ -256,7 +256,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
       <div class="eotd-tooltip" id="eotdTooltip"></div>
     </div>
     <a href="/daily-briefing" class="hdr-btn hdr-btn-briefing"><span class="hb-icon">&#128240;</span><span class="hb-label">Daily Briefing</span></a>
-    <a href="/mediation-strategy/control-air" class="hdr-btn hdr-btn-strategy" id="strategyBtn"><span class="hb-live"></span><span class="hb-icon">&#9876;</span><span class="hb-label">Strategy: Control Air</span></a>
+    <a href="/mediation-strategy/soto-control-air/" class="hdr-btn hdr-btn-strategy" id="strategyBtn"><span class="hb-live"></span><span class="hb-icon">&#9876;</span><span class="hb-label">Strategy: Control Air</span></a>
   </div>
   <div class="hdr-right">
     <div class="live-dot"></div>
@@ -728,7 +728,7 @@ window.addEventListener('load',function(){
   for(var i=0;i<items.length;i++){
     var badge = items[i].querySelector('.tl-badge');
     if(badge && badge.textContent.indexOf('TODAY') !== -1){
-      items[i].setAttribute('data-med-link','/mediation-strategy/control-air');
+      items[i].setAttribute('data-med-link','/mediation-strategy/soto-control-air/');
     }
   }
 })();

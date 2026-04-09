@@ -933,6 +933,7 @@ document.getElementById('fSearch').addEventListener('input', applyF);
 /* ── Donut ── */
 (function(){
   var data = [{v:6,c:'var(--green)',l:'Won'},{v:4,c:'var(--red)',l:'Lost'},{v:7,c:'var(--orange)',l:'Pending'},{v:2,c:'var(--yellow)',l:'Cont.'},{v:5,c:'var(--purple)',l:'Antic.'}];
+const HDATA = data;
   var total = data.reduce(function(s,d){return s+d.v;},0);
   var cx=60,cy=60,r=46,sw=13,circ=2*Math.PI*r;
   var off=0; var svg=document.getElementById('donut');

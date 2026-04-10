@@ -3,122 +3,175 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mediation Strategy Archive &mdash; Blackstone Law</title>
+<title>Mediation Strategy Archive — Blackstone Law</title>
 <style>
-:root {
-  --bg:#0a0e1a;--surface:#131a2e;--surface2:#1a2340;--border:#243052;
-  --text:#e8ecf4;--muted:#7a8ba8;--dim:#4a5a78;
-  --blue:#4f8fff;--purple:#a855f7;--green:#10b981;--pink:#ec4899;
-  --red:#ef4444;--orange:#f97316;--teal:#14b8a6;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
-body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 20% 20%,rgba(79,143,255,.06) 0%,transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(168,85,247,.04) 0%,transparent 60%);pointer-events:none;z-index:0}
-.wrap{max-width:900px;margin:0 auto;padding:24px;position:relative;z-index:1}
-
-.hdr{display:flex;justify-content:space-between;align-items:center;padding:16px 0 20px;border-bottom:1px solid var(--border);margin-bottom:24px}
-.hdr h1{font-size:1.5rem;font-weight:800;letter-spacing:-.03em}
-.hdr h1 em{font-style:normal;background:linear-gradient(135deg,var(--pink),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hdr-back{font-size:.82rem;color:var(--blue);text-decoration:none;font-weight:600}
-.hdr-back:hover{text-decoration:underline}
-
-.controls{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;align-items:center}
-.search-box{flex:1;min-width:200px;padding:10px 16px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:.88rem;outline:none;transition:border-color .2s}
-.search-box:focus{border-color:var(--blue)}
-.sort-btn{padding:8px 16px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--muted);font-size:.78rem;font-weight:700;cursor:pointer;transition:all .2s;text-transform:uppercase;letter-spacing:.04em}
-.sort-btn:hover,.sort-btn.active{border-color:var(--purple);color:var(--text);background:rgba(168,85,247,.1)}
-
-.count{font-size:.78rem;color:var(--muted);margin-bottom:16px}
-
-.strat-list{display:flex;flex-direction:column;gap:8px}
-.strat-card{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:var(--surface);border:1px solid var(--border);border-radius:12px;text-decoration:none;color:var(--text);transition:all .2s;border-left:3px solid var(--purple)}
-.strat-card:hover{border-color:var(--pink);transform:translateX(4px);box-shadow:0 4px 20px rgba(236,72,153,.15)}
-.sc-name{font-size:.95rem;font-weight:700}
-.sc-meta{font-size:.78rem;color:var(--muted);margin-top:2px}
-.sc-arrow{color:var(--dim);font-size:1.2rem;font-weight:700;transition:all .2s}
-.strat-card:hover .sc-arrow{color:var(--pink);transform:translateX(3px)}
-
-.empty{text-align:center;padding:60px 20px;color:var(--muted)}
-.empty-icon{font-size:3rem;margin-bottom:12px}
+  :root {
+    --bg: #0a0e1a;
+    --surface: #131a2e;
+    --text: #e8ecf4;
+    --text-dim: #8892a8;
+    --accent: #6366f1;
+    --green: #22c55e;
+    --border: #1e2740;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    padding: 24px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .header h1 { font-size: 22px; font-weight: 700; }
+  .header a { color: var(--accent); text-decoration: none; font-size: 13px; }
+  .header a:hover { text-decoration: underline; }
+  .controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .search-box {
+    flex: 1;
+    min-width: 200px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    font-size: 14px;
+    outline: none;
+  }
+  .search-box:focus { border-color: var(--accent); }
+  .sort-btn {
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-dim);
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .sort-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .count-label {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+  }
+  .case-card {
+    display: block;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.2s;
+  }
+  .case-card:hover { border-color: var(--accent); }
+  .card-status { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .card-name { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+  .card-meta { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-dim); }
+  .card-meta strong { color: var(--text); }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="hdr">
-    <div>
-      <h1>&#9876; Mediation <em>Strategy Archive</em></h1>
-    </div>
-    <a href="/" class="hdr-back">&larr; Mission Control</a>
+
+<div class="header">
+  <div>
+    <h1>Mediation Strategy Archive</h1>
   </div>
+  <a href="/">&larr; Back to Mission Control</a>
+</div>
 
-  <div class="controls">
-    <input type="text" class="search-box" id="search" placeholder="Search by case name, mediator, or date...">
-    <button class="sort-btn active" id="sortDate" onclick="sortCards('date')">Newest First</button>
-    <button class="sort-btn" id="sortName" onclick="sortCards('name')">A &rarr; Z</button>
-  </div>
+<div class="controls">
+  <input type="text" class="search-box" id="search" placeholder="Search by case name, mediator, or date...">
+  <button class="sort-btn active" id="sort-date" onclick="sortBy('date')">Newest First</button>
+  <button class="sort-btn" id="sort-alpha" onclick="sortBy('alpha')">A &rarr; Z</button>
+</div>
 
-  <div class="count" id="countLabel">3 strategy dashboards archived</div>
+<div class="count-label" id="count">4 archived strategies</div>
 
-  <div class="strat-list" id="stratList">
-      <a href="/mediation-strategy/soto-control-air/" class="strat-card" data-case-slug="soto-control-air" data-case="soto v. control air enterprises, llc" data-mediator="gig kyriacou" data-date="April 9, 2026">
-        <div class="sc-left">
-          <div class="sc-name">Soto v. Control Air Enterprises, LLC</div>
-          <div class="sc-meta">Gig Kyriacou &middot; April 9, 2026</div>
-        </div>
-        <div class="sc-arrow">&rarr;</div>
-      </a>
-      <a href="/mediation-strategy/vasquez-lulus/" class="strat-card" data-case="vasquez v. lulu's at town & country village, inc., et al." data-mediator="steven rottman, esq." data-date="April 3, 2026">
-        <div class="sc-left">
-          <div class="sc-name">Vasquez v. Lulu's At Town & Country Village, Inc., et al.</div>
-          <div class="sc-meta">Steven Rottman, Esq. &middot; April 3, 2026</div>
-        </div>
-        <div class="sc-arrow">&rarr;</div>
-      </a>
-      <a href="/mediation-strategy/golden-rain/" class="strat-card" data-case-slug="golden-rain" data-case="bassell, mayoka v. golden rain foundation" data-mediator="tbd" data-date="April 2026">
-        <div class="sc-left">
-          <div class="sc-name">Bassell, Mayoka v. Golden Rain Foundation</div>
-          <div class="sc-meta">Archived &middot; April 2026</div>
-        </div>
-        <div class="sc-arrow">&rarr;</div>
-      </a>
-  </div>
+<div id="cards">
 
-  
+    <a href="vasquez-lulus/" class="case-card archived" data-case-slug="vasquez-lulus" data-name="vasquez v. lulu's — mediation strategy" data-mediator="unknown" data-date="Unknown">
+      <div class="card-status" style="color:#6366f1;">Archived</div>
+      <div class="card-name">Vasquez v. Lulu's — Mediation Strategy</div>
+      <div class="card-meta">
+        <span class="card-mediator">Mediator: <strong>Unknown</strong></span>
+        <span class="card-date">Unknown</span>
+      </div>
+    </a>
+    <a href="santamaria-america-central/" class="case-card upcoming" data-case-slug="santamaria-america-central" data-name="santamaria v. america central corporation, et al." data-mediator="brandon mckelvey" data-date="2026-04-10">
+      <div class="card-status" style="color:#22c55e;">Upcoming</div>
+      <div class="card-name">Santamaria v. America Central Corporation, et al.</div>
+      <div class="card-meta">
+        <span class="card-mediator">Mediator: <strong>Brandon McKelvey</strong></span>
+        <span class="card-date">2026-04-10</span>
+      </div>
+    </a>
+    <a href="soto-control-air/" class="case-card upcoming" data-case-slug="soto-control-air" data-name="soto v. control air enterprises, llc" data-mediator="gig kyriacou" data-date="2026-04-09">
+      <div class="card-status" style="color:#22c55e;">Upcoming</div>
+      <div class="card-name">Soto v. Control Air Enterprises, LLC</div>
+      <div class="card-meta">
+        <span class="card-mediator">Mediator: <strong>Gig Kyriacou</strong></span>
+        <span class="card-date">2026-04-09</span>
+      </div>
+    </a>
+    <a href="golden-rain/" class="case-card archived" data-case-slug="golden-rain" data-name="bassell, mayoka v. golden rain foundation" data-mediator="tbd" data-date="2026-04-02">
+      <div class="card-status" style="color:#6366f1;">Archived</div>
+      <div class="card-name">Bassell, Mayoka v. Golden Rain Foundation</div>
+      <div class="card-meta">
+        <span class="card-mediator">Mediator: <strong>TBD</strong></span>
+        <span class="card-date">2026-04-02</span>
+      </div>
+    </a>
 </div>
 
 <script>
-var cards = document.querySelectorAll('.strat-card');
-var searchEl = document.getElementById('search');
-var countEl = document.getElementById('countLabel');
+const cards = document.querySelectorAll('.case-card');
+const search = document.getElementById('search');
+const countEl = document.getElementById('count');
 
-searchEl.addEventListener('input', function() {
-  var q = this.value.toLowerCase();
-  var vis = 0;
-  for (var i = 0; i < cards.length; i++) {
-    var c = cards[i];
-    var match = c.getAttribute('data-case').indexOf(q) !== -1 ||
-                c.getAttribute('data-mediator').indexOf(q) !== -1 ||
-                c.getAttribute('data-date').toLowerCase().indexOf(q) !== -1;
-    c.style.display = match ? '' : 'none';
-    if (match) vis++;
-  }
-  countEl.textContent = vis + ' strategy dashboard' + (vis !== 1 ? 's' : '') + (q ? ' matching' : ' archived');
+search.addEventListener('input', function() {
+  const q = this.value.toLowerCase();
+  let visible = 0;
+  cards.forEach(card => {
+    const match = card.dataset.name.includes(q) || card.dataset.mediator.includes(q) || card.dataset.date.includes(q);
+    card.style.display = match ? '' : 'none';
+    if (match) visible++;
+  });
+  countEl.textContent = visible + ' of 4 strategies shown';
 });
 
-function sortCards(mode) {
-  var list = document.getElementById('stratList');
-  var arr = Array.prototype.slice.call(cards);
-  if (mode === 'name') {
-    arr.sort(function(a, b) { return a.getAttribute('data-case').localeCompare(b.getAttribute('data-case')); });
-    document.getElementById('sortName').classList.add('active');
-    document.getElementById('sortDate').classList.remove('active');
+function sortBy(mode) {
+  const container = document.getElementById('cards');
+  const arr = Array.from(cards);
+  if (mode === 'date') {
+    arr.sort((a, b) => b.dataset.date.localeCompare(a.dataset.date));
+    document.getElementById('sort-date').classList.add('active');
+    document.getElementById('sort-alpha').classList.remove('active');
   } else {
-    arr.sort(function(a, b) { return b.getAttribute('data-date').localeCompare(a.getAttribute('data-date')); });
-    document.getElementById('sortDate').classList.add('active');
-    document.getElementById('sortName').classList.remove('active');
+    arr.sort((a, b) => a.dataset.name.localeCompare(b.dataset.name));
+    document.getElementById('sort-alpha').classList.add('active');
+    document.getElementById('sort-date').classList.remove('active');
   }
-  for (var i = 0; i < arr.length; i++) list.appendChild(arr[i]);
+  arr.forEach(card => container.appendChild(card));
 }
 </script>
+
 </body>
 </html>

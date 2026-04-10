@@ -179,6 +179,18 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
 #errorMsg pre{background:var(--surface);padding:12px;border-radius:8px;margin-top:12px;text-align:left;font-size:.75rem;overflow-x:auto}
 .cross-badge.cmc{background:rgba(6,182,212,.12);color:#06b6d4;border-color:rgba(6,182,212,.3)}
 .cross-badge.cmc.urgent{background:rgba(239,68,68,.12);color:#ef4444;border-color:rgba(239,68,68,.3)}
+
+/* Client Calls Table */
+.calls-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.calls-table th{text-align:left;padding:8px 10px;border-bottom:2px solid var(--border);color:var(--text-muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;font-weight:700}
+.calls-table td{padding:7px 10px;border-bottom:1px solid var(--border)}
+.calls-table tr:hover{background:var(--bg-hover)}
+.calls-table .stale-critical{color:var(--red);font-weight:700}
+.calls-table .stale-high{color:var(--orange);font-weight:600}
+.calls-table .stale-medium{color:var(--yellow)}
+.calls-table .stale-ok{color:var(--green)}
+.calls-table .log-btn{background:var(--accent);color:#fff;border:none;border-radius:4px;padding:3px 10px;font-size:.75rem;cursor:pointer}
+.calls-table .log-btn:hover{opacity:.85}
 </style>
 </head>
 <body>
@@ -214,6 +226,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
       <button class="layer-tab active" data-layer="attention">Needs Action <span class="count" id="attentionCount">0</span></button>
       <button class="layer-tab" data-layer="pipeline">Pipeline <span class="count" id="pipelineCount">0</span></button>
       <button class="layer-tab" data-layer="deepdive">All Cases <span class="count" id="deepdiveCount">0</span></button>
+      <button class="layer-tab" data-layer="calls">Client Calls <span class="count" id="callsCount">0</span></button>
     </div>
     <div class="layer active" id="layer-attention"><div id="attentionList"></div></div>
     <div class="layer" id="layer-pipeline"><div class="pipeline-board" id="pipelineBoard"></div></div>
@@ -229,6 +242,24 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
 </div><div class="case-grid" id="caseGrid"></div></div>
   </div>
 </div>
+    <div class="layer" id="layer-calls">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;padding:0 4px">
+        <span style="font-size:.85rem;color:var(--text-muted);font-weight:600">Client Call List</span>
+        <span style="font-size:.75rem;color:var(--text-dim)">Sorted by staleness — oldest contact first</span>
+      </div>
+      <table class="calls-table" id="callsTable">
+        <thead><tr>
+          <th onclick="sortCallsTable(0)" style="cursor:pointer">Case &#9650;</th>
+          <th onclick="sortCallsTable(1)" style="cursor:pointer">Attorney</th>
+          <th onclick="sortCallsTable(2)" style="cursor:pointer">Last Contact &#9650;</th>
+          <th onclick="sortCallsTable(3)" style="cursor:pointer">Days</th>
+          <th onclick="sortCallsTable(4)" style="cursor:pointer">Status</th>
+          <th>Action</th>
+        </tr></thead>
+        <tbody id="callsBody"></tbody>
+      </table>
+    </div>
+
 <div class="modal-overlay" id="modalOverlay"><div class="modal" id="modalContent"></div></div>
 <div class="toast" id="toast"></div>
 <script>
@@ -764,6 +795,7 @@ function updateCounts(){
   document.getElementById('attentionCount').textContent=urgent;
   document.getElementById('pipelineCount').textContent=filteredCases.length;
   document.getElementById('deepdiveCount').textContent=filteredCases.length;
+  buildCallsList();
 }
 
 async function loadCases(){
@@ -814,6 +846,61 @@ async function init(){
   }
 }
 init();
+
+function buildCallsList(){
+  var fc=allCases.filter(function(c){return !isPostSettlementGated(c);});
+  document.getElementById('callsCount').textContent=fc.length;
+  var tbody=document.getElementById('callsBody');
+  if(!tbody)return;
+  // Sort by staleness: no contact > oldest contact > newest
+  fc.sort(function(a,b){
+    var aDate=a.last_client_contact?parseDate(a.last_client_contact):null;
+    var bDate=b.last_client_contact?parseDate(b.last_client_contact):null;
+    if(!aDate&&!bDate)return 0;
+    if(!aDate)return -1;
+    if(!bDate)return 1;
+    return aDate-bDate; // oldest first
+  });
+  var html='';
+  fc.forEach(function(c){
+    var id=caseId(c);
+    var lcd=c.last_client_contact;
+    var lcdDate=lcd?parseDate(lcd):null;
+    var days=lcdDate?daysBetween(TODAY,lcdDate):'—';
+    var cls='stale-ok';
+    if(!lcdDate||days>120)cls='stale-critical';
+    else if(days>90)cls='stale-high';
+    else if(days>60)cls='stale-medium';
+    var status='';
+    if(c._mediation&&c._mediation.phase)status=c._mediation.phase.split(' — ')[0]||'';
+    if(c._motion&&c._motion.status)status+=(status?' | ':'')+c._motion.motion+' '+c._motion.status;
+    if(!status&&c.is_stayed)status='Stayed';
+    html+='<tr onclick="openCase(\''+id+'\')" style="cursor:pointer">'+
+      '<td><strong>'+esc(c.defendant||'Unknown')+'</strong><div style="font-size:.7rem;color:var(--text-dim)">'+esc(c.plaintiff||'')+'</div></td>'+
+      '<td>'+esc(c.attorney||'—')+'</td>'+
+      '<td class="'+cls+'">'+(lcd?formatDate(lcd):'None')+'</td>'+
+      '<td class="'+cls+'">'+(typeof days==="number"?days+'d':'—')+'</td>'+
+      '<td style="font-size:.75rem">'+esc(status)+'</td>'+
+      '<td><button class="log-btn" onclick="logContact(\''+id+'\',this,event)">\u260E Log</button></td>'+
+      '</tr>';
+  });
+  tbody.innerHTML=html;
+}
+var _callsSortCol=-1,_callsSortAsc=true;
+function sortCallsTable(col){
+  if(_callsSortCol===col)_callsSortAsc=!_callsSortAsc;
+  else{_callsSortCol=col;_callsSortAsc=true;}
+  var tbody=document.getElementById('callsBody');
+  var rows=Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+  rows.sort(function(a,b){
+    var at=a.cells[col].textContent.trim();
+    var bt=b.cells[col].textContent.trim();
+    if(col===3){at=parseInt(at)||9999;bt=parseInt(bt)||9999;return _callsSortAsc?at-bt:bt-at;}
+    return _callsSortAsc?at.localeCompare(bt):bt.localeCompare(at);
+  });
+  rows.forEach(function(r){tbody.appendChild(r);});
+}
+
 </script>
 </body>
 </html>

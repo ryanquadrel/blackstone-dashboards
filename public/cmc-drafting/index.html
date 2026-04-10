@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CMC Drafting Progress</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --blue: #3b82f6;
+      --green: #10b981;
+      --yellow: #eab308;
+      --red: #ef4444;
+      --purple: #a855f7;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --border: #334155;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      font-weight: 600;
+    }
+
+    .back-link {
+      color: var(--blue);
+      text-decoration: none;
+      font-size: 14px;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    .back-link:hover {
+      background-color: rgba(59, 130, 246, 0.1);
+      border-color: var(--blue);
+    }
+
+    /* Filter Bar */
+    .filter-bar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .filter-label {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .filter-btn {
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      background-color: transparent;
+      color: var(--text);
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--blue);
+      background-color: rgba(59, 130, 246, 0.1);
+    }
+
+    .filter-btn.active {
+      background-color: var(--blue);
+      border-color: var(--blue);
+      color: white;
+    }
+
+    /* Stats Row */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .stat-card {
+      background-color: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .stat-card.critical .stat-value {
+      color: var(--red);
+    }
+
+    .stat-card.in-progress .stat-value {
+      color: var(--blue);
+    }
+
+    .stat-card.filed .stat-value {
+      color: var(--green);
+    }
+
+    /* Kanban Layout */
+    .kanban-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 20px;
+    }
+
+    .kanban-column {
+      display: flex;
+      flex-direction: column;
+      background-color: rgba(30, 41, 59, 0.5);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      min-height: 600px;
+    }
+
+    .column-header {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .column-count {
+      font-size: 12px;
+      background-color: rgba(59, 130, 246, 0.1);
+      color: var(--blue);
+      padding: 4px 8px;
+      border-radius: 3px;
+    }
+
+    .case-card {
+      background-color: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .case-card:hover {
+      border-color: var(--blue);
+      background-color: rgba(59, 130, 246, 0.05);
+    }
+
+    .case-name {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .case-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
+    .detail-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .detail-label {
+      color: var(--text-muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .detail-value {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .hearing-type-badge {
+      display: inline-block;
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 3px;
+      font-weight: 600;
+      background-color: rgba(168, 85, 247, 0.2);
+      color: var(--purple);
+      margin-bottom: 8px;
+    }
+
+    .attorney-badge {
+      display: inline-block;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 3px;
+      font-weight: 600;
+      background-color: rgba(59, 130, 246, 0.2);
+      color: var(--blue);
+    }
+
+    .case-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      font-size: 11px;
+    }
+
+    .days-remaining {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .days-label {
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .days-value {
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .days-value.critical {
+      color: var(--red);
+    }
+
+    .days-value.warning {
+      color: var(--yellow);
+    }
+
+    .days-value.ok {
+      color: var(--green);
+    }
+
+    .last-action {
+      color: var(--text-muted);
+      font-size: 11px;
+      font-style: italic;
+      max-width: 160px;
+      text-align: right;
+    }
+
+    .empty-column {
+      color: var(--text-muted);
+      text-align: center;
+      padding: 40px 16px;
+      font-size: 13px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 16px;
+      }
+
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .header h1 {
+        font-size: 22px;
+      }
+
+      .kanban-container {
+        grid-template-columns: 1fr;
+      }
+
+      .kanban-column {
+        min-height: 400px;
+      }
+
+      .case-details {
+        grid-template-columns: 1fr;
+      }
+
+      .filter-bar {
+        gap: 8px;
+      }
+
+      .filter-btn {
+        padding: 6px 12px;
+        font-size: 13px;
+      }
+
+      .stats-row {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1>CMC Drafting Progress</h1>
+      <a href="/" class="back-link">← Back to Home</a>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+      <span class="filter-label">Filter by Attorney:</span>
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="JM">JM</button>
+      <button class="filter-btn" data-filter="SM">SM</button>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="stats-row" id="statsRow">
+      <div class="stat-card">
+        <span class="stat-label">Total Cases</span>
+        <span class="stat-value" id="totalCases">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Not Started</span>
+        <span class="stat-value" id="notStartedCount">0</span>
+      </div>
+      <div class="stat-card in-progress">
+        <span class="stat-label">In Progress</span>
+        <span class="stat-value" id="inProgressCount">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Sent to OC</span>
+        <span class="stat-value" id="sentOCCount">0</span>
+      </div>
+      <div class="stat-card filed">
+        <span class="stat-label">Filed</span>
+        <span class="stat-value" id="filedCount">0</span>
+      </div>
+      <div class="stat-card critical">
+        <span class="stat-label">Critical (≤3 days)</span>
+        <span class="stat-value" id="criticalCount">0</span>
+      </div>
+    </div>
+
+    <!-- Kanban Board -->
+    <div class="kanban-container" id="kanbanBoard">
+      <!-- Dynamically populated -->
+    </div>
+  </div>
+
+  <script>
+    // Sample drafting data — this will be populated by cmc-monitor-sync task
+    var DRAFTING_DATA = [
+      {
+        case_name: "Vasquez v. Lulu's Fashion Lounge",
+        hearing_date: "2026-04-25",
+        hearing_type: "CMC",
+        attorney: "SM",
+        filing_deadline: "2026-04-10",
+        status: "draft_sent",
+        defense_counsel: "Fisher & Phillips",
+        last_action: "Draft sent to OC 4/8",
+        days_to_hearing: 15,
+        days_to_deadline: 0
+      },
+      {
+        case_name: "Chen v. TechCorp Solutions Inc.",
+        hearing_date: "2026-04-15",
+        hearing_type: "ISC",
+        attorney: "JM",
+        filing_deadline: "2026-04-12",
+        status: "in_progress",
+        defense_counsel: "O'Melveny & Myers",
+        last_action: "Draft started 4/5",
+        days_to_hearing: 5,
+        days_to_deadline: 2
+      },
+      {
+        case_name: "Rodriguez v. Coastal Manufacturing",
+        hearing_date: "2026-05-02",
+        hearing_type: "CMC",
+        attorney: "SM",
+        filing_deadline: "2026-04-20",
+        status: "not_started",
+        defense_counsel: "Covington & Burling",
+        last_action: "Case assigned 4/1",
+        days_to_hearing: 22,
+        days_to_deadline: 10
+      },
+      {
+        case_name: "Martinez v. Global Logistics",
+        hearing_date: "2026-04-22",
+        hearing_type: "IDC",
+        attorney: "JM",
+        filing_deadline: "2026-04-15",
+        status: "filed",
+        defense_counsel: "Sidley Austin",
+        last_action: "Filed on 4/10",
+        days_to_hearing: 12,
+        days_to_deadline: 5
+      },
+      {
+        case_name: "Kim v. Digital Services Corp",
+        hearing_date: "2026-04-18",
+        hearing_type: "CMC",
+        attorney: "SM",
+        filing_deadline: "2026-04-11",
+        status: "in_progress",
+        defense_counsel: "Foley & Lardner",
+        last_action: "Draft in progress 4/9",
+        days_to_hearing: 8,
+        days_to_deadline: 1
+      },
+      {
+        case_name: "Thompson v. Metro Healthcare",
+        hearing_date: "2026-04-28",
+        hearing_type: "CMC",
+        attorney: "JM",
+        filing_deadline: "2026-04-18",
+        status: "draft_sent",
+        defense_counsel: "King & Spalding",
+        last_action: "Draft sent to OC 4/7",
+        days_to_hearing: 18,
+        days_to_deadline: 8
+      }
+    ];
+
+    // State
+    let currentFilter = 'all';
+
+    // Column metadata
+    const COLUMNS = {
+      not_started: {
+        title: 'Not Started',
+        order: 0
+      },
+      in_progress: {
+        title: 'Draft in Progress',
+        order: 1
+      },
+      draft_sent: {
+        title: 'Draft Sent to OC',
+        order: 2
+      },
+      filed: {
+        title: 'Filed / On File',
+        order: 3
+      }
+    };
+
+    // Filter events
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentFilter = this.dataset.filter;
+        render();
+      });
+    });
+
+    // Get filtered data
+    function getFilteredData() {
+      if (currentFilter === 'all') {
+        return DRAFTING_DATA;
+      }
+      return DRAFTING_DATA.filter(item => item.attorney === currentFilter);
+    }
+
+    // Calculate days class
+    function getDaysClass(days) {
+      if (days <= 3) return 'critical';
+      if (days <= 7) return 'warning';
+      return 'ok';
+    }
+
+    // Render dashboard
+    function render() {
+      const filtered = getFilteredData();
+
+      // Update stats
+      updateStats(filtered);
+
+      // Render kanban
+      renderKanban(filtered);
+    }
+
+    // Update statistics
+    function updateStats(data) {
+      const total = data.length;
+      const notStarted = data.filter(d => d.status === 'not_started').length;
+      const inProgress = data.filter(d => d.status === 'in_progress').length;
+      const sentOC = data.filter(d => d.status === 'draft_sent').length;
+      const filed = data.filter(d => d.status === 'filed').length;
+      const critical = data.filter(d => d.days_to_deadline <= 3).length;
+
+      document.getElementById('totalCases').textContent = total;
+      document.getElementById('notStartedCount').textContent = notStarted;
+      document.getElementById('inProgressCount').textContent = inProgress;
+      document.getElementById('sentOCCount').textContent = sentOC;
+      document.getElementById('filedCount').textContent = filed;
+      document.getElementById('criticalCount').textContent = critical;
+    }
+
+    // Render kanban board
+    function renderKanban(data) {
+      const board = document.getElementById('kanbanBoard');
+      board.innerHTML = '';
+
+      // Group by status
+      const grouped = {
+        not_started: [],
+        in_progress: [],
+        draft_sent: [],
+        filed: []
+      };
+
+      data.forEach(item => {
+        grouped[item.status].push(item);
+      });
+
+      // Render columns in order
+      Object.entries(COLUMNS).forEach(([status, config]) => {
+        const column = document.createElement('div');
+        column.className = 'kanban-column';
+
+        const header = document.createElement('div');
+        header.className = 'column-header';
+        header.innerHTML = `
+          <span>${config.title}</span>
+          <span class="column-count">${grouped[status].length}</span>
+        `;
+        column.appendChild(header);
+
+        const items = grouped[status];
+        if (items.length === 0) {
+          const empty = document.createElement('div');
+          empty.className = 'empty-column';
+          empty.textContent = 'No cases';
+          column.appendChild(empty);
+        } else {
+          items.forEach(item => {
+            const card = createCaseCard(item);
+            column.appendChild(card);
+          });
+        }
+
+        board.appendChild(column);
+      });
+    }
+
+    // Create case card
+    function createCaseCard(item) {
+      const card = document.createElement('div');
+      card.className = 'case-card';
+
+      const daysToDeadlineClass = getDaysClass(item.days_to_deadline);
+
+      card.innerHTML = `
+        <div class="hearing-type-badge">${item.hearing_type}</div>
+        <div class="case-name">${item.case_name}</div>
+        <div class="case-details">
+          <div class="detail-item">
+            <span class="detail-label">Hearing Date</span>
+            <span class="detail-value">${formatDate(item.hearing_date)}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Days to Hearing</span>
+            <span class="detail-value">${item.days_to_hearing}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Filing Deadline</span>
+            <span class="detail-value">${formatDate(item.filing_deadline)}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Defense Counsel</span>
+            <span class="detail-value" style="font-size: 11px;">${item.defense_counsel}</span>
+          </div>
+        </div>
+        <div class="case-footer">
+          <div class="days-remaining">
+            <span class="days-label">Days to Deadline</span>
+            <span class="days-value ${daysToDeadlineClass}">${item.days_to_deadline}</span>
+          </div>
+          <span class="attorney-badge">${item.attorney}</span>
+          <span class="last-action">${item.last_action}</span>
+        </div>
+      `;
+
+      return card;
+    }
+
+    // Format date
+    function formatDate(dateStr) {
+      const date = new Date(dateStr + 'T00:00:00');
+      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    }
+
+    // Initial render
+    render();
+  </script>
+</body>
+</html>

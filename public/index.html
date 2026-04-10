@@ -256,7 +256,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
       <div class="eotd-tooltip" id="eotdTooltip"></div>
     </div>
     <a href="/daily-briefing" class="hdr-btn hdr-btn-briefing"><span class="hb-icon">&#128240;</span><span class="hb-label">Daily Briefing</span></a>
-    <a href="/mediation-strategy/soto-control-air/" class="hdr-btn hdr-btn-strategy" id="strategyBtn"><span class="hb-live"></span><span class="hb-icon">&#9876;</span><span class="hb-label">Strategy: Control Air</span></a>
+    <a href="/mediation-strategy/santamaria-america-central/" class="hdr-btn hdr-btn-strategy" id="strategyBtn"><span class="hb-live"></span><span class="hb-icon">&#9876;</span><span class="hb-label">Strategy: America Central</span></a>
   </div>
   <div class="hdr-right">
     <div class="live-dot"></div>
@@ -378,6 +378,10 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
     <div class="tl-panel">
       <h2><span class="icon">&#9889;</span> 14-Day Action Timeline</h2>
                   <div class="tl-items">
+        <div class="tl-item s-med" data-med-link="/mediation-strategy/santamaria-america-central/" onclick="window.location=this.getAttribute('data-med-link')">
+          <div class="tl-date">APR 10</div>
+          <div class="tl-body"><div class="tl-case">Santamaria v. America Central Corp</div><div class="tl-event">Mediation TODAY (RQ)</div><span class="tl-badge b-med">TODAY &middot; MEDIATION</span></div>
+        </div>
         <div class="tl-item s-disco" onclick="window.location='/cmc-deadline-monitor/'">
           <div class="tl-date">APR 10</div>
           <div class="tl-body"><div class="tl-case">Flores v. Med-Pharmex, Inc.,et al.</div><div class="tl-event">CMC hearing &middot; 10:00 AM &middot; JM &middot; <span style="color:#10b981;font-weight:700">FILED</span></div><span class="tl-badge b-disco">CMC</span></div>
@@ -737,7 +741,7 @@ window.addEventListener('load',function(){
   for(var i=0;i<items.length;i++){
     var badge = items[i].querySelector('.tl-badge');
     if(badge && badge.textContent.indexOf('TODAY') !== -1){
-      items[i].setAttribute('data-med-link','/mediation-strategy/soto-control-air/');
+      items[i].setAttribute('data-med-link','/mediation-strategy/santamaria-america-central/');
     }
   }
 })();

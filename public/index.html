@@ -256,7 +256,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
       <div class="eotd-tooltip" id="eotdTooltip"></div>
     </div>
     <a href="/daily-briefing" class="hdr-btn hdr-btn-briefing"><span class="hb-icon">&#128240;</span><span class="hb-label">Daily Briefing</span></a>
-    <a href="/mediation-strategy/santamaria-america-central/" class="hdr-btn hdr-btn-strategy" id="strategyBtn"><span class="hb-live"></span><span class="hb-icon">&#9876;</span><span class="hb-label">Strategy: America Central</span></a>
+    <a href="/mediation-strategy/america-central" class="hdr-btn hdr-btn-strategy" id="strategyBtn"><span class="hb-live"></span><span class="hb-icon">&#9876;</span><span class="hb-label">Strategy: America Central Corp</span></a>
   </div>
   <div class="hdr-right">
     <div class="live-dot"></div>
@@ -295,13 +295,13 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
     <svg class="ring-svg" viewBox="0 0 100 100">
       <circle class="ring-bg" cx="50" cy="50" r="42"/>
       <circle class="ring-fill" cx="50" cy="50" r="42" stroke="var(--purple)" stroke-dasharray="264" stroke-dashoffset="264" transform="rotate(-90 50 50)" id="ring2"/>
-      <text x="50" y="46" fill="var(--purple)" font-size="14" font-weight="800" text-anchor="middle">78</text>
+      <text x="50" y="46" fill="var(--purple)" font-size="14" font-weight="800" text-anchor="middle">76</text>
       <text x="50" y="60" fill="var(--muted)" font-size="7" text-anchor="middle" font-weight="600">TOTAL</text>
     </svg>
     <div class="ring-info">
-      <div class="ri-val glow-purple">78 Cases</div>
+      <div class="ri-val glow-purple">76 Cases</div>
       <div class="ri-label">Mediation Pipeline</div>
-      <div class="ri-sub">42 pipeline &middot; 36 booked &middot; 8 post-settlement</div>
+      <div class="ri-sub">42 pipeline &middot; 34 booked &middot; 10 post-settlement</div>
     </div>
     <div class="arrow">&rarr;</div>
   </a>
@@ -378,17 +378,53 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
     <div class="tl-panel">
       <h2><span class="icon">&#9889;</span> 14-Day Action Timeline</h2>
                   <div class="tl-items">
-        <div class="tl-item s-med" data-med-link="/mediation-strategy/santamaria-america-central/" onclick="window.location=this.getAttribute('data-med-link')">
+        <div class="tl-item s-brief" onclick="window.location='/mediation-pipeline'">
           <div class="tl-date">APR 10</div>
-          <div class="tl-body"><div class="tl-case">Santamaria v. America Central Corp</div><div class="tl-event">Mediation TODAY (RQ)</div><span class="tl-badge b-med">TODAY &middot; MEDIATION</span></div>
+          <div class="tl-body"><div class="tl-case">Agpalza v. Mission Wells / Magnolia Springs</div><div class="tl-event">Mediation brief deadline (JM)</div><span class="tl-badge b-urgent">BRIEF DUE</span></div>
         </div>
         <div class="tl-item s-disco" onclick="window.location='/cmc-deadline-monitor/'">
           <div class="tl-date">APR 10</div>
           <div class="tl-body"><div class="tl-case">Flores v. Med-Pharmex, Inc.,et al.</div><div class="tl-event">CMC hearing &middot; 10:00 AM &middot; JM &middot; <span style="color:#10b981;font-weight:700">FILED</span></div><span class="tl-badge b-disco">CMC</span></div>
         </div>
+        <div class="tl-item s-med" data-med-link="/mediation-pipeline" onclick="window.location=this.getAttribute('data-med-link')">
+          <div class="tl-date">APR 10</div>
+          <div class="tl-body"><div class="tl-case">Santamaria v. America Central Corp</div><div class="tl-event">Mediation TODAY (RQ)</div><span class="tl-badge b-med">TODAY &middot; MEDIATION</span></div>
+        </div>
+        <div class="tl-item s-med" data-med-link="/mediation-pipeline" onclick="window.location=this.getAttribute('data-med-link')">
+          <div class="tl-date">APR 13</div>
+          <div class="tl-body"><div class="tl-case">Agpalza v. Mission Wells / Magnolia Springs</div><div class="tl-event">Mediation (JM)</div><span class="tl-badge b-med">MEDIATION</span></div>
+        </div>
         <div class="tl-item s-disco" onclick="window.location='/cmc-deadline-monitor/'">
           <div class="tl-date">APR 14</div>
           <div class="tl-body"><div class="tl-case">Anguiano v. Kinecta Federal Credit Union</div><div class="tl-event">CMC hearing &middot; 8:30 AM &middot; SM &middot; <span style="color:#f59e0b;font-weight:700">DRAFT SENT</span></div><span class="tl-badge b-disco">CMC</span></div>
+        </div>
+        <div class="tl-item s-motion" onclick="window.location='/motion-dashboard'">
+          <div class="tl-date">APR 14</div>
+          <div class="tl-body"><div class="tl-case">Truitt / Carias-Paredes</div><div class="tl-event">MTC #1 — Original deficient responses. Deadline extended to Apr 14 (per Viviano 4/7). Objections waived (CCP 2031.300). M&amp;C 2/27. Privilege logs 3/13. (RQ) (RQ)</div><span class="tl-badge b-motion">MOTION</span></div>
+        </div>
+        <div class="tl-item s-motion" onclick="window.location='/motion-dashboard'">
+          <div class="tl-date">APR 15</div>
+          <div class="tl-body"><div class="tl-case">Caleres / Ramirez</div><div class="tl-event">CIVRS2510023 (JM)</div><span class="tl-badge b-motion">MOTION</span></div>
+        </div>
+        <div class="tl-item s-motion" onclick="window.location='/motion-dashboard'">
+          <div class="tl-date">APR 15</div>
+          <div class="tl-body"><div class="tl-case">Caleres / Ramirez</div><div class="tl-event">D's Reply due 4/15. Opp filed 4/9 (via Steno). Hearing 4/22. (JM) (JM)</div><span class="tl-badge b-motion">MOTION</span></div>
+        </div>
+        <div class="tl-item s-motion" onclick="window.location='/motion-dashboard'">
+          <div class="tl-date">APR 15</div>
+          <div class="tl-body"><div class="tl-case">Edmiston v. Weatherford</div><div class="tl-event">25CV144036 (SM)</div><span class="tl-badge b-motion">MOTION</span></div>
+        </div>
+        <div class="tl-item s-motion" onclick="window.location='/motion-dashboard'">
+          <div class="tl-date">APR 15</div>
+          <div class="tl-body"><div class="tl-case">Edmiston v. Weatherford</div><div class="tl-event">D's Reply due 4/15. Opp filed 4/9. Hearing 4/22. (SM) (SM)</div><span class="tl-badge b-motion">MOTION</span></div>
+        </div>
+        <div class="tl-item s-motion" onclick="window.location='/motion-dashboard'">
+          <div class="tl-date">APR 16</div>
+          <div class="tl-body"><div class="tl-case">Conant v. Evergreen (Class)</div><div class="tl-event">D's Reply due 4/16 (NDCA LR 7-3(c)). P opp filed 4/2 (Dkt 25). Reply filed 4/9 (Dkt 26). Hearing 4/23. (JM) (JM)</div><span class="tl-badge b-motion">MOTION</span></div>
+        </div>
+        <div class="tl-item s-brief" onclick="window.location='/mediation-pipeline'">
+          <div class="tl-date">APR 20</div>
+          <div class="tl-body"><div class="tl-case">Douglas v. Veridiam</div><div class="tl-event">Mediation brief deadline (SM)</div><span class="tl-badge b-urgent">BRIEF DUE</span></div>
         </div>
         <div class="tl-item s-disco" onclick="window.location='/cmc-deadline-monitor/'">
           <div class="tl-date">APR 21</div>
@@ -398,9 +434,17 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
           <div class="tl-date">APR 21</div>
           <div class="tl-body"><div class="tl-case">Steves v. LA Solar Group, Inc.</div><div class="tl-event">CMC hearing &middot; 8:30 AM &middot; JM &middot; <span style="color:#ef4444;font-weight:700">DUE</span></div><span class="tl-badge b-disco">CMC</span></div>
         </div>
+        <div class="tl-item s-motion" onclick="window.location='/motion-dashboard'">
+          <div class="tl-date">APR 23</div>
+          <div class="tl-body"><div class="tl-case">Conant v. Evergreen (Class)</div><div class="tl-event">3:25-cv-10265-VC (JM)</div><span class="tl-badge b-motion">MOTION</span></div>
+        </div>
         <div class="tl-item s-disco" onclick="window.location='/cmc-deadline-monitor/'">
           <div class="tl-date">APR 24</div>
           <div class="tl-body"><div class="tl-case">Hernandez v. Liberty Utilities (Apple Valley Ranchos Water) Corp</div><div class="tl-event">SC hearing &middot; 10:00 AM &middot; SM &middot; <span style="color:#f59e0b;font-weight:700">DRAFT SENT</span></div><span class="tl-badge b-disco">SC</span></div>
+        </div>
+        <div class="tl-item s-motion" onclick="window.location='/motion-dashboard'">
+          <div class="tl-date">APR 24</div>
+          <div class="tl-body"><div class="tl-case">Rosado v. Ridgecrest</div><div class="tl-event">BCV-25-102263 (RQ)</div><span class="tl-badge b-motion">MOTION</span></div>
         </div>
 </div>
 </div>
@@ -459,12 +503,12 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
   <div class="snap-panel">
     <h2>&#128202; Portfolio at a Glance</h2>
     <div class="snap-grid">
-      <a href="/mediation-pipeline" class="snap-card"><div class="snap-num glow-purple">36</div><div class="snap-label">Mediations Booked</div></a>
+      <a href="/mediation-pipeline" class="snap-card"><div class="snap-num glow-purple">34</div><div class="snap-label">Mediations Booked</div></a>
       <a href="/mediation-pipeline" class="snap-card"><div class="snap-num glow-green">42</div><div class="snap-label">Pipeline Cases</div></a>
-      <a href="/motion-dashboard" class="snap-card"><div class="snap-num glow-orange">37</div><div class="snap-label">Active Motions</div></a>
+      <a href="/motion-dashboard" class="snap-card"><div class="snap-num glow-orange">54</div><div class="snap-label">Active Motions</div></a>
       <a href="/discovery-tracker" class="snap-card"><div class="snap-num glow-blue">18</div><div class="snap-label">Pre-Discovery</div></a>
       <a href="/cmc-deadline-monitor/" class="snap-card"><div class="snap-num" style="color:var(--yellow);text-shadow:0 0 20px rgba(234,179,8,.3)">5</div><div class="snap-label">CMC Filings (14d)</div></a>
-      <a href="/motion-dashboard" class="snap-card"><div class="snap-num glow-red">18</div><div class="snap-label">Arb Track</div></a>
+      <a href="/motion-dashboard" class="snap-card"><div class="snap-num glow-red">34</div><div class="snap-label">Arb Track</div></a>
       <a href="/command-center" class="snap-card"><div class="snap-num" style="color:var(--red);text-shadow:0 0 20px rgba(239,68,68,.3)">0</div><div class="snap-label">Needs Action</div></a>
     </div>
   </div>

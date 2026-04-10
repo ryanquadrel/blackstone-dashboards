@@ -598,6 +598,7 @@ function renderDeepDive(){
       fields.push(['Discovery',truncate(c.disco,80)]);
       fields.push(['Defense Counsel',truncate(c.defense_counsel,50)]);
       fields.push(['Next Hearing',formatDate(c.next_hearing_date)]);
+      if(c.discovery_status && c.discovery_status !== 'No discovery tracked') fields.push(['Discovery Status', c.discovery_status]);
     } else if(c._stage==='med-booked'||c._stage==='med-prep'||c._stage==='med-scheduling'){
       if(c._mediation){fields.push(['Mediator',c._mediation.mediator||'\u2014']);fields.push(['Med. Date',c._mediation.med_date?formatDate(c._mediation.med_date):'\u2014']);}
       fields.push(['Next Hearing',formatDate(c.next_hearing_date)]);
@@ -639,7 +640,16 @@ function renderDeepDive(){
       html+='</div>';
     }
     html+='<div class="case-card-body">';
-    fields.forEach(function(f){if(f[1]&&String(f[1]).trim()&&f[1]!=='\u2014')html+='<div class="case-field"><span class="cf-label">'+f[0]+'</span><span class="cf-value">'+esc(String(f[1]))+'</span></div>';});
+    fields.forEach(function(f){if(f[1]&&String(f[1]).trim()&&f[1]!=='\u2014'){
+      var style='';
+      if(f[0]==='Discovery Status'){
+        if(String(f[1]).indexOf('MTC')>=0)style='color:#f59e0b;';
+        else if(String(f[1]).indexOf('Awaiting')>=0)style='color:#3b82f6;';
+        else if(String(f[1]).indexOf('Pre-discovery')>=0)style='color:#6b7280;';
+        else style='color:#10b981;';
+      }
+      html+='<div class="case-field"><span class="cf-label">'+f[0]+'</span><span class="cf-value"'+( style ? ' style="'+style+'"' : '')+'>'+esc(String(f[1]))+'</span></div>';
+    }});
     html+='<div class="case-field"><span class="cf-label">Client Contact</span><span class="cf-value">'+(c.last_client_contact?formatDate(c.last_client_contact):'\u2014')+' <button class="log-contact-btn" onclick="logContact(\''+id+'\',this,event)">\u260E Log Contact</button></span></div>';
     html+='</div>';
     // Editable fields

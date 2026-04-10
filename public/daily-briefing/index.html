@@ -1,122 +1,420 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8">
-<title>Daily Case Briefing — 2026-04-09</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Case Briefing — April 10, 2026 | Blackstone Law</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{
---bg-primary:#0a0e17;--bg-card:#141a2a;--bg-card-hover:#1a2236;--border:#1e293b;
---text-primary:#e2e8f0;--text-secondary:#94a3b8;--text-muted:#64748b;
---accent:#4f8cff;--accent-glow:rgba(79,140,255,.12);
---red:#ff4757;--red-glow:rgba(255,71,87,.12);
---orange:#ff9f43;--orange-glow:rgba(255,159,67,.12);
---green:#2ed573;--green-glow:rgba(46,213,115,.12);
---purple:#a77bff;--purple-glow:rgba(167,123,255,.12);
---yellow:#ffd32a;--yellow-glow:rgba(255,211,42,.12);
---teal:#00d2d3;--teal-glow:rgba(0,210,211,.12);
+:root {
+  --bg-primary: #0a0e17;
+  --bg-card: #141a2a;
+  --bg-card-hover: #1a2236;
+  --border: #1e293b;
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent: #4f8cff;
+  --accent-glow: rgba(79,140,255,0.12);
+  --red: #ff4757;
+  --red-glow: rgba(255,71,87,0.12);
+  --orange: #ff9f43;
+  --orange-glow: rgba(255,159,67,0.12);
+  --green: #2ed573;
+  --green-glow: rgba(46,213,115,0.12);
+  --purple: #a77bff;
+  --purple-glow: rgba(167,123,255,0.12);
+  --yellow: #ffd32a;
+  --yellow-glow: rgba(255,211,42,0.12);
+  --teal: #00d2d3;
+  --teal-glow: rgba(0,210,211,0.12);
 }
-*{box-sizing:border-box}
-html,body{margin:0;background:var(--bg-primary);color:var(--text-primary);font-family:'Segoe UI',system-ui,-apple-system,sans-serif}
-body{padding:70px 28px 48px;max-width:1440px;margin-inline:auto;line-height:1.45}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; background:var(--bg-primary); color:var(--text-primary); line-height:1.6; padding:24px; }
+.container { max-width:1200px; margin:0 auto; }
 
-/* ═══ MISSION CONTROL BACK-LINK ═══ */
-.mc-home{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:9999;display:inline-flex;align-items:center;gap:8px;padding:8px 16px 8px 12px;background:linear-gradient(135deg,rgba(79,143,255,.12),rgba(168,85,247,.12));border:1px solid rgba(79,143,255,.25);border-radius:24px;text-decoration:none;color:#e8ecf4;font-size:.78rem;font-weight:600;letter-spacing:.01em;transition:all .3s cubic-bezier(.4,0,.2,1);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 2px 12px rgba(0,0,0,.3)}
-.mc-home:hover{border-color:rgba(79,143,255,.5);transform:translateX(-50%) translateY(-1px) scale(1.03);box-shadow:0 4px 20px rgba(79,143,255,.2),0 0 30px rgba(168,85,247,.1);background:linear-gradient(135deg,rgba(79,143,255,.2),rgba(168,85,247,.18))}
-.mc-home .mc-icon{font-size:1.1rem;transition:transform .3s}
-.mc-home:hover .mc-icon{transform:rotate(-15deg) scale(1.15)}
-.mc-home .mc-label{background:linear-gradient(135deg,#4f8fff,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.mc-home .mc-arrow{color:#4a5a78;transition:all .2s;font-size:.9rem}
-.mc-home:hover .mc-arrow{color:#4f8fff;transform:translateX(-3px)}
+/* HEADER */
+.header { display:flex; align-items:center; justify-content:space-between; margin-bottom:28px; flex-wrap:wrap; gap:16px; }
+.header-left { display:flex; align-items:center; gap:16px; }
+.logo { width:48px; height:48px; border-radius:12px; background:linear-gradient(135deg,#4f8cff,#a77bff); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:18px; color:#fff; flex-shrink:0; }
+.header-title h1 { font-size:22px; font-weight:700; }
+.header-title p { font-size:13px; color:var(--text-secondary); }
+.date-pill { background:var(--bg-card); border:1px solid var(--border); border-radius:10px; padding:10px 18px; text-align:right; }
+.date-pill .day { font-size:15px; font-weight:600; }
+.date-pill .sub { font-size:11px; color:var(--text-muted); margin-top:2px; }
 
-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
-.logo{display:flex;align-items:center;gap:16px}
-.logo-sq{width:54px;height:54px;border-radius:12px;background:linear-gradient(135deg,#4f8cff,#a77bff);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.2rem;color:#fff;letter-spacing:.02em;box-shadow:0 4px 16px rgba(79,140,255,.25)}
-h1{margin:0;font-size:1.75rem;font-weight:700;letter-spacing:-.01em}
-.sub{color:var(--text-secondary);font-size:.85rem;margin-top:2px}
-.date-pill{background:var(--bg-card);border:1px solid var(--border);padding:12px 18px;border-radius:12px;text-align:right}
-.date-pill b{display:block;color:var(--text-primary);font-size:.95rem}
-.date-pill span{font-size:.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em}
+/* STATS */
+.stats-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin-bottom:28px; }
+.stat-card { background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:16px; text-align:center; transition:transform .15s,background .15s; }
+.stat-card:hover { transform:translateY(-2px); background:var(--bg-card-hover); }
+.stat-num { font-size:32px; font-weight:700; line-height:1; }
+.stat-label { font-size:10px; text-transform:uppercase; letter-spacing:1px; color:var(--text-muted); margin-top:6px; }
 
-.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-bottom:22px}
-.stat{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:16px 18px;position:relative;overflow:hidden;transition:all .2s}
-.stat::before{content:"";position:absolute;inset:0;background:var(--glow);opacity:.6;pointer-events:none}
-.stat:hover{border-color:rgba(255,255,255,.15);transform:translateY(-1px)}
-.stat .n{position:relative;font-size:2rem;font-weight:800;line-height:1;letter-spacing:-.02em}
-.stat .l{position:relative;font-size:.66rem;text-transform:uppercase;color:var(--text-muted);letter-spacing:.08em;margin-top:6px;font-weight:600}
-.stat.red{--glow:radial-gradient(circle at top left,var(--red-glow),transparent 70%)} .stat.red .n{color:var(--red)}
-.stat.purple{--glow:radial-gradient(circle at top left,var(--purple-glow),transparent 70%)} .stat.purple .n{color:var(--purple)}
-.stat.blue{--glow:radial-gradient(circle at top left,var(--accent-glow),transparent 70%)} .stat.blue .n{color:var(--accent)}
-.stat.orange{--glow:radial-gradient(circle at top left,var(--orange-glow),transparent 70%)} .stat.orange .n{color:var(--orange)}
-.stat.yellow{--glow:radial-gradient(circle at top left,var(--yellow-glow),transparent 70%)} .stat.yellow .n{color:var(--yellow)}
-.stat.teal{--glow:radial-gradient(circle at top left,var(--teal-glow),transparent 70%)} .stat.teal .n{color:var(--teal)}
+/* SECTIONS */
+.section { margin-bottom:28px; }
+.section-header { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+.section-icon { font-size:18px; }
+.section-title { font-size:16px; font-weight:600; }
+.section-count { background:var(--bg-card); border:1px solid var(--border); border-radius:20px; padding:2px 10px; font-size:12px; color:var(--text-secondary); }
 
-.lookahead{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
-.card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:20px;max-height:min(60vh,520px);overflow-y:auto;transition:border-color .2s}
-.card:hover{border-color:rgba(255,255,255,.1)}
-.card h2,.full h2{margin:0 0 14px;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);font-weight:700;display:flex;align-items:center;gap:8px}
-.card h2::before,.full h2::before{content:"";width:3px;height:14px;border-radius:2px}
-.card.hearings h2::before{background:var(--red)}
-.card.mediations h2::before{background:var(--purple)}
-.full{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:16px}
-.full.filing h2::before{background:var(--red)}
-.full.calendar h2::before{background:var(--accent)}
-.full.response h2::before{background:var(--orange)}
-.full.docket h2::before{background:var(--accent)}
-.full.followup h2::before{background:var(--yellow)}
+/* MEDIATION CARDS */
+.med-card { background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:18px; margin-bottom:10px; display:flex; gap:16px; align-items:flex-start; transition:background .15s; }
+.med-card:hover { background:var(--bg-card-hover); }
+.med-card.today-card { border-left:4px solid var(--red); }
+.date-block { background:rgba(255,255,255,0.04); border-radius:10px; padding:10px 14px; text-align:center; min-width:64px; flex-shrink:0; }
+.date-block .dow { font-size:10px; text-transform:uppercase; color:var(--text-muted); letter-spacing:1px; }
+.date-block .day-num { font-size:24px; font-weight:700; line-height:1.2; }
+.date-block .mon { font-size:11px; color:var(--text-secondary); }
+.med-content { flex:1; }
+.med-content .case-name { font-weight:600; font-size:15px; margin-bottom:4px; }
+.med-content .detail { font-size:13px; color:var(--text-secondary); }
+.atty-tag { display:inline-block; padding:2px 8px; border-radius:6px; font-size:11px; font-weight:600; margin-right:6px; }
+.atty-jm { background:rgba(79,140,255,0.15); color:var(--accent); }
+.atty-sm { background:rgba(46,213,115,0.15); color:var(--green); }
+.atty-rq { background:rgba(167,123,255,0.15); color:var(--purple); }
+.badge-today { background:var(--red); color:#fff; padding:2px 8px; border-radius:6px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-left:8px; }
+.badge-type { display:inline-block; padding:2px 8px; border-radius:6px; font-size:10px; font-weight:600; margin-left:6px; }
+.badge-class { background:rgba(79,140,255,0.15); color:var(--accent); }
+.badge-paga { background:rgba(255,159,67,0.15); color:var(--orange); }
+.note-callout { background:var(--orange-glow); border-left:3px solid var(--orange); border-radius:0 8px 8px 0; padding:8px 12px; margin-top:8px; font-size:12px; color:var(--orange); }
+.days-out { text-align:right; min-width:56px; flex-shrink:0; }
+.days-out .num { font-size:28px; font-weight:700; line-height:1; }
+.days-out .lbl { font-size:10px; color:var(--text-muted); text-transform:uppercase; }
 
-.item{padding:12px 0;border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:4px}
-.item:last-child{border-bottom:0}
-.item .top{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
-.item b{color:var(--text-primary);font-size:.92rem;font-weight:600}
-.item .meta{font-size:.76rem;color:var(--text-muted);line-height:1.5}
+/* TWO COL */
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:28px; }
 
-.tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.65rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-left:6px}
-.tag.rq{background:var(--accent-glow);color:var(--accent);border:1px solid rgba(79,140,255,.3)}
-.tag.jm{background:var(--green-glow);color:var(--green);border:1px solid rgba(46,213,115,.3)}
-.tag.sm{background:var(--purple-glow);color:var(--purple);border:1px solid rgba(167,123,255,.3)}
-.tag.kg{background:var(--teal-glow);color:var(--teal);border:1px solid rgba(0,210,211,.3)}
-.tag.crit{background:var(--red-glow);color:var(--red);border:1px solid rgba(255,71,87,.35)}
-.tag.warn{background:var(--orange-glow);color:var(--orange);border:1px solid rgba(255,159,67,.3)}
-.tag.soon{background:var(--yellow-glow);color:var(--yellow);border:1px solid rgba(255,211,42,.3)}
-.days{font-variant-numeric:tabular-nums;color:var(--text-secondary);font-size:.78rem;font-weight:600;white-space:nowrap}
-.days.crit{color:var(--red)}
-.days.warn{color:var(--orange)}
+/* DOCKET / RESPONSE / FOLLOW-UP ROWS */
+.row-card { background:var(--bg-card); border:1px solid var(--border); border-radius:10px; padding:12px 16px; margin-bottom:8px; display:flex; align-items:center; gap:12px; transition:background .15s; }
+.row-card:hover { background:var(--bg-card-hover); }
+.dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.dot-red { background:var(--red); }
+.dot-green { background:var(--green); }
+.dot-purple { background:var(--purple); }
+.dot-accent { background:var(--accent); }
+.row-content { flex:1; min-width:0; }
+.row-content .rc-case { font-weight:600; font-size:13px; }
+.row-content .rc-detail { font-size:12px; color:var(--text-secondary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.source-badge { padding:3px 8px; border-radius:6px; font-size:10px; font-weight:600; white-space:nowrap; flex-shrink:0; }
+.sb-cmecf { background:var(--red-glow); color:var(--red); }
+.sb-steno { background:var(--green-glow); color:var(--green); }
+.sb-lexis { background:var(--purple-glow); color:var(--purple); }
+.sb-caseanywhere { background:var(--accent-glow); color:var(--accent); }
+.badge-unread { background:var(--red); color:#fff; padding:2px 6px; border-radius:4px; font-size:9px; font-weight:700; margin-left:6px; }
+.badge-action { background:var(--red-glow); color:var(--red); padding:3px 8px; border-radius:6px; font-size:10px; font-weight:600; }
+.badge-pending { background:var(--yellow-glow); color:var(--yellow); padding:3px 8px; border-radius:6px; font-size:10px; font-weight:600; }
+.badge-quick { background:var(--green-glow); color:var(--green); padding:3px 8px; border-radius:6px; font-size:10px; font-weight:600; }
+.badge-noreply { background:var(--red-glow); color:var(--red); padding:3px 8px; border-radius:6px; font-size:10px; font-weight:600; }
+.days-ago { color:var(--orange); font-weight:700; font-size:13px; white-space:nowrap; flex-shrink:0; }
 
-footer{text-align:center;color:var(--text-muted);font-size:.72rem;margin-top:24px;padding-top:18px;border-top:1px solid var(--border)}
-</style></head>
+/* ALL CLEAR */
+.all-clear { background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:24px; text-align:center; }
+.all-clear .icon { font-size:28px; margin-bottom:8px; }
+.all-clear .msg { font-size:14px; }
+.all-clear-green .icon { color:var(--green); }
+.all-clear-green .msg { color:var(--green); }
+.all-clear-gray .icon { color:var(--text-muted); }
+.all-clear-gray .msg { color:var(--text-muted); }
+
+/* REMINDER SECTION */
+.reminder-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.reminder-chip { background:var(--bg-card); border:1px solid var(--border); border-radius:10px; padding:10px 14px; font-size:12px; }
+.reminder-chip .rc-case { font-weight:600; color:var(--text-primary); font-size:13px; }
+.reminder-chip .rc-detail { color:var(--text-secondary); margin-top:2px; }
+
+/* FOOTER */
+.footer { text-align:center; padding:24px 0 8px; font-size:12px; color:var(--text-muted); }
+
+/* RESPONSIVE */
+@media(max-width:900px) {
+  .stats-grid { grid-template-columns:repeat(3,1fr); }
+  .two-col { grid-template-columns:1fr; }
+  .reminder-grid { grid-template-columns:1fr; }
+}
+@media(max-width:600px) {
+  .stats-grid { grid-template-columns:repeat(2,1fr); }
+  .header { flex-direction:column; align-items:flex-start; }
+  body { padding:14px; }
+  .med-card { flex-direction:column; }
+  .days-out { text-align:left; }
+}
+</style>
+</head>
 <body>
+<div class="container">
 
-<a href="/" class="mc-home" title="Back to Mission Control"><span class="mc-arrow">&#8592;</span><span class="mc-icon">&#128640;</span><span class="mc-label">Mission Control</span></a>
-
-<header>
-  <div class="logo">
-    <div class="logo-sq">BL</div>
-    <div>
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <div class="logo">BL</div>
+    <div class="header-title">
       <h1>Daily Case Briefing</h1>
-      <div class="sub">Blackstone Law, APC &middot; Morning signal across all active matters</div>
+      <p>Blackstone Law, APC</p>
     </div>
   </div>
-  <div class="date-pill"><b>Thursday, April 9, 2026</b><span>Generated from Outlook</span></div>
-</header>
-
-<div class="stats">
-  <div class="stat red"><div class="n">11</div><div class="l">Hearings 14d</div></div>
-  <div class="stat purple"><div class="n">5</div><div class="l">Mediations 30d</div></div>
-  <div class="stat blue"><div class="n">11</div><div class="l">Docket 48h</div></div>
-  <div class="stat orange"><div class="n">3</div><div class="l">Response Needed</div></div>
-  <div class="stat yellow"><div class="n">8</div><div class="l">Awaiting OC</div></div>
-  <div class="stat teal"><div class="n">2</div><div class="l">Filing Deadlines</div></div>
+  <div class="date-pill">
+    <div class="day">Friday, April 10, 2026</div>
+    <div class="sub">Generated from Outlook</div>
+  </div>
 </div>
 
-<div class="lookahead">
-  <div class="card hearings"><h2>Hearings &middot; Next 14 Days</h2><div class="item"><div class="top"><b>Flores v. Med-Pharmex</b><span class="days critical">1</span></div><div class="meta">CMC · Fri 4/10 · 1 day · <span class="tag">FLORES</span></div></div><div class="item"><div class="top"><b>Anguiano v. Kinecta</b><span class="days warn">5</span></div><div class="meta">CMC · Tue 4/14 · 5 days<span class="tag">ANGUIANO</span></div></div><div class="item"><div class="top"><b>Waddell v. Santa Teresita</b><span class="days warn">7</span></div><div class="meta">NACR · Thu 4/16 · 7 days<span class="tag">WADDELL</span></div></div><div class="item"><div class="top"><b>Valenzuela v. ChildNet</b><span class="days ">8</span></div><div class="meta">MTCA Hearing · Fri 4/17 · 8 days<span class="tag">VALENZUELA</span></div></div><div class="item"><div class="top"><b>Steves v. LA Solar</b><span class="days ">12</span></div><div class="meta">CMC · Tue 4/21 · 12 days<span class="tag">STEVES</span></div></div><div class="item"><div class="top"><b>Seybold v. Hyatt</b><span class="days ">12</span></div><div class="meta">CMC · Tue 4/21 · 12 days<span class="tag">SEYBOLD</span></div></div><div class="item"><div class="top"><b>Naquin v. BenQ</b><span class="days ">14</span></div><div class="meta">Deposition objection deadline · Thu 4/23 · 14 days<span class="tag">NAQUIN</span></div></div></div>
-  <div class="card mediations"><h2>Mediations &middot; Next 30 Days</h2><div class="item"><div class="top"><b>Soto v. Control Air</b><span class="days critical">0</span></div><div class="meta">TODAY · Gig Kyriacou · 10:00 AM<span class="tag">SOTO</span></div></div><div class="item"><div class="top"><b>Santamaria v. America Central</b><span class="days critical">1</span></div><div class="meta">Fri 4/10 · McKelvey Zoom · 10:00 AM<span class="tag">SANTAMARIA</span></div></div><div class="item"><div class="top"><b>Agpalza v. Magnolia Springs</b><span class="days warn">4</span></div><div class="meta">Mon 4/13 · Carl West · 9:00 AM<span class="tag">AGPALZA</span></div></div><div class="item"><div class="top"><b>Lee v. IMC Logistics</b><span class="days ">8</span></div><div class="meta">Mediator call · Fri 4/17 · 8 days<span class="tag">LEE</span></div></div><div class="item"><div class="top"><b>Douglas v. Veridiam</b><span class="days ">18</span></div><div class="meta">Mon 4/27 · Rottman · 10:00 AM · 18 days<span class="tag">DOUGLAS</span></div></div></div>
+<!-- STATS -->
+<div class="stats-grid">
+  <div class="stat-card"><div class="stat-num" style="color:var(--text-muted)">0</div><div class="stat-label">Hearings</div></div>
+  <div class="stat-card"><div class="stat-num" style="color:var(--purple)">3</div><div class="stat-label">Mediations</div></div>
+  <div class="stat-card"><div class="stat-num" style="color:var(--accent)">15</div><div class="stat-label">Docket Events</div></div>
+  <div class="stat-card"><div class="stat-num" style="color:var(--orange)">3</div><div class="stat-label">Response Needed</div></div>
+  <div class="stat-card"><div class="stat-num" style="color:var(--yellow)">5</div><div class="stat-label">Awaiting OC Reply</div></div>
 </div>
 
-<div class="full filing"><h2>CMC Filing Deadlines &middot; Next 7 Days</h2><div class="item"><div class="top"><b>Lee v. IMC Logistics</b><span class="days critical">0</span></div><div class="meta">CMC Joint Statement · DUE TODAY 4/9<span class="tag">LEE</span></div></div><div class="item"><div class="top"><b>Anguiano v. Kinecta</b><span class="days warn">5</span></div><div class="meta">CMC Joint Statement · Tue 4/14<span class="tag">ANGUIANO</span></div></div></div>
-<div class="full calendar"><h2>Today's Team Calendar</h2><div class="item"><div class="top"><b>Soto v. Control Air — Mediation w/ Gig Kyriacou</b></div><div class="meta">10:00 AM – 6:00 PM · Ryan</div></div><div class="item"><div class="top"><b>Joe Marshall — OOO</b></div><div class="meta">8:30–11:00 AM and 12:45–2:15 PM</div></div></div>
-<div class="full response"><h2>Response Needed &middot; Defense Counsel</h2><div class="item"><div class="top"><b>Santamaria v. America Central</b></div><div class="meta">Littler (S. Samie) · workweek + mediation data · UNREAD 4/9<span class="tag">SANTAMARIA</span></div></div><div class="item"><div class="top"><b>Hernandez v. Liberty Utilities</b></div><div class="meta">Fisher Phillips (C. Ibrahim) · class notice<span class="tag">HERNANDEZ</span></div></div><div class="item"><div class="top"><b>Cotton/Taylor</b></div><div class="meta">J. Maguire · production follow-up<span class="tag">COTTON</span></div></div></div>
-<div class="full docket"><h2>Docket Activity &middot; Last 48 Hours</h2><div class="item"><div class="top"><b>Anguiano v. Kinecta</b></div><div class="meta">CaseAnywhere · Notice of Appeal · 4/8<span class="tag">ANGUIANO</span></div></div><div class="item"><div class="top"><b>Anguiano v. Kinecta</b></div><div class="meta">CaseAnywhere · Joint Status Report · 4/7<span class="tag">ANGUIANO</span></div></div><div class="item"><div class="top"><b>Galvez</b></div><div class="meta">Notice of Related Case · 4/8<span class="tag">GALVEZ</span></div></div><div class="item"><div class="top"><b>Cazares v. Oleander</b></div><div class="meta">Steno eFile · 4/9<span class="tag">CAZARES</span></div></div><div class="item"><div class="top"><b>Hearn v. Crescent Heights</b></div><div class="meta">PAGA eFile · 4/8<span class="tag">HEARN</span></div></div><div class="item"><div class="top"><b>Rabadan v. ECB Corp</b></div><div class="meta">Steno eFile · 4/7<span class="tag">RABADAN</span></div></div><div class="item"><div class="top"><b>Dizon v. Guardant Health</b></div><div class="meta">Steno eFile · 4/7<span class="tag">DIZON</span></div></div><div class="item"><div class="top"><b>Valenzuela v. ChildNet</b></div><div class="meta">LexisNexis Track · Taken under Submission<span class="tag">VALENZUELA</span></div></div><div class="item"><div class="top"><b>Zaragoza v. ChildNet</b></div><div class="meta">LexisNexis Track alert<span class="tag">ZARAGOZA</span></div></div><div class="item"><div class="top"><b>Nithya v. Martis Camp</b></div><div class="meta">LexisNexis Track alert<span class="tag">NITHYA</span></div></div><div class="item"><div class="top"><b>Chavez v. Southland Box</b></div><div class="meta">LexisNexis Track alert<span class="tag">CHAVEZ</span></div></div></div>
-<div class="full followup"><h2>Follow-Ups Awaiting OC Reply &middot; 5–14 days</h2><div class="item"><div class="top"><b>Evergreen Alliance</b><span class="days warn">7</span></div><div class="meta">Motion to Remand · sent 4/2 · 7 days<span class="tag">EVERGREEN</span></div></div><div class="item"><div class="top"><b>Vasquez v. Lulu's</b><span class="days warn">7</span></div><div class="meta">Mediation payroll request · sent 4/2 · 7 days<span class="tag">VASQUEZ</span></div></div><div class="item"><div class="top"><b>Santamaria v. America Central</b><span class="days warn">6</span></div><div class="meta">Jury fees + 10-month data · sent 4/3 · 6 days<span class="tag">SANTAMARIA</span></div></div><div class="item"><div class="top"><b>Garfias v. ISU Petasys</b><span class="days warn">6</span></div><div class="meta">Rate sheet request · sent 4/3 · 6 days<span class="tag">GARFIAS</span></div></div><div class="item"><div class="top"><b>Douglas v. Veridiam</b><span class="days warn">7</span></div><div class="meta">Production deficiencies · sent 4/2 · 7 days<span class="tag">DOUGLAS</span></div></div><div class="item"><div class="top"><b>Truitt Oilfield / Carias-Paredes</b><span class="days warn">7</span></div><div class="meta">sent 4/2 · 7 days<span class="tag">TRUITT</span></div></div><div class="item"><div class="top"><b>Valenzuela v. ChildNet</b><span class="days warn">6</span></div><div class="meta">New case intro · sent 4/3 · 6 days<span class="tag">VALENZUELA</span></div></div><div class="item"><div class="top"><b>Soto v. Control Air</b><span class="days warn">7</span></div><div class="meta">Mediation brief follow-up · sent 4/2 · 7 days<span class="tag">SOTO</span></div></div></div>
+<!-- MEDIATIONS -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-icon">&#9878;</span>
+    <span class="section-title">Mediations</span>
+    <span class="section-count">3 sessions</span>
+  </div>
 
-<footer>Generated from Outlook + live dashboards &middot; Blackstone Law, APC &middot; Daily Case Briefing pipeline</footer>
+  <!-- TODAY -->
+  <div class="med-card today-card">
+    <div class="date-block">
+      <div class="dow">FRI</div>
+      <div class="day-num">10</div>
+      <div class="mon">APR</div>
+    </div>
+    <div class="med-content">
+      <div>
+        <span class="atty-tag atty-jm">JM</span><span class="atty-tag atty-rq">RQ</span>
+        <span class="badge-today">TODAY</span>
+      </div>
+      <div class="case-name">Santamaria v. America Central Corporation</div>
+      <div class="detail">Mediator: Brandon McKelvey (M Resolution) &middot; 10:00 AM &middot; Zoom</div>
+      <div class="detail">Class/PAGA + Individual &middot; Attendees: J. Genish, R. Quadrel, M. Dietz</div>
+      <div class="note-callout">Brief submitted 4/9 by Joe. Mediation Questionnaire also sent.</div>
+    </div>
+    <div class="days-out">
+      <div class="num" style="color:var(--red)">0</div>
+      <div class="lbl">days</div>
+      <div style="margin-top:6px">
+        <span class="badge-type badge-class">Class</span>
+        <span class="badge-type badge-paga">PAGA</span>
+      </div>
+    </div>
+  </div>
 
-</body></html>
+  <!-- Agpalza -->
+  <div class="med-card">
+    <div class="date-block">
+      <div class="dow">MON</div>
+      <div class="day-num">13</div>
+      <div class="mon">APR</div>
+    </div>
+    <div class="med-content">
+      <div><span class="atty-tag atty-jm">JM</span><span class="atty-tag atty-rq">RQ</span></div>
+      <div class="case-name">Agpalza v. Magnolia Springs, Inc.</div>
+      <div class="detail">Mediator: Carl J. West &middot; 9:00 AM &middot; Kern County Superior Court</div>
+    </div>
+    <div class="days-out">
+      <div class="num" style="color:var(--red)">3</div>
+      <div class="lbl">days</div>
+      <div style="margin-top:6px"><span class="badge-type badge-class">Class</span></div>
+    </div>
+  </div>
+
+  <!-- Douglas -->
+  <div class="med-card">
+    <div class="date-block">
+      <div class="dow">MON</div>
+      <div class="day-num">27</div>
+      <div class="mon">APR</div>
+    </div>
+    <div class="med-content">
+      <div><span class="atty-tag atty-sm">SM</span><span class="atty-tag atty-rq">RQ</span></div>
+      <div class="case-name">Douglas v. Veridiam, Inc.</div>
+      <div class="detail">Mediator: Steve Rottman &middot; 10:00 AM &middot; San Diego Superior Court</div>
+      <div class="note-callout">Brief due April 20 (10 days). Data demand sent 4/3 — production deficient, only personnel files received.</div>
+    </div>
+    <div class="days-out">
+      <div class="num" style="color:var(--accent)">17</div>
+      <div class="lbl">days</div>
+      <div style="margin-top:6px"><span class="badge-type badge-class">Class</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- MEDIATION REMINDERS -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-icon">&#128276;</span>
+    <span class="section-title">Mediation Pipeline Reminders</span>
+    <span class="section-count">6 upcoming</span>
+  </div>
+  <div class="reminder-grid">
+    <div class="reminder-chip"><div class="rc-case"><span class="atty-tag atty-jm">JM</span> Rucker v. River City Medical Group</div><div class="rc-detail">May 15 mediation &middot; 30-day data reminder Apr 15</div></div>
+    <div class="reminder-chip"><div class="rc-case"><span class="atty-tag atty-sm">SM</span> Cotton v. Taylor Communications</div><div class="rc-detail">May 29 mediation &middot; 45-day data reminder Apr 14 &middot; Cancel deadline Apr 17</div></div>
+    <div class="reminder-chip"><div class="rc-case"><span class="atty-tag atty-jm">JM</span> Bowers v. Southwest College</div><div class="rc-detail">May 20 mediation &middot; 30-day data + payment due Apr 20</div></div>
+    <div class="reminder-chip"><div class="rc-case"><span class="atty-tag atty-jm">JM</span> Mayers v. Helpline Youth Counseling</div><div class="rc-detail">Jun 6 mediation w/ Eve Wagner &middot; 45-day reminder Apr 22</div></div>
+    <div class="reminder-chip"><div class="rc-case"><span class="atty-tag atty-jm">JM</span> Orihuela v. International Cosmetics</div><div class="rc-detail">Jun 16 mediation &middot; 60-day data reminder Apr 17</div></div>
+    <div class="reminder-chip"><div class="rc-case"><span class="atty-tag atty-jm">JM</span> Kreutzer v. American Future Technology</div><div class="rc-detail">Jul 24 mediation w/ McKelvey &middot; 90-day data reminder</div></div>
+  </div>
+</div>
+
+<!-- TWO COLUMN: Pick-Off + Response Needed -->
+<div class="two-col">
+  <div>
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">&#128737;</span>
+        <span class="section-title">Pick-Off Watch</span>
+      </div>
+      <div class="all-clear all-clear-green">
+        <div class="icon">&#10003;</div>
+        <div class="msg">All clear — no pre-certification settlement activity detected in the last 7 days</div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">&#9993;</span>
+        <span class="section-title">Response Needed</span>
+        <span class="section-count">3</span>
+      </div>
+      <div class="row-card">
+        <div class="row-content">
+          <div class="rc-case">Cabrera v. Vicar Operating</div>
+          <div class="rc-detail">Warsame Hassan (Littler) — new attorney appearance, service list & extension request</div>
+        </div>
+        <span class="badge-action">Action Needed</span>
+      </div>
+      <div class="row-card">
+        <div class="row-content">
+          <div class="rc-case">Mitchell &amp; Dizon v. Guardant Health</div>
+          <div class="rc-detail">Joanna Brooks (Pillsbury) — redlined MOU changes for mediator's proposal</div>
+        </div>
+        <span class="badge-pending">Pending Review</span>
+      </div>
+      <div class="row-card">
+        <div class="row-content">
+          <div class="rc-case">White v. KidzToPros</div>
+          <div class="rc-detail">Berger Consulting Group — confirming mediation date (May 5 or 7?)</div>
+        </div>
+        <span class="badge-quick">Quick Reply</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DOCKET ACTIVITY -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-icon">&#128196;</span>
+    <span class="section-title">Docket Activity</span>
+    <span class="section-count">15 events</span>
+  </div>
+
+  <div class="row-card"><div class="dot dot-red"></div><div class="row-content"><div class="rc-case">Conant v. Evergreen Alliance Golf <span class="source-badge sb-cmecf">CM/ECF</span></div><div class="rc-detail">Reply to Opposition/Response filed</div></div><span style="color:var(--text-muted);font-size:12px">Apr 9</span></div>
+
+  <div class="row-card"><div class="dot dot-green"></div><div class="row-content"><div class="rc-case">Hearn v. Crescent Heights <span class="badge-unread">UNREAD</span> <span class="source-badge sb-steno">Steno eFiling</span></div><div class="rc-detail">Order Accepted — filing submitted</div></div><span style="color:var(--text-muted);font-size:12px">Apr 10</span></div>
+
+  <div class="row-card"><div class="dot dot-green"></div><div class="row-content"><div class="rc-case">Edmiston v. Weatherford Motors <span class="source-badge sb-steno">Steno eFiling</span></div><div class="rc-detail">MTCA Opposition filed (Alameda County)</div></div><span style="color:var(--text-muted);font-size:12px">Apr 9</span></div>
+
+  <div class="row-card"><div class="dot dot-green"></div><div class="row-content"><div class="rc-case">Ramirez v. Caleres, Inc. <span class="source-badge sb-steno">Steno eFiling</span></div><div class="rc-detail">Opposition to Demurrer filed (San Bernardino)</div></div><span style="color:var(--text-muted);font-size:12px">Apr 9</span></div>
+
+  <div class="row-card"><div class="dot dot-green"></div><div class="row-content"><div class="rc-case">Lee v. IMC Logistics <span class="source-badge sb-steno">Steno eFiling</span></div><div class="rc-detail">Joint CMC Statement filed</div></div><span style="color:var(--text-muted);font-size:12px">Apr 9</span></div>
+
+  <div class="row-card"><div class="dot dot-green"></div><div class="row-content"><div class="rc-case">Cazares v. Oleander Holdings <span class="source-badge sb-steno">Steno eFiling</span></div><div class="rc-detail">Filing submitted</div></div><span style="color:var(--text-muted);font-size:12px">Apr 9</span></div>
+
+  <div class="row-card"><div class="dot dot-purple"></div><div class="row-content"><div class="rc-case">Paz v. Slater, Inc. <span class="badge-unread">UNREAD</span> <span class="source-badge sb-lexis">LexisNexis Track</span></div><div class="rc-detail">New filing by Defendant</div></div><span style="color:var(--text-muted);font-size:12px">Apr 10</span></div>
+
+  <div class="row-card"><div class="dot dot-purple"></div><div class="row-content"><div class="rc-case">Zaragoza v. ChildNet Youth &amp; Family <span class="source-badge sb-lexis">LexisNexis Track</span></div><div class="rc-detail">Arbitration Held — Continued</div></div><span style="color:var(--text-muted);font-size:12px">Apr 9</span></div>
+
+  <div class="row-card"><div class="dot dot-purple"></div><div class="row-content"><div class="rc-case">Subramanyananda v. Martis Camp Club <span class="source-badge sb-lexis">LexisNexis Track</span></div><div class="rc-detail">16 Minutes — Civil</div></div><span style="color:var(--text-muted);font-size:12px">Apr 9</span></div>
+
+  <div class="row-card"><div class="dot dot-purple"></div><div class="row-content"><div class="rc-case">Chavez v. Southland Box Company <span class="source-badge sb-lexis">LexisNexis Track</span></div><div class="rc-detail">Vacated by Court</div></div><span style="color:var(--text-muted);font-size:12px">Apr 9</span></div>
+
+  <div class="row-card"><div class="dot dot-purple"></div><div class="row-content"><div class="rc-case">Valenzuela v. ChildNet Youth &amp; Family <span class="source-badge sb-lexis">LexisNexis Track</span></div><div class="rc-detail">Taken under Submission</div></div><span style="color:var(--text-muted);font-size:12px">Apr 8</span></div>
+
+  <div class="row-card"><div class="dot dot-purple"></div><div class="row-content"><div class="rc-case">Barandiaran v. Patrol Solutions <span class="source-badge sb-lexis">LexisNexis Track</span></div><div class="rc-detail">Service — 2 pages</div></div><span style="color:var(--text-muted);font-size:12px">Apr 8</span></div>
+
+  <div class="row-card"><div class="dot dot-accent"></div><div class="row-content"><div class="rc-case">Flores v. Med-Pharmex, Inc. <span class="source-badge sb-caseanywhere">CaseAnywhere</span></div><div class="rc-detail">Minute Order — ISC Continuance</div></div><span style="color:var(--text-muted);font-size:12px">Apr 9</span></div>
+
+  <div class="row-card"><div class="dot dot-accent"></div><div class="row-content"><div class="rc-case">Anguiano v. Kinecta Federal Credit Union <span class="source-badge sb-caseanywhere">CaseAnywhere</span></div><div class="rc-detail">Notice of Appeal uploaded</div></div><span style="color:var(--text-muted);font-size:12px">Apr 9</span></div>
+
+  <div class="row-card"><div class="dot dot-accent"></div><div class="row-content"><div class="rc-case">Galvez v. Snap-On Logistics Company <span class="source-badge sb-caseanywhere">CaseAnywhere</span></div><div class="rc-detail">Notice of Related Case</div></div><span style="color:var(--text-muted);font-size:12px">Apr 8</span></div>
+</div>
+
+<!-- FOLLOW-UP -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-icon">&#128260;</span>
+    <span class="section-title">Follow-Up Needed</span>
+    <span class="section-count">5 items</span>
+  </div>
+
+  <div class="row-card">
+    <div class="row-content">
+      <div class="rc-case"><span class="atty-tag atty-rq">RQ</span> Vasquez v. Lulu's</div>
+      <div class="rc-detail">To: Lisa (IMAN) &middot; Payroll records with itemized deductions for mediation</div>
+    </div>
+    <span class="badge-noreply">No Reply</span>
+    <span class="days-ago">7d</span>
+  </div>
+
+  <div class="row-card">
+    <div class="row-content">
+      <div class="rc-case"><span class="atty-tag atty-rq">RQ</span> Douglas v. Veridiam</div>
+      <div class="rc-detail">To: Briana (OC) &middot; Production deficiency — personnel files only, no payroll/time data</div>
+    </div>
+    <span class="badge-noreply">No Reply</span>
+    <span class="days-ago">7d</span>
+  </div>
+
+  <div class="row-card">
+    <div class="row-content">
+      <div class="rc-case"><span class="atty-tag atty-rq">RQ</span> Garfias v. ISU Petasys</div>
+      <div class="rc-detail">To: Lisa (OC) &middot; Mediator rate sheet and date confirmation</div>
+    </div>
+    <span class="badge-noreply">No Reply</span>
+    <span class="days-ago">7d</span>
+  </div>
+
+  <div class="row-card">
+    <div class="row-content">
+      <div class="rc-case"><span class="atty-tag atty-rq">RQ</span> Truitt v. Carias-Paredes</div>
+      <div class="rc-detail">To: Viviano (OC) &middot; Document scanning arrangement and digital copies</div>
+    </div>
+    <span class="badge-noreply">No Reply</span>
+    <span class="days-ago">7d</span>
+  </div>
+
+  <div class="row-card">
+    <div class="row-content">
+      <div class="rc-case"><span class="atty-tag atty-rq">RQ</span> Evergreen Alliance</div>
+      <div class="rc-detail">To: Joe Marshall (internal) &middot; Motion to Remand — pick dates with Karen for OC</div>
+    </div>
+    <span class="badge-noreply">No Reply</span>
+    <span class="days-ago">7d</span>
+  </div>
+</div>
+
+<!-- OVERDUE -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-icon">&#9888;</span>
+    <span class="section-title">Overdue (8+ Days)</span>
+  </div>
+  <div class="all-clear all-clear-gray">
+    <div class="icon">&#8212;</div>
+    <div class="msg">All clear — no overdue follow-ups detected</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Briefing complete &middot; 15 docket events &middot; 3 mediations &middot; 5 follow-ups tracked &middot; Blackstone Law, APC &middot; Generated Friday, April 10, 2026
+</div>
+
+</div>
+</body>
+</html>

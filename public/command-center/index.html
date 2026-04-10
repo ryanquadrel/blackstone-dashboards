@@ -504,7 +504,6 @@ function renderHealthStrip(){
     '<div class="health-card '+(arbUnknown>20?'alert':arbUnknown>10?'warn':'good')+'"><div class="label">Arb Unknown</div><div class="value">'+arbUnknown+'</div><div class="detail">Not yet analyzed</div></div>'+
     '<div class="health-card info"><div class="label">Stayed</div><div class="value">'+stayed+'</div><div class="detail">'+Math.round(stayed/Math.max(t,1)*100)+'% of portfolio</div></div>'+
     '<div class="health-card '+(cmcSoon>0?'warn':'good')+'"><div class="label">CMC Filings Due</div><div class="value">'+cmcSoon+'</div><div class="detail">within 14 days</div></div>';
-    '<div class="health-card '+(cmcSoon>0?'warn':'good')+'">'+'<div class="label">CMC Filings Due</div><div class="value">'+cmcSoon+'</div><div class="detail">within 14 days</div></div>'+
 }
 
 function renderAttentionQueue(){

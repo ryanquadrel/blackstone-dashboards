@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="scroll-behavior:smooth;">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -138,10 +138,35 @@ body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; backgrou
   .med-card { flex-direction:column; }
   .days-out { text-align:left; }
 }
+
+/* STICKY NAV BAR */
+.briefing-nav { position:sticky; top:0; z-index:100; background:rgba(10,14,23,0.95); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); padding:10px 0; margin:-24px -24px 24px -24px; padding:10px 24px; display:flex; align-items:center; gap:8px; overflow-x:auto; }
+.nav-btn { background:var(--bg-card); border:1px solid var(--border); border-radius:8px; padding:6px 14px; font-size:12px; font-weight:600; color:var(--text-secondary); cursor:pointer; white-space:nowrap; transition:all .15s; text-decoration:none; display:inline-flex; align-items:center; gap:6px; }
+.nav-btn:hover { background:var(--bg-card-hover); color:var(--text-primary); border-color:var(--accent); }
+.nav-btn.nav-mc { background:linear-gradient(135deg,rgba(79,140,255,0.15),rgba(167,123,255,0.15)); border-color:var(--accent); color:var(--accent); margin-right:auto; }
+.nav-btn.nav-mc:hover { background:linear-gradient(135deg,rgba(79,140,255,0.25),rgba(167,123,255,0.25)); }
+.nav-divider { width:1px; height:24px; background:var(--border); flex-shrink:0; }
+
+
+/* DRAFT EMAIL LINK */
+.draft-link { display:inline-flex; align-items:center; gap:4px; background:rgba(79,140,255,0.1); border:1px solid rgba(79,140,255,0.3); border-radius:6px; padding:3px 10px; font-size:11px; font-weight:600; color:var(--accent); cursor:pointer; text-decoration:none; transition:all .15s; margin-left:8px; }
+.draft-link:hover { background:rgba(79,140,255,0.2); border-color:var(--accent); }
+
 </style>
 </head>
 <body>
 <div class="container">
+<div class="briefing-nav">
+  <a href="/" class="nav-btn nav-mc">&#8592; Mission Control</a>
+  <div class="nav-divider"></div>
+  <a href="#sec-mediations" class="nav-btn">&#9878; Mediations</a>
+  <a href="#sec-pipeline" class="nav-btn">&#128276; Pipeline</a>
+  <a href="#sec-pickoff" class="nav-btn">&#128737; Pick-Off</a>
+  <a href="#sec-response" class="nav-btn">&#9993; Response</a>
+  <a href="#sec-docket" class="nav-btn">&#128196; Docket</a>
+  <a href="#sec-followup" class="nav-btn">&#128260; Follow-Up</a>
+  <a href="#sec-overdue" class="nav-btn">&#9888; Overdue</a>
+</div>
 
 <!-- HEADER -->
 <div class="header">
@@ -168,7 +193,7 @@ body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; backgrou
 </div>
 
 <!-- MEDIATIONS -->
-<div class="section">
+<div class="section" id="sec-mediations">
   <div class="section-header">
     <span class="section-icon">&#9878;</span>
     <span class="section-title">Mediations</span>
@@ -243,7 +268,7 @@ body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; backgrou
 </div>
 
 <!-- MEDIATION REMINDERS -->
-<div class="section">
+<div class="section" id="sec-pipeline">
   <div class="section-header">
     <span class="section-icon">&#128276;</span>
     <span class="section-title">Mediation Pipeline Reminders</span>
@@ -262,7 +287,7 @@ body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; backgrou
 <!-- TWO COLUMN: Pick-Off + Response Needed -->
 <div class="two-col">
   <div>
-    <div class="section">
+    <div class="section" id="sec-pickoff">
       <div class="section-header">
         <span class="section-icon">&#128737;</span>
         <span class="section-title">Pick-Off Watch</span>
@@ -274,7 +299,7 @@ body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; backgrou
     </div>
   </div>
   <div>
-    <div class="section">
+    <div class="section" id="sec-response">
       <div class="section-header">
         <span class="section-icon">&#9993;</span>
         <span class="section-title">Response Needed</span>
@@ -285,28 +310,28 @@ body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; backgrou
           <div class="rc-case">Cabrera v. Vicar Operating</div>
           <div class="rc-detail">Warsame Hassan (Littler) — new attorney appearance, service list & extension request</div>
         </div>
-        <span class="badge-action">Action Needed</span>
+        <a class="draft-link" title="Auto-draft response email">&#9993; Draft</a><span class="badge-action">Action Needed</span>
       </div>
       <div class="row-card">
         <div class="row-content">
           <div class="rc-case">Mitchell &amp; Dizon v. Guardant Health</div>
           <div class="rc-detail">Joanna Brooks (Pillsbury) — redlined MOU changes for mediator's proposal</div>
         </div>
-        <span class="badge-pending">Pending Review</span>
+        <a class="draft-link" title="Auto-draft response email">&#9993; Draft</a><span class="badge-pending">Pending Review</span>
       </div>
       <div class="row-card">
         <div class="row-content">
           <div class="rc-case">White v. KidzToPros</div>
           <div class="rc-detail">Berger Consulting Group — confirming mediation date (May 5 or 7?)</div>
         </div>
-        <span class="badge-quick">Quick Reply</span>
+        <a class="draft-link" title="Auto-draft response email">&#9993; Draft</a><span class="badge-quick">Quick Reply</span>
       </div>
     </div>
   </div>
 </div>
 
 <!-- DOCKET ACTIVITY -->
-<div class="section">
+<div class="section" id="sec-docket">
   <div class="section-header">
     <span class="section-icon">&#128196;</span>
     <span class="section-title">Docket Activity</span>
@@ -345,7 +370,7 @@ body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; backgrou
 </div>
 
 <!-- FOLLOW-UP -->
-<div class="section">
+<div class="section" id="sec-followup">
   <div class="section-header">
     <span class="section-icon">&#128260;</span>
     <span class="section-title">Follow-Up Needed</span>
@@ -357,7 +382,7 @@ body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; backgrou
       <div class="rc-case"><span class="atty-tag atty-rq">RQ</span> Vasquez v. Lulu's</div>
       <div class="rc-detail">To: Lisa (IMAN) &middot; Payroll records with itemized deductions for mediation</div>
     </div>
-    <span class="badge-noreply">No Reply</span>
+    <span class="badge-noreply">No Reply</span><a class="draft-link" title="Auto-draft follow-up email">&#9993; Draft</a>
     <span class="days-ago">7d</span>
   </div>
 
@@ -366,7 +391,7 @@ body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; backgrou
       <div class="rc-case"><span class="atty-tag atty-rq">RQ</span> Douglas v. Veridiam</div>
       <div class="rc-detail">To: Briana (OC) &middot; Production deficiency — personnel files only, no payroll/time data</div>
     </div>
-    <span class="badge-noreply">No Reply</span>
+    <span class="badge-noreply">No Reply</span><a class="draft-link" title="Auto-draft follow-up email">&#9993; Draft</a>
     <span class="days-ago">7d</span>
   </div>
 
@@ -375,7 +400,7 @@ body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; backgrou
       <div class="rc-case"><span class="atty-tag atty-rq">RQ</span> Garfias v. ISU Petasys</div>
       <div class="rc-detail">To: Lisa (OC) &middot; Mediator rate sheet and date confirmation</div>
     </div>
-    <span class="badge-noreply">No Reply</span>
+    <span class="badge-noreply">No Reply</span><a class="draft-link" title="Auto-draft follow-up email">&#9993; Draft</a>
     <span class="days-ago">7d</span>
   </div>
 
@@ -384,7 +409,7 @@ body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; backgrou
       <div class="rc-case"><span class="atty-tag atty-rq">RQ</span> Truitt v. Carias-Paredes</div>
       <div class="rc-detail">To: Viviano (OC) &middot; Document scanning arrangement and digital copies</div>
     </div>
-    <span class="badge-noreply">No Reply</span>
+    <span class="badge-noreply">No Reply</span><a class="draft-link" title="Auto-draft follow-up email">&#9993; Draft</a>
     <span class="days-ago">7d</span>
   </div>
 
@@ -393,13 +418,13 @@ body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; backgrou
       <div class="rc-case"><span class="atty-tag atty-rq">RQ</span> Evergreen Alliance</div>
       <div class="rc-detail">To: Joe Marshall (internal) &middot; Motion to Remand — pick dates with Karen for OC</div>
     </div>
-    <span class="badge-noreply">No Reply</span>
+    <span class="badge-noreply">No Reply</span><a class="draft-link" title="Auto-draft follow-up email">&#9993; Draft</a>
     <span class="days-ago">7d</span>
   </div>
 </div>
 
 <!-- OVERDUE -->
-<div class="section">
+<div class="section" id="sec-overdue">
   <div class="section-header">
     <span class="section-icon">&#9888;</span>
     <span class="section-title">Overdue (8+ Days)</span>

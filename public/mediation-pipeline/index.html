@@ -311,6 +311,10 @@
   .brief-chip-date { font-size:.72rem; font-weight:700; }
   .brief-chip-meta { display:flex; align-items:center; gap:6px; margin-top:2px; }
   .brief-chip-biz { font-size:.65rem; font-weight:800; }
+
+/* CLICKABLE STAT CARDS */
+.stat-card[onclick] { transition:transform .15s,box-shadow .15s; }
+.stat-card[onclick]:hover { transform:translateY(-3px); box-shadow:0 4px 12px rgba(0,0,0,0.3); }
 </style>
 </head>
 <body>
@@ -489,10 +493,10 @@
     </div>
 
     <div class="stats">
-      <div class="stat-card green"><div class="label">Ready to Book</div><div class="value">3</div><div class="sub">1 vacated, 2 near-booking</div></div>
-      <div class="stat-card blue"><div class="label">New Activity</div><div class="value">21</div><div class="sub">Movement since last scan</div></div>
-      <div class="stat-card orange"><div class="label">Going Stale</div><div class="value">4</div><div class="sub">30+ days no activity</div></div>
-      <div class="stat-card red"><div class="label">Blocked (MTCA)</div><div class="value">8</div><div class="sub">Pending motions</div></div>
+      <div class="stat-card green" style="cursor:pointer;" onclick="document.querySelector('[data-tab=\&quot;p-ready\&quot;]').click();this.closest('.phase').querySelector('#p-ready')?.scrollIntoView({behavior:'smooth',block:'start'})"><div class="label">Ready to Book</div><div class="value">3</div><div class="sub">1 vacated, 2 near-booking</div></div>
+      <div class="stat-card blue" style="cursor:pointer;" onclick="document.querySelector('[data-tab=\&quot;p-activity\&quot;]').click();this.closest('.phase').querySelector('#p-activity')?.scrollIntoView({behavior:'smooth',block:'start'})"><div class="label">New Activity</div><div class="value">21</div><div class="sub">Movement since last scan</div></div>
+      <div class="stat-card orange" style="cursor:pointer;" onclick="document.querySelector('[data-tab=\&quot;p-stale\&quot;]').click();this.closest('.phase').querySelector('#p-stale')?.scrollIntoView({behavior:'smooth',block:'start'})"><div class="label">Going Stale</div><div class="value">4</div><div class="sub">30+ days no activity</div></div>
+      <div class="stat-card red" style="cursor:pointer;" onclick="document.querySelector('[data-tab=\&quot;p-blocked\&quot;]').click();this.closest('.phase').querySelector('#p-blocked')?.scrollIntoView({behavior:'smooth',block:'start'})"><div class="label">Blocked (MTCA)</div><div class="value">8</div><div class="sub">Pending motions</div></div>
       <div class="stat-card purple"><div class="label">Booked This Cycle</div><div class="value">0</div><div class="sub">All transferred to Phase 2</div></div>
       <div class="stat-card yellow"><div class="label">No OC Yet</div><div class="value">6</div><div class="sub">Awaiting defense</div></div>
     </div>
@@ -661,13 +665,13 @@
     </div>
 
     <div class="stats">
-      <div class="stat-card red"><div class="label">Critical (This Week)</div><div class="value">2</div><div class="sub">Santamaria (TODAY), Agpalza (Mon)</div></div>
-      <div class="stat-card orange"><div class="label">Action Needed</div><div class="value">7</div><div class="sub">Veridiam, Redd, Kidztopros, Orihuela, Cotton, Bowers, Hope</div></div>
-      <div class="stat-card blue"><div class="label">On Track</div><div class="value">5</div><div class="sub">Kreutzer, Miranda, Conant, BenQ, Lee</div></div>
-      <div class="stat-card purple"><div class="label">Early Stage</div><div class="value">15</div><div class="sub">Touch, Waddell, Chavez, Lopez + 12 others</div></div>
-      <div class="stat-card green"><div class="label">Briefs Due Now</div><div class="value">0</div><div class="sub">All current briefs submitted</div></div>
-          <div class="stat-card blue"><div class="label">Outreach Active</div><div class="value">9</div><div class="sub">108 witnesses &middot; 24 willing</div></div>
-      <div class="stat-card yellow"><div class="label">Pending Proposal</div><div class="value">1</div><div class="sub">Bassell (4/16)</div></div>
+      <div class="stat-card red" style="cursor:pointer;" onclick="document.querySelector('[data-tab=\&quot;b-critical\&quot;]').click();this.closest('.phase').querySelector('#b-critical')?.scrollIntoView({behavior:'smooth',block:'start'})"><div class="label">Critical (This Week)</div><div class="value">2</div><div class="sub">Santamaria (TODAY), Agpalza (Mon)</div></div>
+      <div class="stat-card orange" style="cursor:pointer;" onclick="document.querySelector('[data-tab=\&quot;b-action\&quot;]').click();this.closest('.phase').querySelector('#b-action')?.scrollIntoView({behavior:'smooth',block:'start'})"><div class="label">Action Needed</div><div class="value">7</div><div class="sub">Veridiam, Redd, Kidztopros, Orihuela, Cotton, Bowers, Hope</div></div>
+      <div class="stat-card blue" style="cursor:pointer;" onclick="document.querySelector('[data-tab=\&quot;b-ontrack\&quot;]').click();this.closest('.phase').querySelector('#b-ontrack')?.scrollIntoView({behavior:'smooth',block:'start'})"><div class="label">On Track</div><div class="value">5</div><div class="sub">Kreutzer, Miranda, Conant, BenQ, Lee</div></div>
+      <div class="stat-card purple" style="cursor:pointer;" onclick="document.querySelector('[data-tab=\&quot;b-early\&quot;]').click();this.closest('.phase').querySelector('#b-early')?.scrollIntoView({behavior:'smooth',block:'start'})"><div class="label">Early Stage</div><div class="value">15</div><div class="sub">Touch, Waddell, Chavez, Lopez + 12 others</div></div>
+      <div class="stat-card green" style="cursor:pointer;" onclick="document.querySelector('[data-tab=\&quot;b-critical\&quot;]').click()"><div class="label">Briefs Due Now</div><div class="value">0</div><div class="sub">All current briefs submitted</div></div>
+          <div class="stat-card blue" style="cursor:pointer;" onclick="document.querySelector('[data-tab=\&quot;b-outreach\&quot;]').click();this.closest('.phase').querySelector('#b-outreach')?.scrollIntoView({behavior:'smooth',block:'start'})"><div class="label">Outreach Active</div><div class="value">9</div><div class="sub">108 witnesses &middot; 24 willing</div></div>
+      <div class="stat-card yellow" style="cursor:pointer;" onclick="document.querySelector('[data-tab=\&quot;b-proposal\&quot;]').click();this.closest('.phase').querySelector('#b-proposal')?.scrollIntoView({behavior:'smooth',block:'start'})"><div class="label">Pending Proposal</div><div class="value">1</div><div class="sub">Bassell (4/16)</div></div>
     </div>
     <!-- BRIEF DEADLINE TIMELINE STRIP (auto-generated 2026-04-03) -->
     <div class="brief-timeline">

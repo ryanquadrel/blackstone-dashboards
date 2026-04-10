@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="case-slug" content="santamaria-america-central">
+<meta name="case-name" content="Santamaria v. America Central Corporation, et al.">
+<meta name="mediation-date" content="2026-04-10">
+<meta name="mediator" content="Brandon McKelvey">
+<meta name="generated" content="2026-04-10">
+<meta name="status" content="Upcoming">
+<title>Santamaria v. America Central — Mediation Strategy</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --card-alt: #21242f;
+    --border: #2a2d3a;
+    --text: #e4e4e7;
+    --text-dim: #9ca3af;
+    --accent: #6366f1;
+    --accent-light: #818cf8;
+    --green: #22c55e;
+    --red: #ef4444;
+    --yellow: #eab308;
+    --orange: #f97316;
+    --blue: #3b82f6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .header h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+  .header-meta { text-align: right; font-size: 13px; color: var(--text-dim); line-height: 1.7; }
+  .header-meta strong { color: var(--text); }
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .badge-settle { background: rgba(34,197,94,0.15); color: var(--green); }
+  .badge-conf { background: rgba(99,102,241,0.15); color: var(--accent-light); }
+  .badge-warn { background: rgba(239,68,68,0.15); color: var(--red); }
+
+  /* Grid */
+  .grid { display: grid; gap: 16px; }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .grid-top { grid-template-columns: 300px 1fr 1fr; }
+
+  /* Cards */
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+  .card h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  .card.full-width { grid-column: 1 / -1; }
+
+  /* Snapshot KV */
+  .kv-row { display: flex; justify-content: space-between; padding: 5px 0; font-size: 13px; border-bottom: 1px solid rgba(42,45,58,0.5); }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-label { color: var(--text-dim); }
+  .kv-value { font-weight: 600; text-align: right; }
+  .kv-value.big { font-size: 15px; color: var(--accent-light); }
+
+  /* S/W lists */
+  .sw-list { list-style: none; }
+  .sw-list li { font-size: 12.5px; padding: 6px 0; padding-left: 20px; position: relative; border-bottom: 1px solid rgba(42,45,58,0.3); }
+  .sw-list li:last-child { border-bottom: none; }
+  .sw-list li::before { position: absolute; left: 0; top: 6px; font-size: 12px; }
+  .sw-list.pro li::before { content: "▲"; color: var(--green); }
+  .sw-list.con li::before { content: "▼"; color: var(--red); }
+  .sw-list li strong { color: var(--text); }
+
+  /* Numbers table */
+  .num-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .num-table th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-dim); padding: 6px 8px; border-bottom: 1px solid var(--border); }
+  .num-table td { padding: 7px 8px; border-bottom: 1px solid rgba(42,45,58,0.4); }
+  .num-table tr:last-child td { border-bottom: none; }
+  .num-table .label-cell { color: var(--text-dim); }
+  .num-table .money { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .num-table .highlight-row td { background: rgba(99,102,241,0.08); font-weight: 600; }
+  .num-table .target-row td { background: rgba(34,197,94,0.08); }
+  .num-table .floor-row td { background: rgba(239,68,68,0.08); }
+
+  /* Pipeline */
+  .pipeline { display: flex; flex-direction: column; gap: 0; }
+  .pipeline-step { display: grid; grid-template-columns: 100px 120px 70px 1fr; align-items: center; gap: 12px; padding: 10px 12px; border-left: 3px solid var(--border); font-size: 13px; position: relative; }
+  .pipeline-step::before { content: ""; position: absolute; left: -7px; top: 50%; transform: translateY(-50%); width: 11px; height: 11px; border-radius: 50%; background: var(--card); border: 2px solid var(--border); }
+  .pipeline-step .step-label { font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.3px; }
+  .pipeline-step .step-amount { font-weight: 700; font-variant-numeric: tabular-nums; }
+  .pipeline-step .step-ww { color: var(--text-dim); font-size: 12px; }
+  .pipeline-step .step-msg { color: var(--text-dim); font-size: 12px; font-style: italic; }
+  .pipeline-step.open { border-left-color: var(--accent); }
+  .pipeline-step.open::before { border-color: var(--accent); background: var(--accent); }
+  .pipeline-step.move { border-left-color: var(--blue); }
+  .pipeline-step.move::before { border-color: var(--blue); }
+  .pipeline-step.signal { border-left-color: var(--yellow); }
+  .pipeline-step.signal::before { border-color: var(--yellow); background: var(--yellow); }
+  .pipeline-step.bracket { border-left-color: var(--orange); }
+  .pipeline-step.bracket::before { border-color: var(--orange); }
+  .pipeline-step.target { border-left-color: var(--green); }
+  .pipeline-step.target::before { border-color: var(--green); background: var(--green); }
+  .pipeline-step.floor { border-left-color: var(--red); }
+  .pipeline-step.floor::before { border-color: var(--red); background: var(--red); }
+
+  /* Messaging cards */
+  .msg-card { padding: 10px 12px; background: var(--card-alt); border-radius: 8px; margin-bottom: 8px; font-size: 12.5px; }
+  .msg-card:last-child { margin-bottom: 0; }
+  .msg-card .msg-num { display: inline-block; width: 20px; height: 20px; background: var(--accent); color: white; font-size: 11px; font-weight: 700; text-align: center; line-height: 20px; border-radius: 4px; margin-right: 8px; }
+  .msg-card .msg-title { font-weight: 700; margin-bottom: 4px; }
+  .msg-card .msg-body { color: var(--text-dim); }
+
+  /* Brackets */
+  .bracket-opt { background: var(--card-alt); border-radius: 8px; padding: 12px; text-align: center; border: 1px solid var(--border); margin-bottom: 8px; }
+  .bracket-opt:last-child { margin-bottom: 0; }
+  .bracket-opt .bracket-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-dim); margin-bottom: 6px; }
+  .bracket-opt .bracket-range { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .bracket-opt .bracket-mid { font-size: 12px; color: var(--text-dim); }
+  .bracket-opt.agg { border-color: var(--orange); }
+  .bracket-opt.mod { border-color: var(--yellow); }
+  .bracket-opt.con { border-color: var(--green); }
+  .bracket-opt.agg .bracket-range { color: var(--orange); }
+  .bracket-opt.mod .bracket-range { color: var(--yellow); }
+  .bracket-opt.con .bracket-range { color: var(--green); }
+
+  /* OC read */
+  .oc-read { font-size: 13px; color: var(--text-dim); line-height: 1.7; }
+  .oc-read strong { color: var(--text); }
+
+  /* Damages bar */
+  .dmg-bar { display: flex; height: 24px; border-radius: 6px; overflow: hidden; font-size: 11px; font-weight: 600; margin-bottom: 16px; }
+  .dmg-bar div { display: flex; align-items: center; justify-content: center; color: #fff; white-space: nowrap; padding: 0 6px; }
+  .dmg-bar-label { font-size: 11px; color: var(--text-dim); margin-top: 4px; }
+
+  /* Footer */
+  .footer { text-align: center; margin-top: 20px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-dim); font-style: italic; }
+
+  @media (max-width: 900px) {
+    .grid-2, .grid-3, .grid-top { grid-template-columns: 1fr; }
+    .pipeline-step { grid-template-columns: 80px 100px 60px 1fr; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div>
+    <h1>Santamaria v. America Central Corporation, et al.</h1>
+    <div style="color:var(--text-dim); font-size:13px; margin-top:4px;">Class/PAGA + Individual · LASC · Remote/Zoom</div>
+    <div style="margin-top:8px;">
+      <span class="badge badge-settle">Goal: Settlement</span>
+      <span class="badge badge-conf">Confidential</span>
+      <span class="badge badge-warn">No Policies Produced</span>
+    </div>
+  </div>
+  <div class="header-meta">
+    <strong>April 10, 2026</strong> &middot; 10:00 AM PT<br>
+    Mediator: <strong>Brandon McKelvey</strong> (M Resolution)<br>
+    Los Angeles Superior Court<br>
+    Defendants: ACC + Avianca/Aerovias
+  </div>
+</div>
+
+<!-- DAMAGES BAR -->
+<div class="dmg-bar">
+  <div style="width:20%;background:#ef4444;" title="Meal Period Premiums">Meal</div>
+  <div style="width:15%;background:#f97316;" title="Rest Period Premiums">Rest</div>
+  <div style="width:12%;background:#8b5cf6;" title="Overtime (RROP/Ferra)">OT/Ferra</div>
+  <div style="width:10%;background:#3b82f6;" title="Off-the-Clock">OTC</div>
+  <div style="width:8%;background:#06b6d4;" title="Unreimbursed Expenses">Expenses</div>
+  <div style="width:20%;background:#22c55e;" title="PAGA Penalties">PAGA</div>
+  <div style="width:15%;background:#475569;" title="Wage Statements + Interest">WS + Deriv</div>
+</div>
+<div class="dmg-bar-label">Claim breakdown — BCG expert analysis from defendant's records (Asher tiers from prep spreadsheet) · See brief for exact figures</div>
+
+<!-- TOP ROW: Snapshot + Strengths + Weaknesses -->
+<div class="grid grid-top" style="margin-bottom:16px;">
+
+  <!-- Case Snapshot -->
+  <div class="card">
+    <h2>Case Snapshot</h2>
+    <div class="kv-row"><span class="kv-label">Workweeks</span><span class="kv-value big">7,407</span></div>
+    <div class="kv-row"><span class="kv-label">Class Members</span><span class="kv-value">~74 (83 - 9 removed)</span></div>
+    <div class="kv-row"><span class="kv-label">Case Type</span><span class="kv-value">Class + PAGA + Indi</span></div>
+    <div class="kv-row"><span class="kv-label">Pay Frequency</span><span class="kv-value">Semi-Monthly</span></div>
+    <div class="kv-row"><span class="kv-label">Workweek Def.</span><span class="kv-value">Mon–Sun</span></div>
+    <div class="kv-row"><span class="kv-label">Class Period Start</span><span class="kv-value">March 10, 2022</span></div>
+    <div class="kv-row"><span class="kv-label">OT Violation Rate</span><span class="kv-value">3.4% of PP</span></div>
+    <div class="kv-row"><span class="kv-label">OC</span><span class="kv-value">Littler (Samie / Lerner)</span></div>
+    <div class="kv-row"><span class="kv-label">In Our Room</span><span class="kv-value">JG, RQ, MD, SW, JM, Plaintiff</span></div>
+    <div class="kv-row"><span class="kv-label">Other Room</span><span class="kv-value" style="color:var(--yellow);">⚠ Ask Ryan</span></div>
+    <div class="kv-row"><span class="kv-label">Referral / JPA</span><span class="kv-value" style="color:var(--yellow);">⚠ Check Asher Sheet</span></div>
+    <div class="kv-row"><span class="kv-label">Handling</span><span class="kv-value">JM / RQ Team</span></div>
+  </div>
+
+  <!-- Strengths -->
+  <div class="card">
+    <h2 style="color:var(--green);">&#9650; Our Strengths</h2>
+    <ul class="sw-list pro">
+      <li><strong>No written policies produced</strong> — Defendant "still looking into" meal/rest/OT/expense policies as of 4/3. Strong inference no compliant policies existed during class period</li>
+      <li><strong>BCG expert analysis from their records</strong> — Full analysis run from defendant's own time and pay data (replacement production with PeriodStart/End/PayDate breakdowns)</li>
+      <li><strong>Ferra RROP underpayments confirmed</strong> — BCG computed regular rate underpayments at 1.5x method. New pay data allows precise period-by-period Ferra calculation</li>
+      <li><strong>Unreimbursed expenses strong</strong> — Eve analysis flagged this as a strong claim category</li>
+      <li><strong>Chaotic recordkeeping</strong> — Two incompatible productions, reused IDs across datasets, 9 BECs wrongly included, duplicates (BECs 74/81, 23/82). Suggests systemic compliance failures</li>
+      <li><strong>Individual claims add leverage</strong> — Sydney drafted individual portion; separate track adds pressure for global resolution</li>
+      <li><strong>Data gap: no records before 3/10/22</strong> — Defendant claims no NE employees before then, but some employees have hire dates going back to 2008. Potential misclassification exposure</li>
+      <li><strong>Named plaintiff attending</strong> — Sergio Santamaria present via Zoom; demonstrates commitment</li>
+      <li><strong>Outreach success</strong> — 3/3 called, 2 spoke, 2 willing witnesses (per Outreach Tracker)</li>
+    </ul>
+  </div>
+
+  <!-- Weaknesses -->
+  <div class="card">
+    <h2 style="color:var(--red);">&#9660; Their Arguments</h2>
+    <ul class="sw-list con">
+      <li><strong>Low OT violation rate (3.4%)</strong> — Only 3.4% of pay periods show unpaid overtime premiums. Defense will minimize OT exposure</li>
+      <li><strong>Small class (~74 members)</strong> — Reduces gross exposure compared to larger classes. Defense will argue manageable individual resolution</li>
+      <li><strong>Brief submitted night before</strong> — Mediation brief delivered 4/9 at 3:48 PM for 4/10 mediation. McKelvey had limited review time</li>
+      <li><strong>Data arrived late</strong> — Replacement production came 4/9 via TitanFile, day before mediation. BCG had to rush updated analysis</li>
+      <li><strong>Littler defense</strong> — Well-resourced, organized firm. Will present polished counter-narrative and won't fold easily</li>
+      <li><strong>Multiple defendant entities</strong> — ACC + Avianca/Aerovias may complicate authority/funding at the table</li>
+      <li><strong>Class period limited</strong> — NE classification starts 3/10/22 only; shorter exposure window than typical case</li>
+    </ul>
+  </div>
+</div>
+
+<!-- MIDDLE ROW: Numbers + Game Plan -->
+<div class="grid grid-2" style="margin-bottom:16px;">
+
+  <!-- Numbers Framework -->
+  <div class="card">
+    <h2>The Numbers (Asher Tiers + JG Sanity Check)</h2>
+    <table class="num-table">
+      <thead>
+        <tr><th>Concept</th><th>$/WW</th><th>Amount</th><th style="font-size:10px;">Source</th></tr>
+      </thead>
+      <tbody>
+        <tr class="highlight-row"><td style="font-weight:700;">Opening</td><td class="money" style="font-size:15px; color:var(--yellow);">⚠ See Brief</td><td class="money" style="font-size:15px; color:var(--yellow);">⚠ See Brief</td><td style="font-size:11px; color:var(--accent-light);">BCG</td></tr>
+        <tr><td class="label-cell">Asher High</td><td class="money" style="color:var(--yellow);">⚠ Sheet</td><td class="money" style="color:var(--yellow);">⚠ Sheet</td><td style="font-size:11px; color:var(--text-dim);">Asher</td></tr>
+        <tr><td class="label-cell">Asher Mid</td><td class="money" style="color:var(--yellow);">⚠ Sheet</td><td class="money" style="color:var(--yellow);">⚠ Sheet</td><td style="font-size:11px; color:var(--text-dim);">Asher</td></tr>
+        <tr style="border-top:1px dashed var(--border);"><td class="label-cell" style="font-style:italic;">BCS (JG check)</td><td class="money">$40–$50</td><td class="money">$296K–$370K</td><td style="font-size:11px; color:var(--text-dim);">JG</td></tr>
+        <tr><td class="label-cell" style="font-style:italic;">Signal (BCS+20%)</td><td class="money">$48–$60</td><td class="money">$356K–$444K</td><td style="font-size:11px; color:var(--text-dim);">JG</td></tr>
+        <tr class="target-row"><td>Target Zone</td><td class="money" style="color:var(--yellow);">⚠ Asher</td><td class="money" style="color:var(--yellow);">⚠ Asher</td><td style="font-size:11px; color:var(--text-dim);">Asher</td></tr>
+        <tr class="floor-row"><td>Walk-Away</td><td class="money">$30</td><td class="money">$222,210</td><td style="font-size:11px; color:var(--yellow);">⚠ Confirm</td></tr>
+        <tr><td class="label-cell">Individual Claims</td><td class="label-cell">—</td><td class="money" style="color:var(--yellow);">⚠ Sydney's draft</td><td style="font-size:11px;">Indi brief</td></tr>
+        <tr><td class="label-cell">PAGA Penalties</td><td class="label-cell">—</td><td class="money" style="color:var(--yellow);">⚠ Brief</td><td style="font-size:11px;">BCG</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:10px; padding:8px 10px; background:var(--card-alt); border-radius:6px; font-size:11px; color:var(--text-dim); line-height:1.6;">
+      <strong style="color:var(--accent-light);">⚠ INCOMPLETE — Attachments not accessible.</strong> Asher's prep spreadsheet arrived this morning (8:51 AM) and contains the full endpoint calculator with $/ww reference tiers. The mediation brief (v6, submitted last night) has BCG expert damages. Ryan should populate the ⚠ fields from these documents before the session begins.<br><br>
+      <strong style="color:var(--accent-light);">JG sanity check:</strong> BCS $40–$50/ww reflects no-policies strength offset by low OT rate and small class. Signal at $48–$60/ww — "this is a $50/ww case." With 7,407 WW, firm norm opening ($200–$250/ww) = $1.48M–$1.85M range. Walk-away floor at $30/ww ($222K) — JG minimum.
+    </div>
+  </div>
+
+  <!-- Negotiation Pipeline -->
+  <div class="card">
+    <h2>Negotiation Game Plan</h2>
+    <div class="pipeline">
+      <div class="pipeline-step open">
+        <span class="step-label">Open</span>
+        <span class="step-amount">⚠ BCG #</span>
+        <span class="step-ww">⚠ $/ww</span>
+        <span class="step-msg">Full expert number — backed by BCG analysis of their records</span>
+      </div>
+      <div class="pipeline-step move">
+        <span class="step-label">Move 2</span>
+        <span class="step-amount">~60% of open</span>
+        <span class="step-ww">—</span>
+        <span class="step-msg">Concede OT (only 3.4%) — "everything else stands: meals, rest, Ferra, expenses, PAGA"</span>
+      </div>
+      <div class="pipeline-step move">
+        <span class="step-label">Move 3</span>
+        <span class="step-amount">~40% of open</span>
+        <span class="step-ww">—</span>
+        <span class="step-msg">Narrow to strongest claims — no-policy meal/rest, Ferra, expenses. Separate PAGA track.</span>
+      </div>
+      <div class="pipeline-step signal">
+        <span class="step-label">Signal</span>
+        <span class="step-amount">$356K–$444K</span>
+        <span class="step-ww">$48–60</span>
+        <span class="step-msg">"No policies, Ferra confirmed, expenses strong — this is a $50/ww case all day"</span>
+      </div>
+      <div class="pipeline-step bracket">
+        <span class="step-label">Bracket</span>
+        <span class="step-amount">⚠ Set from Asher</span>
+        <span class="step-ww">Mid in target</span>
+        <span class="step-msg">One-time use — midpoint should land in target zone from Asher tiers</span>
+      </div>
+      <div class="pipeline-step target">
+        <span class="step-label">Target</span>
+        <span class="step-amount">⚠ Asher zone</span>
+        <span class="step-ww">⚠ $/ww</span>
+        <span class="step-msg">20-35% of expert — check Asher reference tier alignment</span>
+      </div>
+      <div class="pipeline-step floor">
+        <span class="step-label">Walk-Away</span>
+        <span class="step-amount">$222K</span>
+        <span class="step-ww">$30</span>
+        <span class="step-msg">⚠ Confirm — JG minimum. Below this, individual claims + PAGA justify litigation</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM ROW: Messaging + Brackets + OC Read -->
+<div class="grid grid-3">
+
+  <!-- Messaging Points -->
+  <div class="card" style="grid-column: span 2;">
+    <h2>Key Messaging Points for McKelvey</h2>
+    <div class="msg-card">
+      <div class="msg-title"><span class="msg-num">1</span>No Policies — At All</div>
+      <div class="msg-body">We asked on 4/3. Follow-up on 4/8. Defense is "still looking into" whether meal, rest, overtime, and expense reimbursement policies existed during the class period. The inference is clear: there were no compliant written policies. Under <em>Brinker</em> and <em>Donohue</em>, the burden is squarely on them.</div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-title"><span class="msg-num">2</span>Ferra Underpayments Are Confirmed</div>
+      <div class="msg-body">BCG computed overtime regular rate underpayments at the 1.5x method. The new pay data — with full PeriodStart/End/PayDate and every wage code broken out (KPI, Ancillaries Incentive, Bono Nocturnidad, Bono Navideño, etc.) — lets us price Ferra exposure precisely. These non-discretionary bonuses were excluded from the regular rate.</div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-title"><span class="msg-num">3</span>Their Own Records Are a Mess</div>
+      <div class="msg-body">Two productions with incompatible ID systems. The same ID number refers to different employees across files. 9 class members were erroneously included. 2 duplicate pairs. If they can't track their own workforce, how confident is the court going to be in their compliance systems?</div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-title"><span class="msg-num">4</span>The Data Gap Before March 2022</div>
+      <div class="msg-body">Defendant says no non-exempt employees existed before 3/10/22 — but several employees on the class list have hire dates going back to 2008. Either those employees were misclassified, or there's a missing universe of pre-2022 data. Both options are bad for defense.</div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-title"><span class="msg-num">5</span>Individual Claims Create Double Exposure</div>
+      <div class="msg-body">This isn't just a class/PAGA case. Mr. Santamaria has individual claims with their own valuation. A class settlement that doesn't address the individual track leaves the defendant defending a second front. Global resolution is in everyone's interest.</div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-title"><span class="msg-num">6</span>PAGA Survives Regardless</div>
+      <div class="msg-body">PAGA penalties are independent of the class exposure. Every meal, rest, and Ferra violation triggers PAGA penalty exposure for all aggrieved employees. The individual track adds further PAGA standing. Not arbitrable. Separate from class valuation.</div>
+    </div>
+  </div>
+
+  <!-- Right column: Brackets + OC Read -->
+  <div style="display:flex; flex-direction:column; gap:16px;">
+
+    <!-- Brackets -->
+    <div class="card">
+      <h2>Bracket Options (Use Once)</h2>
+      <div class="bracket-opt agg">
+        <div class="bracket-label">Aggressive</div>
+        <div class="bracket-range">⚠ Set from Asher</div>
+        <div class="bracket-mid">Mid in upper target zone</div>
+      </div>
+      <div class="bracket-opt mod">
+        <div class="bracket-label">Moderate</div>
+        <div class="bracket-range">⚠ Set from Asher</div>
+        <div class="bracket-mid">Mid in target zone</div>
+      </div>
+      <div class="bracket-opt con">
+        <div class="bracket-label">Conservative</div>
+        <div class="bracket-range">⚠ Set from Asher</div>
+        <div class="bracket-mid">Mid at lower target zone</div>
+      </div>
+      <div style="margin-top:10px; font-size:11px; color:var(--text-dim); font-style:italic; text-align:center;">
+        Populate from Asher's endpoint calculator — their counter-bracket top tells you where they are.
+      </div>
+    </div>
+
+    <!-- OC Read -->
+    <div class="card">
+      <h2>OC Read</h2>
+      <div class="oc-read">
+        <strong>Shahram Samie</strong> (lead) and <strong>Matthew Lerner</strong> at Littler Mendelson. Big Law defense — well-resourced, thorough, but Samie was out of office 4/8 and slow to respond on policies and data. Never produced policies despite multiple requests (4/3, 4/8). Late-stage document production swap (4/3 replacement) suggests either disorganized client or strategic withholding. Expect: low $/ww anchor citing small class and low OT rate, "ability to pay" given multiple corporate entities (ACC + Avianca/Aerovias), challenge Ferra calculations, minimize individual claims. Counter: no policies is indefensible, Ferra is from their own pay codes, recordkeeping chaos undercuts any compliance narrative. <strong style="color:var(--yellow);">Unknown: who is in their room? Corporate representative for which entity? Carrier involvement? Affects authority and pace.</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  Cancel deadline passed — committed &middot; McKelvey fee $14,000 (Invoice #6754) &middot; JM handling / RQ Team &middot; ⚠ Populate Asher tiers + BCG numbers before session
+</div>
+
+</body>
+</html>

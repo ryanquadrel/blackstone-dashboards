@@ -258,7 +258,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
       <div class="eotd-tooltip" id="eotdTooltip"></div>
     </div>
     <a href="/daily-briefing" class="hdr-btn hdr-btn-briefing"><span class="hb-icon">&#128240;</span><span class="hb-label">Daily Briefing</span></a>
-    <a href="/mediation-strategy/america-central" class="hdr-btn hdr-btn-strategy" id="strategyBtn"><span class="hb-live"></span><span class="hb-icon">&#9876;</span><span class="hb-label">Strategy: America Central Corp</span></a>
+    <a href="/mediation-strategy/agpalza-magnolia-springs/" class="hdr-btn hdr-btn-strategy" id="strategyBtn"><span class="hb-live"></span><span class="hb-icon">&#9876;</span><span class="hb-label">Strategy: Magnolia Springs</span></a>
   </div>
   <div class="hdr-right">
     <div class="live-dot"></div>
@@ -382,6 +382,10 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
     <div class="tl-panel">
       <h2><span class="icon">&#9889;</span> 14-Day Action Timeline</h2>
                   <div class="tl-items">
+        <div class="tl-item s-med" onclick="window.location='/mediation-strategy/agpalza-magnolia-springs/'">
+          <div class="tl-date">APR 13</div>
+          <div class="tl-body"><div class="tl-case">Agpalza v. Magnolia Springs</div><div class="tl-event">Mediation with Carl J. West &middot; 9:00 AM &middot; JM</div><span class="tl-badge b-med" style="background:#a855f7;color:#fff">TODAY</span></div>
+        </div>
         <div class="tl-item s-motion" onclick="window.location='/motion-dashboard'">
           <div class="tl-date">APR 13</div>
           <div class="tl-body"><div class="tl-case">Anguiano v. Kinecta</div><div class="tl-event">MTC deadline (RQ)</div><span class="tl-badge b-motion">MOTION</span></div>
@@ -777,7 +781,7 @@ window.addEventListener('load',function(){
   for(var i=0;i<items.length;i++){
     var badge = items[i].querySelector('.tl-badge');
     if(badge && badge.textContent.indexOf('TODAY') !== -1){
-      items[i].setAttribute('data-med-link','/mediation-strategy/santamaria-america-central/');
+      items[i].setAttribute('data-med-link','/mediation-strategy/agpalza-magnolia-springs/');
     }
   }
 })();

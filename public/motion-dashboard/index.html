@@ -1039,6 +1039,49 @@ document.getElementById('fSearch').addEventListener('input', applyF);
   svg.innerHTML+='<text x="'+cx+'" y="'+(cy-5)+'" text-anchor="middle" fill="var(--accent)" font-size="21" font-weight="700">60%</text><text x="'+cx+'" y="'+(cy+11)+'" text-anchor="middle" fill="var(--text-dim)" font-size="9">Win Rate (6W/4L)</text>';
 })();
 </script>
+
+<script>
+
+/* Auto-attach SharePoint folder icons to static case-name elements */
+document.addEventListener('DOMContentLoaded', function() {
+  var els = document.querySelectorAll('.case-name, .jpa-case-name');
+  els.forEach(function(el) {
+    var raw = el.textContent.trim();
+    if (!raw) return;
+    // Extract defendant name: strip parenthetical suffixes like "(Class)", "(PAGA)", "(plaintiff)"
+    // Keep the core defendant name for folder lookup
+    var clean = raw
+      .replace(/\s*\(Class[^)]*\)/gi, '')
+      .replace(/\s*\(PAGA[^)]*\)/gi, '')
+      .replace(/\s*\(Federal[^)]*\)/gi, '')
+      .replace(/\s*\(Both[^)]*\)/gi, '')
+      .replace(/\s*\(Spanish\)/gi, '')
+      .replace(/\s*\(KG PARTNERING\)/gi, '')
+      .replace(/\s*\(BDC PARTNERING\)/gi, '')
+      .trim();
+    // For "Plaintiff v. Defendant" format, extract defendant
+    var vMatch = clean.match(/v\.\s+(.+)/);
+    if (vMatch) clean = vMatch[1].trim();
+    // For "Defendant (Plaintiff, First)" format, strip plaintiff parens
+    clean = clean.replace(/\s*\([^)]*\)\s*$/, '').trim();
+    // For "Defendant / Plaintiff" format, take first part
+    var slashMatch = clean.match(/^([^/]+)\//);
+    if (slashMatch) clean = slashMatch[1].trim();
+    if (!clean) return;
+    var link = buildCaseLink(clean);
+    var a = document.createElement('a');
+    a.href = link;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.title = 'Open case folder: ' + clean;
+    a.style.cssText = 'margin-left:5px;text-decoration:none;opacity:.45;font-size:.75em;';
+    a.textContent = '\uD83D\uDCC1';
+    a.addEventListener('click', function(e) { e.stopPropagation(); });
+    el.appendChild(a);
+  });
+});
+
+</script>
 </body>
 </html>
 <!-- deploy-ts: 2026-04-10T04 -->

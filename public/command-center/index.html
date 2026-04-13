@@ -695,7 +695,7 @@ function renderDeepDive(){
     }
     fields.push(['Last Team Update',formatDate(c.last_team_update)]);
 
-    html+='<div class="case-card"><div class="case-card-header"><h3>'+esc(c.defendant||c.case_name)+(c._isDupe?' <span style="opacity:.6;font-size:.7em">('+(c.case_type||'?')+')</span>':'')+'+folderIcon(c.defendant||c.case_name)+'</h3><div class="tags">'+
+    html+='<div class="case-card"><div class="case-card-header"><h3>'+esc(c.defendant||c.case_name)+(c._isDupe?' <span style="opacity:.6;font-size:.7em">('+(c.case_type||'?')+')</span>':'')+folderIcon(c.defendant||c.case_name)+'</h3><div class="tags">'+
       '<span class="tag tag-'+c.attorney.toLowerCase()+'">'+c.attorney+'</span>'+
       '<span class="tag '+tt+'">'+(c.case_type||'?')+'</span>'+
       (stage?'<span class="tag '+stage.color+'">'+stage.label+'</span>':'')+

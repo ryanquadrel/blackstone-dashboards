@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Competing Cases Tracker &mdash; Blackstone Law, APC</title>
+<style>
+
+:root {
+  --bg: #0f1117; --surface: #1a1d27; --surface2: #22262f; --border: #2e3340;
+  --text: #e4e6eb; --text-dim: #8b8fa3; --accent: #6c8cff; --accent-dim: rgba(108,140,255,.12);
+  --red: #ff4d6a; --red-dim: rgba(255,77,106,.12);
+  --orange: #ff9f43; --orange-dim: rgba(255,159,67,.12);
+  --green: #2ed573; --green-dim: rgba(46,213,115,.12);
+  --yellow: #ffc048; --yellow-dim: rgba(255,192,72,.12);
+  --purple: #a55eea; --purple-dim: rgba(165,94,234,.12);
+  --teal: #14b8a6; --teal-dim: rgba(20,184,166,.12);
+  --pink: #ec4899; --pink-dim: rgba(236,72,153,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;}
+
+/* ── Header ── */
+.header{background:linear-gradient(135deg,#1a1d27,#1e2235);border-bottom:1px solid var(--border);padding:24px 40px;}
+.header-row{display:flex;justify-content:space-between;align-items:flex-start;}
+.header h1{font-size:22px;font-weight:600;letter-spacing:-.3px;}
+.header h1 em{font-style:normal;color:var(--accent);}
+.header-sub{color:var(--text-dim);font-size:13px;margin-top:3px;}
+.week-badge{background:var(--accent-dim);color:var(--accent);padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;}
+.header-meta{display:flex;gap:20px;margin-top:14px;font-size:12px;color:var(--text-dim);}
+.header-meta strong{color:var(--text);}
+
+/* ── Stats ── */
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;padding:20px 40px;}
+@media(max-width:1100px){.stats{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr);padding:16px;}}
+.sc{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;}
+.sc .l{font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--text-dim);margin-bottom:6px;}
+.sc .v{font-size:26px;font-weight:700;}
+.sc .s{font-size:11px;color:var(--text-dim);margin-top:3px;}
+
+/* ── Cross-Firm Intelligence Panel ── */
+.intel-panel{padding:0 40px 20px;}
+.intel-panel h2{font-size:14px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.intel-panel h2 .icon{font-size:16px;}
+.firm-cards{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;scrollbar-width:thin;scrollbar-color:var(--accent) var(--surface);}
+.firm-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 18px;min-width:200px;flex-shrink:0;cursor:pointer;transition:all .15s;position:relative;}
+.firm-card:hover,.firm-card.active{border-color:var(--accent);background:var(--accent-dim);}
+.firm-card .fc-name{font-size:13px;font-weight:600;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.firm-card .fc-count{font-size:22px;font-weight:700;color:var(--accent);}
+.firm-card .fc-label{font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.5px;}
+.firm-card .fc-cases{font-size:11px;color:var(--text-dim);margin-top:6px;line-height:1.4;}
+.firm-card .fc-bdc{font-size:10px;color:var(--purple);margin-top:4px;font-style:italic;}
+
+/* ── Controls ── */
+.controls{display:flex;align-items:center;gap:12px;padding:0 40px 16px;flex-wrap:wrap;}
+.tabs{display:flex;gap:4px;background:var(--surface);border-radius:10px;padding:3px;border:1px solid var(--border);}
+.tab{padding:7px 16px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;color:var(--text-dim);transition:.15s;white-space:nowrap;user-select:none;}
+.tab:hover{color:var(--text);}
+.tab.active{background:var(--accent);color:#fff;}
+.tab .tc{font-size:10px;opacity:.65;margin-left:4px;}
+.sep{flex:1;}
+.fg{display:flex;align-items:center;gap:5px;}
+.fg label{font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.4px;}
+select,input[type=text]{background:var(--surface);border:1px solid var(--border);color:var(--text);padding:6px 10px;border-radius:8px;font-size:12px;outline:none;}
+select:focus,input:focus{border-color:var(--accent);}
+
+/* ── Content ── */
+.content{padding:0 40px 40px;}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+/* ── Tables ── */
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;}
+thead th{background:var(--surface2);color:var(--text-dim);font-size:10px;text-transform:uppercase;letter-spacing:.6px;font-weight:600;padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);cursor:pointer;white-space:nowrap;position:sticky;top:0;z-index:2;}
+thead th:first-child{border-radius:8px 0 0 0;} thead th:last-child{border-radius:0 8px 0 0;}
+thead th:hover{color:var(--text);}
+thead th .sa{font-size:9px;margin-left:3px;opacity:.35;}
+thead th.sorted .sa{opacity:1;color:var(--accent);}
+tbody tr{border-bottom:1px solid var(--border);}
+tbody tr:hover{background:rgba(108,140,255,.03);}
+tbody td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top;}
+tbody tr:last-child td{border-bottom:none;}
+.case-name{font-weight:600;} .case-num{font-size:11px;color:var(--text-dim);margin-top:1px;}
+
+/* ── Badges ── */
+.b{display:inline-block;padding:2px 9px;border-radius:10px;font-size:10px;font-weight:600;white-space:nowrap;}
+.b-alert{background:var(--red-dim);color:var(--red);}
+.b-monitor{background:var(--orange-dim);color:var(--orange);}
+.b-outreach{background:var(--yellow-dim);color:var(--yellow);}
+.b-contact{background:var(--accent-dim);color:var(--accent);}
+.b-jpa{background:var(--green-dim);color:var(--green);}
+.b-resolved{background:rgba(139,143,163,.12);color:var(--text-dim);}
+.b-bsl{background:var(--green-dim);color:var(--green);}
+.b-other{background:var(--red-dim);color:var(--red);}
+.b-simul{background:var(--yellow-dim);color:var(--yellow);}
+.b-class{background:var(--accent-dim);color:var(--accent);}
+.b-paga{background:var(--purple-dim);color:var(--purple);}
+.b-both{background:var(--teal-dim);color:var(--teal);}
+.b-indiv{background:var(--pink-dim);color:var(--pink);}
+.b-stayed{background:var(--yellow-dim);color:var(--yellow);}
+.b-active{background:var(--orange-dim);color:var(--orange);}
+
+/* ── Impact indicator ── */
+.impact{display:inline-flex;align-items:center;gap:4px;font-size:11px;}
+.impact-dot{width:8px;height:8px;border-radius:50%;}
+.impact-high .impact-dot{background:var(--red);}
+.impact-med .impact-dot{background:var(--orange);}
+.impact-low .impact-dot{background:var(--green);}
+
+/* ── Notes cell ── */
+.notes-cell{font-size:11px;color:var(--text-dim);max-width:260px;line-height:1.4;}
+
+/* ── Footer ── */
+.footer{padding:18px 40px;border-top:1px solid var(--border);font-size:11px;color:var(--text-dim);text-align:center;}
+@media(max-width:640px){.header,.controls,.content,.footer,.intel-panel{padding-left:16px;padding-right:16px;}}
+
+/* ═══ MISSION CONTROL BACK-LINK ═══ */
+.mc-home{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:9999;display:inline-flex;align-items:center;gap:8px;padding:8px 16px 8px 12px;background:linear-gradient(135deg,rgba(79,143,255,.12),rgba(168,85,247,.12));border:1px solid rgba(79,143,255,.25);border-radius:24px;text-decoration:none;color:#e8ecf4;font-family:'Segoe UI',system-ui,sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.01em;transition:all .3s cubic-bezier(.4,0,.2,1);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 2px 12px rgba(0,0,0,.3)}
+.mc-home:hover{border-color:rgba(79,143,255,.5);transform:translateX(-50%) translateY(-1px) scale(1.03);box-shadow:0 4px 20px rgba(79,143,255,.2),0 0 30px rgba(168,85,247,.1);background:linear-gradient(135deg,rgba(79,143,255,.2),rgba(168,85,247,.18))}
+.mc-home .mc-arrow{color:#4a5a78;transition:all .2s;font-size:.9rem}
+.mc-home:hover .mc-arrow{color:#4f8fff;transform:translateX(-3px)}
+.mc-home .mc-icon{font-size:1.1rem;transition:transform .3s}
+.mc-home:hover .mc-icon{transform:rotate(-15deg) scale(1.15)}
+.mc-home .mc-label{background:linear-gradient(135deg,#4f8fff,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* ── Lifecycle Pipeline ── */
+.lifecycle{display:flex;align-items:center;gap:3px;margin:6px 0;}
+.lc-dot{width:10px;height:10px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;}
+.lc-dot.done{border-color:var(--green);background:var(--green);}
+.lc-dot.active{border-color:var(--accent);background:var(--accent);box-shadow:0 0 6px rgba(108,140,255,.4);}
+.lc-dot.future{border-color:var(--border);background:transparent;}
+.lc-line{width:12px;height:2px;background:var(--border);}
+.lc-line.done{background:var(--green);}
+
+</style>
+</head>
+<body>
+<a href="/" class="mc-home" title="Back to Mission Control"><span class="mc-arrow">&#8592;</span><span class="mc-icon">&#128640;</span><span class="mc-label">Mission Control</span></a>
+
+<!-- ════ HEADER ════ -->
+<div class="header">
+  <div class="header-row">
+    <div>
+      <h1>Competing Cases <em>Tracker</em></h1>
+      <div class="header-sub">Blackstone Law, APC &mdash; RQ Team Pre-JPA Competing Case Intelligence</div>
+    </div>
+    <div class="week-badge">Week of April 13, 2026</div>
+  </div>
+  <div class="header-meta">
+    <span>Generated: <strong>Sun, April 13, 2026</strong></span>
+    <span>Team: <strong>RQ, SM, JM</strong></span>
+    <span>Sources: <strong>Dinger Alerts, Topfile Sheet, Active Case Sheet</strong></span>
+  </div>
+</div>
+
+<!-- ════ STATS ════ -->
+<div class="stats">
+  <div class="sc"><div class="l">Active Competing Cases</div><div class="v" style="color:var(--red);">15</div><div class="s">Across RQ caseload</div></div>
+  <div class="sc"><div class="l">Unique Competing Firms</div><div class="v" style="color:var(--orange);">9</div><div class="s">Pre-JPA only</div></div>
+  <div class="sc"><div class="l">BSL Filed First</div><div class="v" style="color:var(--green);">8</div><div class="s">53% first-filer rate</div></div>
+  <div class="sc"><div class="l">BSL Got Topfiled</div><div class="v" style="color:var(--yellow);">4</div><div class="s">Other firm filed first</div></div>
+  <div class="sc"><div class="l">Multi-Firm Targets</div><div class="v" style="color:var(--purple);">2</div><div class="s">IMC Logistics, PRS</div></div>
+</div>
+
+<!-- ════ CROSS-FIRM INTELLIGENCE ════ -->
+<div class="intel-panel">
+  <h2><span class="icon">&#128373;</span> Cross-Firm Intelligence</h2>
+  <div class="firm-cards" id="firmCards">
+    <div class="firm-card" data-firm="lavi" onclick="filterByFirm('Lavi')">
+      <div class="fc-name">Lavi &amp; Ebrahimian</div>
+      <div class="fc-count">3</div>
+      <div class="fc-label">RQ Cases</div>
+      <div class="fc-cases">Patrol Solutions, Ridgecrest, JVS SoCal</div>
+      <div class="fc-bdc">+ appears on BDC Topfile sheet (Ukas Saver)</div>
+    </div>
+    <div class="firm-card" data-firm="abramson" onclick="filterByFirm('Abramson')">
+      <div class="fc-name">Abramson Labor Group</div>
+      <div class="fc-count">2</div>
+      <div class="fc-label">RQ Cases</div>
+      <div class="fc-cases">Hyatt, IMC Logistics</div>
+      <div class="fc-bdc">+ extensive BDC sheet presence</div>
+    </div>
+    <div class="firm-card" data-firm="otkupman" onclick="filterByFirm('Otkupman')">
+      <div class="fc-name">Otkupman Law</div>
+      <div class="fc-count">2</div>
+      <div class="fc-label">RQ Cases</div>
+      <div class="fc-cases">Control Air, IMC Logistics</div>
+    </div>
+    <div class="firm-card" data-firm="sentinel" onclick="filterByFirm('Sentinel')">
+      <div class="fc-name">Sentinel Firm</div>
+      <div class="fc-count">2</div>
+      <div class="fc-label">RQ Cases</div>
+      <div class="fc-cases">Keenan Farms, Vagaro</div>
+    </div>
+    <div class="firm-card" data-firm="koul" onclick="filterByFirm('Koul')">
+      <div class="fc-name">Koul Law</div>
+      <div class="fc-count">2</div>
+      <div class="fc-label">RQ Cases</div>
+      <div class="fc-cases">Truitt Oilfield, Hope Program</div>
+    </div>
+    <div class="firm-card" data-firm="dlaw" onclick="filterByFirm('D. Law')">
+      <div class="fc-name">D. Law</div>
+      <div class="fc-count">1</div>
+      <div class="fc-label">RQ Cases</div>
+      <div class="fc-cases">Southwest College</div>
+      <div class="fc-bdc">+ PriMed on BDC sheet</div>
+    </div>
+    <div class="firm-card" data-firm="bokhour" onclick="filterByFirm('Bokhour')">
+      <div class="fc-name">Bokhour Law Group</div>
+      <div class="fc-count">1</div>
+      <div class="fc-label">RQ Cases</div>
+      <div class="fc-cases">Lefiell Mfg</div>
+    </div>
+    <div class="firm-card" data-firm="sanaz" onclick="filterByFirm('Sanaz')">
+      <div class="fc-name">Sanaz Law Corp</div>
+      <div class="fc-count">1</div>
+      <div class="fc-label">RQ Cases</div>
+      <div class="fc-cases">PRS Holdings</div>
+    </div>
+    <div class="firm-card" data-firm="lfj" onclick="filterByFirm('LFJ')">
+      <div class="fc-name">LFJ / Sweeny (Aiwazian)</div>
+      <div class="fc-count">1</div>
+      <div class="fc-label">RQ Cases</div>
+      <div class="fc-cases">Childnet Youth</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ CONTROLS ════ -->
+<div class="controls">
+  <div class="tabs" id="tabBar">
+    <div class="tab active" data-tab="active">Active<span class="tc" id="cnt-active">15</span></div>
+    <div class="tab" data-tab="resolved">Resolved / JPA<span class="tc" id="cnt-resolved">1</span></div>
+  </div>
+  <div class="sep"></div>
+  <div class="fg"><label>Phase</label><select id="fPhase"><option value="">All</option><option value="New Alert">New Alert</option><option value="Monitoring">Monitoring</option><option value="Outreach Planned">Outreach Planned</option><option value="Initial Contact">Initial Contact</option></select></div>
+  <div class="fg"><label>Filed First</label><select id="fFirst"><option value="">All</option><option value="BSL">BSL First</option><option value="Other">Other First</option><option value="TBD">TBD</option></select></div>
+  <div class="fg"><input type="text" id="fSearch" placeholder="Search case or firm..." style="width:180px;"/></div>
+</div>
+
+<!-- ════ CONTENT ════ -->
+<div class="content">
+
+<!-- ──── TAB: ACTIVE ──── -->
+<div class="tab-panel active" id="panel-active">
+<table>
+<thead><tr>
+  <th onclick="sortT(this,0)">BSL Case <span class="sa">&#9650;</span></th>
+  <th onclick="sortT(this,1)">Competing Case <span class="sa">&#9650;</span></th>
+  <th onclick="sortT(this,2)">Competing Firm <span class="sa">&#9650;</span></th>
+  <th onclick="sortT(this,3)">Type <span class="sa">&#9650;</span></th>
+  <th onclick="sortT(this,4)">Filed First <span class="sa">&#9650;</span></th>
+  <th onclick="sortT(this,5)">Phase <span class="sa">&#9650;</span></th>
+  <th onclick="sortT(this,6)">Impact <span class="sa">&#9650;</span></th>
+  <th>Notes</th>
+</tr></thead>
+<tbody class="ft" id="activeBody">
+
+  <tr data-phase="Monitoring" data-first="BSL" data-firm="Abramson">
+    <td><div class="case-name">Hyatt (Seybold)</div><div class="case-num">Hyatt Corp dba Carmel Valley Ranch</div></td>
+    <td><div class="case-name">Jean v. Hyatt Corp dba Hyatt Regency Indian Wells</div><div class="case-num">TC26-599 &bull; Riverside County</div><div class="case-num">Filed: 1/23/2026</div></td>
+    <td><div class="case-name">Abramson Labor Group</div><div class="case-num">Fawn F. Bekam</div></td>
+    <td><span class="b b-paga">PAGA</span></td>
+    <td><span class="b b-bsl">BSL First</span></td>
+    <td><span class="b b-monitor">Monitoring</span></td>
+    <td><div class="impact impact-high"><span class="impact-dot"></span> High</div></td>
+    <td class="notes-cell">Different Hyatt property (Indian Wells vs. Carmel Valley). PAGA claims may overlap. Abramson also on IMC Logistics. Dashboard skeleton exists on pipeline.</td>
+  </tr>
+
+  <tr data-phase="Monitoring" data-first="BSL" data-firm="Abramson">
+    <td><div class="case-name">IMC Logistics (Lee)</div><div class="case-num">IMC Logistics, LLC</div></td>
+    <td><div class="case-name">Chatman v. IMC Logistics</div><div class="case-num">25STCV27411 &bull; LASC</div><div class="case-num">Filed: 9/17/2025</div></td>
+    <td><div class="case-name">Abramson Labor Group</div><div class="case-num">Megan Ross</div></td>
+    <td><span class="b b-class">Class</span></td>
+    <td><span class="b b-bsl">BSL First</span></td>
+    <td><span class="b b-monitor">Monitoring</span></td>
+    <td><div class="impact impact-high"><span class="impact-dot"></span> High</div></td>
+    <td class="notes-cell">TWO competing firms on this case. Abramson (Class/PAGA, LASC) + Otkupman (Benjamin, San Bernardino CIVSB2508424). Multi-front competition.</td>
+  </tr>
+
+  <tr data-phase="Monitoring" data-first="BSL" data-firm="Otkupman">
+    <td><div class="case-name">IMC Logistics (Lee)</div><div class="case-num">IMC Logistics, LLC</div></td>
+    <td><div class="case-name">Benjamin v. IMC Logistics</div><div class="case-num">CIVSB2508424 &bull; San Bernardino</div><div class="case-num">Filed: ~2025</div></td>
+    <td><div class="case-name">Otkupman Law</div><div class="case-num">Attorney TBD</div></td>
+    <td><span class="b b-class">Class</span></td>
+    <td><span class="b b-bsl">BSL First</span></td>
+    <td><span class="b b-monitor">Monitoring</span></td>
+    <td><div class="impact impact-high"><span class="impact-dot"></span> High</div></td>
+    <td class="notes-cell">Second competing firm on IMC. Otkupman also on Control Air. Filed in different venue (San Bernardino).</td>
+  </tr>
+
+  <tr data-phase="Monitoring" data-first="BSL" data-firm="Otkupman">
+    <td><div class="case-name">Control Air (Soto)</div><div class="case-num">Control Air Enterprises, LLC</div></td>
+    <td><div class="case-name">Towson v. Control Air Enterprises</div><div class="case-num">25CU031025C &bull; San Diego County</div><div class="case-num">Filed: 6/13/2025</div></td>
+    <td><div class="case-name">Otkupman Law</div><div class="case-num">Nidah Farishta</div></td>
+    <td><span class="b b-class">Class</span></td>
+    <td><span class="b b-bsl">BSL First</span></td>
+    <td><span class="b b-monitor">Monitoring</span></td>
+    <td><div class="impact impact-med"><span class="impact-dot"></span> Med</div></td>
+    <td class="notes-cell">Related case in San Diego. Otkupman also on IMC Logistics (Benjamin). Dinger alert from Asher.</td>
+  </tr>
+
+  <tr data-phase="Monitoring" data-first="BSL" data-firm="Lavi">
+    <td><div class="case-name">Patrol Solutions (Williams/Cortes/Sperber)</div><div class="case-num">Patrol Solutions, LLC</div></td>
+    <td><div class="case-name">Barandiaran v. Patrol Solutions</div><div class="case-num">25STCV30315 (Class, LASC) &bull; TC25-2261 (PAGA, Contra Costa)</div><div class="case-num">Filed: 10/16/2025 (Class) &bull; 12/23/2025 (PAGA)</div></td>
+    <td><div class="case-name">Lavi &amp; Ebrahimian</div><div class="case-num">Joseph Lavi</div></td>
+    <td><span class="b b-both">Class + PAGA</span></td>
+    <td><span class="b b-bsl">BSL First</span></td>
+    <td><span class="b b-monitor">Monitoring</span></td>
+    <td><div class="impact impact-high"><span class="impact-dot"></span> High</div></td>
+    <td class="notes-cell">Lavi filed both class and PAGA in separate venues. Lavi also on Ridgecrest and JVS SoCal. Aggressive competitor.</td>
+  </tr>
+
+  <tr data-phase="New Alert" data-first="TBD" data-firm="Sentinel">
+    <td><div class="case-name">Keenan Farms (Cervantez)</div><div class="case-num">Keenan Farms, Inc.</div></td>
+    <td><div class="case-name">Najera v. Keenan Farms</div><div class="case-num">TC25-112 &bull; Kings County (PAGA)</div><div class="case-num">Filed: 11/21/2025</div></td>
+    <td><div class="case-name">Sentinel Firm</div><div class="case-num">Seung Yang</div></td>
+    <td><span class="b b-both">Class + PAGA</span></td>
+    <td><span class="b b-simul">TBD</span></td>
+    <td><span class="b b-alert">New Alert</span></td>
+    <td><div class="impact impact-high"><span class="impact-dot"></span> High</div></td>
+    <td class="notes-cell">Sentinel filed class action 6/4/25 (now stayed) and separate PAGA 11/21/25 with different plaintiff. Sentinel also on Vagaro.</td>
+  </tr>
+
+  <tr data-phase="Monitoring" data-first="BSL" data-firm="LFJ">
+    <td><div class="case-name">Childnet Youth (Valenzuela)</div><div class="case-num">Childnet Youth and Family Services</div></td>
+    <td><div class="case-name">Zaragoza v. Childnet</div><div class="case-num">25LBCV00137 &bull; Long Beach</div><div class="case-num">LFJ filed PAGA 1/21/25, Class 2/25/25</div></td>
+    <td><div class="case-name">LFJ / Sweeny (Aiwazian incubator)</div><div class="case-num">LFJ disqualified by court</div></td>
+    <td><span class="b b-both">Class + PAGA</span></td>
+    <td><span class="b b-other">Other First</span></td>
+    <td><span class="b b-monitor">Monitoring</span></td>
+    <td><div class="impact impact-med"><span class="impact-dot"></span> Med</div></td>
+    <td class="notes-cell">LFJ disqualified (hired defense counsel's associate). Zaragoza given leave to find new counsel. BSL pursuing Zaragoza as class rep. BSL filed PAGA 5/1/25. Sweeny (Aiwazian incubator) also involved per dinger alert.</td>
+  </tr>
+
+  <tr data-phase="Monitoring" data-first="TBD" data-firm="Lavi">
+    <td><div class="case-name">Ridgecrest Regional (Rosado)</div><div class="case-num">Ridgecrest Regional Hospital</div></td>
+    <td><div class="case-name">Hoskins v. Ridgecrest Regional Hospital</div><div class="case-num">BCV-25-103466 &bull; Kern County</div><div class="case-num">Filed: ~2025</div></td>
+    <td><div class="case-name">Lavi &amp; Ebrahimian</div><div class="case-num">Attorney TBD</div></td>
+    <td><span class="b b-class">Class</span></td>
+    <td><span class="b b-simul">TBD</span></td>
+    <td><span class="b b-monitor">Monitoring</span></td>
+    <td><div class="impact impact-med"><span class="impact-dot"></span> Med</div></td>
+    <td class="notes-cell">Lavi&rsquo;s third competing case against RQ matters. Pattern of overlapping filings.</td>
+  </tr>
+
+  <tr data-phase="Monitoring" data-first="TBD" data-firm="Sanaz">
+    <td><div class="case-name">PRS Holdings (Yang)</div><div class="case-num">PRS Holdings / Pavement Recycling Systems</div></td>
+    <td><div class="case-name">Strozier v. Sustainable Emulsions / PRS</div><div class="case-num">TC25-7127 &bull; Riverside County</div><div class="case-num">Filed: 10/16/2025</div></td>
+    <td><div class="case-name">Sanaz Law Corp</div><div class="case-num">Sanaz Imani</div></td>
+    <td><span class="b b-indiv">Individual</span></td>
+    <td><span class="b b-simul">TBD</span></td>
+    <td><span class="b b-monitor">Monitoring</span></td>
+    <td><div class="impact impact-low"><span class="impact-dot"></span> Low</div></td>
+    <td class="notes-cell">Employment/discrimination individual case. Also PAGA (Munoz) and Class (Nygard) competing cases from other firms per Active Case Sheet.</td>
+  </tr>
+
+  <tr data-phase="Monitoring" data-first="TBD" data-firm="unknown">
+    <td><div class="case-name">PRS Holdings (Yang)</div><div class="case-num">PRS Holdings / Pavement Recycling Systems</div></td>
+    <td><div class="case-name">Munoz v. Pavement Coatings (PAGA)<br/>Nygard v. Pavement Coatings (Class)</div><div class="case-num">Case numbers TBD</div></td>
+    <td><div class="case-name">Firm TBD</div><div class="case-num">Attorney TBD</div></td>
+    <td><span class="b b-both">Class + PAGA</span></td>
+    <td><span class="b b-simul">TBD</span></td>
+    <td><span class="b b-monitor">Monitoring</span></td>
+    <td><div class="impact impact-med"><span class="impact-dot"></span> Med</div></td>
+    <td class="notes-cell">Additional competing cases per Active Case Sheet. Need to confirm competing firm identity and filing dates.</td>
+  </tr>
+
+  <tr data-phase="Monitoring" data-first="TBD" data-firm="unknown">
+    <td><div class="case-name">Hamcor / Dublin Toyota (Touch)</div><div class="case-num">Hamcor Inc. dba Dublin Toyota</div></td>
+    <td><div class="case-name">Fritzlan v. 6450 Motor, LLC</div><div class="case-num">Case number TBD &bull; Venue TBD</div></td>
+    <td><div class="case-name">Firm TBD</div><div class="case-num">Attorney TBD</div></td>
+    <td><span class="b b-class">Class</span></td>
+    <td><span class="b b-simul">TBD</span></td>
+    <td><span class="b b-monitor">Monitoring</span></td>
+    <td><div class="impact impact-low"><span class="impact-dot"></span> Low</div></td>
+    <td class="notes-cell">Related case listed in Active Case Sheet. Need to confirm if direct competitor or related-party action.</td>
+  </tr>
+
+  <tr data-phase="Monitoring" data-first="Other" data-firm="Koul">
+    <td><div class="case-name">Truitt Oilfield (Carias-Paredes)</div><div class="case-num">Truitt Oilfield Maintenance Corp.</div></td>
+    <td><div class="case-name">Chatterjee v. Truitt Oilfield</div><div class="case-num">25CV135016 &bull; Alameda County</div><div class="case-num">Filed: 8/1/2025 &bull; FAC 10/14 (added PAGA)</div></td>
+    <td><div class="case-name">Koul Law</div><div class="case-num">Attorney TBD</div></td>
+    <td><span class="b b-both">Class + PAGA</span></td>
+    <td><span class="b b-other">Other First</span></td>
+    <td><span class="b b-monitor">Monitoring</span></td>
+    <td><div class="impact impact-med"><span class="impact-dot"></span> Med</div></td>
+    <td class="notes-cell">BSL topfiled Koul Law. FAC added PAGA claims 10/14. Koul also on Hope Program.</td>
+  </tr>
+
+  <tr data-phase="Monitoring" data-first="Other" data-firm="Lavi">
+    <td><div class="case-name">JVS SoCal (Mendez)</div><div class="case-num">JVS SoCal</div></td>
+    <td><div class="case-name">Lavi cases</div><div class="case-num">25STCV12079 &amp; 25STCV19040 &bull; LASC</div></td>
+    <td><div class="case-name">Lavi &amp; Ebrahimian</div><div class="case-num">Attorney TBD</div></td>
+    <td><span class="b b-class">Class</span></td>
+    <td><span class="b b-other">Other First</span></td>
+    <td><span class="b b-monitor">Monitoring</span></td>
+    <td><div class="impact impact-med"><span class="impact-dot"></span> Med</div></td>
+    <td class="notes-cell">BSL topfiled Lavi on this one. Third Lavi overlap on RQ caseload.</td>
+  </tr>
+
+  <tr data-phase="Monitoring" data-first="TBD" data-firm="Koul">
+    <td><div class="case-name">Hope Program (Brown)</div><div class="case-num">Hope Program</div></td>
+    <td><div class="case-name">Competing case TBD</div><div class="case-num">Details TBD</div></td>
+    <td><div class="case-name">Koul Law</div><div class="case-num">Attorney TBD</div></td>
+    <td><span class="b b-class">Class</span></td>
+    <td><span class="b b-simul">TBD</span></td>
+    <td><span class="b b-monitor">Monitoring</span></td>
+    <td><div class="impact impact-low"><span class="impact-dot"></span> Low</div></td>
+    <td class="notes-cell">Topfile reference in Phase1 Audit. Need to confirm details. Koul also on Truitt Oilfield.</td>
+  </tr>
+
+  <tr data-phase="Monitoring" data-first="TBD" data-firm="Sentinel">
+    <td><div class="case-name">Vagaro</div><div class="case-num">Vagaro, Inc.</div></td>
+    <td><div class="case-name">Sentinel case v. Vagaro</div><div class="case-num">BDC Topfile Sheet reference</div><div class="case-num">Sentinel filed 4/30/2025 &bull; BSL filed 8/28-29/2025</div></td>
+    <td><div class="case-name">Sentinel Firm</div><div class="case-num">Attorney TBD</div></td>
+    <td><span class="b b-class">Class</span></td>
+    <td><span class="b b-other">Other First</span></td>
+    <td><span class="b b-monitor">Monitoring</span></td>
+    <td><div class="impact impact-med"><span class="impact-dot"></span> Med</div></td>
+    <td class="notes-cell">Sentinel filed 4/30/25, BSL filed 8/28-29/25. Sentinel also on Keenan Farms. Per BDC Topfile sheet.</td>
+  </tr>
+
+</tbody>
+</table>
+</div>
+
+<!-- ──── TAB: RESOLVED ──── -->
+<div class="tab-panel" id="panel-resolved">
+<table>
+<thead><tr>
+  <th>BSL Case</th>
+  <th>Competing Case</th>
+  <th>Competing Firm</th>
+  <th>Type</th>
+  <th>Resolution</th>
+  <th>Notes</th>
+</tr></thead>
+<tbody>
+  <tr>
+    <td><div class="case-name">Southwest College (Bowers)</div><div class="case-num">Southwest College of Medical-Dental Asst.</div></td>
+    <td><div class="case-name">D. Law case</div><div class="case-num">24STCV33616 &bull; LASC</div><div class="case-num">D. Law filed class 12/19/2024</div></td>
+    <td><div class="case-name">D. Law</div></td>
+    <td><span class="b b-class">Class</span></td>
+    <td><span class="b b-jpa">15% JPA</span></td>
+    <td class="notes-cell">JG negotiated 15% JPA with D. Law. Resolved &mdash; may graduate to JPA Tracker.</td>
+  </tr>
+  <tr>
+    <td><div class="case-name">Lefiell Mfg (Redd)</div><div class="case-num">Lefiell Manufacturing Company</div></td>
+    <td><div class="case-name">Bokhour case</div><div class="case-num">25STCV04710 &bull; LASC</div><div class="case-num">Bokhour filed class Feb 2025</div></td>
+    <td><div class="case-name">Bokhour Law Group</div></td>
+    <td><span class="b b-class">Class</span></td>
+    <td><span class="b b-jpa">~50/50 JPA?</span></td>
+    <td class="notes-cell">BSL topfiled Bokhour. Mehrdad thinks they agreed to 50/50 &mdash; needs confirmation of signed JPA.</td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+</div><!-- /content -->
+
+<!-- ════ FOOTER ════ -->
+<div class="footer">
+  Blackstone Law, APC &mdash; Competing Cases Tracker &mdash; Auto-synced from Dinger Alerts, Topfile Sheet &amp; Active Case Sheet &mdash; Last updated April 13, 2026
+</div>
+
+<script>
+/* ══ Tabs ══ */
+document.querySelectorAll('.tab').forEach(function(t){
+  t.addEventListener('click',function(){
+    document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active');});
+    document.querySelectorAll('.tab-panel').forEach(function(x){x.classList.remove('active');});
+    t.classList.add('active');
+    document.getElementById('panel-'+t.dataset.tab).classList.add('active');
+  });
+});
+
+/* ══ Sort ══ */
+function sortT(th,col){
+  var table=th.closest('table'), tbody=table.querySelector('tbody');
+  var rows=Array.from(tbody.querySelectorAll('tr'));
+  var asc=!th.classList.contains('sorted')||th.dataset.dir==='desc';
+  table.querySelectorAll('th').forEach(function(h){h.classList.remove('sorted');h.dataset.dir='';});
+  th.classList.add('sorted'); th.dataset.dir=asc?'asc':'desc';
+  th.querySelector('.sa').textContent=asc?'\u25B2':'\u25BC';
+  rows.sort(function(a,b){
+    var at=(a.children[col]||{}).textContent||'', bt=(b.children[col]||{}).textContent||'';
+    return asc?at.localeCompare(bt):bt.localeCompare(at);
+  });
+  rows.forEach(function(r){tbody.appendChild(r);});
+}
+
+/* ══ Filters ══ */
+var fPhase=document.getElementById('fPhase');
+var fFirst=document.getElementById('fFirst');
+var fSearch=document.getElementById('fSearch');
+
+function applyFilters(){
+  var phase=fPhase.value, first=fFirst.value, q=fSearch.value.toLowerCase();
+  var rows=document.querySelectorAll('#activeBody tr');
+  var vis=0;
+  rows.forEach(function(r){
+    var show=true;
+    if(phase && r.dataset.phase!==phase) show=false;
+    if(first){
+      if(first==='BSL' && r.dataset.first!=='BSL') show=false;
+      if(first==='Other' && r.dataset.first!=='Other') show=false;
+      if(first==='TBD' && r.dataset.first!=='TBD') show=false;
+    }
+    if(q && r.textContent.toLowerCase().indexOf(q)===-1) show=false;
+    r.style.display=show?'':'none';
+    if(show) vis++;
+  });
+  document.getElementById('cnt-active').textContent=vis;
+}
+fPhase.addEventListener('change',applyFilters);
+fFirst.addEventListener('change',applyFilters);
+fSearch.addEventListener('input',applyFilters);
+
+/* ══ Firm Filter (from intelligence panel) ══ */
+var activeFirm='';
+function filterByFirm(firm){
+  var cards=document.querySelectorAll('.firm-card');
+  if(activeFirm===firm){
+    activeFirm='';
+    fSearch.value='';
+    cards.forEach(function(c){c.classList.remove('active');});
+  } else {
+    activeFirm=firm;
+    fSearch.value=firm;
+    cards.forEach(function(c){
+      c.classList.toggle('active',c.textContent.indexOf(firm)!==-1);
+    });
+    // Switch to active tab
+    document.querySelectorAll('.tab')[0].click();
+  }
+  applyFilters();
+}
+
+</script>
+</body>
+</html>

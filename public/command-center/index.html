@@ -384,8 +384,11 @@ function normalizeCase(c){
   nc.case_type = c.case_type||c.sum_case_type||'';
   // Cross-dashboard enrichment
   nc._motion = matchLookup(MOTION_LOOKUP, nc.defendant);
+  if(nc._motion && !nc._motion.motion) nc._motion = null;
   nc._mediation = matchLookup(MEDIATION_LOOKUP, nc.defendant);
+  if(nc._mediation && !nc._mediation.phase && !nc._mediation.med_date) nc._mediation = null;
   nc._cmc = matchLookup(CMC_LOOKUP, nc.defendant);
+  if(nc._cmc && !nc._cmc.filing_deadline && !nc._cmc.hearing_type) nc._cmc = null;
   // Phase 2 — matter/filing model
   nc.matter_id = c.matter_id||null;
   nc.filing_type = c.filing_type||null;

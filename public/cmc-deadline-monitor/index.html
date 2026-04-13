@@ -121,7 +121,39 @@ table.sortable-table th.sort-desc::after{content:'↓';opacity:1;color:var(--acc
 .mc-home .mc-arrow{color:#4a5a78;transition:all .2s;font-size:.9rem}
 .mc-home:hover .mc-arrow{color:#4f8fff;transform:translateX(-3px)}
 
-</style></head>
+</style>
+<script>
+/* === Case Folder Links (SharePoint/OneDrive) === */
+const SP_BASE = "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases";
+const SP_ROUTES = {
+  'root': '',
+  'discovery-class': '/Discovery/Class/Written%20Discovery',
+  'discovery-paga': '/Discovery/PAGA/Written%20Discovery',
+  'productions-class': '/Discovery/Class/Document%20Productions',
+  'productions-paga': '/Discovery/PAGA/Document%20Productions',
+  'pleadings': '/Pleadings%2C%20Motions%20and%20Court%20Filings',
+  'correspondence': '/Correspondence',
+  'settlement': '/Settlement%20%26%20Mediation',
+  'evidence': '/Evidence',
+  'research': '/Research%2C%20Memos%20%26%20Notes',
+};
+function buildCaseLink(defendantName, routingKey) {
+  if (!defendantName) return '#';
+  routingKey = routingKey || 'root';
+  var clean = defendantName.replace(/\s*\(.*?\)\s*$/,'').trim();
+  var slug = encodeURIComponent(clean);
+  return SP_BASE + '/' + slug + (SP_ROUTES[routingKey] || '');
+}
+function folderIcon(defendantName, routingKey, title) {
+  var url = buildCaseLink(defendantName, routingKey);
+  title = title || 'Open case folder';
+  return '<a href="'+url+'" target="_blank" rel="noopener" title="'+title+'" '
+    + 'style="margin-left:6px;text-decoration:none;opacity:.55;font-size:.8em;" '
+    + 'onclick="event.stopPropagation()">&#128193;</a>';
+}
+</script>
+
+</head>
 <body>
 <a href="/" class="mc-home" title="Back to Mission Control"><span class="mc-arrow">&#8592;</span><span class="mc-icon">&#128640;</span><span class="mc-label">Mission Control</span></a>
 <header>
@@ -674,4 +706,48 @@ document.getElementById('search').addEventListener('input', e => {
   });
 })();
 </script>
+
+<script>
+/* Auto-attach SharePoint folder icons to CMC case-name elements */
+document.addEventListener('DOMContentLoaded', function() {
+  var els = document.querySelectorAll('.hcard-case');
+  els.forEach(function(el) {
+    // Extract case name text only — exclude contingent-tag spans and emoji suffixes
+    var raw = '';
+    el.childNodes.forEach(function(n) {
+      if (n.nodeType === 3) raw += n.textContent;
+      else if (n.nodeType === 1 && !n.classList.contains('contingent-tag') && n.tagName !== 'A') raw += n.textContent;
+    });
+    raw = raw.replace(/[\u2300-\u27BF\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}].*/su, '').trim();
+    if (!raw) return;
+    var clean = raw
+      .replace(/\s*\(Class[^)]*\)/gi, '')
+      .replace(/\s*\(PAGA[^)]*\)/gi, '')
+      .replace(/\s*\(Federal[^)]*\)/gi, '')
+      .replace(/\s*\(Both[^)]*\)/gi, '')
+      .replace(/\s*\(Spanish\)/gi, '')
+      .replace(/\s*\(KG PARTNERING\)/gi, '')
+      .replace(/\s*\(BDC PARTNERING\)/gi, '')
+      .trim();
+    var vMatch = clean.match(/v\.\s+(.+)/);
+    if (vMatch) clean = vMatch[1].trim();
+    clean = clean.replace(/\s*\([^)]*\)\s*$/, '').trim();
+    var slashMatch = clean.match(/^([^/]+)\//);
+    if (slashMatch) clean = slashMatch[1].trim();
+    if (!clean) return;
+    // CMC statements → pleadings folder
+    var link = buildCaseLink(clean, 'pleadings');
+    var a = document.createElement('a');
+    a.href = link;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.title = 'Open case folder: ' + clean;
+    a.style.cssText = 'margin-left:5px;text-decoration:none;opacity:.45;font-size:.75em;';
+    a.textContent = '\uD83D\uDCC1';
+    a.addEventListener('click', function(e) { e.stopPropagation(); });
+    el.appendChild(a);
+  });
+});
+</script>
+
 </body></html>

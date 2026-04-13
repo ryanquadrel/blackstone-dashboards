@@ -161,7 +161,42 @@ tbody tr:last-child td{border-bottom:none;}
 .mc-home .mc-arrow{color:#4a5a78;transition:all .2s;font-size:.9rem}
 .mc-home:hover .mc-arrow{color:#4f8fff;transform:translateX(-3px)}
 
+
 </style>
+<script>
+
+/* === Case Folder Links (SharePoint/OneDrive) === */
+const SP_BASE = "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases";
+const SP_ROUTES = {
+  'root': '',
+  'discovery-class': '/Discovery/Class/Written%20Discovery',
+  'discovery-paga': '/Discovery/PAGA/Written%20Discovery',
+  'productions-class': '/Discovery/Class/Document%20Productions',
+  'productions-paga': '/Discovery/PAGA/Document%20Productions',
+  'pleadings': '/Pleadings%2C%20Motions%20and%20Court%20Filings',
+  'correspondence': '/Correspondence',
+  'settlement': '/Settlement%20%26%20Mediation',
+  'evidence': '/Evidence',
+  'research': '/Research%2C%20Memos%20%26%20Notes',
+};
+function buildCaseLink(defendantName, routingKey) {
+  if (!defendantName) return '#';
+  routingKey = routingKey || 'root';
+  // Clean defendant name to match folder name (strip parenthetical plaintiff refs)
+  var clean = defendantName.replace(/\s*\(.*?\)\s*$/,'').trim();
+  var slug = encodeURIComponent(clean);
+  return SP_BASE + '/' + slug + (SP_ROUTES[routingKey] || '');
+}
+function folderIcon(defendantName, routingKey, title) {
+  var url = buildCaseLink(defendantName, routingKey);
+  title = title || 'Open case folder';
+  return '<a href="'+url+'" target="_blank" rel="noopener" title="'+title+'" '
+    + 'style="margin-left:6px;text-decoration:none;opacity:.55;font-size:.8em;" '
+    + 'onclick="event.stopPropagation()">&#128193;</a>';
+}
+
+</script>
+
 </head>
 <body>
 <a href="/" class="mc-home" title="Back to Mission Control"><span class="mc-arrow">&#8592;</span><span class="mc-icon">&#128640;</span><span class="mc-label">Mission Control</span></a>

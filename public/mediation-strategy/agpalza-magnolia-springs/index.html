@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="case-slug" content="agpalza-magnolia-springs">
+<meta name="case-name" content="Agpalza v. Magnolia Springs, Inc. and Mission Wells, Inc.">
+<meta name="mediation-date" content="2026-04-13">
+<meta name="mediator" content="Carl J. West (Ret.) (JAMS)">
+<meta name="generated" content="2026-04-13">
+<meta name="status" content="Upcoming">
+<title>Agpalza v. Magnolia Springs, Inc. and Mission Wells, Inc. — Mediation Strategy</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --card-alt: #21242f;
+    --border: #2a2d3a;
+    --text: #e4e4e7;
+    --text-dim: #9ca3af;
+    --accent: #6366f1;
+    --accent-light: #818cf8;
+    --green: #22c55e;
+    --red: #ef4444;
+    --yellow: #eab308;
+    --orange: #f97316;
+    --blue: #3b82f6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+  .header h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+  .header-meta { text-align: right; font-size: 13px; color: var(--text-dim); line-height: 1.7; }
+  .header-meta strong { color: var(--text); }
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .badge-settle { background: rgba(34,197,94,0.15); color: var(--green); }
+  .badge-conf { background: rgba(99,102,241,0.15); color: var(--accent-light); }
+  .badge-warn { background: rgba(239,68,68,0.15); color: var(--red); }
+  .grid { display: grid; gap: 16px; }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .grid-top { grid-template-columns: 300px 1fr 1fr; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+  .card h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  .card.full-width { grid-column: 1 / -1; }
+  .kv-row { display: flex; justify-content: space-between; padding: 5px 0; font-size: 13px; border-bottom: 1px solid rgba(42,45,58,0.5); }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-label { color: var(--text-dim); }
+  .kv-value { font-weight: 600; text-align: right; }
+  .kv-value.big { font-size: 15px; color: var(--accent-light); }
+  .sw-list { list-style: none; }
+  .sw-list li { font-size: 12.5px; padding: 6px 0; padding-left: 20px; position: relative; border-bottom: 1px solid rgba(42,45,58,0.3); }
+  .sw-list li:last-child { border-bottom: none; }
+  .sw-list li::before { position: absolute; left: 0; top: 6px; font-size: 12px; }
+  .sw-list.pro li::before { content: "▲"; color: var(--green); }
+  .sw-list.con li::before { content: "▼"; color: var(--red); }
+  .sw-list li strong { color: var(--text); }
+  .num-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .num-table th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-dim); padding: 6px 8px; border-bottom: 1px solid var(--border); }
+  .num-table td { padding: 7px 8px; border-bottom: 1px solid rgba(42,45,58,0.4); }
+  .num-table tr:last-child td { border-bottom: none; }
+  .num-table .label-cell { color: var(--text-dim); }
+  .num-table .money { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .num-table .highlight-row td { background: rgba(99,102,241,0.08); font-weight: 600; }
+  .num-table .target-row td { background: rgba(34,197,94,0.08); }
+  .num-table .floor-row td { background: rgba(239,68,68,0.08); }
+  .pipeline { display: flex; flex-direction: column; gap: 0; }
+  .pipeline-step { display: grid; grid-template-columns: 100px 120px 70px 1fr; align-items: center; gap: 12px; padding: 10px 12px; border-left: 3px solid var(--border); font-size: 13px; position: relative; }
+  .pipeline-step::before { content: ""; position: absolute; left: -7px; top: 50%; transform: translateY(-50%); width: 11px; height: 11px; border-radius: 50%; background: var(--card); border: 2px solid var(--border); }
+  .pipeline-step .step-label { font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.3px; }
+  .pipeline-step .step-amount { font-weight: 700; font-variant-numeric: tabular-nums; }
+  .pipeline-step .step-ww { color: var(--text-dim); font-size: 12px; }
+  .pipeline-step .step-msg { color: var(--text-dim); font-size: 12px; font-style: italic; }
+  .pipeline-step.open { border-left-color: var(--accent); }
+  .pipeline-step.open::before { border-color: var(--accent); background: var(--accent); }
+  .pipeline-step.move { border-left-color: var(--blue); }
+  .pipeline-step.move::before { border-color: var(--blue); }
+  .pipeline-step.signal { border-left-color: var(--yellow); }
+  .pipeline-step.signal::before { border-color: var(--yellow); background: var(--yellow); }
+  .pipeline-step.bracket { border-left-color: var(--orange); }
+  .pipeline-step.bracket::before { border-color: var(--orange); }
+  .pipeline-step.target { border-left-color: var(--green); }
+  .pipeline-step.target::before { border-color: var(--green); background: var(--green); }
+  .pipeline-step.floor { border-left-color: var(--red); }
+  .pipeline-step.floor::before { border-color: var(--red); background: var(--red); }
+  .msg-card { padding: 10px 12px; background: var(--card-alt); border-radius: 8px; margin-bottom: 8px; font-size: 12.5px; }
+  .msg-card:last-child { margin-bottom: 0; }
+  .msg-card .msg-num { display: inline-block; width: 20px; height: 20px; background: var(--accent); color: white; font-size: 11px; font-weight: 700; text-align: center; line-height: 20px; border-radius: 4px; margin-right: 8px; }
+  .msg-card .msg-title { font-weight: 700; margin-bottom: 4px; }
+  .msg-card .msg-body { color: var(--text-dim); }
+  .bracket-opt { background: var(--card-alt); border-radius: 8px; padding: 12px; text-align: center; border: 1px solid var(--border); margin-bottom: 8px; }
+  .bracket-opt:last-child { margin-bottom: 0; }
+  .bracket-opt .bracket-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-dim); margin-bottom: 6px; }
+  .bracket-opt .bracket-range { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .bracket-opt .bracket-mid { font-size: 12px; color: var(--text-dim); }
+  .bracket-opt.agg { border-color: var(--orange); }
+  .bracket-opt.mod { border-color: var(--yellow); }
+  .bracket-opt.con { border-color: var(--green); }
+  .bracket-opt.agg .bracket-range { color: var(--orange); }
+  .bracket-opt.mod .bracket-range { color: var(--yellow); }
+  .bracket-opt.con .bracket-range { color: var(--green); }
+  .oc-read { font-size: 13px; color: var(--text-dim); line-height: 1.7; }
+  .oc-read strong { color: var(--text); }
+  .dmg-bar { display: flex; height: 24px; border-radius: 6px; overflow: hidden; font-size: 11px; font-weight: 600; margin-bottom: 16px; }
+  .dmg-bar div { display: flex; align-items: center; justify-content: center; color: #fff; white-space: nowrap; padding: 0 6px; }
+  .dmg-bar-label { font-size: 11px; color: var(--text-dim); margin-top: 4px; }
+  .footer { text-align: center; margin-top: 20px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-dim); font-style: italic; }
+  @media (max-width: 900px) {
+    .grid-2, .grid-3, .grid-top { grid-template-columns: 1fr; }
+    .pipeline-step { grid-template-columns: 80px 100px 60px 1fr; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>Agpalza v. Magnolia Springs, Inc. and Mission Wells, Inc.</h1>
+    <div style="margin-top: 8px;">
+      <span class="badge badge-settle">Upcoming Mediation</span>
+    </div>
+  </div>
+  <div class="header-meta">
+    <strong>Mediator:</strong> Carl J. West (Ret.) (JAMS)<br>
+    <strong>Date:</strong> April 13, 2026, 9:00 AM PT<br>
+    <strong>Format:</strong> Zoom (JAMS Virtual ADR)<br>
+    <strong>Team:</strong> JM/RQ
+  </div>
+</div>
+
+<div class="grid grid-top">
+  <!-- CASE OVERVIEW -->
+  <div class="card">
+    <h2>Case Overview</h2>
+    <div class="kv-row">
+      <span class="kv-label">Class Period</span>
+      <span class="kv-value">4/9/21 – Present</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-label">PAGA Period</span>
+      <span class="kv-value">4/9/24 – Present</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-label">Court</span>
+      <span class="kv-value">Kern County SC</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-label">Class Case No.</span>
+      <span class="kv-value">BCV-25-100925</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-label">PAGA Case No.</span>
+      <span class="kv-value">BCV-25-101296</span>
+    </div>
+  </div>
+
+  <!-- SCALE & EXPOSURE -->
+  <div class="card">
+    <h2>Scale & Exposure</h2>
+    <div class="kv-row">
+      <span class="kv-label">Workweeks</span>
+      <span class="kv-value big">18,000</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-label">Class Members</span>
+      <span class="kv-value">130</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-label">Aggrieved Employees</span>
+      <span class="kv-value">120</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-label">Pay Periods</span>
+      <span class="kv-value">5,000</span>
+    </div>
+  </div>
+
+  <!-- OC CONTACT -->
+  <div class="card">
+    <h2>Opposing Counsel</h2>
+    <div class="kv-row" style="border-bottom: none;">
+      <span class="kv-value" style="text-align: left; font-size: 12px; color: var(--text-dim);">
+        <strong style="color: var(--text);">BBR Law</strong><br>
+        Kaleb Estrada<br>
+        Danielle Medellin<br>
+        <br>
+        <span style="font-size: 11px;">5016 California Ave, Ste 300<br>
+        Bakersfield, CA</span>
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- STRENGTHS & WEAKNESSES -->
+<div class="grid grid-2">
+  <div class="card">
+    <h2>Strengths (Plaintiff)</h2>
+    <ul class="sw-list pro">
+      <li><strong>Synthetic records:</strong> 69% of shifts exactly 8 hours (handwritten/synthetic, not from digital system)</li>
+      <li><strong>No policies:</strong> Neither Magnolia Springs nor Mission Wells had written wage/hour policies</li>
+      <li><strong>RROP underpayments:</strong> Training stipends and bonuses not included in regular rate for OT and sick pay</li>
+      <li><strong>Suspicious rest breaks:</strong> 98.5% of rest breaks recorded exactly 10 minutes (suggests timing adjustment)</li>
+      <li><strong>Rounding underpayments:</strong> 2.4 min/shift underpaid due to rounding in 2024</li>
+      <li><strong>Multiple claim categories:</strong> Meal period violations, rest period violations, RROP underpayments, rounding, wage statements, PAGA penalties</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Weaknesses (Plaintiff)</h2>
+    <ul class="sw-list con">
+      <li><strong>Violation rates modest:</strong> Rest (11.8%) and meal (11.9%) violation rates are lower than many settlements</li>
+      <li><strong>Premiums were paid:</strong> Both meal and rest premiums were paid when violations occurred—reduces damages to differential</li>
+      <li><strong>Sampling-based analysis:</strong> BCG used 25% sampling extrapolated to full dataset</li>
+      <li><strong>Handwritten records:</strong> At scale (18,000 WW), harder to establish pattern from manual logs vs. digital system</li>
+      <li><strong>No digital evidence:</strong> All time records handwritten/synthetic; no timestamp logs to show pattern of violations</li>
+    </ul>
+  </div>
+</div>
+
+<!-- BCG DATA SUMMARY -->
+<div class="card full-width">
+  <h2>Expert Analysis (Claire Li, Berger Consulting Group, 4/3/26)</h2>
+  <table class="num-table">
+    <thead>
+      <tr>
+        <th>Finding</th>
+        <th>Data Point</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="label-cell">Synthetic time records (2021–2023)</td>
+        <td>69% of shifts exactly 8 hours</td>
+      </tr>
+      <tr>
+        <td class="label-cell">Rest break recording precision</td>
+        <td>98.5% recorded exactly 10 minutes</td>
+      </tr>
+      <tr>
+        <td class="label-cell">Rounding underpayments (2024)</td>
+        <td>2.4 min/shift average</td>
+      </tr>
+      <tr>
+        <td class="label-cell">Rest period violation rate</td>
+        <td>11.8%</td>
+      </tr>
+      <tr>
+        <td class="label-cell">Meal period violation rate</td>
+        <td>11.9%</td>
+      </tr>
+      <tr>
+        <td class="label-cell">Meal/rest premiums paid</td>
+        <td>YES (both)</td>
+      </tr>
+      <tr class="highlight-row">
+        <td class="label-cell"><strong>RROP issue:</strong> Training stipend & bonus not in regular rate</td>
+        <td><strong>OT/sick pay underpayments via 1.5x method</strong></td>
+      </tr>
+      <tr>
+        <td class="label-cell">Analysis methodology</td>
+        <td>25% sampling (extrapolated)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- VALUATION FRAMEWORK -->
+<div class="grid grid-2">
+  <div class="card">
+    <h2>Valuation Pipeline</h2>
+    <div class="pipeline">
+      <div class="pipeline-step open">
+        <div class="step-label">Opening</div>
+        <div class="step-amount">$200/ww</div>
+        <div class="step-ww">$3,600,000</div>
+        <div class="step-msg">4x signal, firm high-end</div>
+      </div>
+      <div class="pipeline-step signal">
+        <div class="step-label">Signal</div>
+        <div class="step-amount">$48/ww</div>
+        <div class="step-ww">$864,000</div>
+        <div class="step-msg">BCS + 20%</div>
+      </div>
+      <div class="pipeline-step bracket">
+        <div class="step-label">Target Zone</div>
+        <div class="step-amount">$55–$70/ww</div>
+        <div class="step-ww">$990,000–$1,260,000</div>
+        <div class="step-msg">20–35% of opening</div>
+      </div>
+      <div class="pipeline-step floor">
+        <div class="step-label">Walk-Away</div>
+        <div class="step-amount">$30/ww</div>
+        <div class="step-ww">$540,000</div>
+        <div class="step-msg">Minimum JG floor</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Bracket Options</h2>
+    <div class="bracket-opt agg">
+      <div class="bracket-label">Aggressive</div>
+      <div class="bracket-range">$200/ww</div>
+      <div class="bracket-mid">$3,600,000 total</div>
+    </div>
+    <div class="bracket-opt mod">
+      <div class="bracket-label">Moderate (Signal)</div>
+      <div class="bracket-range">$48/ww</div>
+      <div class="bracket-mid">$864,000 total</div>
+    </div>
+    <div class="bracket-opt con">
+      <div class="bracket-label">Conservative (Target)</div>
+      <div class="bracket-range">$55–$70/ww</div>
+      <div class="bracket-mid">$990,000–$1,260,000</div>
+    </div>
+  </div>
+</div>
+
+<!-- ESTIMATED DAMAGES BREAKDOWN -->
+<div class="card full-width">
+  <h2>Estimated Damages by Category (without full expert report)</h2>
+  <div class="dmg-bar">
+    <div style="flex: 2; background: #3b82f6;">Rest Premiums</div>
+    <div style="flex: 2; background: #8b5cf6;">Meal Premiums</div>
+    <div style="flex: 3; background: #ec4899;">RROP/OT Underpayments</div>
+    <div style="flex: 1; background: #f59e0b;">Rounding</div>
+    <div style="flex: 1; background: #14b8a6;">Wage Statements</div>
+  </div>
+  <div class="dmg-bar-label">Proportional representation (estimated): Rest ~20% · Meal ~20% · RROP/OT ~30% · Rounding ~15% · Wage Statements ~10% · PAGA Penalties ~5%</div>
+</div>
+
+<!-- MEDIATION NOTES -->
+<div class="grid grid-2">
+  <div class="card">
+    <h2>Key Facts for Mediation</h2>
+    <p class="oc-read" style="margin-bottom: 12px;">
+      <strong>OC position (confirmed):</strong> Magnolia Springs and Mission Wells assert time records are 99% handwritten. Joe disputes this—has not seen any digital records. All available records appear synthetic/handwritten.
+    </p>
+    <p class="oc-read">
+      <strong>No written policies.</strong> Critical vulnerability for defense. No documentation of meal/rest break procedures, no wage/hour handbook, no time-off policies. Makes it harder for defense to argue compliance systems.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Strategic Considerations</h2>
+    <p class="oc-read" style="margin-bottom: 12px;">
+      <strong>RROP claim is new leverage.</strong> If defense hasn't fully modeled OT underpayments from DSPTrainingStipend and Bonus exclusions, this could shift settlement math materially upward as they run numbers during mediation.
+    </p>
+    <p class="oc-read">
+      <strong>Violation rates are modest but multiple.</strong> Individual rates (11.8%, 11.9%) are defensible, but clustering across meal, rest, and rounding—combined with no policies—makes aggregate exposure harder to dismiss. Premium-paid defense (meals and rest) limits damages but doesn't eliminate them.
+    </p>
+  </div>
+</div>
+
+<div class="footer">
+Generated 2026-04-13 | Strategy dashboard v1.0 | JM/RQ mediation prep
+</div>
+
+</body>
+</html>

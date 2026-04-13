@@ -3,174 +3,284 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mediation Strategy Archive — Blackstone Law</title>
+<title>Mediation Strategy Archive</title>
 <style>
   :root {
     --bg: #0a0e1a;
     --surface: #131a2e;
     --text: #e8ecf4;
-    --text-dim: #8892a8;
-    --accent: #6366f1;
-    --green: #22c55e;
-    --border: #1e2740;
+    --text-dim: #a8b2c1;
+    --border: #1f2b3d;
+    --accent: #5b9ff7;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
     background: var(--bg);
     color: var(--text);
-    line-height: 1.5;
-    padding: 24px;
-    max-width: 1000px;
+    padding: 20px;
+    max-width: 1200px;
     margin: 0 auto;
   }
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 24px;
-    padding-bottom: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 20px;
     border-bottom: 1px solid var(--border);
   }
-  .header h1 { font-size: 22px; font-weight: 700; }
-  .header a { color: var(--accent); text-decoration: none; font-size: 13px; }
-  .header a:hover { text-decoration: underline; }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  .header-nav {
+    font-size: 13px;
+  }
+  .header-nav a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .header-nav a:hover {
+    text-decoration: underline;
+  }
   .controls {
     display: flex;
     gap: 12px;
-    align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     flex-wrap: wrap;
   }
   .search-box {
     flex: 1;
     min-width: 200px;
-    padding: 8px 14px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
+    padding: 10px 14px;
     background: var(--surface);
-    color: var(--text);
-    font-size: 14px;
-    outline: none;
-  }
-  .search-box:focus { border-color: var(--accent); }
-  .sort-btn {
-    padding: 6px 14px;
+    border: 1px solid var(--border);
     border-radius: 6px;
-    border: 1px solid var(--border);
-    background: var(--surface);
+    color: var(--text);
+    font-size: 13px;
+  }
+  .search-box::placeholder {
     color: var(--text-dim);
+  }
+  .sort-group {
+    display: flex;
+    gap: 8px;
+  }
+  .sort-btn {
+    padding: 8px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 6px;
     font-size: 12px;
     cursor: pointer;
-    font-weight: 600;
+    transition: all 0.2s;
   }
-  .sort-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .sort-btn:hover {
+    background: var(--border);
+  }
+  .sort-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
   .count-label {
     font-size: 12px;
     color: var(--text-dim);
-    margin-bottom: 16px;
+    align-self: center;
+  }
+  .cases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
   }
   .case-card {
-    display: block;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px 20px;
-    margin-bottom: 10px;
-    text-decoration: none;
-    color: var(--text);
-    transition: border-color 0.2s;
+    border-radius: 8px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
   }
-  .case-card:hover { border-color: var(--accent); }
-  .card-status { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
-  .card-name { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
-  .card-meta { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-dim); }
-  .card-meta strong { color: var(--text); }
+  .case-card:hover {
+    border-color: var(--accent);
+    background: rgba(91, 159, 247, 0.05);
+  }
+  .case-card.hidden {
+    display: none;
+  }
+  .case-header {
+    margin-bottom: 12px;
+  }
+  .case-name {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+  .case-date {
+    font-size: 11px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .case-mediator {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .case-link a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .case-link a:hover {
+    text-decoration: underline;
+  }
+  .empty-state {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-dim);
+  }
+  .footer {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+  @media (max-width: 600px) {
+    .cases-grid {
+      grid-template-columns: 1fr;
+    }
+    .controls {
+      flex-direction: column;
+    }
+    .sort-group {
+      flex-wrap: wrap;
+    }
+  }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <div>
-    <h1>Mediation Strategy Archive</h1>
+  <h1>Mediation Strategy Archive</h1>
+  <div class="header-nav">
+    <a href="/">← Back to Mission Control</a>
   </div>
-  <a href="/">&larr; Back to Mission Control</a>
 </div>
 
 <div class="controls">
-  <input type="text" class="search-box" id="search" placeholder="Search by case name, mediator, or date...">
-  <button class="sort-btn active" id="sort-date" onclick="sortBy('date')">Newest First</button>
-  <button class="sort-btn" id="sort-alpha" onclick="sortBy('alpha')">A &rarr; Z</button>
+  <input type="text" class="search-box" id="searchBox" placeholder="Search by case name, mediator, or date...">
+  <div class="sort-group">
+    <button class="sort-btn active" data-sort="date-desc">Newest First</button>
+    <button class="sort-btn" data-sort="name-asc">A → Z</button>
+  </div>
+  <div class="count-label"><span id="caseCount">4</span> strategies</div>
 </div>
 
-<div class="count-label" id="count">4 archived strategies</div>
+<div class="cases-grid" id="casesGrid">
+    <div class="case-card" data-name="Agpalza v. Magnolia Springs, Inc. and Mission Wells, Inc." data-mediator="Carl J. West (Ret.) (JAMS)" data-date="2026-04-13">
+      <div class="case-header">
+        <div class="case-name">Agpalza v. Magnolia Springs, Inc. and Mission Wells, Inc.</div>
+        <div class="case-date">2026-04-13</div>
+      </div>
+      <div class="case-mediator">Mediator: Carl J. West (Ret.) (JAMS)</div>
+      <div class="case-link">
+        <a href="/mediation-strategy/agpalza-magnolia-springs/" target="_blank">View Strategy →</a>
+      </div>
+    </div>
+    <div class="case-card" data-name="Santamaria v. America Central Corporation, et al." data-mediator="Brandon McKelvey" data-date="2026-04-10">
+      <div class="case-header">
+        <div class="case-name">Santamaria v. America Central Corporation, et al.</div>
+        <div class="case-date">2026-04-10</div>
+      </div>
+      <div class="case-mediator">Mediator: Brandon McKelvey</div>
+      <div class="case-link">
+        <a href="/mediation-strategy/santamaria-america-central/" target="_blank">View Strategy →</a>
+      </div>
+    </div>
+    <div class="case-card" data-name="Soto v. Control Air Enterprises, LLC" data-mediator="Gig Kyriacou" data-date="2026-04-09">
+      <div class="case-header">
+        <div class="case-name">Soto v. Control Air Enterprises, LLC</div>
+        <div class="case-date">2026-04-09</div>
+      </div>
+      <div class="case-mediator">Mediator: Gig Kyriacou</div>
+      <div class="case-link">
+        <a href="/mediation-strategy/soto-control-air/" target="_blank">View Strategy →</a>
+      </div>
+    </div>
+    <div class="case-card" data-name="Bassell, Mayoka v. Golden Rain Foundation" data-mediator="TBD" data-date="2026-04-02">
+      <div class="case-header">
+        <div class="case-name">Bassell, Mayoka v. Golden Rain Foundation</div>
+        <div class="case-date">2026-04-02</div>
+      </div>
+      <div class="case-mediator">Mediator: TBD</div>
+      <div class="case-link">
+        <a href="/mediation-strategy/golden-rain/" target="_blank">View Strategy →</a>
+      </div>
+    </div>
 
-<div id="cards">
+</div>
 
-    <a href="vasquez-lulus/" class="case-card archived" data-case-slug="vasquez-lulus" data-name="vasquez v. lulu's — mediation strategy" data-mediator="unknown" data-date="Unknown">
-      <div class="card-status" style="color:#6366f1;">Archived</div>
-      <div class="card-name">Vasquez v. Lulu's — Mediation Strategy</div>
-      <div class="card-meta">
-        <span class="card-mediator">Mediator: <strong>Unknown</strong></span>
-        <span class="card-date">Unknown</span>
-      </div>
-    </a>
-    <a href="santamaria-america-central/" class="case-card upcoming" data-case-slug="santamaria-america-central" data-name="santamaria v. america central corporation, et al." data-mediator="brandon mckelvey" data-date="2026-04-10">
-      <div class="card-status" style="color:#22c55e;">Upcoming</div>
-      <div class="card-name">Santamaria v. America Central Corporation, et al.</div>
-      <div class="card-meta">
-        <span class="card-mediator">Mediator: <strong>Brandon McKelvey</strong></span>
-        <span class="card-date">2026-04-10</span>
-      </div>
-    </a>
-    <a href="soto-control-air/" class="case-card upcoming" data-case-slug="soto-control-air" data-name="soto v. control air enterprises, llc" data-mediator="gig kyriacou" data-date="2026-04-09">
-      <div class="card-status" style="color:#22c55e;">Upcoming</div>
-      <div class="card-name">Soto v. Control Air Enterprises, LLC</div>
-      <div class="card-meta">
-        <span class="card-mediator">Mediator: <strong>Gig Kyriacou</strong></span>
-        <span class="card-date">2026-04-09</span>
-      </div>
-    </a>
-    <a href="golden-rain/" class="case-card archived" data-case-slug="golden-rain" data-name="bassell, mayoka v. golden rain foundation" data-mediator="tbd" data-date="2026-04-02">
-      <div class="card-status" style="color:#6366f1;">Archived</div>
-      <div class="card-name">Bassell, Mayoka v. Golden Rain Foundation</div>
-      <div class="card-meta">
-        <span class="card-mediator">Mediator: <strong>TBD</strong></span>
-        <span class="card-date">2026-04-02</span>
-      </div>
-    </a>
+<div class="footer">
+Mediation strategy archive. Last updated: April 13, 2026.
 </div>
 
 <script>
-const cards = document.querySelectorAll('.case-card');
-const search = document.getElementById('search');
-const countEl = document.getElementById('count');
+const searchBox = document.getElementById('searchBox');
+const sortBtns = document.querySelectorAll('.sort-btn');
+const casesGrid = document.getElementById('casesGrid');
+const caseCards = document.querySelectorAll('.case-card');
+const caseCount = document.getElementById('caseCount');
 
-search.addEventListener('input', function() {
-  const q = this.value.toLowerCase();
-  let visible = 0;
-  cards.forEach(card => {
-    const match = card.dataset.name.includes(q) || card.dataset.mediator.includes(q) || card.dataset.date.includes(q);
-    card.style.display = match ? '' : 'none';
-    if (match) visible++;
+let currentSort = 'date-desc';
+
+function filterAndSort() {
+  const searchTerm = searchBox.value.toLowerCase();
+  const allCards = Array.from(caseCards);
+  
+  // Filter
+  const filtered = allCards.filter(card => {
+    const name = card.dataset.name.toLowerCase();
+    const mediator = card.dataset.mediator.toLowerCase();
+    const date = card.dataset.date.toLowerCase();
+    return name.includes(searchTerm) || mediator.includes(searchTerm) || date.includes(searchTerm);
   });
-  countEl.textContent = visible + ' of 4 strategies shown';
-});
-
-function sortBy(mode) {
-  const container = document.getElementById('cards');
-  const arr = Array.from(cards);
-  if (mode === 'date') {
-    arr.sort((a, b) => b.dataset.date.localeCompare(a.dataset.date));
-    document.getElementById('sort-date').classList.add('active');
-    document.getElementById('sort-alpha').classList.remove('active');
-  } else {
-    arr.sort((a, b) => a.dataset.name.localeCompare(b.dataset.name));
-    document.getElementById('sort-alpha').classList.add('active');
-    document.getElementById('sort-date').classList.remove('active');
-  }
-  arr.forEach(card => container.appendChild(card));
+  
+  // Sort
+  filtered.sort((a, b) => {
+    if (currentSort === 'date-desc') {
+      return new Date(b.dataset.date) - new Date(a.dataset.date);
+    } else if (currentSort === 'name-asc') {
+      return a.dataset.name.localeCompare(b.dataset.name);
+    }
+  });
+  
+  // Update display
+  allCards.forEach(card => card.classList.add('hidden'));
+  filtered.forEach(card => card.classList.remove('hidden'));
+  
+  caseCount.textContent = filtered.length;
 }
+
+searchBox.addEventListener('input', filterAndSort);
+
+sortBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    sortBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentSort = btn.dataset.sort;
+    filterAndSort();
+  });
+});
 </script>
 
 </body>

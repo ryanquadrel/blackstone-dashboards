@@ -229,6 +229,24 @@ function folderIcon(defendantName, routingKey, title) {
 
 </head>
 <body>
+<script>
+/* Watchdog — surfaces silent JS parse failures that would otherwise leave the dashboard stuck on "Loading cases…" forever.
+   Added 2026-04-13. If init() has not hidden the loading message within 8s, assume the inline script failed to parse or init threw before the catch could fire. */
+(function(){
+  setTimeout(function(){
+    var l = document.getElementById('loadingMsg');
+    if (!l) return;
+    if (l.style.display === 'none') return;
+    if (typeof init !== 'function') {
+      l.innerHTML = '<div style="color:#ef4444;font-weight:600;margin-bottom:8px">Dashboard failed to initialize</div>'
+        + '<div style="font-size:.85rem;color:#94a3b8;line-height:1.5">The inline script did not parse — usually a bad character in today\'s deploy.<br>'
+        + 'Open the browser console (F12) for the exact error, hard-refresh (Ctrl+Shift+R) to rule out cache, then ping Ryan.</div>';
+      l.style.color = 'inherit';
+    }
+  }, 8000);
+})();
+</script>
+
 <div class="container">
 <a href="/" class="mc-home" title="Back to Mission Control"><span class="mc-arrow">&#8592;</span><span class="mc-icon">&#128640;</span><span class="mc-label">Mission Control</span></a>
   <div class="header">

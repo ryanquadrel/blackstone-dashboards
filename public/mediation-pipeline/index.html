@@ -1265,7 +1265,14 @@ function folderIcon(defendantName, routingKey, title) {
 document.addEventListener('DOMContentLoaded', function() {
   var els = document.querySelectorAll('.case-name, .jpa-case-name');
   els.forEach(function(el) {
-    var raw = el.textContent.trim();
+    // Extract case name text only — exclude contingent-tag spans and emoji suffixes
+    var raw = '';
+    el.childNodes.forEach(function(n) {
+      if (n.nodeType === 3) raw += n.textContent;  // text nodes only
+      else if (n.nodeType === 1 && !n.classList.contains('contingent-tag') && n.tagName !== 'A') raw += n.textContent;
+    });
+    raw = raw.replace(/[\u2300-\u27BF\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}].*/su, '').trim();
+    if (!raw) return;
     if (!raw) return;
     // Extract defendant name: strip parenthetical suffixes like "(Class)", "(PAGA)", "(plaintiff)"
     // Keep the core defendant name for folder lookup

@@ -371,6 +371,23 @@ function folderIcon(defendantName, routingKey, title) {
     + 'style="margin-left:6px;text-decoration:none;opacity:.55;font-size:.8em;" '
     + 'onclick="event.stopPropagation()">&#128193;</a>';
 }
+function draftsChip(defendantName) {
+  if (!defendantName) return '';
+  var matterKey = defendantName.replace(/\s*\(.*?\)\s*$/,'').trim();
+  var entry = ARTIFACT_REGISTRY.mappings && ARTIFACT_REGISTRY.mappings[matterKey];
+  if (!entry || !entry.drafts || !entry.drafts.length) return '';
+  var pending = entry.drafts.filter(function(d){ return d.status === 'pending-review'; }).length;
+  var count = entry.drafts.length;
+  var tooltip = entry.drafts.map(function(d){
+    return '• ' + (d.type||'Draft') + (d.descriptor ? ': ' + d.descriptor : '') + (d.status ? ' [' + d.status + ']' : '');
+  }).join('\n').replace(/"/g,'&quot;');
+  var primary = entry.drafts[entry.drafts.length-1];
+  var badge = pending > 0 ? '<span style="background:#d97706;color:#fff;border-radius:8px;padding:0 5px;font-size:.7em;margin-left:2px;">'+pending+'</span>' : '';
+  return '<a href="'+primary.url+'" target="_blank" rel="noopener" title="'+tooltip+'" '
+    + 'style="margin-left:6px;text-decoration:none;opacity:.75;font-size:.8em;" '
+    + 'onclick="event.stopPropagation()">&#128221;'+badge+'</a>';
+}
+
 
 </script>
 

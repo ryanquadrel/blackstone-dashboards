@@ -463,13 +463,13 @@
   <!-- PHASE NAV -->
   <div class="phase-nav" id="phaseNav">
     <button class="phase-btn" data-phase="pipeline">
-      <span>1. Pipeline</span><span class="count" id="count-pipeline">46</span>
+      <span>1. Pipeline</span><span class="count" id="count-pipeline">45</span>
     </button>
     <button class="phase-btn active" data-phase="booked">
       <span>2. Booked &amp; Preparing</span><span class="count" id="count-booked">32</span>
     </button>
     <button class="phase-btn" data-phase="resolved">
-      <span>3. Post-Mediation</span><span class="count" id="count-resolved">12</span>
+      <span>3. Post-Mediation</span><span class="count" id="count-resolved">13</span>
     </button>
   </div>
 
@@ -518,7 +518,7 @@
 
     <!-- NEW ACTIVITY -->
     <div class="section" id="p-activity">
-      <div class="section-header"><h2>New Activity</h2><span class="badge badge-blue">33 cases</span></div>
+      <div class="section-header"><h2>New Activity</h2><span class="badge badge-blue">32 cases</span></div>
       <div class="case-grid" id="activity-grid">
         <div class="case-card needs-population" data-matter-id="goodwill-sf-bay">
           <div class="case-header">
@@ -534,7 +534,6 @@
           </div>
         </div>
 
-        <div data-matter-id="nova-measuring" class="case-card" data-attorney="sm" style="border-left:3px solid var(--orange);"><div class="cc-top"><span class="case-name">Nova Measuring Instruments (Nash)</span><span class="drafts-chip-mount" data-matter="Nova Measuring Instruments"></span><span class="attorney att-sm">SM</span><span class="badge badge-orange" style="margin-left:auto;font-size:.65rem;">RETURNED FROM MEDIATION</span></div><div class="cc-status">Mediation: <strong>2/4/26</strong> (McKelvey). Mediator's proposal $349K — <strong>expired</strong>. Not settled. Data issues flagged. Individual settlement obstacles. Court continued CMC; neither side contested tentative.</div><div class="cc-action"><strong>Next</strong> Evaluate re-mediation or litigation path. Consider discovery posture.</div></div>
         <div data-matter-id="behavior-treatment" class="case-card" data-attorney="sm"><div class="cc-top"><span class="case-name">Behavior Treatment &amp; Analysis (Ines)</span><span class="drafts-chip-mount" data-matter="Behavior Treatment &amp; Analysis"></span><span class="attorney att-sm">SM</span></div><div class="cc-status">RQ emailed OC (Sara) 3/30 circling back on reserving mediation date. OC wants to mediate. PAGA case filed (C26-00112).</div><div class="cc-action"><strong>Next</strong> Finalize mediator (Eve, Monique, or McKelvey) and lock date.</div></div>
         <div data-matter-id="caleres" class="case-card" data-attorney="sm"><div class="cc-top"><span class="case-name">Caleres (Ramirez)</span><span class="drafts-chip-mount" data-matter="Caleres"></span><span class="attorney att-sm">SM</span></div><div class="cc-status">Remand motion <strong>DENIED</strong> 3/19 (Judge Bernal). Remains in federal court (C.D. Cal. 5:26-cv-00054-JGB-SP). Ogletree Deakins OC (Chris Decker).</div><div class="cc-action"><strong>Next</strong> Raise mediation with Ogletree. Sage knows Chris Decker.</div></div>
         <div data-matter-id="cargomatic" class="case-card" data-attorney="jm"><div class="cc-top"><span class="case-name">Cargomatic (Duenas)</span><span class="drafts-chip-mount" data-matter="Cargomatic"></span><span class="attorney att-jm">JM</span></div><div class="cc-status">MTCA hearing 5/5. Negotiating continuance with Fisher Phillips.</div><div class="cc-action"><strong>Next</strong> Finalize stipulation. <span class="badge badge-red">MTCA BLOCKED</span></div></div>
@@ -927,7 +926,7 @@
 
     <!-- CONTINUING NEGOTIATION — mediation held, no settlement, active follow-up -->
     <div class="section active" id="r-continuing">
-      <div class="section-header"><h2>Continuing Negotiation — Mediation Held, No Settlement Yet</h2><span class="badge badge-orange">2 cases</span></div>
+      <div class="section-header"><h2>Continuing Negotiation — Mediation Held, No Settlement Yet</h2><span class="badge badge-orange">3 cases</span></div>
       <div style="font-size:.8rem;color:var(--text-muted);margin-bottom:10px;">Cases that sat for mediation but did not produce a settlement or mediator's proposal. Active follow-up sequence is running — mediator-brokered next steps, client authority conversations, pressure moves (M&amp;C letters, belated notice). Visibility here until the matter resolves (settlement, proposal, or return to litigation).</div>
       <div class="case-grid">
 
@@ -949,6 +948,16 @@
           <div class="cc-status" style="margin-top:6px;"><strong>Open items:</strong><br>&bull; M&amp;C letter sent 4/13 @ 11:09 PM (Karen for Joe &rarr; BBR firm) &#10003;<br>&bull; West to contact defense in ~1 week<br>&bull; RQ/JM check-in with West end of next week (~4/24)<br>&bull; Evaluate request for belated notice / renewed discovery<br>&bull; Client authority conversation &mdash; bottom number</div>
           <div class="cc-action"><strong>Next</strong> JM &mdash; check in with West <strong>Fri 4/24</strong>. Monitor BBR response to 4/13 M&amp;C letter. Client authority call.</div>
           <div class="countdown-action ca-orange"><span class="ca-icon">&#128222;</span><span class="ca-text">West shuttle in progress</span><span class="ca-deadline">~11d to check-in</span></div>
+        </div>
+
+        <!-- Nova Measuring Instruments — expired mediator's proposal, still negotiating -->
+        <div data-matter-id="nova-measuring" class="case-card" data-attorney="sm" data-meddate="2026-02-04" style="border-left:3px solid var(--orange);">
+          <div class="cc-top"><span class="case-name">Nash v. Nova Measuring Instruments</span><span class="drafts-chip-mount" data-matter="Nova Measuring Instruments"></span><span class="attorney att-sm">SM</span><span class="badge badge-orange" style="margin-left:auto;font-size:.65rem;">PROPOSAL EXPIRED — NEGOTIATING</span></div>
+          <div style="display:flex;gap:8px;margin-bottom:6px;flex-wrap:wrap;"><span class="badge badge-blue">Mediation 2/4/26</span><span class="badge badge-purple">Brandon McKelvey</span><span class="badge badge-yellow">MP $349K expired</span></div>
+          <div class="cc-status"><strong>Outcome:</strong> McKelvey issued mediator&rsquo;s proposal at <strong>$349,000</strong>. Proposal expired without formal acceptance/rejection. Parties are <strong>continuing negotiations post-expiration</strong>. Data issues flagged; individual settlement obstacles. Court continued CMC; neither side contested tentative.</div>
+          <div class="cc-status" style="margin-top:6px;"><strong>Open items:</strong><br>&bull; Evaluate path: re-mediation vs. litigation posture<br>&bull; Resolve data issues that surfaced at mediation<br>&bull; Individual settlement logistics<br>&bull; Monitor docket / CMC trajectory</div>
+          <div class="cc-action"><strong>Next</strong> SM &mdash; direct negotiation posture with OC. Decide re-mediation vs. discovery push.</div>
+          <div class="countdown-action ca-yellow"><span class="ca-icon">&#128260;</span><span class="ca-text">Post-MP negotiation</span><span class="ca-deadline">68d since expiration</span></div>
         </div>
 
       </div>

@@ -111,7 +111,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
 .tag-class{background:rgba(34,197,94,.15);color:var(--green)}
 .tag-paga{background:rgba(249,115,22,.15);color:var(--orange)}
 .tag-stayed{background:rgba(234,179,8,.15);color:var(--yellow)}
-.tag-arb{background:rgba(239,68,68,.15);color:var(--red)}
+.tag-arb{background:rgba(239,68,68,.15);color:var(--red)}.contact-chip{padding:2px 8px;border-radius:4px;font-size:.63rem;font-weight:700;white-space:nowrap;cursor:pointer;user-select:none;border:1px solid transparent;transition:filter .15s}.contact-chip:hover{filter:brightness(1.15)}.contact-chip.green{background:var(--green-bg);color:var(--green);border-color:rgba(34,197,94,.3)}.contact-chip.yellow{background:var(--yellow-bg);color:var(--yellow);border-color:rgba(234,179,8,.3)}.contact-chip.red{background:var(--red-bg);color:var(--red);border-color:rgba(239,68,68,.3)}
 .cross-badges{display:flex;gap:4px;flex-wrap:wrap;padding:4px 16px 0}
 .cross-badge{font-size:.65rem;padding:3px 8px;border-radius:6px;font-weight:600;display:inline-flex;align-items:center;gap:4px}
 .cross-badge.motion{background:var(--orange-bg);color:var(--orange)}
@@ -383,6 +383,7 @@ function truncate(s,n){if(!s)return'';s=String(s).replace(/\n/g,' ');return s.le
 function slugify(s){return(s||'').replace(/[^a-zA-Z0-9]/g,'_').slice(0,60);}
 function caseId(c){return slugify(c.case_name)+'_'+c._idx;}
 function daysBetween(a,b){return Math.floor((a-b)/86400000);}
+function contactChipHtml(c){var v=c.last_client_contact;var sl=caseId(c);if(!v)return'<span class="contact-chip red" onclick="logContact(\''+sl+'\',this,event)" title="No contact on file. Click to log.">\u260E No contact</span>';var dt=parseDate(v);if(!dt){var s=String(v);var disp=s.length>22?s.slice(0,22)+'\u2026':s;return'<span class="contact-chip red" onclick="logContact(\''+sl+'\',this,event)" title="'+esc(s)+' \u2014 click to log a new contact.">\u26A0 '+esc(disp)+'</span>';}var d=daysBetween(TODAY,dt);var cls=d<=60?'green':(d<=90?'yellow':'red');var label=d<=0?'Today':(d===1?'1d ago':d+'d ago');return'<span class="contact-chip '+cls+'" onclick="logContact(\''+sl+'\',this,event)" title="Last contact '+formatDate(v)+'. Click to log a new contact.">\u260E '+label+'</span>';}
 function parseDate(d){if(!d)return null;var s=String(d);if(/^\d{4}-\d{2}-\d{2}$/.test(s)){var p=s.split('-');return new Date(+p[0],+p[1]-1,+p[2]);}var dt=new Date(d);return isNaN(dt)?null:dt;}
 
 // Cross-dashboard matching: fuzzy match defendant name against lookup keys
@@ -494,13 +495,13 @@ function inferStage(c){
 function scoreCase(c){
   var score=0,reasons=[];
   if(isPostSettlementGated(c)) return {score:0,reasons:[]};
-  // 1. Client contact — only flag at 90+ (medium) and 120+ (critical)
+  // 1. Client contact — firm target 60-90d. >60 medium, >90 critical. Non-date = high.
   if(c.last_client_contact){
     var lcd=parseDate(c.last_client_contact);
     if(lcd){var d=daysBetween(TODAY,lcd);
-      if(d>120){score+=25;reasons.push({text:'No client contact '+d+'d',level:'critical'});}
-      else if(d>90){score+=12;reasons.push({text:'Client contact stale '+d+'d',level:'medium'});}
-    }
+      if(d>90){score+=25;reasons.push({text:'Client contact '+d+'d stale',level:'critical'});}
+      else if(d>60){score+=12;reasons.push({text:'Client contact '+d+'d (target 60d)',level:'medium'});}
+    } else {score+=15;reasons.push({text:'Client contact not dated',level:'high'});}
   } else {score+=15;reasons.push({text:'No client contact on file',level:'high'});}
 
   // 2. Hearing proximity — only 7d is critical, 14d is high
@@ -744,6 +745,7 @@ function renderDeepDive(){
       (c.arb==='Y/N'?'<span class="tag" style="background:var(--orange-bg);color:var(--orange)">Partial Arb</span>':'')+
       (c.arb==='?'?'<span class="tag" style="background:var(--yellow-bg);color:var(--yellow)">Arb?</span>':'')+
       (c._score>=25?'<span class="tag" style="background:var(--red-bg);color:var(--red)">\u26a1'+c._score+'</span>':'')+
+      contactChipHtml(c)+
       '</div></div>';
     // Cross-dashboard badges
     if(c._motion||c._mediation){
@@ -810,12 +812,19 @@ function saveContact(caseSlug,e){
   if(!dateVal){showToast('Pick a date',true);return;}
   var c=null;for(var i=0;i<allCases.length;i++){if(caseId(allCases[i])===caseSlug){c=allCases[i];break;}}
   if(!c)return;
+  if(!c.matter_id){showToast('No matter_id on case \u2014 cannot log',true);return;}
+  // Optimistic local update; trigger will also set last_client_contact server-side via client_contacts.
   c.last_client_contact=dateVal;
-  if(isLive&&c.id){
-    fetch(SUPABASE_URL+'/rest/v1/active_cases?id=eq.'+c.id,{
-      method:'PATCH',headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},
-      body:JSON.stringify({last_client_contact:dateVal})
-    }).then(function(){showToast('Client contact logged: '+dateVal);}).catch(function(){showToast('Saved locally (Supabase unavailable)',true);});
+  var row={matter_id:c.matter_id,contact_date:dateVal,channel:'call',direction:'outbound',
+    team_member:c.attorney||'Ryan Quadrel',client_name:null,source:'manual',
+    source_id:'manual-'+c.matter_id+'-'+dateVal+'-'+Date.now(),notes:''};
+  if(isLive){
+    fetch(SUPABASE_URL+'/rest/v1/client_contacts?on_conflict=source_id',{
+      method:'POST',
+      headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json','Prefer':'return=minimal,resolution=ignore-duplicates'},
+      body:JSON.stringify([row])
+    }).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);showToast('Client contact logged: '+dateVal);})
+      .catch(function(err){showToast('Save failed: '+err.message,true);});
   } else {showToast('Saved locally: '+dateVal);}
   applyFilters();
 }

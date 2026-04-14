@@ -68,10 +68,10 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 .ticker-item .src{color:var(--dim);font-size:.7rem;margin-left:8px}
 
 /* ═══ TOP METRICS (4 ring cards) ═══ */
-.rings{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
-@media(max-width:1100px){.rings{grid-template-columns:repeat(2,1fr)}}
+.rings{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:24px}
+@media(max-width:1400px){.rings{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:600px){.rings{grid-template-columns:1fr}}
-.ring-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;display:flex;align-items:center;gap:20px;cursor:pointer;transition:all .2s;text-decoration:none;color:inherit}
+.ring-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .2s;text-decoration:none;color:inherit;min-width:0}
 .ring-card:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.3)}
 .ring-svg{width:90px;height:90px;flex-shrink:0}
 .ring-bg{fill:none;stroke:var(--surface2);stroke-width:6}

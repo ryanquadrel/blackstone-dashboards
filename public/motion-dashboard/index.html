@@ -161,79 +161,7 @@ tbody tr:last-child td{border-bottom:none;}
 .mc-home .mc-arrow{color:#4a5a78;transition:all .2s;font-size:.9rem}
 .mc-home:hover .mc-arrow{color:#4f8fff;transform:translateX(-3px)}
 
-
 </style>
-<script>
-
-/* === Case Folder Links (SharePoint/OneDrive) === */
-const SP_BASE = "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases";
-const SP_ROUTES = {
-  'root': '',
-  'discovery-class': '/Discovery/Class/Written%20Discovery',
-  'discovery-paga': '/Discovery/PAGA/Written%20Discovery',
-  'productions-class': '/Discovery/Class/Document%20Productions',
-  'productions-paga': '/Discovery/PAGA/Document%20Productions',
-  'pleadings': '/Pleadings%2C%20Motions%20and%20Court%20Filings',
-  'correspondence': '/Correspondence',
-  'settlement': '/Settlement%20%26%20Mediation',
-  'evidence': '/Evidence',
-  'research': '/Research%2C%20Memos%20%26%20Notes',
-};
-var ARTIFACT_REGISTRY = { mappings: {} };
-(function loadRegistry(){
-  try {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/shared/artifact-registry.json', false); // sync load before render
-    xhr.send(null);
-    if (xhr.status === 200) { ARTIFACT_REGISTRY = JSON.parse(xhr.responseText); }
-  } catch(e) { /* registry optional */ }
-})();
-function getArtifact(matterKey, artifactType) {
-  if (!matterKey || !ARTIFACT_REGISTRY.mappings) return null;
-  var entry = ARTIFACT_REGISTRY.mappings[matterKey];
-  if (!entry) return null;
-  return entry[artifactType] || null;
-}
-
-function buildCaseLink(defendantName, routingKey) {
-  if (!defendantName) return '#';
-  routingKey = routingKey || 'root';
-  // Clean defendant name to match folder name (strip parenthetical plaintiff refs)
-  var clean = defendantName.replace(/\s*\(.*?\)\s*$/,'').trim();
-  var slug = encodeURIComponent(clean);
-  return SP_BASE + '/' + slug + (SP_ROUTES[routingKey] || '');
-}
-function folderIcon(defendantName, routingKey, title) {
-  if (!defendantName) return '';
-  var matterKey = defendantName.replace(/\s*\(.*?\)\s*$/,'').trim();
-  var artifactType = routingKey || 'folder';
-  var entry = getArtifact(matterKey, artifactType);
-  if (!entry || !entry.url) return ''; // render nothing when unmapped
-  var descriptor = entry.descriptor || title || 'Open case folder';
-  return '<a href="'+entry.url+'" target="_blank" rel="noopener" title="'+descriptor.replace(/"/g,'&quot;')+'" '
-    + 'style="margin-left:6px;text-decoration:none;opacity:.55;font-size:.8em;" '
-    + 'onclick="event.stopPropagation()">&#128193;</a>';
-}
-function draftsChip(defendantName) {
-  if (!defendantName) return '';
-  var matterKey = defendantName.replace(/\s*\(.*?\)\s*$/,'').trim();
-  var entry = ARTIFACT_REGISTRY.mappings && ARTIFACT_REGISTRY.mappings[matterKey];
-  if (!entry || !entry.drafts || !entry.drafts.length) return '';
-  var pending = entry.drafts.filter(function(d){ return d.status === 'pending-review'; }).length;
-  var count = entry.drafts.length;
-  var tooltip = entry.drafts.map(function(d){
-    return '• ' + (d.type||'Draft') + (d.descriptor ? ': ' + d.descriptor : '') + (d.status ? ' [' + d.status + ']' : '');
-  }).join('\n').replace(/"/g,'&quot;');
-  var primary = entry.drafts[entry.drafts.length-1];
-  var badge = pending > 0 ? '<span style="background:#d97706;color:#fff;border-radius:8px;padding:0 5px;font-size:.7em;margin-left:2px;">'+pending+'</span>' : '';
-  return '<a href="'+primary.url+'" target="_blank" rel="noopener" title="'+tooltip+'" '
-    + 'style="margin-left:6px;text-decoration:none;opacity:.75;font-size:.8em;" '
-    + 'onclick="event.stopPropagation()">&#128221;'+badge+'</a>';
-}
-
-
-</script>
-
 </head>
 <body>
 <a href="/" class="mc-home" title="Back to Mission Control"><span class="mc-arrow">&#8592;</span><span class="mc-icon">&#128640;</span><span class="mc-label">Mission Control</span></a>
@@ -245,7 +173,7 @@ function draftsChip(defendantName) {
       <h1>Motion <em>Dashboard</em></h1>
       <div class="header-sub">Blackstone Law, APC &mdash; RQ Team Active Caseload</div>
     </div>
-    <div class="week-badge">Week of April 13, 2026</div>
+    <div class="week-badge">Week of April 6, 2026</div>
   </div>
   <div class="header-meta">
     <span>Generated: <strong>Fri, April 10, 2026</strong></span>
@@ -271,10 +199,10 @@ function draftsChip(defendantName) {
 <!-- ════ CONTROLS ════ -->
 <div class="controls">
   <div class="tabs" id="tabBar">
-    <div class="tab active" data-tab="action">Action Needed<span class="tc">7</span></div>
-    <div class="tab" data-tab="briefing">Briefing<span class="tc">10</span></div>
-    <div class="tab" data-tab="watching">Watching<span class="tc">10</span></div>
-    <div class="tab" data-tab="closed">Closed<span class="tc">10</span></div>
+    <div class="tab active" data-tab="action">Action Needed<span class="tc">5</span></div>
+    <div class="tab" data-tab="briefing">Briefing<span class="tc">13</span></div>
+    <div class="tab" data-tab="watching">Watching<span class="tc">20</span></div>
+    <div class="tab" data-tab="closed">Closed<span class="tc">14</span></div>
     <div class="tab" data-tab="scorecard">Scorecard</div>
   </div>
   <div class="sep"></div>
@@ -296,45 +224,34 @@ function draftsChip(defendantName) {
   <th onclick="sortT(this,3)">Assigned <span class="sa">&#9650;</span></th>
 </tr></thead>
 <tbody class="ft">
-  <tr data-deadline="2026-04-13" data-a="RQ" data-m="MTC" data-c="Anguiano v. Kinecta">
-    <td><div class="case-name">Anguiano v. Kinecta</div><div class="case-num">Cross-appeal record designation. Status Conf TOMORROW 4/14. (RQ)</div></td>
-    <td><span class="b b-urgent">RECORD DESIG. DUE TODAY 4/13</span></td>
-    <td class="dl-c">Apr 13, 2026</td>
-    <td>RQ</td>
-  </tr>
+
   <tr data-deadline="2026-04-14" data-a="RQ" data-m="MTC" data-c="Truitt / Carias-Paredes">
-    <td><div class="case-name">Truitt / Carias-Paredes</div><div class="case-num">MTC #1 &mdash; Original deficient responses. Extended from 4/9 to Apr 14 (Viviano). Objections waived (CCP 2031.300). (RQ)</div></td>
-    <td><span class="b b-urgent">MTC DL TOMORROW 4/14</span></td>
+    <td><div class="case-name">Truitt / Carias-Paredes</div><div class="case-num">MTC #1 &mdash; Original deficient responses. Deadline extended to Apr 14 (per Viviano 4/7). Objections waived (CCP 2031.300). M&amp;C 2/27. Privilege logs 3/13. (RQ)</div></td>
+    <td><span class="b b-urgent">MTC DL 4/14</span></td>
     <td class="dl-c">Apr 14, 2026</td>
     <td>RQ</td>
   </tr>
   <tr data-deadline="2026-04-15" data-a="SM" data-m="MTCA" data-c="Edmiston v. Weatherford">
     <td><div class="case-name">Edmiston v. Weatherford</div><div class="case-num">D&rsquo;s Reply due 4/15. Opp filed 4/9. Hearing 4/22. (SM)</div></td>
-    <td><span class="b b-filed">REPLY DUE 4/15 (2 DAYS)</span></td>
+    <td><span class="b b-filed">REPLY DUE 4/15</span></td>
     <td class="dl-c">Apr 15, 2026</td>
     <td>SM</td>
   </tr>
   <tr data-deadline="2026-04-15" data-a="JM" data-m="Consolidate" data-c="Caleres / Ramirez">
-    <td><div class="case-name">Caleres / Ramirez (PAGA)</div><div class="case-num">D&rsquo;s Reply due 4/15. Opp filed 4/9. Hearing 4/22. (JM)</div></td>
-    <td><span class="b b-filed">REPLY DUE 4/15 (2 DAYS)</span></td>
+    <td><div class="case-name">Caleres / Ramirez (PAGA)</div><div class="case-num">D&rsquo;s Reply due 4/15. Opp filed 4/9 (via Steno). Hearing 4/22. (JM)</div></td>
+    <td><span class="b b-filed">REPLY DUE 4/15</span></td>
     <td class="dl-c">Apr 15, 2026</td>
     <td>JM</td>
   </tr>
-  <tr data-deadline="2026-04-16" data-a="JM" data-m="MTC" data-c="Duenas v. Cargomatic">
-    <td><div class="case-name">Duenas v. Cargomatic</div><div class="case-num">MTC Discovery deadline 4/16 (estop date). Stip continued 3/23. (JM)</div></td>
-    <td><span class="b b-filed">MTC DISC. DL 4/16 (3 DAYS)</span></td>
-    <td class="dl-c">Apr 16, 2026</td>
+  <tr data-deadline="2026-04-16" data-a="JM" data-m="MTCA" data-c="Conant v. Evergreen (Class)">
+    <td><div class="case-name">Conant v. Evergreen (Class)</div><div class="case-num">D&rsquo;s Reply due 4/16 (NDCA LR 7-3(c)). P opp filed 4/2 (Dkt 25). Reply filed 4/9 (Dkt 26). Hearing 4/23. (JM)</div></td>
+    <td><span class="b b-filed">BRIEFING COMPLETE</span></td>
+    <td class="dl-s">Apr 23, 2026</td>
     <td>JM</td>
   </tr>
-  <tr data-deadline="2026-04-21" data-a="RQ" data-m="MTC" data-c="ISU Petasys">
-    <td><div class="case-name">ISU Petasys</div><div class="case-num">MTC deadline 4/21. D supp production was due 4/10. (RQ)</div></td>
-    <td><span class="b b-filed">MTC DL 4/21 (8 DAYS)</span></td>
-    <td class="dl-s">Apr 21, 2026</td>
-    <td>RQ</td>
-  </tr>
   <tr data-deadline="2026-04-28" data-a="SM" data-m="MTC" data-c="Richards v. Outdoor Dimensions">
-    <td><div class="case-name">Richards v. Outdoor Dimensions</div><div class="case-num">MTC Discovery deadline Apr 28 (extended). D&rsquo;s supp responses due 4/17. (SM)</div></td>
-    <td><span class="b b-filed">MTC DL 4/28 (15 DAYS)</span></td>
+    <td><div class="case-name">Richards v. Outdoor Dimensions</div><div class="case-num">MTC Discovery deadline Apr 28 (extended per SM/Boyle 4/2). D&rsquo;s supp responses now due 4/17. (see Discovery Tracker)</div></td>
+    <td><span class="b b-filed">MTC DL 4/28</span></td>
     <td class="dl-s">Apr 28, 2026</td>
     <td>SM</td>
   </tr>
@@ -1075,54 +992,32 @@ document.getElementById('fSearch').addEventListener('input', applyF);
   });
   svg.innerHTML+='<text x="'+cx+'" y="'+(cy-5)+'" text-anchor="middle" fill="var(--accent)" font-size="21" font-weight="700">60%</text><text x="'+cx+'" y="'+(cy+11)+'" text-anchor="middle" fill="var(--text-dim)" font-size="9">Win Rate (6W/4L)</text>';
 })();
-</script>
 
-<script>
+/* ── Drafts Chip ── */
+function draftsChip(defendantName) {
+  if (!defendantName) return '';
+  var matterKey = defendantName.replace(/\s*\(.*?\)\s*$/,'').trim();
+  var entry = ARTIFACT_REGISTRY.mappings && ARTIFACT_REGISTRY.mappings[matterKey];
+  if (!entry || !entry.drafts || !entry.drafts.length) return '';
+  var pending = entry.drafts.filter(function(d){ return d.status === 'pending-review'; }).length;
+  var count = entry.drafts.length;
+  var tooltip = entry.drafts.map(function(d){
+    return '• ' + (d.type||'Draft') + (d.descriptor ? ': ' + d.descriptor : '') + (d.status ? ' [' + d.status + ']' : '');
+  }).join('\n').replace(/"/g,'&quot;');
+  var primary = entry.drafts[entry.drafts.length-1];
+  var badge = pending > 0 ? '<span style="background:#d97706;color:#fff;border-radius:8px;padding:0 5px;font-size:.7em;margin-left:2px;">'+pending+'</span>' : '';
+  return '<a href="'+primary.url+'" target="_blank" rel="noopener" title="'+tooltip+'" '
+    + 'style="margin-left:6px;text-decoration:none;opacity:.75;font-size:.8em;" '
+    + 'onclick="event.stopPropagation()">&#128221;'+badge+'</a>';
+}
 
-/* Auto-attach SharePoint folder icons to static case-name elements */
-document.addEventListener('DOMContentLoaded', function() {
-  var els = document.querySelectorAll('.case-name, .jpa-case-name');
-  els.forEach(function(el) {
-    // Extract case name text only — exclude contingent-tag spans and emoji suffixes
-    var raw = '';
-    el.childNodes.forEach(function(n) {
-      if (n.nodeType === 3) raw += n.textContent;  // text nodes only
-      else if (n.nodeType === 1 && !n.classList.contains('contingent-tag') && n.tagName !== 'A') raw += n.textContent;
-    });
-    raw = raw.replace(/[\u2300-\u27BF\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}].*/su, '').trim();
-    if (!raw) return;
-    if (!raw) return;
-    // Extract defendant name: strip parenthetical suffixes like "(Class)", "(PAGA)", "(plaintiff)"
-    // Keep the core defendant name for folder lookup
-    var clean = raw
-      .replace(/\s*\(Class[^)]*\)/gi, '')
-      .replace(/\s*\(PAGA[^)]*\)/gi, '')
-      .replace(/\s*\(Federal[^)]*\)/gi, '')
-      .replace(/\s*\(Both[^)]*\)/gi, '')
-      .replace(/\s*\(Spanish\)/gi, '')
-      .replace(/\s*\(KG PARTNERING\)/gi, '')
-      .replace(/\s*\(BDC PARTNERING\)/gi, '')
-      .trim();
-    // For "Plaintiff v. Defendant" format, extract defendant
-    var vMatch = clean.match(/v\.\s+(.+)/);
-    if (vMatch) clean = vMatch[1].trim();
-    // For "Defendant (Plaintiff, First)" format, strip plaintiff parens
-    clean = clean.replace(/\s*\([^)]*\)\s*$/, '').trim();
-    // For "Defendant / Plaintiff" format, take first part
-    var slashMatch = clean.match(/^([^/]+)\//);
-    if (slashMatch) clean = slashMatch[1].trim();
-    if (!clean) return;
-    var link = buildCaseLink(clean);
-    var a = document.createElement('a');
-    a.href = link;
-    a.target = '_blank';
-    a.rel = 'noopener';
-    a.title = 'Open case folder: ' + clean;
-    a.style.cssText = 'margin-left:5px;text-decoration:none;opacity:.45;font-size:.75em;';
-    a.textContent = '\uD83D\uDCC1';
-    a.addEventListener('click', function(e) { e.stopPropagation(); });
-    el.appendChild(a);
-  });
+/* ── Wire draftsChip into table case names ── */
+document.querySelectorAll('.ft tr').forEach(function(row) {
+  var caseName = row.dataset.c;
+  var caseNameCell = row.querySelector('.case-name');
+  if (caseName && caseNameCell && !caseNameCell.querySelector('a[title*="Draft"]')) {
+    caseNameCell.innerHTML += draftsChip(caseName);
+  }
 });
 
 </script>

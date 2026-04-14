@@ -466,10 +466,10 @@
       <span>1. Pipeline</span><span class="count" id="count-pipeline">46</span>
     </button>
     <button class="phase-btn active" data-phase="booked">
-      <span>2. Booked &amp; Preparing</span><span class="count" id="count-booked">34</span>
+      <span>2. Booked &amp; Preparing</span><span class="count" id="count-booked">32</span>
     </button>
     <button class="phase-btn" data-phase="resolved">
-      <span>3. Post Settlement</span><span class="count" id="count-resolved">10</span>
+      <span>3. Post-Mediation</span><span class="count" id="count-resolved">12</span>
     </button>
   </div>
 
@@ -726,24 +726,8 @@
 
     <!-- CRITICAL -->
     <div class="section active" id="b-critical">
-      <div class="section-header"><h2>Critical — Action Needed Today</h2><span class="badge badge-red">3 cases</span></div>
+      <div class="section-header"><h2>Critical — Action Needed Today</h2><span class="badge badge-green">0 cases — 2 moved to Continuing Negotiation</span></div>
       <div class="case-grid">
-        <div data-matter-id="magnolia-springs" class="case-card" data-attorney="jm" data-mediation="2026-04-13" data-meddate="2026-04-13" style="border-left:3px solid var(--orange);" data-brief-due="2026-04-10">
-          <div class="status-dot dot-orange"></div>
-          <div class="cc-top"><span class="case-name">Agpalza v. Mission Wells / Magnolia Springs</span><span class="drafts-chip-mount" data-matter="Agpalza v. Mission Wells / Magnolia Springs"></span><span class="attorney att-jm">JM</span></div>
-          <div style="display:flex;gap:8px;margin-bottom:6px;flex-wrap:wrap;"><span class="badge badge-orange">~APRIL 13</span><span class="badge badge-purple">Phase 4-5 — Data Analysis</span><span class="countdown cd-soon" data-meddate="2026-04-13"></span></div>
-          <div class="cc-status">Mediator: <strong>Marc Feder</strong>. BCG 25% sampling agreed 3/23. No status update in 7 days. Brief due ~4/10.</div>
-          <div class="phase-indicator"><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-label">Phase 4-5/7</div></div>
-          <div class="cc-action"><strong>Next</strong> Follow up with Bennett Berger TODAY. If not on track for 4/7 delivery, postpone. Start brief outline.</div>
-        </div>
-        <div data-matter-id="america-central" class="case-card" data-attorney="rq" data-mediation="2026-04-10" data-meddate="2026-04-10" data-brief-due="2026-04-07" style="border-left:3px solid var(--red);">
-          <div class="status-dot dot-orange"></div>
-          <div class="cc-top"><span class="case-name">Santamaria v. America Central Corp</span><span class="drafts-chip-mount" data-matter="Santamaria v. America Central Corp"></span><span class="attorney att-rq">RQ</span></div>
-          <div style="display:flex;gap:8px;margin-bottom:6px;flex-wrap:wrap;"><span class="badge badge-orange">APRIL 10 (Zoom)</span><span class="badge badge-purple">Phase 3 — Data Exchange</span><span class="countdown cd-soon" data-meddate="2026-04-10"></span></div>
-          <div class="cc-status">Mediator: <strong>M Resolution</strong>. KG partnering. Class case. Littler OC (SSamie). Mediation CONFIRMED April 10 via Zoom (M Resolution confirmed 3/31). Joe running Eve analysis — unreimbursed expenses strong, off-the-clock TBD.</div>
-          <div class="phase-indicator"><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-label">Phase 3/7</div></div>
-          <div class="cc-action"><strong>Next</strong> Finalize brief. Confirm Zoom logistics. Data exchange status check.</div>
-<div class="countdown-action ca-green"><span class="ca-icon">💰</span><span class="ca-text">Cancel passed — committed</span><span class="ca-deadline">8d to med</span></div><div class="outreach-badge ob-green"><span class="ob-icon">&#128222;</span><span class="ob-funnel"><span class="ob-step"><strong>3</strong>/3 called</span><span class="ob-step">&middot; <strong>2</strong> spoke</span><span class="ob-step">&middot; <strong>2</strong> willing</span></span></div></div>
         
       </div>
     </div>
@@ -936,12 +920,42 @@
     </div>
 
     <div class="tabs" data-group="resolved">
-      <button class="tab active" data-tab="r-postmed">Post Settlement</button>
+      <button class="tab active" data-tab="r-continuing">Continuing Negotiation</button>
+      <button class="tab" data-tab="r-postmed">Post Settlement</button>
       <button class="tab" data-tab="r-settled">Settled</button>
     </div>
 
+    <!-- CONTINUING NEGOTIATION — mediation held, no settlement, active follow-up -->
+    <div class="section active" id="r-continuing">
+      <div class="section-header"><h2>Continuing Negotiation — Mediation Held, No Settlement Yet</h2><span class="badge badge-orange">2 cases</span></div>
+      <div style="font-size:.8rem;color:var(--text-muted);margin-bottom:10px;">Cases that sat for mediation but did not produce a settlement or mediator's proposal. Active follow-up sequence is running — mediator-brokered next steps, client authority conversations, pressure moves (M&amp;C letters, belated notice). Visibility here until the matter resolves (settlement, proposal, or return to litigation).</div>
+      <div class="case-grid">
+
+        <!-- Santamaria v. America Central — blind proposal (McKelvey) -->
+        <div data-matter-id="america-central" class="case-card" data-attorney="rq" data-meddate="2026-04-10" style="border-left:3px solid var(--purple);">
+          <div class="cc-top"><span class="case-name">Santamaria v. America Central Corp</span><span class="drafts-chip-mount" data-matter="Santamaria v. America Central Corp"></span><span class="attorney att-rq">RQ</span><span class="badge badge-purple" style="margin-left:auto;font-size:.65rem;">BLIND PROPOSAL PENDING</span></div>
+          <div style="display:flex;gap:8px;margin-bottom:6px;flex-wrap:wrap;"><span class="badge badge-blue">Mediation 4/10/26</span><span class="badge badge-purple">Brandon McKelvey</span><span class="badge badge-orange">Response Due May 8 @ 5pm</span></div>
+          <div class="cc-status"><strong>Outcome:</strong> Impasse at mediation; McKelvey issued a <strong>blind proposal</strong> (distinct from a mediator&rsquo;s proposal) asking both sides to confirm by <strong>May 8, 2026 @ 5:00 PM</strong> whether they will continue negotiations within the range of <strong>$200,000&ndash;$900,000</strong>. Both parties respond to mediator only. If both say yes, process continues.</div>
+          <div class="cc-status" style="margin-top:6px;"><strong>Open items:</strong><br>&bull; Client authority conversation re: range (RQ/JM)<br>&bull; Strengthen evidence: flight logs, investigation timeline (KG partnering)<br>&bull; Do not disclose range to OC &mdash; blind process</div>
+          <div class="cc-action"><strong>Next</strong> RQ &mdash; client authority call this week. Monitor for McKelvey check-in. Confirm response by <strong>5/8 @ 5pm</strong>.</div>
+          <div class="countdown-action ca-orange"><span class="ca-icon">&#9203;</span><span class="ca-text">Blind proposal response</span><span class="ca-deadline">25d to deadline</span></div>
+        </div>
+
+        <!-- Agpalza v. Magnolia Springs — West post-impasse shuttle -->
+        <div data-matter-id="magnolia-springs" class="case-card" data-attorney="jm" data-meddate="2026-04-13" style="border-left:3px solid var(--red);">
+          <div class="cc-top"><span class="case-name">Agpalza v. Mission Wells / Magnolia Springs</span><span class="drafts-chip-mount" data-matter="Agpalza v. Mission Wells / Magnolia Springs"></span><span class="attorney att-jm">JM</span><span class="badge badge-red" style="margin-left:auto;font-size:.65rem;">WIDE GAP &mdash; SHUTTLE</span></div>
+          <div style="display:flex;gap:8px;margin-bottom:6px;flex-wrap:wrap;"><span class="badge badge-blue">Mediation 4/13/26</span><span class="badge badge-purple">Carl J. West (JAMS)</span><span class="badge badge-orange">Check-in ~Fri 4/24</span></div>
+          <div class="cc-status"><strong>Outcome:</strong> Impasse at mediation; West <strong>declined to issue a mediator&rsquo;s proposal</strong> &mdash; gap too wide. Last brackets: Plaintiff <strong>$1.9M&ndash;$3.2M</strong> vs. Defense <strong>$150K&ndash;$400K</strong>. West&rsquo;s recommended landing range: <strong>$2.0M&ndash;$2.25M</strong>. Kern County BCV-25-100925 (Class) &amp; BCV-25-101296 (PAGA).</div>
+          <div class="cc-status" style="margin-top:6px;"><strong>Open items:</strong><br>&bull; M&amp;C letter sent 4/13 @ 11:09 PM (Karen for Joe &rarr; BBR firm) &#10003;<br>&bull; West to contact defense in ~1 week<br>&bull; RQ/JM check-in with West end of next week (~4/24)<br>&bull; Evaluate request for belated notice / renewed discovery<br>&bull; Client authority conversation &mdash; bottom number</div>
+          <div class="cc-action"><strong>Next</strong> JM &mdash; check in with West <strong>Fri 4/24</strong>. Monitor BBR response to 4/13 M&amp;C letter. Client authority call.</div>
+          <div class="countdown-action ca-orange"><span class="ca-icon">&#128222;</span><span class="ca-text">West shuttle in progress</span><span class="ca-deadline">~11d to check-in</span></div>
+        </div>
+
+      </div>
+    </div>
+
     <!-- POST-MEDIATION ACTIVE -->
-    <div class="section active" id="r-postmed">
+    <div class="section" id="r-postmed">
       <div class="section-header"><h2>Post Settlement — Documentation In Progress</h2><span class="badge badge-teal">10 cases</span></div>
       <div class="case-grid">
         <div data-matter-id="american-future" class="case-card" data-attorney="jg"><div class="cc-top"><span class="case-name">Estrada/Nava v. Maruichi American</span><span class="drafts-chip-mount" data-matter="Estrada/Nava v. Maruichi American"></span><span class="attorney att-jg">JG</span></div><div class="cc-status"><span class="badge badge-green">SETTLED — $525K GSA</span>. Settlement documentation being prepared.</div><div class="cc-action"><strong>Next</strong> Finalize settlement docs.</div></div>

@@ -1,0 +1,5 @@
+{
+  "_schema": "matter_id -> { artifact_type: { url, descriptor } }. artifact_type examples: folder, discovery, pleadings, mediation. Empty registry = no buttons render.",
+  "_version": 1,
+  "mappings": {}
+}

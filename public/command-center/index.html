@@ -209,6 +209,22 @@ const SP_ROUTES = {
   'evidence': '/Evidence',
   'research': '/Research%2C%20Memos%20%26%20Notes',
 };
+var ARTIFACT_REGISTRY = { mappings: {} };
+(function loadRegistry(){
+  try {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/shared/artifact-registry.json', false); // sync load before render
+    xhr.send(null);
+    if (xhr.status === 200) { ARTIFACT_REGISTRY = JSON.parse(xhr.responseText); }
+  } catch(e) { /* registry optional */ }
+})();
+function getArtifact(matterKey, artifactType) {
+  if (!matterKey || !ARTIFACT_REGISTRY.mappings) return null;
+  var entry = ARTIFACT_REGISTRY.mappings[matterKey];
+  if (!entry) return null;
+  return entry[artifactType] || null;
+}
+
 function buildCaseLink(defendantName, routingKey) {
   if (!defendantName) return '#';
   routingKey = routingKey || 'root';
@@ -218,9 +234,13 @@ function buildCaseLink(defendantName, routingKey) {
   return SP_BASE + '/' + slug + (SP_ROUTES[routingKey] || '');
 }
 function folderIcon(defendantName, routingKey, title) {
-  var url = buildCaseLink(defendantName, routingKey);
-  title = title || 'Open case folder';
-  return '<a href="'+url+'" target="_blank" rel="noopener" title="'+title+'" '
+  if (!defendantName) return '';
+  var matterKey = defendantName.replace(/\s*\(.*?\)\s*$/,'').trim();
+  var artifactType = routingKey || 'folder';
+  var entry = getArtifact(matterKey, artifactType);
+  if (!entry || !entry.url) return ''; // render nothing when unmapped
+  var descriptor = entry.descriptor || title || 'Open case folder';
+  return '<a href="'+entry.url+'" target="_blank" rel="noopener" title="'+descriptor.replace(/"/g,'&quot;')+'" '
     + 'style="margin-left:6px;text-decoration:none;opacity:.55;font-size:.8em;" '
     + 'onclick="event.stopPropagation()">&#128193;</a>';
 }

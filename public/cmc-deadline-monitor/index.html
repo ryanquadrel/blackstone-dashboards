@@ -762,13 +762,14 @@ document.addEventListener('DOMContentLoaded', function() {
     var slashMatch = clean.match(/^([^/]+)\//);
     if (slashMatch) clean = slashMatch[1].trim();
     if (!clean) return;
-    // CMC statements → pleadings folder
-    var link = buildCaseLink(clean, 'pleadings');
+    // CMC statements → pleadings folder — GATED on artifact registry (render nothing when unmapped)
+    var entry = getArtifact(clean, 'pleadings') || getArtifact(clean, 'folder');
+    if (!entry || !entry.url) return;
     var a = document.createElement('a');
-    a.href = link;
+    a.href = entry.url;
     a.target = '_blank';
     a.rel = 'noopener';
-    a.title = 'Open case folder: ' + clean;
+    a.title = entry.descriptor || ('Open case folder: ' + clean);
     a.style.cssText = 'margin-left:5px;text-decoration:none;opacity:.45;font-size:.75em;';
     a.textContent = '\uD83D\uDCC1';
     a.addEventListener('click', function(e) { e.stopPropagation(); });

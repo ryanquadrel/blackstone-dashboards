@@ -290,7 +290,6 @@
   tr[data-fee-status="paid"] { opacity:0.85; }
   tr[data-fee-status="manual-paid"] td:nth-child(4) span.badge { background:var(--green) !important; color:white !important; }
 
-
 /* ═══ MISSION CONTROL BACK-LINK ═══ */
 .mc-home{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:9999;display:inline-flex;align-items:center;gap:8px;padding:8px 16px 8px 12px;background:linear-gradient(135deg,rgba(79,143,255,.12),rgba(168,85,247,.12));border:1px solid rgba(79,143,255,.25);border-radius:24px;text-decoration:none;color:#e8ecf4;font-family:'Segoe UI',system-ui,sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.01em;transition:all .3s cubic-bezier(.4,0,.2,1);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 2px 12px rgba(0,0,0,.3)}
 .mc-home:hover{border-color:rgba(79,143,255,.5);transform:translateX(-50%) translateY(-1px) scale(1.03);box-shadow:0 4px 20px rgba(79,143,255,.2),0 0 30px rgba(168,85,247,.1);background:linear-gradient(135deg,rgba(79,143,255,.2),rgba(168,85,247,.18))}
@@ -299,7 +298,6 @@
 .mc-home .mc-label{background:linear-gradient(135deg,#4f8fff,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .mc-home .mc-arrow{color:#4a5a78;transition:all .2s;font-size:.9rem}
 .mc-home:hover .mc-arrow{color:#4f8fff;transform:translateX(-3px)}
-
 
   /* BRIEF DEADLINE TIMELINE STRIP */
   .brief-timeline { display:flex; align-items:flex-start; gap:12px; margin-bottom:16px; padding:12px 16px; background:var(--surface); border:1px solid var(--border); border-radius:10px; overflow-x:auto; }
@@ -520,19 +518,6 @@
     <div class="section" id="p-activity">
       <div class="section-header"><h2>New Activity</h2><span class="badge badge-blue">32 cases</span></div>
       <div class="case-grid" id="activity-grid">
-        <div class="case-card needs-population" data-matter-id="goodwill-sf-bay">
-          <div class="case-header">
-            <h3>Goodwill of the San Francisco Bay (Perry)</h3>
-            <span class="badge needs-pop">NEEDS POPULATION</span>
-          </div>
-          <div class="case-meta">
-            <div><strong>Attorney:</strong> SM</div>
-            <div><strong>Case #:</strong> CV0009471 · Marin</div>
-            <div><strong>Type:</strong> Class/PAGA</div>
-            <div><strong>Filed:</strong> 2026-03-18 · Intake 2026-04-09</div>
-            <div><strong>Mediator / MDRL:</strong> TBD</div>
-          </div>
-        </div>
 
         <div data-matter-id="behavior-treatment" class="case-card" data-attorney="sm"><div class="cc-top"><span class="case-name">Behavior Treatment &amp; Analysis (Ines)</span><span class="drafts-chip-mount" data-matter="Behavior Treatment &amp; Analysis"></span><span class="attorney att-sm">SM</span></div><div class="cc-status">RQ emailed OC (Sara) 3/30 circling back on reserving mediation date. OC wants to mediate. PAGA case filed (C26-00112).</div><div class="cc-action"><strong>Next</strong> Finalize mediator (Eve, Monique, or McKelvey) and lock date.</div></div>
         <div data-matter-id="caleres" class="case-card" data-attorney="sm"><div class="cc-top"><span class="case-name">Caleres (Ramirez)</span><span class="drafts-chip-mount" data-matter="Caleres"></span><span class="attorney att-sm">SM</span></div><div class="cc-status">Remand motion <strong>DENIED</strong> 3/19 (Judge Bernal). Remains in federal court (C.D. Cal. 5:26-cv-00054-JGB-SP). Ogletree Deakins OC (Chris Decker).</div><div class="cc-action"><strong>Next</strong> Raise mediation with Ogletree. Sage knows Chris Decker.</div></div>
@@ -964,7 +949,6 @@
       </table></div>
     </div>
 
-
   </div>
 
 </div>
@@ -1211,7 +1195,6 @@
       });
     });
   })();
-
 
 /* ── Drafts Chip ── */
 function draftsChip(defendantName) {

@@ -35,7 +35,7 @@ h1{margin:0;font-size:1.75rem;font-weight:700;letter-spacing:-.01em}
 .date-pill b{display:block;color:var(--text-primary);font-size:.95rem}
 .date-pill span{font-size:.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em}
 
-.stats{display:grid;grid-template-columns:repeat(7,1fr);gap:14px;margin-bottom:22px}
+.stats{display:grid;grid-template-columns:repeat(8,1fr);gap:14px;margin-bottom:22px}
 .stat{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:16px 18px;position:relative;overflow:hidden;transition:all .2s}
 .stat::before{content:"";position:absolute;inset:0;background:var(--glow);opacity:.6;pointer-events:none}
 .stat:hover{border-color:rgba(255,255,255,.15);transform:translateY(-1px)}
@@ -47,6 +47,7 @@ h1{margin:0;font-size:1.75rem;font-weight:700;letter-spacing:-.01em}
 .stat.orange{--glow:radial-gradient(circle at top left,var(--orange-glow),transparent 70%)} .stat.orange .n{color:var(--orange)}
 .stat.yellow{--glow:radial-gradient(circle at top left,var(--yellow-glow),transparent 70%)} .stat.yellow .n{color:var(--yellow)}
 .stat.teal{--glow:radial-gradient(circle at top left,var(--teal-glow),transparent 70%)} .stat.teal .n{color:var(--teal)}
+.stat.green{--glow:radial-gradient(circle at top left,var(--green-glow),transparent 70%)} .stat.green .n{color:var(--green)}
 
 .lookahead{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
 .card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:20px;max-height:min(60vh,520px);overflow-y:auto;transition:border-color .2s}
@@ -62,6 +63,18 @@ h1{margin:0;font-size:1.75rem;font-weight:700;letter-spacing:-.01em}
 .full.docket h2::before{background:var(--accent)}
 .full.followup h2::before{background:var(--yellow)}
 .full.discovery h2::before{background:var(--teal)}
+.full.drafts h2::before{background:var(--green)}
+.full.drafts{border-color:rgba(46,213,115,.25);background:linear-gradient(135deg,var(--bg-card),rgba(46,213,115,.04))}
+.draft-row{padding:14px 0;border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr auto;gap:10px 16px;align-items:center}
+.draft-row:last-child{border-bottom:0}
+.draft-row .dr-body b{color:var(--text-primary);font-size:.92rem;font-weight:600}
+.draft-row .dr-body b a{color:inherit;text-decoration:none;border-bottom:1px dotted var(--border);transition:border-color .15s ease,color .15s ease}
+.draft-row .dr-body b a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.draft-row .dr-body .meta{font-size:.76rem;color:var(--text-muted);line-height:1.5;margin-top:4px}
+.draft-row .dr-actions{display:flex;gap:8px;align-items:center}
+.draft-row .dr-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:var(--green-glow);color:var(--green);border:1px solid rgba(46,213,115,.35);border-radius:8px;font-size:.72rem;font-weight:600;text-decoration:none;letter-spacing:.02em;transition:all .15s ease}
+.draft-row .dr-btn:hover{background:rgba(46,213,115,.2);border-color:var(--green);transform:translateY(-1px)}
+.drafts-empty{padding:18px 0;color:var(--text-muted);font-size:.82rem;font-style:italic}
 
 .item{padding:12px 0;border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:4px}
 .item:last-child{border-bottom:0}
@@ -101,53 +114,28 @@ footer{text-align:center;color:var(--text-muted);font-size:.72rem;margin-top:24p
 </header>
 
 <div class="stats">
-  <div class="stat red"><div class="n">10</div><div class="l">Hearings 14d</div></div>
-  <div class="stat purple"><div class="n">3</div><div class="l">Mediations 30d</div></div>
-  <div class="stat blue"><div class="n">4</div><div class="l">Docket 48h</div></div>
-  <div class="stat orange"><div class="n">2</div><div class="l">Response Needed</div></div>
-  <div class="stat yellow"><div class="n">—</div><div class="l">Awaiting OC</div></div>
-  <div class="stat teal"><div class="n">—</div><div class="l">Discovery DLs</div></div>
-  <div class="stat blue"><div class="n">4</div><div class="l">Filing Deadlines</div></div>
+  <div class="stat red"><div class="n">0</div><div class="l">Hearings 14d</div></div>
+  <div class="stat purple"><div class="n">0</div><div class="l">Mediations 30d</div></div>
+  <div class="stat blue"><div class="n">0</div><div class="l">Docket 48h</div></div>
+  <div class="stat orange"><div class="n">0</div><div class="l">Response Needed</div></div>
+  <div class="stat yellow"><div class="n">0</div><div class="l">Awaiting OC</div></div>
+  <div class="stat teal"><div class="n">0</div><div class="l">Discovery DLs</div></div>
+  <div class="stat blue"><div class="n">0</div><div class="l">Filing Deadlines</div></div>
+  <div class="stat green"><div class="n">0</div><div class="l">Awaiting Your Send</div></div>
 </div>
 
 <div class="lookahead">
-  <div class="card hearings"><h2>Hearings &middot; Next 14 Days</h2><div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-deadline-monitor/#case-anguiano" target="_blank">Anguiano v. Kinecta Federal Credit Union</a><span class="tag sm">SM</span></b><span class="days crit">0d</span></div><div class="meta">CMC · 4/14 · 8:30 a.m. · Dept. assigned — today</div></div>
-<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-deadline-monitor/#case-waddell" target="_blank">Waddell v. Santa Teresita</a><span class="tag sm">SM</span></b><span class="days crit">2d</span></div><div class="meta">NACR · 4/16 · 8:30 a.m.</div></div>
-<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/motion-dashboard/#case-valenzuela" target="_blank">Valenzuela v. Childnet</a><span class="tag sm">SM</span></b><span class="days crit">3d</span></div><div class="meta">MTCA Hearing · 4/17 · 8:30 a.m.</div></div>
-<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-deadline-monitor/#case-steves" target="_blank">Steves v. LA Solar Group</a><span class="tag jm">JM</span></b><span class="days warn">7d</span></div><div class="meta">CMC · 4/21 · 8:30 a.m.</div></div>
-<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-deadline-monitor/#case-seybold" target="_blank">Seybold v. Carmel Valley Ranch (Hyatt)</a><span class="tag sm">SM</span></b><span class="days warn">7d</span></div><div class="meta">CMC · 4/21 · 9:00 a.m.</div></div>
-<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/motion-dashboard/#case-edmiston" target="_blank">Edmiston v. Weatherford Motors</a><span class="tag sm">SM</span></b><span class="days warn">8d</span></div><div class="meta">MTCA Hearing · 4/22 · 1:30 p.m.</div></div>
-<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/motion-dashboard/#case-ramirez" target="_blank">Ramirez v. Caleres</a><span class="tag sm">SM</span></b><span class="days warn">8d</span></div><div class="meta">MJOP Hearing · 4/22 · 9:00 a.m.</div></div>
-<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/motion-dashboard/#case-conant" target="_blank">Conant v. ODL</a><span class="tag sm">SM</span></b><span class="days warn">9d</span></div><div class="meta">MTCA Hearing · 4/23</div></div>
-<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-deadline-monitor/#case-hernandez" target="_blank">Hernandez v. Liberty Utilities</a><span class="tag jm">JM</span></b><span class="days warn">10d</span></div><div class="meta">Status Conference · 4/24 · 10:00 a.m.</div></div>
-<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/command-center/#case-galvez" target="_blank">Galvez v. Snap-On Logistics</a><span class="tag jm">JM/RQ</span></b><span class="days ">14d</span></div><div class="meta">PMK/Supervisor Deposition · 4/28</div></div></div>
-  <div class="card mediations"><h2>Mediations &middot; Next 30 Days</h2><div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/mediation-pipeline/#case-douglas" target="_blank">Douglas v. Veridiam</a><span class="tag sm">SM</span></b><span class="days warn">13d</span></div><div class="meta">Steve Rottman · 4/27 · 10:00 a.m. · Zoom</div></div>
-<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/mediation-pipeline/#case-redd" target="_blank">Redd v. LeFiell Manufacturing</a><span class="tag sm">SM/JM</span></b><span class="days ">23d</span></div><div class="meta">Monique Ngo-Bonnici · 5/7 · 9:00 a.m.</div></div>
-<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/mediation-pipeline/#case-white" target="_blank">White v. Kidztopros</a><span class="tag sm">SM</span></b><span class="days ">23d</span></div><div class="meta">Brandon McKelvey · 5/7 · 10:00 a.m.</div></div></div>
+  <div class="card hearings"><h2>Hearings &middot; Next 14 Days</h2></div>
+  <div class="card mediations"><h2>Mediations &middot; Next 30 Days</h2></div>
 </div>
 
-<div class="full filing"><h2>CMC Filing Deadlines &middot; Next 7 Days</h2><div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-deadline-monitor/#case-anguiano" target="_blank">Anguiano v. Kinecta Federal Credit Union</a><span class="tag sm">SM</span></b><span class="days crit">TODAY</span></div><div class="meta">CMC Joint Statement · Due 4/14 (today) · SM sent draft 4/6</div></div>
-<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-deadline-monitor/#case-steves" target="_blank">Steves v. LA Solar Group</a><span class="tag jm">JM</span></b><span class="days crit">TODAY</span></div><div class="meta">CMC Joint Statement · Due 4/14 (today)</div></div>
-<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-deadline-monitor/#case-edmiston" target="_blank">Edmiston v. Weatherford Motors (CLASS)</a><span class="tag sm">SM</span></b><span class="days crit">TODAY</span></div><div class="meta">CMC Joint Statement · Due 4/14 (today)</div></div>
-<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-deadline-monitor/#case-edmiston" target="_blank">Edmiston v. Weatherford Motors (PAGA)</a><span class="tag sm">SM</span></b><span class="days warn">6d</span></div><div class="meta">CMC Joint Statement · Due 4/20</div></div></div>
-<div class="full calendar"><h2>Today's Team Calendar</h2><div class="item"><div class="top"><b>Weekly w/ Alvaro<span class="tag rq">RQ</span></b></div><div class="meta">9:30 a.m. · Teams</div></div>
-<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/command-center/#case-rabadan" target="_blank">Rabadan v. ECB Corp — Client intro (Spanish)</a><span class="tag jm">JM</span></b></div><div class="meta">10:00 a.m. · Teams</div></div>
-<div class="item"><div class="top"><b>Saephan Referral — Ian Silvers<span class="tag rq">RQ/JM</span></b></div><div class="meta">10:30 a.m. · Teams</div></div>
-<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/motion-dashboard/#case-ramirez" target="_blank">Ramirez v. Caleres — MJOP timeline call w/ Ogletree (Decker, Kolsuzyan)</a><span class="tag sm">SM/RQ</span></b></div><div class="meta">11:00 a.m. · Teams</div></div>
-<div class="item"><div class="top"><b>Team Template Generator meeting<span class="tag rq">RQ</span></b></div><div class="meta">12:00 p.m. · Teams</div></div>
-<div class="item"><div class="top"><b>Weekly Calendar Review<span class="tag kg">All</span></b></div><div class="meta">1:00 p.m. · Teams</div></div>
-<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/command-center/#case-favela" target="_blank">Favela v. Hobie Cat — Intro w/ Seyfarth (Meer, Lee)</a><span class="tag jm">JM/RQ</span></b></div><div class="meta">2:00 p.m. · Teams</div></div>
-<div class="item"><div class="top"><b>Weekly w/ Karen<span class="tag kg">RQ/KG</span></b></div><div class="meta">3:00 p.m. · Teams</div></div>
-<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/command-center/#case-hale" target="_blank">Hale v. Rove Engineering — Client intro</a><span class="tag sm">SM/RQ</span></b></div><div class="meta">4:00 p.m. · Teams ⚠ CONFLICT</div></div>
-<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/mediation-pipeline/#case-white" target="_blank">White v. Kidztopros — Discovery Production call w/ DDWK (Garcia, Lebow, Schwartz)</a><span class="tag sm">SM/RQ</span></b></div><div class="meta">4:00 p.m. · Teams ⚠ CONFLICT w/ Hale intro</div></div></div>
-<div class="full response"><h2>Response Needed &middot; Defense Counsel</h2><div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/motion-dashboard/#case-ramirez" target="_blank">Ramirez v. Caleres — Christopher Decker (Ogletree)</a><span class="tag sm">SM/RQ</span></b><span class="days warn">4d</span></div><div class="meta">MJOP timeline · Rec&#x27;d 4/10 · Call scheduled 11:00 a.m. today</div></div>
-<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/command-center/#case-cotton" target="_blank">Cotton v. Taylor Communications — Michele Ramos-Flores (Littler)</a><span class="tag sm">SM</span></b><span class="days warn">4d</span></div><div class="meta">M&amp;C response re: supplemental production · Rec&#x27;d 4/10</div></div></div>
-<div class="full docket"><h2>Docket Activity &middot; Last 48 Hours</h2><div class="item"><div class="top"><b>Flores v. Med-Pharmex<span class="tag sm">SM</span></b><span class="days ">Today</span></div><div class="meta">LexisNexis Track · CMC activity · 4/14</div></div>
-<div class="item"><div class="top"><b>Galvez v. Snap-On Logistics<span class="tag jm">JM</span></b><span class="days ">Today</span></div><div class="meta">LexisNexis Track · New docket entry · 4/14</div></div>
-<div class="item"><div class="top"><b>Anguiano v. Kinecta<span class="tag sm">SM</span></b><span class="days ">Today</span></div><div class="meta">LexisNexis Track · POS filed (19pp) · 4/14</div></div>
-<div class="item"><div class="top"><b>Ines v. Behavior Treatment<span class="tag sm">SM</span></b><span class="days ">Today</span></div><div class="meta">LexisNexis Track · Hearing notice · 8:30 a.m.</div></div></div>
-<div class="full discovery"><h2>Discovery Deadline Reminders &middot; Next 14 Days</h2><div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/discovery-tracker/" target="_blank">See Discovery Tracker for full deadline roster</a></b></div><div class="meta">Use the Discovery Tracker for a full view of RFP response deadlines, M&amp;C deadlines, and MTC filing deadlines across all cases.</div></div></div>
-<div class="full followup"><h2>Follow-Ups &middot; Awaiting OC Response</h2><div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/command-center/" target="_blank">Review Follow-Up Tracker on Command Center</a></b></div><div class="meta">Outbound follow-ups 5–14 days old without an OC reply. Use Command Center case cards to drill in.</div></div></div>
+<div class="full drafts"><h2>Awaiting Your Send &middot; Auto-Drafted Emails</h2><div class="drafts-empty">No auto-drafts awaiting your review.</div></div>
+<div class="full filing"><h2>CMC Filing Deadlines &middot; Next 7 Days</h2></div>
+<div class="full calendar"><h2>Today's Team Calendar</h2></div>
+<div class="full response"><h2>Response Needed &middot; Defense Counsel</h2></div>
+<div class="full docket"><h2>Docket Activity &middot; Last 48 Hours</h2></div>
+<div class="full discovery"><h2>Discovery Deadline Reminders &middot; Next 14 Days</h2></div>
+<div class="full followup"><h2>Follow-Ups &middot; Awaiting OC Response</h2></div>
 
 <footer>Blackstone Law, APC &middot; Daily Case Briefing &middot; Generated Tuesday, April 14, 2026</footer>
 </body></html>

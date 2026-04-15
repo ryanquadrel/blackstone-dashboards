@@ -311,13 +311,13 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
     <svg class="ring-svg" viewBox="0 0 100 100">
       <circle class="ring-bg" cx="50" cy="50" r="42"/>
       <circle class="ring-fill" cx="50" cy="50" r="42" stroke="var(--red)" stroke-dasharray="264" stroke-dashoffset="264" transform="rotate(-90 50 50)" id="ring-cc"/>
-      <text x="50" y="46" fill="var(--red)" font-size="16" font-weight="800" text-anchor="middle" id="ring-cc-num">13</text>
+      <text x="50" y="46" fill="var(--red)" font-size="16" font-weight="800" text-anchor="middle" id="ring-cc-num">15</text>
       <text x="50" y="60" fill="var(--muted)" font-size="7" text-anchor="middle" font-weight="600">URGENT</text>
     </svg>
     <div class="ring-info">
-      <div class="ri-val" style="color:var(--red);text-shadow:0 0 20px rgba(239,68,68,.3)" id="ring-cc-headline">13 Cases</div>
+      <div class="ri-val" style="color:var(--red);text-shadow:0 0 20px rgba(239,68,68,.3)" id="ring-cc-headline">15 Cases</div>
       <div class="ri-label">Command Center</div>
-      <div class="ri-sub" id="ring-cc-sub">13 need action &middot; 19 stale &middot; 81 active</div>
+      <div class="ri-sub" id="ring-cc-sub">15 need action &middot; 19 stale &middot; 81 active</div>
     </div>
     <div class="arrow">&rarr;</div>
   </a>
@@ -396,10 +396,6 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
     <div class="tl-panel">
       <h2><span class="icon">&#9889;</span> 14-Day Action Timeline</h2>
                   <div class="tl-items">
-        <div class="tl-item s-disco" onclick="window.location='/cmc-deadline-monitor/'">
-          <div class="tl-date">APR 14</div>
-          <div class="tl-body"><div class="tl-case">Anguiano v. Kinecta Federal Credit Union</div><div class="tl-event">CMC hearing · 8:30 AM · SM · <span style="color:#f59e0b;font-weight:700">DRAFT SENT</span></div><span class="tl-badge b-disco">CMC</span></div>
-        </div>
         <div class="tl-item s-motion" onclick="window.location='/motion-dashboard'">
           <div class="tl-date">APR 15</div>
           <div class="tl-body"><div class="tl-case">Caleres / Ramirez</div><div class="tl-event">D's Reply due 4/15. Opp filed 4/9 (via Steno). Hearing 4/22. (JM)</div><span class="tl-badge b-motion">MOTION</span></div>
@@ -418,11 +414,11 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
         </div>
         <div class="tl-item s-disco" onclick="window.location='/cmc-deadline-monitor/'">
           <div class="tl-date">APR 21</div>
-          <div class="tl-body"><div class="tl-case">Seybold v. Hyatt Corporation</div><div class="tl-event">CMC hearing · 9:00 AM · JM · <span style="color:#6b7280;font-weight:700">CHECK</span></div><span class="tl-badge b-disco">CMC</span></div>
+          <div class="tl-body"><div class="tl-case">Seybold v. Hyatt Corporation</div><div class="tl-event">CMC hearing &middot; 9:00 AM &middot; JM &middot; <span style="color:#6b7280;font-weight:700">CHECK</span></div><span class="tl-badge b-disco">CMC</span></div>
         </div>
         <div class="tl-item s-disco" onclick="window.location='/cmc-deadline-monitor/'">
           <div class="tl-date">APR 21</div>
-          <div class="tl-body"><div class="tl-case">Steves v. LA Solar Group, Inc.</div><div class="tl-event">CMC hearing · 8:30 AM · JM · <span style="color:#ef4444;font-weight:700">DUE</span></div><span class="tl-badge b-disco">CMC</span></div>
+          <div class="tl-body"><div class="tl-case">Steves v. LA Solar Group, Inc.</div><div class="tl-event">CMC hearing &middot; 8:30 AM &middot; JM &middot; <span style="color:#ef4444;font-weight:700">DUE</span></div><span class="tl-badge b-disco">CMC</span></div>
         </div>
         <div class="tl-item s-motion" onclick="window.location='/motion-dashboard'">
           <div class="tl-date">APR 21</div>
@@ -444,6 +440,10 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
           <div class="tl-date">APR 28</div>
           <div class="tl-body"><div class="tl-case">Richards v. Outdoor Dimensions</div><div class="tl-event">MTC DL Apr 28 (ext SM/Boyle 4/2). TLD requested further ext to 5/01 on 4/13 — not yet confirmed. D's supp responses due 4/17. (see Discovery Tracker) (SM)</div><span class="tl-badge b-motion">MOTION</span></div>
         </div>
+        <div class="tl-item s-disco" onclick="window.location='/cmc-deadline-monitor/'">
+          <div class="tl-date">APR 29</div>
+          <div class="tl-body"><div class="tl-case">Edmiston v. Weatherford Motors, Inc.</div><div class="tl-event">CMC hearing &middot; 1:30 PM &middot; SM &middot; <span style="color:#ef4444;font-weight:700">DUE</span></div><span class="tl-badge b-disco">CMC</span></div>
+        </div>
 </div>
 </div>
 
@@ -456,21 +456,38 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
   <div class="cmc-body">
     <!-- CRITICAL FILINGS -->
     <div class="cmc-critical">
-      <div class="cmc-card" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'"><div class="cmc-countdown cd-red"><div class="cd-num">0</div><div class="cd-unit">days</div></div><div class="cmc-meta"><div class="cm-case">Anguiano v. Kinecta Federal Credit Union</div><div class="cm-detail">CMC hearing &middot; 8:30 AM &middot; <span style="color:#f59e0b;font-weight:700">DRAFT SENT</span></div><span class="cm-atty">SM</span></div></div>
+      <div class="cmc-card"><div class="cmc-meta"><div class="cm-case">No critical hearings (next 3 days)</div></div></div>
     </div>
     <!-- UPCOMING -->
     <div class="cmc-upcoming">
-      <div class="cmc-up-item" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'"><div class="cmc-up-days d-orange">7d</div><div class="cmc-up-info"><div class="ui-case">Seybold v. Hyatt Corporation</div><div class="ui-date">04-21 CMC &middot; JM &middot; <span style="color:#6b7280;font-weight:700">CHECK</span></div></div></div>
-      <div class="cmc-up-item" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'"><div class="cmc-up-days d-orange">7d</div><div class="cmc-up-info"><div class="ui-case">Steves v. LA Solar Group, Inc.</div><div class="ui-date">04-21 CMC &middot; JM &middot; <span style="color:#ef4444;font-weight:700">DUE</span></div></div></div>
-      <div class="cmc-up-item" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'"><div class="cmc-up-days d-yellow">10d</div><div class="cmc-up-info"><div class="ui-case">Hernandez v. Liberty Utilities (Apple Valley Ranchos Water) Corp</div><div class="ui-date">04-24 SC &middot; SM &middot; <span style="color:#f59e0b;font-weight:700">DRAFT SENT</span></div></div></div>
+      <div class="cmc-up-item" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'">
+        <div class="cmc-up-days d-orange">6d</div>
+        <div class="cmc-up-info"><div class="ui-case">Seybold v. Hyatt Corporation</div><div class="ui-date">04-21 CMC &middot; JM &middot; <span style="color:#6b7280;font-weight:700">CHECK</span></div></div>
+      </div>
+      <div class="cmc-up-item" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'">
+        <div class="cmc-up-days d-orange">6d</div>
+        <div class="cmc-up-info"><div class="ui-case">Steves v. LA Solar Group, Inc.</div><div class="ui-date">04-21 CMC &middot; JM &middot; <span style="color:#ef4444;font-weight:700">DUE</span></div></div>
+      </div>
+      <div class="cmc-up-item" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'">
+        <div class="cmc-up-days d-yellow">9d</div>
+        <div class="cmc-up-info"><div class="ui-case">Hernandez v. Liberty Utilities (Apple Valley Ranchos Water) Corp</div><div class="ui-date">04-24 SC &middot; SM &middot; <span style="color:#f59e0b;font-weight:700">DRAFT SENT</span></div></div>
+      </div>
+      <div class="cmc-up-item" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'">
+        <div class="cmc-up-days d-muted">14d</div>
+        <div class="cmc-up-info"><div class="ui-case">Edmiston v. Weatherford Motors, Inc.</div><div class="ui-date">04-29 CMC &middot; SM &middot; <span style="color:#ef4444;font-weight:700">DUE</span></div></div>
+      </div>
+      <div class="cmc-up-item" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'">
+        <div class="cmc-up-days d-muted">14d</div>
+        <div class="cmc-up-info"><div class="ui-case">Soto v. Control Air Enterprises, LLC</div><div class="ui-date">04-29 SC &middot; SM &middot; <span style="color:#ef4444;font-weight:700">DUE</span></div></div>
+      </div>
     </div>
     <!-- STATS -->
     <div class="cmc-stats">
-      <div class="cmc-stat-box"><div class="sb-num" style="color:var(--yellow);text-shadow:0 0 16px rgba(234,179,8,.3)">4</div><div class="sb-label">CMC/ISC Filings (14d)</div></div>
-      <div class="cmc-stat-box"><div class="sb-num glow-red">1</div><div class="sb-label">Critical (&lt;7 days)</div></div>
+      <div class="cmc-stat-box"><div class="sb-num" style="color:var(--yellow);text-shadow:0 0 16px rgba(234,179,8,.3)">5</div><div class="sb-label">CMC/ISC Filings (14d)</div></div>
+      <div class="cmc-stat-box"><div class="sb-num glow-red">0</div><div class="sb-label">Critical (&lt;7 days)</div></div>
       <div class="cmc-workload">
         <div class="cmc-wl-bar"><span style="color:var(--blue)">2</span><div class="wl-name">JM</div></div>
-        <div class="cmc-wl-bar"><span style="color:var(--purple)">2</span><div class="wl-name">SM</div></div>
+        <div class="cmc-wl-bar"><span style="color:var(--purple)">3</span><div class="wl-name">SM</div></div>
       </div>
     </div>
   </div>
@@ -484,10 +501,10 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
       <a href="/mediation-pipeline" class="snap-card"><div class="snap-num glow-purple">32</div><div class="snap-label">Mediations Booked</div></a>
       <a href="/mediation-pipeline" class="snap-card"><div class="snap-num glow-green">45</div><div class="snap-label">Pipeline Cases</div></a>
       <a href="/motion-dashboard" class="snap-card"><div class="snap-num glow-orange">56</div><div class="snap-label">Active Motions</div></a>
-      <a href="/discovery-tracker" class="snap-card"><div class="snap-num glow-blue">18</div><div class="snap-label">Pre-Discovery</div></a>
-      <a href="/cmc-deadline-monitor/" class="snap-card"><div class="snap-num" style="color:var(--yellow);text-shadow:0 0 20px rgba(234,179,8,.3)">4</div><div class="snap-label">CMC Filings (14d)</div></a>
+      <a href="/discovery-tracker" class="snap-card"><div class="snap-num glow-blue">20</div><div class="snap-label">Pre-Discovery</div></a>
+      <a href="/cmc-deadline-monitor/" class="snap-card"><div class="snap-num" style="color:var(--yellow);text-shadow:0 0 20px rgba(234,179,8,.3)">5</div><div class="snap-label">CMC Filings (14d)</div></a>
       <a href="/motion-dashboard" class="snap-card"><div class="snap-num glow-red">34</div><div class="snap-label">Arb Track</div></a>
-      <a href="/command-center" class="snap-card"><div class="snap-num" id="cmdcenter-attention" style="color:var(--red);text-shadow:0 0 20px rgba(239,68,68,.3)">13</div><div class="snap-label">Needs Action</div></a>
+      <a href="/command-center" class="snap-card"><div class="snap-num" id="cmdcenter-attention" style="color:var(--red);text-shadow:0 0 20px rgba(239,68,68,.3)">15</div><div class="snap-label">Needs Action</div></a>
     </div>
   </div>
   <div class="nav-panel">
@@ -495,7 +512,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
     <a href="/mediation-pipeline" class="nav-tile"><span class="nav-icon">&#128176;</span><div class="nav-text"><div class="nt-title">Mediation Pipeline</div><div class="nt-desc">Pipeline &rarr; Booked &rarr; Resolved &mdash; settlement tracking &amp; recovery</div></div></a>
     <a href="/motion-dashboard" class="nav-tile"><span class="nav-icon">&#9889;</span><div class="nav-text"><div class="nt-title">Motion Dashboard</div><div class="nt-desc">Deadlines, filings, MTCA scorecard &amp; CMC tracker</div></div></a>
     <a href="/discovery-tracker" class="nav-tile"><span class="nav-icon">&#128203;</span><div class="nav-text"><div class="nt-title">Discovery Tracker</div><div class="nt-desc">66 entries &mdash; RFPs, SROGs, deadlines &amp; M&amp;C status</div></div></a>
-    <a href="/cmc-deadline-monitor/" class="nav-tile"><span class="nav-icon">&#128197;</span><div class="nav-text"><div class="nt-title">CMC Deadline Monitor</div><div class="nt-desc">4 upcoming CMC/ISC hearings — next 14 days</div></div></a>
+    <a href="/cmc-deadline-monitor/" class="nav-tile"><span class="nav-icon">&#128197;</span><div class="nav-text"><div class="nt-title">CMC Deadline Monitor</div><div class="nt-desc">5 upcoming CMC/ISC hearings — next 14 days</div></div></a>
     <a href="/mediation-strategy" class="nav-tile"><span class="nav-icon">&#9876;</span><div class="nav-text"><div class="nt-title">Mediation Strategy Archive</div><div class="nt-desc">Past mediation day-of dashboards &mdash; opening numbers, game plans &amp; outcomes</div></div></a>
     <a href="/competing-cases" class="nav-tile"><span class="nav-icon">&#128373;</span><div class="nav-text"><div class="nt-title">Competing Cases Tracker</div><div class="nt-desc">15 active &mdash; 2 firms with multiple cases</div></div></a>
   </div>

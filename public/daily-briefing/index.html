@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
-<title>Daily Case Briefing — 2026-04-14</title>
+<title>Daily Case Briefing &mdash; 2026-04-14</title>
 <style>
 :root{
 --bg-primary:#0a0e17;--bg-card:#141a2a;--bg-card-hover:#1a2236;--border:#1e293b;
@@ -17,14 +17,11 @@
 html,body{margin:0;background:var(--bg-primary);color:var(--text-primary);font-family:'Segoe UI',system-ui,-apple-system,sans-serif}
 body{padding:70px 28px 48px;max-width:1440px;margin-inline:auto;line-height:1.45}
 
-/* MISSION CONTROL BACK-LINK */
 .mc-home{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:9999;display:inline-flex;align-items:center;gap:8px;padding:8px 16px 8px 12px;background:linear-gradient(135deg,rgba(79,143,255,.12),rgba(168,85,247,.12));border:1px solid rgba(79,143,255,.25);border-radius:24px;text-decoration:none;color:#e8ecf4;font-size:.78rem;font-weight:600;letter-spacing:.01em;transition:all .3s cubic-bezier(.4,0,.2,1);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 2px 12px rgba(0,0,0,.3)}
-.mc-home:hover{border-color:rgba(79,143,255,.5);transform:translateX(-50%) translateY(-1px) scale(1.03);box-shadow:0 4px 20px rgba(79,143,255,.2),0 0 30px rgba(168,85,247,.1);background:linear-gradient(135deg,rgba(79,143,255,.2),rgba(168,85,247,.18))}
-.mc-home .mc-icon{font-size:1.1rem;transition:transform .3s}
-.mc-home:hover .mc-icon{transform:rotate(-15deg) scale(1.15)}
+.mc-home:hover{border-color:rgba(79,143,255,.5);transform:translateX(-50%) translateY(-1px) scale(1.03);box-shadow:0 4px 20px rgba(79,143,255,.2),0 0 30px rgba(168,85,247,.1)}
+.mc-home .mc-icon{font-size:1.1rem}
 .mc-home .mc-label{background:linear-gradient(135deg,#4f8fff,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.mc-home .mc-arrow{color:#4a5a78;transition:all .2s;font-size:.9rem}
-.mc-home:hover .mc-arrow{color:#4f8fff;transform:translateX(-3px)}
+.mc-home .mc-arrow{color:#4a5a78;font-size:.9rem}
 
 header{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
 .logo{display:flex;align-items:center;gap:16px}
@@ -68,7 +65,7 @@ h1{margin:0;font-size:1.75rem;font-weight:700;letter-spacing:-.01em}
 .draft-row{padding:14px 0;border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr auto;gap:10px 16px;align-items:center}
 .draft-row:last-child{border-bottom:0}
 .draft-row .dr-body b{color:var(--text-primary);font-size:.92rem;font-weight:600}
-.draft-row .dr-body b a{color:inherit;text-decoration:none;border-bottom:1px dotted var(--border);transition:border-color .15s ease,color .15s ease}
+.draft-row .dr-body b a{color:inherit;text-decoration:none;border-bottom:1px dotted var(--border)}
 .draft-row .dr-body b a:hover{color:var(--accent);border-bottom-color:var(--accent)}
 .draft-row .dr-body .meta{font-size:.76rem;color:var(--text-muted);line-height:1.5;margin-top:4px}
 .draft-row .dr-actions{display:flex;gap:8px;align-items:center}
@@ -80,7 +77,7 @@ h1{margin:0;font-size:1.75rem;font-weight:700;letter-spacing:-.01em}
 .item:last-child{border-bottom:0}
 .item .top{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
 .item b{color:var(--text-primary);font-size:.92rem;font-weight:600}
-.item b a{color:inherit;text-decoration:none;border-bottom:1px dotted var(--border);transition:border-color .15s ease,color .15s ease}
+.item b a{color:inherit;text-decoration:none;border-bottom:1px dotted var(--border)}
 .item b a:hover{color:var(--accent);border-bottom-color:var(--accent)}
 .item .meta{font-size:.76rem;color:var(--text-muted);line-height:1.5}
 
@@ -114,28 +111,64 @@ footer{text-align:center;color:var(--text-muted);font-size:.72rem;margin-top:24p
 </header>
 
 <div class="stats">
-  <div class="stat red"><div class="n">0</div><div class="l">Hearings 14d</div></div>
-  <div class="stat purple"><div class="n">0</div><div class="l">Mediations 30d</div></div>
+  <div class="stat red"><div class="n">10</div><div class="l">Hearings 14d</div></div>
+  <div class="stat purple"><div class="n">5</div><div class="l">Mediations 30d</div></div>
+  <div class="stat red"><div class="n">4</div><div class="l">CMC Filings 7d</div></div>
   <div class="stat blue"><div class="n">0</div><div class="l">Docket 48h</div></div>
   <div class="stat orange"><div class="n">0</div><div class="l">Response Needed</div></div>
-  <div class="stat yellow"><div class="n">0</div><div class="l">Awaiting OC</div></div>
-  <div class="stat teal"><div class="n">0</div><div class="l">Discovery DLs</div></div>
-  <div class="stat blue"><div class="n">0</div><div class="l">Filing Deadlines</div></div>
-  <div class="stat green"><div class="n">0</div><div class="l">Awaiting Your Send</div></div>
+  <div class="stat yellow"><div class="n">2</div><div class="l">Follow-ups</div></div>
+  <div class="stat teal"><div class="n">3</div><div class="l">Discovery 14d</div></div>
+  <div class="stat green"><div class="n">2</div><div class="l">Drafts Ready</div></div>
 </div>
 
 <div class="lookahead">
-  <div class="card hearings"><h2>Hearings &middot; Next 14 Days</h2></div>
-  <div class="card mediations"><h2>Mediations &middot; Next 30 Days</h2></div>
+  <div class="card hearings">
+    <h2>Upcoming Hearings &mdash; 14 Days</h2>
+    <div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-deadline-monitor/#case-anguiano-v-kinecta-federal-credit-union-class" target="_blank" rel="noopener">Anguiano v. Kinecta Federal Credit Union (Class)</a></b><span class="days crit">0</span></div><div class="meta">CMC · 2026-04-14 8:30 AM · Dept <span class="tag sm">SM</span></div></div><div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-deadline-monitor/#case-waddell-v-santa-teresita-inc-class" target="_blank" rel="noopener">Waddell v. Santa Teresita Inc. (Class)</a></b><span class="days crit">2</span></div><div class="meta">NACR · 2026-04-16 8:30 AM · Dept <span class="tag sm">SM</span></div></div><div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-deadline-monitor/#case-valenzuela-v-childnet-youth-and-family-services-inc-class-paga" target="_blank" rel="noopener">Valenzuela v. Childnet Youth and Family Services, Inc. (Class/PAGA)</a></b><span class="days crit">3</span></div><div class="meta">MTCA · 2026-04-17 8:30 AM · Dept <span class="tag jm">JM</span></div></div><div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-deadline-monitor/#case-steves-v-la-solar-group-inc-paga" target="_blank" rel="noopener">Steves v. LA Solar Group, Inc. (PAGA)</a></b><span class="days warn">7</span></div><div class="meta">CMC · 2026-04-21 8:30 AM · Dept <span class="tag jm">JM</span></div></div><div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-deadline-monitor/#case-seybold-v-hyatt-corporation-dba-carmel-valley-ranch-class" target="_blank" rel="noopener">Seybold v. Hyatt Corporation dba Carmel Valley Ranch (Class)</a></b><span class="days warn">7</span></div><div class="meta">CMC · 2026-04-21 9:00 AM · Dept <span class="tag jm">JM</span></div></div><div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-deadline-monitor/#case-edmiston-v-weatherford-motors-inc-class" target="_blank" rel="noopener">Edmiston v. Weatherford Motors, Inc. (Class)</a></b><span class="days ">8</span></div><div class="meta">MTCA · 2026-04-22 1:30 PM · Dept <span class="tag sm">SM</span></div></div><div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-deadline-monitor/#case-ramirez-v-caleres-inc-paga" target="_blank" rel="noopener">Ramirez v. Caleres, Inc. (PAGA)</a></b><span class="days ">8</span></div><div class="meta">MOTION · 2026-04-22 9:00 AM · Dept <span class="tag sm">SM</span></div></div><div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/motion-dashboard/#case-edmiston" target="_blank" rel="noopener">Edmiston</a></b><span class="days ">8</span></div><div class="meta">MTCA Hearing · 2026-04-22 (8d)</div></div><div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/motion-dashboard/#case-conant" target="_blank" rel="noopener">Conant</a></b><span class="days ">9</span></div><div class="meta">MTCA Hearing · 2026-04-23 (9d)</div></div><div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-deadline-monitor/#case-hernandez-v-liberty-utilities-apple-valley-ranchos-water-corp-class" target="_blank" rel="noopener">Hernandez v. Liberty Utilities (Apple Valley Ranchos Water) Corp (Class)</a></b><span class="days ">10</span></div><div class="meta">SC · 2026-04-24 10:00 AM · Dept <span class="tag sm">SM</span></div></div>
+  </div>
+  <div class="card mediations">
+    <h2>Upcoming Mediations &mdash; 30 Days</h2>
+    <div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/mediation-pipeline/#case-lee-v-imc-logistics" target="_blank" rel="noopener">Lee v. IMC Logistics</a></b><span class="days crit">3</span></div><div class="meta">2026-04-17<span class="tag jm">JM</span></div></div><div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/mediation-pipeline/#case-douglas-v-veridiam-inc-class" target="_blank" rel="noopener">Douglas v. Veridiam, Inc. (Class)</a></b><span class="days warn">13</span></div><div class="meta">Rottman · 2026-04-27<span class="tag sm">SM</span></div></div><div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/mediation-pipeline/#case-redd-v-lefiell-manufacturing-co-class" target="_blank" rel="noopener">Redd v. LeFiell Manufacturing Co. (Class)</a></b><span class="days ">23</span></div><div class="meta">Ngo-Bonnici · 2026-05-07<span class="tag jg">JG</span></div></div><div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/mediation-pipeline/#case-redd-v-lefiell-manufacturing-co-class-paga" target="_blank" rel="noopener">Redd v. LeFiell Manufacturing Co. (Class/PAGA)</a></b><span class="days ">23</span></div><div class="meta">Ngo-Bonnici · 2026-05-07<span class="tag sm">SM</span></div></div><div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/mediation-pipeline/#case-white-et-al-v-kidztopros-inc-class" target="_blank" rel="noopener">White, et. al. v. Kidztopros, Inc. (Class)</a></b><span class="days ">23</span></div><div class="meta">McKelvey · 2026-05-07<span class="tag sm">SM</span></div></div>
+  </div>
 </div>
 
-<div class="full drafts"><h2>Awaiting Your Send &middot; Auto-Drafted Emails</h2><div class="drafts-empty">No auto-drafts awaiting your review.</div></div>
-<div class="full filing"><h2>CMC Filing Deadlines &middot; Next 7 Days</h2></div>
-<div class="full calendar"><h2>Today's Team Calendar</h2></div>
-<div class="full response"><h2>Response Needed &middot; Defense Counsel</h2></div>
-<div class="full docket"><h2>Docket Activity &middot; Last 48 Hours</h2></div>
-<div class="full discovery"><h2>Discovery Deadline Reminders &middot; Next 14 Days</h2></div>
-<div class="full followup"><h2>Follow-Ups &middot; Awaiting OC Response</h2></div>
+<div class="full drafts">
+  <h2>Awaiting Your Send &mdash; Auto-Drafted Follow-ups</h2>
+  <div class="draft-row"><div class="dr-body"><b>Douglas v. Veridiam, Inc. (Class)</b> <span class="tag warn">CANCEL CHECK</span><span class="tag sm">SM</span><div class="meta">To: defense counsel (Briana) &middot; Subj: Douglas et al. v. Veridiam / 4/27 Mediation Check-in &middot; Mediation 13 days out — crossed 21-day cancel-check threshold</div></div><div class="dr-actions"><a class="dr-btn" href="drafts/2026-04-14/douglas__cancel_check.eml" title="Opens in Outlook on click" download>&#9993;&nbsp;Open Draft</a></div></div><div class="draft-row"><div class="dr-body"><b>Lee v. IMC Logistics</b> <span class="tag warn">CANCEL CHECK</span><span class="tag jm">JM</span><div class="meta">To: defense counsel &middot; Subj: Lee v. IMC Logistics / 4/17 Mediation Check-in &middot; Mediation 3 days out — imminent, confirm parties ready</div></div><div class="dr-actions"><a class="dr-btn" href="drafts/2026-04-14/lee_imc__cancel_check.eml" title="Opens in Outlook on click" download>&#9993;&nbsp;Open Draft</a></div></div>
+</div>
 
-<footer>Blackstone Law, APC &middot; Daily Case Briefing &middot; Generated Tuesday, April 14, 2026</footer>
+<div class="full filing">
+  <h2>CMC Filing Deadlines &mdash; 7 Days</h2>
+  <div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-deadline-monitor/#case-anguiano-v-kinecta-federal-credit-union-class" target="_blank" rel="noopener">Anguiano v. Kinecta Federal Credit Union (Class)</a></b><span class="days crit">0</span></div><div class="meta">4/6 SM sent draft joint statement to OC · due 2026-04-14 (0d)<span class="tag crit">CRITICAL</span></div></div><div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-deadline-monitor/#case-steves-v-la-solar-group-inc-paga" target="_blank" rel="noopener">Steves v. LA Solar Group, Inc. (PAGA)</a></b><span class="days crit">0</span></div><div class="meta">(JM - RQ/KG) Steves v. LA Solar Group, Inc. (PAGA) - L/D to F/S Joint Status Conference Statement · due 2026-04-14 (0d)<span class="tag crit">CRITICAL</span></div></div><div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-deadline-monitor/#case-edmiston-v-weatherford-motors-inc-class" target="_blank" rel="noopener">Edmiston v. Weatherford Motors, Inc. (Class)</a></b><span class="days crit">0</span></div><div class="meta">(SM - RQ Team) Edmiston v. Weatherford Motors, Inc. (Class) - L/D to File and Serve JOINT Case Management Conference Statement [CMC 04/29/2026] · due 2026-04-14 (0d)<span class="tag crit">CRITICAL</span></div></div><div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-deadline-monitor/#case-edmiston-v-weatherford-motors-inc-paga" target="_blank" rel="noopener">Edmiston v. Weatherford Motors, Inc. (PAGA)</a></b><span class="days warn">6</span></div><div class="meta">(SM - RQ Team) Edmiston v. Weatherford Motors, Inc. (PAGA) - L/D to File and Serve JOINT Case Management Statement [CMC 04/29/2026] · due 2026-04-20 (6d)<span class="tag warn">WARN</span></div></div>
+</div>
+
+<div class="full calendar">
+  <h2>Today&rsquo;s Team Calendar</h2>
+  <div class="item"><div class="top"><b>RQ Team - Template Generator Meeting</b><span class="days ">0</span></div><div class="meta">9:00 AM · Teams</div></div><div class="item"><div class="top"><b>Team sync</b><span class="days ">0</span></div><div class="meta">Internal team calls today</div></div>
+</div>
+
+<div class="full response">
+  <h2>Response Needed</h2>
+  
+</div>
+
+<div class="full docket">
+  <h2>Docket Activity &mdash; Last 48 Hours</h2>
+  
+</div>
+
+<div class="full followup">
+  <h2>Follow-up Tracker &mdash; Outbound Awaiting Reply</h2>
+  <div class="item"><div class="top"><b>Sperber v. Patrol Solutions</b><span class="days ">5</span></div><div class="meta">Sent 4/9 — mediator booking request to Jasmine (3/8/27). Awaiting confirmation.<span class="tag warn">FOLLOW-UP</span></div></div><div class="item"><div class="top"><b>Re: April Mediation Dates</b><span class="days warn">7</span></div><div class="meta">Sent 4/7 — asked about new date for 5/15 mediation reschedule.<span class="tag warn">FOLLOW-UP</span></div></div>
+</div>
+
+<div class="full discovery">
+  <h2>Discovery Deadlines &mdash; 14 Days</h2>
+  <div class="item"><div class="top"><b>Truitt Oilfield Maintenance Corporation (Carias-Paredes, Ang)</b><span class="days crit">0</span></div><div class="meta">Truitt Oilfield Maintenance Corporation (Carias-Paredes, Angel & Oilers, Alec De) (Class) (KG PARTNERING) 🔴 MTC #1 —<span class="tag crit">DISCOVERY</span></div></div><div class="item"><div class="top"><b>Outdoor Dimensions, LLC (Richards, Carly)</b><span class="days crit">3</span></div><div class="meta">Outdoor Dimensions, LLC (Richards, Carly) (Class Only) ⏳ 2-wk extension CONFIRMED by Shelby 4/2/26. Supp responses due 4<span class="tag crit">DISCOVERY</span></div></div><div class="item"><div class="top"><b>ISU Petasys Corp. (Garfias, Antonio)</b><span class="days warn">7</span></div><div class="meta">ISU Petasys Corp. (Garfias, Antonio) (Class) ⏳ Supp responses received 3/5/26. Doc production received 3/10/26 (ISU00629<span class="tag warn">DISCOVERY</span></div></div>
+</div>
+
+<footer>
+  Daily Case Briefing &middot; Blackstone Law, APC &middot; Generated 2026-04-14
+</footer>
+
 </body></html>

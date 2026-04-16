@@ -173,7 +173,7 @@ function folderIcon(defendantName, routingKey, title) {
   </div>
   <div class="header-meta">
     <strong>100</strong> total entries tracked<br>
-    Report: <strong>April 15, 2026</strong>
+    Report: <strong>April 16, 2026</strong>
   </div>
 </div>
 
@@ -193,7 +193,7 @@ function folderIcon(defendantName, routingKey, title) {
 
 <!-- DASHBOARD PHASE -->
 <div class="phase active" data-id="dashboard">
-  <div class="phase-updated">Last updated: April 15, 2026 (Discovery Tracker Sync)</div>
+  <div class="phase-updated">Last updated: April 16, 2026 (Discovery Tracker Sync)</div>
   <div class="stats">
     <div class="stat-card teal"><div class="label">Pre-Discovery</div><div class="value">47</div><div class="sub">Not yet propounded</div></div>
     <div class="stat-card yellow"><div class="label">Awaiting Response</div><div class="value">8</div><div class="sub">Discovery served</div></div>
@@ -257,7 +257,7 @@ function folderIcon(defendantName, routingKey, title) {
     <div style="font-size:.76rem;color:var(--text-muted);margin-bottom:12px;padding:4px 10px;background:var(--surface);border-radius:6px;display:inline-block;">14 needs drafting · 4 drafted · 1 MTCA pending · 1 arb pending | 7 with arbitration agreement</div>
     <div class="table-wrap"><div class="table-scroll">
     <table id="table-active-discovery">
-  <div id="tracker-summary" data-total="78" data-pre-discovery="14" data-in-progress="3" data-pending="2" data-stayed="21" data-mediation-track="7" data-mtca-pending="1" style="display:none"></div>
+  <div id="tracker-summary" data-total="78" data-pre-discovery="15" data-in-progress="3" data-pending="2" data-stayed="25" data-mediation-track="7" data-mtca-pending="1" data-drafted="4" data-m-and-c-sent="6" data-arb-pending="1" data-completed="10" style="display:none"></div>
   
     <thead><tr><th>Case Name</th><th>Filing Date</th><th>County</th><th>Discovery Status</th><th>Arbitration</th><th>Notes</th></tr></thead>
     <tbody id="active-discovery-body">
@@ -675,7 +675,7 @@ function folderIcon(defendantName, routingKey, title) {
   <table id="table-awaiting">
     <thead><tr><th>Case Name</th><th>Device</th><th>Propounding Party</th><th>Date Served</th><th>Orig. Deadline</th><th>Extensions</th><th>New Deadline</th><th>Status</th></tr></thead>
     <tbody id="awaiting-body">
-    <tr class="searchable" data-status="plaintiff">
+    <tr class="searchable" data-status="extended">
       <td class="case-name">Hikvision USA Inc. (Fernald, James) (Class Only)<span class="contingent-tag">⏳ Defense amenable to stay per 3/27/26 email. Mediator agreed: Marc Feder (confirmed 4/6/26). Defense responses served 4/10/26 (Gordon Rees via CaseAnywhere). Stip to stay still pending. [Sync 2026-04-14]</span></td>
       <td>SROGs, RFPs — Set 1</td>
       <td><span class="badge badge-blue">Plaintiff</span></td>
@@ -695,7 +695,7 @@ function folderIcon(defendantName, routingKey, title) {
       <td>N/A</td>
       <td><span class="badge badge-blue">Pending</span></td>
     </tr>
-    <tr class="searchable" data-status="defendant">
+    <tr class="searchable" data-status="noticed">
       <td class="case-name">Snap-On Logistics Company (Galvez, Hector) (Class)</td>
       <td>Deposition (PMK + Individual)</td>
       <td><span class="badge badge-blue">Defendant</span></td>
@@ -715,7 +715,7 @@ function folderIcon(defendantName, routingKey, title) {
       <td>N/A</td>
       <td><span class="badge badge-blue">Pending</span></td>
     </tr>
-    <tr class="searchable" data-status="plaintiff">
+    <tr class="searchable" data-status="stayed">
       <td class="case-name">Hope Program, a Licensed Clinical Social Worker Professional Corporation (Brown, Neecha) (Class)<span class="contingent-tag">⏳ Case stayed per Stip approved by Alameda Sup. Ct. 4/1/26. Discovery paused.</span></td>
       <td>SROGs, RFPs — Set 1</td>
       <td><span class="badge badge-blue">Plaintiff</span></td>
@@ -725,7 +725,7 @@ function folderIcon(defendantName, routingKey, title) {
       <td>N/A</td>
       <td><span class="badge badge-orange">Stayed</span></td>
     </tr>
-    <tr class="searchable" data-status="plaintiff">
+    <tr class="searchable" data-status="stayed">
       <td class="case-name">Imperial Valley Family Medical Group (Miranda, Vanessa) (Class only)<span class="contingent-tag">⏳ Stay confirmed by defense (Fisher Phillips) 3/13/26. Mediation 7/31/26 with Eckstrom. Formal discovery paused.</span></td>
       <td>SROGs, RFPs — Set 1</td>
       <td><span class="badge badge-blue">Plaintiff</span></td>
@@ -735,7 +735,7 @@ function folderIcon(defendantName, routingKey, title) {
       <td>N/A</td>
       <td><span class="badge badge-orange">Stayed</span></td>
     </tr>
-    <tr class="searchable" data-status="plaintiff">
+    <tr class="searchable" data-status="stayed">
       <td class="case-name">River City Medical Group, Inc. (Rucker, Samela) (Class only)<span class="contingent-tag">⏳ Case stayed per Stip filed 3/5/26. Mediator cancelled mediation 4/1/26 — seeking rescheduling. Informal production due 5/15/26.</span></td>
       <td>SROGs, RFPs — Set 1</td>
       <td><span class="badge badge-blue">Plaintiff</span></td>
@@ -745,7 +745,7 @@ function folderIcon(defendantName, routingKey, title) {
       <td>N/A</td>
       <td><span class="badge badge-orange">Stayed</span></td>
     </tr>
-    <tr class="searchable" data-status="plaintiff">
+    <tr class="searchable" data-status="stayed">
       <td class="case-name">Thornton Winery (Caceres, Hunter) (Class only)<span class="contingent-tag">⏳ Case stayed pending mediation per Joint Stip filed 2/4/26.</span></td>
       <td>SROGs, RFPs — Set 1</td>
       <td><span class="badge badge-blue">Plaintiff</span></td>
@@ -766,7 +766,7 @@ function folderIcon(defendantName, routingKey, title) {
   <table id="table-followup">
     <thead><tr><th>Case Name</th><th>Device</th><th>Response Date</th><th>M&amp;C Sent</th><th>Supp. Resp. Due</th><th>MTC Deadline</th><th>MTC Drafted</th><th>MTC Filed</th><th>Status</th></tr></thead>
     <tbody id="followup-body">
-    <tr class="searchable" data-status="extended">
+    <tr class="searchable" data-status="mtc-scheduled">
       <td class="case-name">Truitt Oilfield Maintenance Corporation (Carias-Paredes, Angel &amp; Oilers, Alec De) (Class) (KG PARTNERING)<span class="contingent-tag">🔴 MTC #1 — Original deficient responses. Deadline per negotiated extension: Joe Marshall req 3/5/26, Viviano confirmed same day. Re-propounded class discovery after original Set 1 withdrawn. Original deadline 6/24/25 blown — objections waived per CCP 2031.300. M&amp;C letter served 2/11/26 (Karen). M&amp;C call 2/27/26 (Ryan/Viviano). Privilege logs exchanged 3/13/26. Plaintiff supp responses served 3/13/26. 25% time record sampling due 4/6/26 per M&amp;C agreement confirmed 3/5/26. Active dispute re production location for 5 boxes paper time records (Ryan/Viviano 3/27/26). Viviano disputes SROG 11 supplemental scope (3/17/26). Payroll records promised "next week" per Viviano 3/27/26. Defense counsel: Viviano Aguilar, BBR Law (viviano@bbr.law). THIRD extension granted by Viviano 4/13/26: MTC deadline extended another week to 4/21/26 to continue working through copy-service and sampling issues (Ryan/Viviano email chain 4/13-14/26). SECOND extension was 4/7/26 to 4/14/26. [Sync 2026-04-15]</span></td>
       <td>SROGs, RFPs — Set 1 (Re-propounded)</td>
       <td>N/A</td>
@@ -777,7 +777,7 @@ function folderIcon(defendantName, routingKey, title) {
       <td>No</td>
       <td><span class="badge badge-orange">MTC Apr 21</span></td>
     </tr>
-    <tr class="searchable" data-status="mtc-may-6">
+    <tr class="searchable" data-status="mtc-scheduled">
       <td class="case-name">Truitt Oilfield Maintenance Corporation (Carias-Paredes, Angel &amp; Oilers, Alec De) (Class) (KG PARTNERING)<span class="contingent-tag">🟡 MTC #2 — 2nd Supplemental Responses. Defense served 2nd Supp Responses to RFPs and SROGs Set One on 3/20/26 (Chloe/bbr.law). MTC deadline = 45 days from receipt per Karen calc 3/26/26. Same re-propounded class discovery as MTC #1. Defense counsel: Viviano Aguilar, BBR Law (viviano@bbr.law).</span></td>
       <td>SROGs, RFPs — Set 1 (2nd Supp Responses)</td>
       <td>Mar 20, 2026</td>

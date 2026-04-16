@@ -55,6 +55,24 @@
         "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Vicar%20Operating",
         "descriptor": "Vicar Operating (Active Cases root)"
       }
+    },
+    "Maurices Incorporated": {
+      "folder": {
+        "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Maurices/Discovery/Class/Written%20Discovery",
+        "descriptor": "Maurices > Discovery > Class > Written Discovery (auto-drafted by new-case-intake)"
+      },
+      "discovery": {
+        "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Maurices/Discovery/Class/Written%20Discovery",
+        "descriptor": "Maurices > Discovery > Class > Written Discovery"
+      },
+      "pleadings": {
+        "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Maurices/Pleadings%2C%20Motions%20and%20Court%20Filings",
+        "descriptor": "Maurices > Pleadings, Motions and Court Filings"
+      },
+      "root": {
+        "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Maurices",
+        "descriptor": "Maurices (Active Cases root)"
+      }
     }
   }
 }

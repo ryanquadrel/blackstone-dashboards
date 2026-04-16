@@ -300,8 +300,8 @@
 .mc-home:hover .mc-arrow{color:#4f8fff;transform:translateX(-3px)}
 
   /* BRIEF DEADLINE TIMELINE STRIP */
-  .brief-timeline { display:flex; align-items:flex-start; gap:12px; margin-bottom:16px; padding:12px 16px; background:var(--surface); border:1px solid var(--border); border-radius:10px; overflow-x:auto; }
-  .brief-timeline-label { font-size:.78rem; font-weight:700; color:var(--text-muted); white-space:nowrap; padding-top:6px; min-width:70px; }
+  .brief-timeline { display:flex; flex-direction:column; gap:8px; margin-bottom:16px; padding:12px 16px; background:var(--surface); border:1px solid var(--border); border-radius:10px; }
+  .brief-timeline-label { font-size:.78rem; font-weight:700; color:var(--text-muted); white-space:nowrap; }
   .brief-timeline-chips { display:flex; gap:8px; flex-wrap:nowrap; overflow-x:auto; padding-bottom:4px; }
   .brief-chip { border:2px solid; border-radius:10px; padding:8px 12px; min-width:100px; max-width:140px; display:flex; flex-direction:column; gap:2px; flex-shrink:0; transition:transform .15s; }
   .brief-chip:hover { transform:translateY(-2px); }
@@ -678,8 +678,16 @@
       </div>
     </div>
 
+    <!-- BOOKED PHASE TABS (Option A: nested tab navigation) -->
+    <div class="tabs" data-group="booked">
+      <button class="tab active" data-tab="b-action">Action Needed (8)</button>
+      <button class="tab" data-tab="b-ontrack">On Track (5)</button>
+      <button class="tab" data-tab="b-early">Early Stage (18)</button>
+      <button class="tab" data-tab="b-fees">Fee Summary (36)</button>
+    </div>
+
     <!-- ACTION NEEDED -->
-    <div class="section" id="b-action">
+    <div class="section active" id="b-action">
       <div class="section-header"><h2>Action Needed This Month</h2><span class="badge badge-orange">8 cases</span></div>
       <div class="case-grid">
         <div data-matter-id="veridiam" class="case-card" data-attorney="sm" data-mediation="2026-04-27" data-meddate="2026-04-27" data-brief-due="2026-04-20"><div class="cc-top"><span class="case-name">Douglas v. Veridiam</span><span class="drafts-chip-mount" data-matter="Douglas v. Veridiam"></span><span class="attorney att-sm">SM</span><span class="badge badge-green" style="margin-left:auto;font-size:.65rem;">UPDATED 4/3</span></div><div style="display:flex;gap:8px;margin-bottom:6px;flex-wrap:wrap;"><span class="badge badge-orange">APRIL 27</span><span class="badge badge-purple">Phase 3-4 — Data Exchange</span><span class="countdown cd-soon" data-meddate="2026-04-27"></span></div><div class="cc-status">Mediator: <strong>Steven Rottman</strong>. SD County 25CU011565C. Ogletree OC (Briana LaBriola). Non-data docs received 4/2 (VERIDIAM 000001-000485). <strong>Core time/payroll data promised 4/3.</strong> Fee $17K invoiced. Brief due 4/20.</div><div class="phase-indicator"><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip filled"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-pip"></div><div class="phase-label">Phase 3-4/7</div></div><div class="cc-action"><strong>Next</strong> SM — confirm receipt of time/payroll data today. Send to BCG immediately for analysis. Brief due 4/20 — outline by 4/10.</div></div>

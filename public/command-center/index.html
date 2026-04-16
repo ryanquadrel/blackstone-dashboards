@@ -955,14 +955,16 @@ async function init(){
 init();
 
 function buildCallsList(){
-  // Defensive dedup by caseId — Supabase active_cases occasionally emits
-  // duplicate rows (multi-source sync paths can collide), and EMBEDDED_CASE_DATA
-  // would faithfully render both. Collapse here so the calls table never shows
-  // the same case twice. Defect reported by Ryan 2026-04-16.
+  // Defensive dedup by matter_id — active_cases has separate (Class) and (PAGA)
+  // rows for cases filed both ways (e.g., Merical Class + Merical PAGA share
+  // matter_id="merical" but have different case_name). For client-call purposes
+  // those are the same matter and the team only needs one row. The earlier
+  // attempt deduped by caseId() but caseId includes _idx (always unique per
+  // EMBEDDED_CASE_DATA row), so dedup was a no-op. Fixed 2026-04-16.
   var seen={};
   var fc=allCases.filter(function(c){
     if(isPostSettlementGated(c))return false;
-    var k=caseId(c);
+    var k=c.matter_id||caseId(c);
     if(seen[k])return false;
     seen[k]=true;
     return true;

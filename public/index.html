@@ -88,7 +88,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 @media(max-width:1100px){.main{grid-template-columns:1fr}}
 
 /* ═══ SETTLEMENT BAR CHART ═══ */
-.chart-panel{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;overflow:hidden}
+.chart-panel{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;overflow:hidden;min-width:0}
 .chart-panel h2{font-size:1rem;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:8px}
 .chart-panel h2 .icon{font-size:1.1rem}
 .chart-panel .ch-sub{font-size:.76rem;color:var(--muted);margin-bottom:16px}
@@ -110,7 +110,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 .bar-amount{width:72px;font-size:.78rem;font-weight:700;color:var(--green);text-align:left;flex-shrink:0}
 
 /* ═══ RIGHT: TIMELINE + DONUT ═══ */
-.right-stack{display:flex;flex-direction:column;gap:20px}
+.right-stack{display:flex;flex-direction:column;gap:20px;min-width:0}
 
 /* DONUT */
 .donut-panel{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;display:flex;align-items:center;gap:24px}

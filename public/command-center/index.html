@@ -66,6 +66,9 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
 .layer-tab.active .count{background:var(--accent);color:#fff}
 .layer{display:none}
 .layer.active{display:block}
+/* layer-calls renders OUTSIDE .container in the source HTML — scope same width
+   constraints to it so its visual width matches the controls/health-strip above */
+#layer-calls{max-width:1700px;margin:0 auto;padding:0 24px}
 /* Attention */
 .aq-section-title{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--red);padding:12px 0 6px;border-bottom:1px solid var(--border);margin-bottom:8px}
 .aq-section-title.watch{color:var(--orange)}

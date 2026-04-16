@@ -84,7 +84,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 .ring-card:hover .arrow{color:var(--blue);transform:translateX(3px)}
 
 /* ═══ MAIN GRID ═══ */
-.main{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
+.main{display:grid;grid-template-columns:3fr 2fr;gap:20px;margin-bottom:24px}
 @media(max-width:1100px){.main{grid-template-columns:1fr}}
 
 /* ═══ SETTLEMENT BAR CHART ═══ */
@@ -94,7 +94,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 .chart-panel .ch-sub{font-size:.76rem;color:var(--muted);margin-bottom:16px}
 .bar-chart{display:flex;flex-direction:column;gap:8px}
 .bar-row{display:flex;align-items:center;gap:10px}
-.bar-label{width:130px;font-size:.78rem;font-weight:600;text-align:right;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar-label{width:170px;font-size:.78rem;font-weight:600;text-align:right;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .bar-track{flex:1;height:28px;background:var(--surface2);border-radius:6px;overflow:hidden;position:relative}
 .bar-fill{height:100%;border-radius:6px;transition:width 2s cubic-bezier(.4,0,.2,1);display:flex;align-items:center;justify-content:flex-end;padding-right:10px;font-size:.72rem;font-weight:700;color:#fff;min-width:0}
 .bar-fill.g1{background:linear-gradient(90deg,#10b981,#34d399)}

@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Portfolio Dashboard &mdash; Blackstone Law, APC</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+:root{
+  --bg:#0a0e1a; --surface:#131a2e; --surface2:#1a2340; --border:#243052;
+  --text:#e8ecf4; --muted:#7a8ba8; --dim:#4a5a78;
+  --blue:#4f8fff; --blue-g:rgba(79,143,255,.15); --blue-glow:rgba(79,143,255,.3);
+  --purple:#a855f7; --purple-g:rgba(168,85,247,.15);
+  --green:#10b981; --green-g:rgba(16,185,129,.15);
+  --orange:#f97316; --orange-g:rgba(249,115,22,.15);
+  --red:#ef4444; --red-g:rgba(239,68,68,.15);
+  --teal:#14b8a6; --teal-g:rgba(20,184,166,.15);
+  --yellow:#eab308; --yellow-g:rgba(234,179,8,.15);
+  --gold:#fbbf24; --pink:#ec4899; --slate:#64748b;
+
+  /* Owner colors */
+  --owner-ryan:#4f8fff;
+  --owner-saim:#fbbf24;
+  --owner-omri:#a855f7;
+  --owner-jd:#10b981;
+  --owner-doron:#14b8a6;
+  --owner-brett:#ef4444;
+  --owner-jonathan:#64748b;
+  --owner-firm:#7a8ba8;
+
+  /* Status + integration */
+  --st-production:#10b981;
+  --st-development:#f97316;
+  --st-concept:#a855f7;
+  --int-native:#4f8fff;
+  --int-bridge:#14b8a6;
+  --int-standalone:#fbbf24;
+  --int-platform:#a855f7;
+  --int-infrastructure:#7a8ba8;
+  --int-tbd:#4a5a78;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 20%,rgba(79,143,255,.06) 0%,transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(168,85,247,.04) 0%,transparent 60%);pointer-events:none;z-index:0}
+.wrap{max-width:1600px;margin:0 auto;padding:20px 24px 40px;position:relative;z-index:1}
+a{color:inherit}
+
+/* ═══ MISSION CONTROL BACK-LINK ═══ */
+.mc-home{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:9999;display:inline-flex;align-items:center;gap:8px;padding:8px 16px 8px 12px;background:linear-gradient(135deg,rgba(79,143,255,.12),rgba(168,85,247,.12));border:1px solid rgba(79,143,255,.25);border-radius:24px;text-decoration:none;color:#e8ecf4;font-size:.78rem;font-weight:600;letter-spacing:.01em;transition:all .3s cubic-bezier(.4,0,.2,1);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 2px 12px rgba(0,0,0,.3)}
+.mc-home:hover{border-color:rgba(79,143,255,.5);transform:translateX(-50%) translateY(-1px) scale(1.03);box-shadow:0 4px 20px rgba(79,143,255,.2),0 0 30px rgba(168,85,247,.1);background:linear-gradient(135deg,rgba(79,143,255,.2),rgba(168,85,247,.18))}
+.mc-home .mc-icon{font-size:1.1rem;transition:transform .3s}
+.mc-home:hover .mc-icon{transform:rotate(-15deg) scale(1.15)}
+.mc-home .mc-label{background:linear-gradient(135deg,#4f8fff,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.mc-home .mc-arrow{color:#4a5a78;font-size:.9rem;transition:all .2s}
+.mc-home:hover .mc-arrow{color:#4f8fff;transform:translateX(-3px)}
+
+/* ═══ HEADER ═══ */
+.hdr{padding:24px 0 20px;border-bottom:1px solid var(--border);margin-bottom:24px;margin-top:36px}
+.hdr-row{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap}
+.hdr h1{font-size:1.9rem;font-weight:800;letter-spacing:-.03em}
+.hdr h1 em{font-style:normal;background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hdr-sub{font-size:.85rem;color:var(--muted);margin-top:4px}
+.hdr-badge{background:linear-gradient(135deg,rgba(79,143,255,.12),rgba(168,85,247,.12));border:1px solid rgba(168,85,247,.3);color:var(--text);padding:8px 16px;border-radius:20px;font-size:.75rem;font-weight:600;letter-spacing:.02em}
+.hdr-meta{display:flex;gap:22px;margin-top:14px;font-size:.76rem;color:var(--muted);flex-wrap:wrap}
+.hdr-meta strong{color:var(--text)}
+
+/* ═══ SECTION ═══ */
+section{margin-bottom:36px}
+.sh{display:flex;align-items:baseline;gap:12px;margin-bottom:4px}
+.sh h2{font-size:1.15rem;font-weight:700;letter-spacing:-.01em}
+.sh-num{font-size:.7rem;font-weight:700;color:var(--dim);background:var(--surface);border:1px solid var(--border);padding:2px 8px;border-radius:10px}
+.ss{font-size:.8rem;color:var(--muted);margin-bottom:14px}
+
+/* ═══ OWNER LEGEND ═══ */
+.legend-wrap{display:flex;gap:10px;flex-wrap:wrap;padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;align-items:center}
+.legend-title{font-size:.68rem;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-right:4px}
+.legend-item{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);font-size:.72rem}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.legend-sep{width:1px;height:20px;background:var(--border);margin:0 6px}
+.legend-item.style-hyp{background:transparent;border:1.5px dashed var(--dim);color:var(--muted);opacity:.7}
+
+/* ═══ LIFECYCLE PIPELINE ═══ */
+.pipeline{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px 16px;overflow-x:auto}
+.pipeline-stages{display:grid;grid-template-columns:repeat(6,minmax(180px,1fr));gap:10px;position:relative}
+.pl-stage{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px 10px 14px;min-height:120px;display:flex;flex-direction:column}
+.pl-stage-hdr{display:flex;align-items:center;gap:8px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.pl-stage-title{font-size:.78rem;font-weight:700;letter-spacing:.01em;color:var(--text)}
+.pl-stage-count{font-size:.65rem;color:var(--dim);background:var(--bg);padding:1px 7px;border-radius:8px;margin-left:auto}
+.pl-node-list{display:flex;flex-direction:column;gap:6px}
+.pl-node{display:flex;align-items:center;gap:7px;padding:7px 9px;background:var(--bg);border:1px solid var(--border);border-left:3px solid var(--blue);border-radius:6px;font-size:.72rem;cursor:pointer;transition:all .15s;line-height:1.3}
+.pl-node:hover{border-color:var(--blue);transform:translateX(2px);box-shadow:0 2px 10px rgba(79,143,255,.15)}
+.pl-node-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+.pl-node-owners{display:flex;gap:2px;flex-shrink:0}
+.pl-node-owner-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.pl-node.hypothetical{border-style:dashed;opacity:.55;background:transparent}
+.pl-arrow{position:absolute;top:50%;right:-14px;width:10px;height:10px;border-top:1.5px solid var(--dim);border-right:1.5px solid var(--dim);transform:translateY(-50%) rotate(45deg);pointer-events:none;z-index:2}
+.pl-stage:last-child .pl-arrow{display:none}
+
+.pipeline-cross{margin-top:16px;padding:12px 14px;background:var(--surface2);border:1px dashed var(--border);border-radius:10px}
+.pipeline-cross-hdr{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.pipeline-cross-title{font-size:.74rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.pipeline-cross-note{font-size:.68rem;color:var(--dim)}
+.pipeline-cross-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:6px}
+
+/* ═══ NETWORK GRAPH ═══ */
+.net-wrap{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.net-filters{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.net-filters label{font-size:.68rem;text-transform:uppercase;color:var(--dim);letter-spacing:.08em;font-weight:700}
+.net-filters select{background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:6px 10px;border-radius:8px;font-size:.78rem;outline:none;cursor:pointer}
+.net-filters select:focus{border-color:var(--blue)}
+.net-toggle{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid var(--border);border-radius:8px;background:var(--surface2);font-size:.76rem;cursor:pointer;user-select:none;transition:all .15s}
+.net-toggle:hover{border-color:var(--blue)}
+.net-toggle input{accent-color:var(--blue)}
+.net-reset{padding:6px 14px;border:1px solid var(--border);background:var(--surface2);color:var(--muted);border-radius:8px;font-size:.72rem;cursor:pointer;font-weight:600}
+.net-reset:hover{color:var(--text);border-color:var(--blue)}
+.net-hint{font-size:.72rem;color:var(--dim);margin-left:auto}
+#networkSvg{display:block;width:100%;height:640px;background:radial-gradient(circle at center,rgba(79,143,255,.03),transparent 70%)}
+.net-link{stroke:#2a3552;stroke-width:1;opacity:.45;transition:all .2s}
+.net-link.highlight{stroke:var(--blue);stroke-width:2;opacity:1}
+.net-link.dim{opacity:.08}
+.net-node{cursor:pointer;transition:all .2s}
+.net-node circle{stroke:var(--bg);stroke-width:2;transition:all .2s}
+.net-node:hover circle{stroke:#fff;filter:drop-shadow(0 0 10px currentColor)}
+.net-node.hypothetical circle{stroke-dasharray:3 3;fill-opacity:.45}
+.net-node.dim{opacity:.18}
+.net-node text{font-size:9px;fill:var(--text);pointer-events:none;text-anchor:middle;font-weight:600}
+.net-node.hypothetical text{fill:var(--muted)}
+.net-node.highlight text{fill:#fff}
+.net-tooltip{position:absolute;background:var(--surface2);border:1px solid var(--blue);border-radius:8px;padding:8px 12px;font-size:.75rem;color:var(--text);pointer-events:none;opacity:0;transition:opacity .15s;max-width:280px;box-shadow:0 6px 24px rgba(0,0,0,.4);z-index:20}
+.net-tooltip .tt-owners{display:flex;gap:4px;margin-top:4px}
+.net-tooltip .tt-desc{color:var(--muted);font-size:.7rem;margin-top:4px}
+
+/* ═══ HEATMAP ═══ */
+.hmap-wrap{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;overflow-x:auto}
+.hmap{border-collapse:separate;border-spacing:0;width:100%;min-width:700px}
+.hmap th,.hmap td{padding:8px 10px;text-align:center;font-size:.78rem;border:1px solid var(--border)}
+.hmap thead th{background:var(--surface2);color:var(--muted);font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700;position:sticky;top:0}
+.hmap thead th.hmap-owner-hdr{color:var(--text);border-bottom-width:2px}
+.hmap tbody td.hmap-row-label{text-align:left;color:var(--text);font-weight:600;font-size:.76rem;background:var(--surface2);white-space:nowrap}
+.hmap tbody td.hmap-cell{transition:all .15s;cursor:default}
+.hmap tbody td.hmap-cell[data-count="0"]{color:var(--dim);background:var(--bg)}
+.hmap tfoot td{background:var(--surface2);font-weight:700;color:var(--text)}
+.hmap tfoot td.hmap-total-label{text-align:left;color:var(--muted);text-transform:uppercase;font-size:.68rem;letter-spacing:.06em}
+.hmap .hmap-rowtotal{background:var(--surface2);font-weight:700;color:var(--text)}
+
+/* ═══ CONVERGENCE BAR ═══ */
+.conv-wrap{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px}
+.conv-legend{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;font-size:.72rem}
+.conv-legend-item{display:inline-flex;align-items:center;gap:6px;color:var(--muted)}
+.conv-legend-dot{width:12px;height:12px;border-radius:3px}
+.conv-rows{display:flex;flex-direction:column;gap:10px}
+.conv-row{display:flex;align-items:center;gap:12px}
+.conv-row-label{width:220px;font-size:.78rem;font-weight:600;text-align:right;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text)}
+.conv-track{flex:1;height:30px;display:flex;background:var(--surface2);border-radius:6px;overflow:hidden;position:relative}
+.conv-seg{height:100%;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;color:#fff;transition:filter .15s;cursor:default}
+.conv-seg:hover{filter:brightness(1.15)}
+.conv-total{width:36px;font-size:.76rem;font-weight:700;color:var(--text);text-align:left;flex-shrink:0}
+
+/* ═══ OVERLAPS / GAPS / SEAMS ═══ */
+.ogs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:1100px){.ogs{grid-template-columns:1fr}}
+.ogs-col{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px}
+.ogs-col h3{font-size:.88rem;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.ogs-col h3 .icon{font-size:1rem}
+.ogs-col .ogs-sub{font-size:.72rem;color:var(--muted);margin-bottom:12px}
+.ogs-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:10px;transition:all .15s}
+.ogs-card:hover{border-color:var(--blue)}
+.ogs-card.pri1{border-color:var(--red);background:linear-gradient(135deg,rgba(239,68,68,.08),var(--surface2))}
+.ogs-card-title{font-size:.85rem;font-weight:700;margin-bottom:5px;display:flex;align-items:center;gap:8px}
+.ogs-card .pri-badge{display:inline-block;background:var(--red-g);color:var(--red);font-size:.62rem;padding:2px 8px;border-radius:8px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.ogs-card-desc{font-size:.76rem;color:var(--muted);line-height:1.55}
+.ogs-card-meta{margin-top:8px;font-size:.7rem;color:var(--dim)}
+.ogs-card-meta b{color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:.64rem;display:block;margin-bottom:3px}
+.ogs-chip{display:inline-block;padding:2px 8px;margin:2px 3px 2px 0;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:.68rem;color:var(--text);cursor:pointer;transition:all .15s}
+.ogs-chip:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-1px)}
+.ogs-chip.resolution{background:var(--green-g);border-color:var(--green);color:var(--green)}
+
+/* ═══ DETAIL MODAL ═══ */
+.modal-overlay{position:fixed;inset:0;background:rgba(4,8,20,.75);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:100;opacity:0;pointer-events:none;transition:opacity .2s}
+.modal-overlay.open{opacity:1;pointer-events:auto}
+.modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.95);background:var(--surface);border:1px solid var(--border);border-radius:14px;width:min(640px,92vw);max-height:85vh;overflow-y:auto;z-index:101;opacity:0;pointer-events:none;transition:all .2s;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.modal.open{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+.modal-hdr{padding:20px 24px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--surface);z-index:2}
+.modal-title{font-size:1.2rem;font-weight:700;padding-right:30px}
+.modal-close{position:absolute;top:18px;right:18px;background:var(--surface2);border:1px solid var(--border);color:var(--muted);width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.modal-close:hover{color:var(--text);border-color:var(--red)}
+.modal-body{padding:16px 24px 24px}
+.modal-badges{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.mbadge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:10px;font-size:.68rem;font-weight:700;letter-spacing:.02em;background:var(--surface2);border:1px solid var(--border)}
+.mbadge-dot{width:8px;height:8px;border-radius:50%}
+.modal-section{margin-top:16px}
+.modal-section h4{font-size:.7rem;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:8px}
+.modal-section p{font-size:.85rem;color:var(--text);line-height:1.6}
+.modal-list{list-style:none;padding:0}
+.modal-list li{padding:6px 0;font-size:.8rem;color:var(--muted);border-bottom:1px solid var(--border)}
+.modal-list li:last-child{border-bottom:none}
+.modal-chips{display:flex;flex-wrap:wrap;gap:6px}
+.modal-chip{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:4px 10px;font-size:.74rem;cursor:pointer;transition:all .15s;color:var(--text)}
+.modal-chip:hover{border-color:var(--blue);color:var(--blue)}
+.modal-flag{display:inline-block;padding:3px 9px;margin:2px 4px 2px 0;background:var(--orange-g);border:1px solid var(--orange);color:var(--orange);border-radius:6px;font-size:.66rem;font-weight:600;letter-spacing:.02em}
+.modal-flag.gap-priority-1{background:var(--red-g);border-color:var(--red);color:var(--red)}
+.modal-flag.convergence-target{background:var(--purple-g);border-color:var(--purple);color:var(--purple)}
+
+/* Owner badges */
+.obadge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:10px;font-size:.72rem;font-weight:600;background:var(--surface2);border:1px solid var(--border)}
+.obadge-dot{width:8px;height:8px;border-radius:50%}
+.obadge.joint{background:linear-gradient(90deg,var(--c1,#7a8ba8) 0%,var(--c1) 50%,var(--c2,#7a8ba8) 50%,var(--c2) 100%);background-clip:padding-box;color:#fff;border:none;padding:4px 12px;font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+
+.pulse{animation:pulse-ring 1.2s ease-out 2}
+@keyframes pulse-ring{0%{box-shadow:0 0 0 0 rgba(79,143,255,.7)}100%{box-shadow:0 0 0 24px rgba(79,143,255,0)}}
+
+/* Footer */
+.foot{padding:18px 0 0;border-top:1px solid var(--border);font-size:.72rem;color:var(--dim);text-align:center;margin-top:20px}
+
+/* Loading */
+.loading{display:flex;align-items:center;justify-content:center;padding:60px;font-size:.9rem;color:var(--muted)}
+
+@media(max-width:900px){
+  .wrap{padding:16px}
+  .pipeline-stages{grid-template-columns:repeat(3,260px)}
+  .conv-row-label{width:150px;font-size:.72rem}
+}
+</style>
+</head>
+<body>
+<a href="/" class="mc-home" title="Back to Mission Control"><span class="mc-arrow">&larr;</span><span class="mc-icon">&#128640;</span><span class="mc-label">Mission Control</span></a>
+
+<div class="wrap">
+  <!-- HEADER -->
+  <header class="hdr">
+    <div class="hdr-row">
+      <div>
+        <h1>AI <em>Portfolio</em> Dashboard</h1>
+        <div class="hdr-sub">Blackstone AI Committee &mdash; System Inventory, Dependencies &amp; Coordination Map</div>
+      </div>
+      <div class="hdr-badge">Committee Source of Truth &bull; v1.0</div>
+    </div>
+    <div class="hdr-meta">
+      <span>Generated: <strong id="mGenerated">&mdash;</strong></span>
+      <span>Systems: <strong id="mSystems">&mdash;</strong></span>
+      <span>Categories: <strong id="mCats">&mdash;</strong></span>
+      <span>Owners: <strong id="mOwners">&mdash;</strong></span>
+      <span>Convergence target: <strong style="color:var(--purple)">Blackstone AI Platform</strong></span>
+    </div>
+  </header>
+
+  <!-- OWNER LEGEND -->
+  <section>
+    <div class="legend-wrap" id="ownerLegend">
+      <span class="legend-title">Owners</span>
+      <!-- JS fills -->
+      <span class="legend-sep"></span>
+      <span class="legend-title">Style</span>
+      <span class="legend-item style-hyp"><span class="legend-dot" style="background:transparent;border:1.5px dashed var(--muted)"></span>Hypothetical / concept</span>
+      <span class="legend-item"><span class="legend-dot" style="background:linear-gradient(90deg,var(--green) 50%,var(--gold) 50%)"></span>Joint-owned</span>
+    </div>
+  </section>
+
+  <!-- 1. LIFECYCLE PIPELINE -->
+  <section>
+    <div class="sh"><h2>1. Case Lifecycle Pipeline</h2><span class="sh-num" id="lcCount">&mdash;</span></div>
+    <div class="ss">How a matter moves through firm systems from intake to settlement. Cross-cutting systems (Operations, Memory, Drafts Registry) sit below.</div>
+    <div class="pipeline">
+      <div class="pipeline-stages" id="pipelineStages"></div>
+      <div class="pipeline-cross">
+        <div class="pipeline-cross-hdr">
+          <span class="pipeline-cross-title">Cross-Cutting Systems</span>
+          <span class="pipeline-cross-note">Apply across all lifecycle stages &mdash; operations, memory, drafting infrastructure, platform</span>
+        </div>
+        <div class="pipeline-cross-grid" id="pipelineCross"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. NETWORK GRAPH -->
+  <section>
+    <div class="sh"><h2>2. System Connection Network</h2><span class="sh-num" id="netCount">&mdash;</span></div>
+    <div class="ss">Force-directed graph of cross-system dependencies. Node size scales with connection degree &mdash; hub nodes (Memory System, Case Command Center, Drafts Registry) are visually prominent.</div>
+    <div class="net-wrap">
+      <div class="net-filters">
+        <label>Category</label>
+        <select id="fCategory"><option value="">All</option></select>
+        <label>Owner</label>
+        <select id="fOwner"><option value="">All</option></select>
+        <label>Status</label>
+        <select id="fStatus"><option value="">All</option></select>
+        <label class="net-toggle"><input type="checkbox" id="fHypothetical" checked> Show hypothetical</label>
+        <button class="net-reset" id="fReset">Reset</button>
+        <span class="net-hint">Hover to highlight &bull; Click for detail</span>
+      </div>
+      <svg id="networkSvg"></svg>
+      <div class="net-tooltip" id="netTooltip"></div>
+    </div>
+  </section>
+
+  <!-- 3. HEATMAP -->
+  <section>
+    <div class="sh"><h2>3. Category &times; Ownership Heatmap</h2><span class="sh-num" id="hmCount">&mdash;</span></div>
+    <div class="ss">Proportional ownership across the eight functional categories. Color intensity scales with count; row and column totals shown.</div>
+    <div class="hmap-wrap">
+      <table class="hmap" id="heatmap"></table>
+    </div>
+  </section>
+
+  <!-- 4. CONVERGENCE -->
+  <section>
+    <div class="sh"><h2>4. Convergence Status Map</h2><span class="sh-num" id="cvCount">&mdash;</span></div>
+    <div class="ss">Integration posture of each category relative to the Blackstone AI Platform. Native + Bridge = firm-stack integrated. Standalone + TBD = convergence candidates.</div>
+    <div class="conv-wrap">
+      <div class="conv-legend" id="convLegend"></div>
+      <div class="conv-rows" id="convRows"></div>
+    </div>
+  </section>
+
+  <!-- 5. OGS -->
+  <section>
+    <div class="sh"><h2>5. Overlaps, Gaps &amp; Architectural Seams</h2><span class="sh-num" id="ogsCount">&mdash;</span></div>
+    <div class="ss">Committee action items. Click any system chip to pulse it in the network graph above.</div>
+    <div class="ogs">
+      <div class="ogs-col" id="colOverlaps">
+        <h3><span class="icon">&#128279;</span>Overlaps Worth Reconciling</h3>
+        <div class="ogs-sub">Parallel systems where coordination or consolidation would strengthen the portfolio</div>
+        <div id="overlapsList"></div>
+      </div>
+      <div class="ogs-col" id="colGaps">
+        <h3><span class="icon">&#128200;</span>Capability Gaps</h3>
+        <div class="ogs-sub">Missing capabilities surfaced by committee discussion. Priority-1 items flagged.</div>
+        <div id="gapsList"></div>
+      </div>
+      <div class="ogs-col" id="colSeams">
+        <h3><span class="icon">&#129693;</span>Architectural Integration Seams</h3>
+        <div class="ogs-sub">Shared interfaces that multiple systems already consume or could consume</div>
+        <div id="seamsList"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot">
+    Blackstone Law, APC &bull; AI Portfolio Dashboard &bull; Data source: <code>data.json</code> (source of truth, version-controlled in GitHub)
+  </div>
+</div>
+
+<!-- DETAIL MODAL -->
+<div class="modal-overlay" id="modalOverlay"></div>
+<div class="modal" id="detailModal" role="dialog" aria-modal="true">
+  <div class="modal-hdr">
+    <div class="modal-title" id="mdTitle">&mdash;</div>
+    <button class="modal-close" id="mdClose" aria-label="Close">&times;</button>
+  </div>
+  <div class="modal-body" id="mdBody"></div>
+</div>
+
+<script>
+/* ─────────── Owner color map ─────────── */
+const OWNER_COLORS = {
+  "Ryan Quadrel":"#4f8fff",
+  "Saim Khan":"#fbbf24",
+  "Omri Cohen":"#a855f7",
+  "Joshua Duran":"#10b981",
+  "Doron Reiffman":"#14b8a6",
+  "Brett Ferguson":"#ef4444",
+  "Jonathan Genish":"#64748b",
+  "Firm":"#7a8ba8"
+};
+const STATUS_COLORS = {"Production":"#10b981","Development":"#f97316","Concept":"#a855f7"};
+const INTEGRATION_COLORS = {"Native":"#4f8fff","Bridge":"#14b8a6","Standalone":"#fbbf24","Platform":"#a855f7","Infrastructure":"#7a8ba8","TBD":"#4a5a78"};
+const STAGE_ORDER = ["Intake","Onboarding","Discovery","Motion Practice","Mediation","Settlement"];
+const STAGE_ICONS = {"Intake":"&#128222;","Onboarding":"&#128196;","Discovery":"&#128269;","Motion Practice":"&#9889;","Mediation":"&#128176;","Settlement":"&#9989;"};
+
+let DATA = null;
+let SYS_BY_ID = {};
+let DEGREE = {};
+
+/* ─────────── Boot ─────────── */
+fetch('data.json').then(r => r.json()).then(data => {
+  DATA = data;
+  data.systems.forEach(s => SYS_BY_ID[s.id] = s);
+  computeDegree();
+  renderHeader();
+  renderOwnerLegend();
+  renderLifecycle();
+  renderNetwork();
+  renderHeatmap();
+  renderConvergence();
+  renderOGS();
+}).catch(err => {
+  document.querySelector('.wrap').insertAdjacentHTML('beforeend','<div class="loading" style="color:var(--red)">Failed to load data.json: ' + err.message + '</div>');
+  console.error(err);
+});
+
+function computeDegree(){
+  DATA.systems.forEach(s => { DEGREE[s.id] = (s.connects_to||[]).length; });
+  DATA.systems.forEach(s => (s.connects_to||[]).forEach(t => { if(DEGREE[t] !== undefined) DEGREE[t]++; }));
+}
+
+/* ─────────── Header ─────────── */
+function renderHeader(){
+  const m = DATA.meta || {};
+  document.getElementById('mGenerated').textContent = m.generated || '—';
+  document.getElementById('mSystems').textContent = DATA.systems.length;
+  document.getElementById('mCats').textContent = DATA.categories.length;
+  document.getElementById('mOwners').textContent = DATA.owners.length;
+}
+
+/* ─────────── Owner legend ─────────── */
+function renderOwnerLegend(){
+  const host = document.getElementById('ownerLegend');
+  const counts = {};
+  DATA.systems.forEach(s => (s.owners||[]).forEach(o => counts[o] = (counts[o]||0) + 1));
+  const frag = document.createDocumentFragment();
+  DATA.owners.forEach(o => {
+    const el = document.createElement('span');
+    el.className = 'legend-item';
+    el.innerHTML = '<span class="legend-dot" style="background:' + OWNER_COLORS[o] + '"></span>' + o + ' <span style="color:var(--dim);margin-left:4px;font-weight:600">' + (counts[o]||0) + '</span>';
+    frag.appendChild(el);
+  });
+  host.querySelector('.legend-title').after(frag);
+}
+
+/* ─────────── Lifecycle ─────────── */
+function renderLifecycle(){
+  const stageHost = document.getElementById('pipelineStages');
+  const crossHost = document.getElementById('pipelineCross');
+
+  const stageMap = {};
+  STAGE_ORDER.forEach(s => stageMap[s] = []);
+  const crossList = [];
+  DATA.systems.forEach(s => {
+    if(s.lifecycle_stage === 'Cross-Cutting') crossList.push(s);
+    else if(stageMap[s.lifecycle_stage]) stageMap[s.lifecycle_stage].push(s);
+  });
+
+  STAGE_ORDER.forEach((stage, idx) => {
+    const systems = stageMap[stage];
+    const st = document.createElement('div');
+    st.className = 'pl-stage';
+    const list = systems.map(s => nodeHTML(s)).join('');
+    st.innerHTML = '<div class="pl-stage-hdr"><span style="font-size:1rem">' + STAGE_ICONS[stage] + '</span><span class="pl-stage-title">' + stage + '</span><span class="pl-stage-count">' + systems.length + '</span></div><div class="pl-node-list">' + (list || '<div style="font-size:.68rem;color:var(--dim);font-style:italic;padding:8px 4px">no lifecycle-pinned systems</div>') + '</div>' + (idx < STAGE_ORDER.length - 1 ? '<div class="pl-arrow"></div>' : '');
+    stageHost.appendChild(st);
+  });
+
+  crossList.sort((a,b) => (DEGREE[b.id]||0) - (DEGREE[a.id]||0));
+  crossList.forEach(s => crossHost.insertAdjacentHTML('beforeend', nodeHTML(s)));
+
+  document.getElementById('lcCount').textContent = DATA.systems.length + ' systems';
+
+  stageHost.addEventListener('click', handleNodeClick);
+  crossHost.addEventListener('click', handleNodeClick);
+}
+
+function nodeHTML(s){
+  const primary = (s.owners && s.owners[0]) || 'Firm';
+  const primaryCol = OWNER_COLORS[primary] || '#7a8ba8';
+  const dots = (s.owners||[]).map(o => '<span class="pl-node-owner-dot" style="background:' + (OWNER_COLORS[o]||'#7a8ba8') + '"></span>').join('');
+  return '<div class="pl-node' + (s.is_hypothetical ? ' hypothetical' : '') + '" data-id="' + s.id + '" style="border-left-color:' + primaryCol + '"><span class="pl-node-name">' + esc(s.name) + '</span><span class="pl-node-owners">' + dots + '</span></div>';
+}
+
+function handleNodeClick(e){
+  const n = e.target.closest('.pl-node,.ogs-chip,.modal-chip');
+  if(n && n.dataset.id) openDetail(n.dataset.id);
+}
+
+/* ─────────── Network graph (D3) ─────────── */
+let NET_STATE = { nodes:[], links:[], sim:null, svg:null, nodeG:null, linkG:null };
+
+function renderNetwork(){
+  const svgEl = document.getElementById('networkSvg');
+  const rect = svgEl.getBoundingClientRect();
+  const width = rect.width, height = rect.height;
+
+  const svg = d3.select(svgEl);
+  svg.selectAll('*').remove();
+
+  const g = svg.append('g');
+  const linkG = g.append('g').attr('class','net-links');
+  const nodeG = g.append('g').attr('class','net-nodes');
+
+  const zoom = d3.zoom().scaleExtent([0.4, 3]).on('zoom', ev => g.attr('transform', ev.transform));
+  svg.call(zoom);
+
+  NET_STATE.svg = svg;
+  NET_STATE.linkG = linkG;
+  NET_STATE.nodeG = nodeG;
+  NET_STATE.width = width;
+  NET_STATE.height = height;
+
+  // Populate filter dropdowns
+  const fCat = document.getElementById('fCategory');
+  DATA.categories.forEach(c => fCat.insertAdjacentHTML('beforeend','<option>' + c + '</option>'));
+  const fOwn = document.getElementById('fOwner');
+  DATA.owners.forEach(o => fOwn.insertAdjacentHTML('beforeend','<option>' + o + '</option>'));
+  const fSt = document.getElementById('fStatus');
+  DATA.statuses.forEach(s => fSt.insertAdjacentHTML('beforeend','<option>' + s + '</option>'));
+
+  ['fCategory','fOwner','fStatus','fHypothetical'].forEach(id => {
+    document.getElementById(id).addEventListener('change', applyFilters);
+  });
+  document.getElementById('fReset').addEventListener('click', () => {
+    document.getElementById('fCategory').value = '';
+    document.getElementById('fOwner').value = '';
+    document.getElementById('fStatus').value = '';
+    document.getElementById('fHypothetical').checked = true;
+    applyFilters();
+  });
+
+  buildGraph();
+  document.getElementById('netCount').textContent = NET_STATE.nodes.length + ' nodes / ' + NET_STATE.links.length + ' edges';
+}
+
+function buildGraph(){
+  const nodes = DATA.systems.map(s => ({
+    id:s.id, name:s.name, owners:s.owners||[], category:s.category,
+    status:s.status, hypothetical:!!s.is_hypothetical,
+    degree:DEGREE[s.id]||0, raw:s
+  }));
+  const nodeIds = new Set(nodes.map(n => n.id));
+  const links = [];
+  DATA.systems.forEach(s => (s.connects_to||[]).forEach(t => {
+    if(nodeIds.has(t) && s.id !== t) links.push({ source:s.id, target:t });
+  }));
+
+  NET_STATE.nodes = nodes;
+  NET_STATE.links = links;
+
+  const { linkG, nodeG, width, height } = NET_STATE;
+
+  const linkSel = linkG.selectAll('line').data(links).join('line').attr('class','net-link');
+
+  const nodeSel = nodeG.selectAll('g.net-node').data(nodes, d => d.id).join(enter => {
+    const g = enter.append('g').attr('class', d => 'net-node' + (d.hypothetical ? ' hypothetical' : '')).attr('data-id', d => d.id);
+    g.append('circle')
+      .attr('r', d => radius(d))
+      .attr('fill', d => ownerFill(d));
+    g.append('text')
+      .attr('dy', d => radius(d) + 11)
+      .text(d => truncate(d.name, 22));
+    return g;
+  });
+
+  nodeSel.on('click', (e,d) => { e.stopPropagation(); openDetail(d.id); })
+    .on('mouseover', (e,d) => handleHover(d, true))
+    .on('mouseout', (e,d) => handleHover(d, false));
+
+  if(NET_STATE.sim) NET_STATE.sim.stop();
+  const sim = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(links).id(d => d.id).distance(75).strength(0.6))
+    .force('charge', d3.forceManyBody().strength(-260))
+    .force('center', d3.forceCenter(width/2, height/2))
+    .force('collision', d3.forceCollide().radius(d => radius(d) + 14))
+    .stop();
+
+  const syncPositions = () => {
+    linkSel.attr('x1', d => d.source.x).attr('y1', d => d.source.y).attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    nodeSel.attr('transform', d => 'translate(' + d.x + ',' + d.y + ')');
+  };
+
+  // Pre-tick synchronously so positions settle without relying on requestAnimationFrame
+  // (works in headless/background browser environments).
+  const iterations = Math.ceil(Math.log(sim.alphaMin()) / Math.log(1 - sim.alphaDecay()));
+  for(let i = 0; i < iterations; i++) sim.tick();
+  syncPositions();
+
+  sim.on('tick', syncPositions);
+  NET_STATE.sim = sim;
+
+  nodeSel.call(d3.drag()
+    .on('start', (e,d) => { if(!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+    .on('drag', (e,d) => { d.fx = e.x; d.fy = e.y; syncPositions(); })
+    .on('end', (e,d) => { if(!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; })
+  );
+}
+
+function radius(d){
+  // base 8, scale with sqrt(degree)
+  return 8 + Math.sqrt(d.degree) * 4;
+}
+
+function ownerFill(d){
+  if(d.owners.length === 1) return OWNER_COLORS[d.owners[0]] || '#7a8ba8';
+  // Joint-owned: use first owner color (gradient rendering at SVG level is complex; primary + ring)
+  return OWNER_COLORS[d.owners[0]] || '#7a8ba8';
+}
+
+function truncate(s, n){ return s.length > n ? s.slice(0, n-1) + '…' : s; }
+
+function handleHover(d, on){
+  if(!on){
+    NET_STATE.nodeG.selectAll('g.net-node').classed('dim', false).classed('highlight', false);
+    NET_STATE.linkG.selectAll('line').classed('highlight', false).classed('dim', false);
+    hideNetTooltip();
+    return;
+  }
+  const connected = new Set([d.id]);
+  NET_STATE.links.forEach(l => {
+    const sid = l.source.id || l.source, tid = l.target.id || l.target;
+    if(sid === d.id) connected.add(tid);
+    if(tid === d.id) connected.add(sid);
+  });
+  NET_STATE.nodeG.selectAll('g.net-node')
+    .classed('dim', x => !connected.has(x.id))
+    .classed('highlight', x => x.id === d.id);
+  NET_STATE.linkG.selectAll('line')
+    .classed('highlight', l => (l.source.id||l.source) === d.id || (l.target.id||l.target) === d.id)
+    .classed('dim', l => (l.source.id||l.source) !== d.id && (l.target.id||l.target) !== d.id);
+  showNetTooltip(d);
+}
+
+function showNetTooltip(d){
+  const tt = document.getElementById('netTooltip');
+  const s = d.raw;
+  const owners = s.owners.map(o => '<span class="obadge-dot" style="background:' + OWNER_COLORS[o] + ';display:inline-block;margin-right:3px"></span>' + o).join(' &middot; ');
+  tt.innerHTML = '<div style="font-weight:700;font-size:.82rem">' + esc(s.name) + '</div><div style="font-size:.7rem;color:var(--muted);margin-top:3px">' + s.category + ' &bull; ' + s.status + ' &bull; ' + s.integration + (s.is_hypothetical ? ' &bull; <span style="color:var(--purple)">hypothetical</span>' : '') + '</div><div class="tt-owners" style="margin-top:4px;font-size:.72rem">' + owners + '</div>';
+  tt.style.opacity = '1';
+  document.addEventListener('mousemove', moveNetTooltip);
+}
+
+function moveNetTooltip(e){
+  const tt = document.getElementById('netTooltip');
+  const wrap = tt.closest('.net-wrap').getBoundingClientRect();
+  tt.style.left = (e.clientX - wrap.left + 14) + 'px';
+  tt.style.top = (e.clientY - wrap.top + 14) + 'px';
+}
+
+function hideNetTooltip(){
+  document.getElementById('netTooltip').style.opacity = '0';
+  document.removeEventListener('mousemove', moveNetTooltip);
+}
+
+function applyFilters(){
+  const cat = document.getElementById('fCategory').value;
+  const own = document.getElementById('fOwner').value;
+  const st  = document.getElementById('fStatus').value;
+  const showHyp = document.getElementById('fHypothetical').checked;
+
+  const match = n => {
+    if(cat && n.category !== cat) return false;
+    if(own && !n.owners.includes(own)) return false;
+    if(st && n.status !== st) return false;
+    if(!showHyp && n.hypothetical) return false;
+    return true;
+  };
+
+  NET_STATE.nodeG.selectAll('g.net-node').style('display', d => match(d) ? null : 'none');
+  NET_STATE.linkG.selectAll('line').style('display', l => {
+    const s = typeof l.source === 'object' ? l.source : NET_STATE.nodes.find(n => n.id===l.source);
+    const t = typeof l.target === 'object' ? l.target : NET_STATE.nodes.find(n => n.id===l.target);
+    return (s && t && match(s) && match(t)) ? null : 'none';
+  });
+}
+
+/* ─────────── Heatmap ─────────── */
+function renderHeatmap(){
+  const tbl = document.getElementById('heatmap');
+  const cats = DATA.categories;
+  const owners = DATA.owners;
+
+  // Build count grid
+  const grid = {};
+  cats.forEach(c => { grid[c] = {}; owners.forEach(o => grid[c][o] = 0); });
+  DATA.systems.forEach(s => (s.owners||[]).forEach(o => { if(grid[s.category] && grid[s.category][o] !== undefined) grid[s.category][o]++; }));
+
+  let maxCount = 0;
+  cats.forEach(c => owners.forEach(o => { if(grid[c][o] > maxCount) maxCount = grid[c][o]; }));
+
+  let h = '<thead><tr><th class="hmap-owner-hdr" style="text-align:left">Category</th>';
+  owners.forEach(o => h += '<th class="hmap-owner-hdr" style="color:' + OWNER_COLORS[o] + '">' + shortOwner(o) + '</th>');
+  h += '<th class="hmap-owner-hdr">Total</th></tr></thead><tbody>';
+
+  const colTotals = {}; owners.forEach(o => colTotals[o] = 0);
+  let grandTotal = 0;
+
+  cats.forEach(c => {
+    let rowTotal = 0;
+    h += '<tr><td class="hmap-row-label">' + c + '</td>';
+    owners.forEach(o => {
+      const count = grid[c][o];
+      rowTotal += count;
+      colTotals[o] += count;
+      const intensity = count === 0 ? 0 : 0.12 + (count / maxCount) * 0.55;
+      const bg = count === 0 ? 'var(--bg)' : 'rgba(' + hexToRgb(OWNER_COLORS[o]) + ',' + intensity.toFixed(2) + ')';
+      const color = count === 0 ? 'var(--dim)' : (intensity > 0.4 ? '#fff' : 'var(--text)');
+      h += '<td class="hmap-cell" data-count="' + count + '" style="background:' + bg + ';color:' + color + '">' + count + '</td>';
+    });
+    h += '<td class="hmap-rowtotal">' + rowTotal + '</td></tr>';
+    grandTotal += rowTotal;
+  });
+  h += '</tbody><tfoot><tr><td class="hmap-total-label">Owner total</td>';
+  owners.forEach(o => h += '<td>' + colTotals[o] + '</td>');
+  h += '<td style="color:var(--blue)">' + grandTotal + '</td></tr></tfoot>';
+  tbl.innerHTML = h;
+  document.getElementById('hmCount').textContent = grandTotal + ' ownership rows';
+}
+
+function shortOwner(o){
+  if(o === 'Firm') return 'Firm';
+  const parts = o.split(' ');
+  return parts[0] + (parts[1] ? ' ' + parts[1][0] + '.' : '');
+}
+
+function hexToRgb(h){
+  const m = h.replace('#','').match(/.{2}/g);
+  return parseInt(m[0],16)+','+parseInt(m[1],16)+','+parseInt(m[2],16);
+}
+
+/* ─────────── Convergence ─────────── */
+function renderConvergence(){
+  const legendHost = document.getElementById('convLegend');
+  const rowsHost = document.getElementById('convRows');
+
+  // Legend
+  DATA.integration_types.forEach(t => {
+    legendHost.insertAdjacentHTML('beforeend','<span class="conv-legend-item"><span class="conv-legend-dot" style="background:' + INTEGRATION_COLORS[t] + '"></span>' + t + '</span>');
+  });
+
+  // Count per category per integration type
+  const grid = {};
+  DATA.categories.forEach(c => { grid[c] = {}; DATA.integration_types.forEach(t => grid[c][t] = 0); });
+  DATA.systems.forEach(s => { if(grid[s.category] && grid[s.category][s.integration] !== undefined) grid[s.category][s.integration]++; });
+
+  // Find max category total for scaling
+  const totals = DATA.categories.map(c => DATA.integration_types.reduce((a,t) => a + grid[c][t], 0));
+  const maxTotal = Math.max(...totals, 1);
+
+  DATA.categories.forEach((c, i) => {
+    const total = totals[i];
+    let segs = '';
+    DATA.integration_types.forEach(t => {
+      const count = grid[c][t];
+      if(count === 0) return;
+      const pct = (count / total) * 100;
+      segs += '<div class="conv-seg" style="width:' + pct.toFixed(2) + '%;background:' + INTEGRATION_COLORS[t] + '" title="' + t + ': ' + count + ' system' + (count>1?'s':'') + '">' + (pct > 14 ? count + ' ' + t : (pct > 7 ? count : '')) + '</div>';
+    });
+    const trackWidth = (total / maxTotal) * 100;
+    rowsHost.insertAdjacentHTML('beforeend',
+      '<div class="conv-row"><div class="conv-row-label">' + c + '</div><div class="conv-track" style="width:calc(' + trackWidth.toFixed(2) + '% - 56px)">' + segs + '</div><div class="conv-total">' + total + '</div></div>'
+    );
+  });
+
+  document.getElementById('cvCount').textContent = DATA.categories.length + ' categories';
+}
+
+/* ─────────── Overlaps / Gaps / Seams ─────────── */
+function renderOGS(){
+  const oHost = document.getElementById('overlapsList');
+  const gHost = document.getElementById('gapsList');
+  const sHost = document.getElementById('seamsList');
+
+  (DATA.overlaps||[]).forEach(o => {
+    const involved = (o.systems_involved||[]).map(id => systemChipHTML(id)).join('');
+    const resolution = o.resolution_system ? '<div class="ogs-card-meta" style="margin-top:10px"><b>Proposed resolution</b>' + systemChipHTML(o.resolution_system, true) + '</div>' : '';
+    oHost.insertAdjacentHTML('beforeend',
+      '<div class="ogs-card"><div class="ogs-card-title">' + esc(o.title) + '</div><div class="ogs-card-desc">' + esc(o.description) + '</div><div class="ogs-card-meta"><b>Systems involved</b>' + involved + '</div>' + resolution + '</div>'
+    );
+  });
+
+  (DATA.gaps||[]).forEach(g => {
+    const cls = g.priority === 1 ? ' pri1' : '';
+    const pri = g.priority === 1 ? '<span class="pri-badge">Priority 1</span>' : '';
+    const candidates = (g.candidate_solutions||[]).map(id => systemChipHTML(id)).join('') || '<span style="color:var(--dim);font-size:.7rem;font-style:italic">No candidates proposed yet</span>';
+    gHost.insertAdjacentHTML('beforeend',
+      '<div class="ogs-card' + cls + '"><div class="ogs-card-title">' + esc(g.title) + pri + '</div><div class="ogs-card-desc">' + esc(g.description) + '</div><div class="ogs-card-meta"><b>Candidate solutions</b>' + candidates + '</div></div>'
+    );
+  });
+
+  (DATA.architectural_seams||[]).forEach(s => {
+    sHost.insertAdjacentHTML('beforeend',
+      '<div class="ogs-card"><div class="ogs-card-title">' + esc(s.title) + '</div><div class="ogs-card-desc">' + esc(s.description) + '</div></div>'
+    );
+  });
+
+  document.getElementById('ogsCount').textContent = (DATA.overlaps||[]).length + ' overlaps &middot; ' + (DATA.gaps||[]).length + ' gaps &middot; ' + (DATA.architectural_seams||[]).length + ' seams';
+
+  document.querySelectorAll('.ogs-card').forEach(card => {
+    card.addEventListener('click', e => {
+      const chip = e.target.closest('.ogs-chip');
+      if(!chip) return;
+      e.stopPropagation();
+      const id = chip.dataset.id;
+      if(!id) return;
+      if(e.altKey || e.metaKey){ openDetail(id); return; }
+      pulseNetNode(id);
+    });
+  });
+}
+
+function systemChipHTML(id, isResolution){
+  const s = SYS_BY_ID[id];
+  if(!s) return '<span class="ogs-chip" style="opacity:.5">' + id + '</span>';
+  return '<span class="ogs-chip' + (isResolution ? ' resolution' : '') + '" data-id="' + id + '" title="Click: highlight in network &bull; Alt-click: full detail">' + esc(s.name) + '</span>';
+}
+
+function pulseNetNode(id){
+  document.getElementById('networkSvg').scrollIntoView({ behavior:'smooth', block:'start' });
+  const node = NET_STATE.nodeG.select('g.net-node[data-id="' + CSS.escape(id) + '"]');
+  if(node.empty()) return;
+  // clear any existing pulse
+  NET_STATE.nodeG.selectAll('g.net-node circle').interrupt().attr('r', d => radius(d));
+  const c = node.select('circle');
+  const baseR = radius(node.datum());
+  c.transition().duration(260).attr('r', baseR + 10)
+   .transition().duration(260).attr('r', baseR)
+   .transition().duration(260).attr('r', baseR + 10)
+   .transition().duration(260).attr('r', baseR);
+  // Bring to attention
+  node.raise();
+}
+
+/* ─────────── Detail modal ─────────── */
+function openDetail(id){
+  const s = SYS_BY_ID[id];
+  if(!s) return;
+  document.getElementById('mdTitle').textContent = s.name;
+
+  const body = document.getElementById('mdBody');
+  const owners = s.owners.map(o => {
+    if(s.owners.length === 1){
+      return '<span class="obadge"><span class="obadge-dot" style="background:' + OWNER_COLORS[o] + '"></span>' + o + '</span>';
+    }
+    return '<span class="obadge"><span class="obadge-dot" style="background:' + OWNER_COLORS[o] + '"></span>' + o + '</span>';
+  }).join(' ');
+
+  const badges =
+    '<span class="mbadge"><span class="mbadge-dot" style="background:' + STATUS_COLORS[s.status] + '"></span>' + s.status + '</span>' +
+    '<span class="mbadge"><span class="mbadge-dot" style="background:' + INTEGRATION_COLORS[s.integration] + '"></span>' + s.integration + '</span>' +
+    '<span class="mbadge">' + s.category + '</span>' +
+    '<span class="mbadge">' + s.lifecycle_stage + '</span>' +
+    (s.is_hypothetical ? '<span class="mbadge" style="border-color:var(--purple);color:var(--purple)">Hypothetical</span>' : '');
+
+  const includes = (s.includes||[]).length
+    ? '<ul class="modal-list">' + s.includes.map(i => '<li>&bull; ' + esc(i) + '</li>').join('') + '</ul>'
+    : '<p style="color:var(--dim);font-style:italic;font-size:.78rem">No component skills listed.</p>';
+
+  const connects = (s.connects_to||[]).length
+    ? '<div class="modal-chips">' + s.connects_to.map(cid => {
+        const t = SYS_BY_ID[cid];
+        return '<span class="modal-chip" data-id="' + cid + '">' + esc(t ? t.name : cid) + '</span>';
+      }).join('') + '</div>'
+    : '<p style="color:var(--dim);font-style:italic;font-size:.78rem">No cross-system connections.</p>';
+
+  // Reverse connections
+  const incoming = DATA.systems.filter(x => (x.connects_to||[]).includes(s.id));
+  const incomingHtml = incoming.length
+    ? '<div class="modal-chips">' + incoming.map(x => '<span class="modal-chip" data-id="' + x.id + '">' + esc(x.name) + '</span>').join('') + '</div>'
+    : '<p style="color:var(--dim);font-style:italic;font-size:.78rem">No incoming connections.</p>';
+
+  const flags = (s.flags||[]).length
+    ? '<div class="modal-section"><h4>Flags</h4>' + s.flags.map(f => '<span class="modal-flag ' + f + '">' + f.replace(/-/g,' ') + '</span>').join('') + '</div>'
+    : '';
+
+  body.innerHTML =
+    '<div class="modal-badges">' + owners + badges + '</div>' +
+    '<div class="modal-section"><h4>Description</h4><p>' + esc(s.description) + '</p></div>' +
+    '<div class="modal-section"><h4>Includes</h4>' + includes + '</div>' +
+    '<div class="modal-section"><h4>Connects to</h4>' + connects + '</div>' +
+    '<div class="modal-section"><h4>Connected from</h4>' + incomingHtml + '</div>' +
+    flags;
+
+  body.querySelectorAll('.modal-chip').forEach(c => c.addEventListener('click', e => {
+    e.stopPropagation();
+    openDetail(c.dataset.id);
+  }));
+
+  document.getElementById('modalOverlay').classList.add('open');
+  document.getElementById('detailModal').classList.add('open');
+}
+
+function closeDetail(){
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.getElementById('detailModal').classList.remove('open');
+}
+
+document.getElementById('modalOverlay').addEventListener('click', closeDetail);
+document.getElementById('mdClose').addEventListener('click', closeDetail);
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeDetail(); });
+
+/* ─────────── Utils ─────────── */
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+</script>
+</body>
+</html>

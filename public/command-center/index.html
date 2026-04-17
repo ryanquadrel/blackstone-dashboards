@@ -445,7 +445,28 @@ function truncate(s,n){if(!s)return'';s=String(s).replace(/\n/g,' ');return s.le
 function slugify(s){return(s||'').replace(/[^a-zA-Z0-9]/g,'_').slice(0,60);}
 function caseId(c){return slugify(c.case_name)+'_'+c._idx;}
 function daysBetween(a,b){return Math.floor((a-b)/86400000);}
-function contactChipHtml(c){var v=c.last_client_contact;var sl=caseId(c);if(!v)return'<span class="contact-chip red" onclick="logContact(\''+sl+'\',this,event)" title="No contact on file. Click to log.">\u260E No contact</span>';var dt=parseDate(v);if(!dt){var s=String(v);var disp=s.length>22?s.slice(0,22)+'\u2026':s;return'<span class="contact-chip red" onclick="logContact(\''+sl+'\',this,event)" title="'+esc(s)+' \u2014 click to log a new contact.">\u26A0 '+esc(disp)+'</span>';}var d=daysBetween(TODAY,dt);var cls=d<=60?'green':(d<=90?'yellow':'red');var label=d<=0?'Today':(d===1?'1d ago':d+'d ago');return'<span class="contact-chip '+cls+'" onclick="logContact(\''+sl+'\',this,event)" title="Last contact '+formatDate(v)+'. Click to log a new contact.">\u260E '+label+'</span>';}
+function _contactChipOne(v,sl,thresholds,kind){
+  // thresholds=[green_cutoff_days, yellow_cutoff_days]; kind='lit'|'standby'
+  var prefix=kind==='standby'?'RR: ':'';
+  var tipKind=kind==='standby'?'standby (RR) contact':'litigation contact';
+  if(!v)return'<span class="contact-chip red" onclick="logContact(\''+sl+'\',this,event)" title="No '+tipKind+' on file. Click to log.">\u260E '+prefix+'No contact</span>';
+  var dt=parseDate(v);
+  if(!dt){var s=String(v);var disp=s.length>22?s.slice(0,22)+'\u2026':s;return'<span class="contact-chip red" onclick="logContact(\''+sl+'\',this,event)" title="'+esc(s)+' \u2014 click to log a new '+tipKind+'.">\u26A0 '+prefix+esc(disp)+'</span>';}
+  var d=daysBetween(TODAY,dt);
+  var cls=d<=thresholds[0]?'green':(d<=thresholds[1]?'yellow':'red');
+  var label=d<=0?'Today':(d===1?'1d ago':d+'d ago');
+  return'<span class="contact-chip '+cls+'" onclick="logContact(\''+sl+'\',this,event)" title="Last '+tipKind+' '+formatDate(v)+'. Click to log a new contact.">\u260E '+prefix+label+'</span>';
+}
+function contactChipHtml(c){
+  var sl=caseId(c);
+  // Primary chip: litigation client recency (60/90d). Fall back to legacy column if the
+  // per-type column hasn't populated yet (producer cutover).
+  var lit=c.last_lit_contact||c.last_client_contact;
+  var html=_contactChipOne(lit,sl,[60,90],'lit');
+  // Secondary chip: standby (RR) recency (120/180d), only shown when a standby contact exists.
+  if(c.last_standby_contact){html+=' '+_contactChipOne(c.last_standby_contact,sl,[120,180],'standby');}
+  return html;
+}
 function serviceBadgeHTML(c){
   if(c.service_completed) return '';
   if(c.defense_counsel && String(c.defense_counsel).trim()) return '';

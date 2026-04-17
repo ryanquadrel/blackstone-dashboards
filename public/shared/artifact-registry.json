@@ -82,8 +82,8 @@
           "doc_type": "Mediation-Brief",
           "state": "for-attorney-review",
           "state_changed": "2026-04-17T19:14:57.341959Z",
-          "current_owner": "RQ",
-          "owner_since": "2026-04-17T16:49:13.990253Z",
+          "current_owner": "SM",
+          "owner_since": "2026-04-17T19:14:59.825552Z",
           "locked_by": null,
           "lock_acquired_at": null,
           "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Veridiam/Settlement%20%26%20Mediation/Drafts/Mediation-Brief_v2_for-attorney-review_ai-mediation-brief_2026-04-17.docx",
@@ -123,5 +123,5 @@
       ]
     }
   },
-  "last_updated": "2026-04-17T19:14:57.341988Z"
+  "last_updated": "2026-04-17T19:14:59.825565Z"
 }

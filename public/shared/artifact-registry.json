@@ -84,8 +84,8 @@
           "state_changed": "2026-04-17T15:43:31.482692Z",
           "current_owner": "ai-mediation-brief",
           "owner_since": "2026-04-17T15:43:14.027700Z",
-          "locked_by": null,
-          "lock_acquired_at": null,
+          "locked_by": "SM",
+          "lock_acquired_at": "2026-04-17T15:44:12.058220Z",
           "url": "https://example.com/test-v2.docx",
           "descriptor": "Sanity test v1",
           "created": "2026-04-17T15:43:31.482692Z",
@@ -123,5 +123,5 @@
       ]
     }
   },
-  "last_updated": "2026-04-17T15:43:31.482743Z"
+  "last_updated": "2026-04-17T15:44:12.058281Z"
 }

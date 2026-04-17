@@ -2,7 +2,7 @@
   "_schema": "matter_id -> { artifact_type: { url, descriptor } } plus optional 'drafts' array. artifact_type examples: folder, discovery, pleadings, mediation (each a single object with url, descriptor). New in v2: drafts is an optional ARRAY of {type, url, descriptor, created, status} where status is one of: pending-review, sent, filed, awaiting-client. Empty registry = no buttons render.",
   "_version": 2,
   "mappings": {
-    "ECB Corp dba Omniduct": {
+    "ECB Corp. dba Omniduct": {
       "folder": {
         "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/ECB%20Corp/Discovery/Class/Written%20Discovery",
         "descriptor": "ECB Corp > Discovery > Class > Written Discovery (auto-drafted 4/14)"
@@ -20,7 +20,7 @@
         "descriptor": "ECB Corp (Active Cases root)"
       }
     },
-    "Rove Engineering": {
+    "Rove Engineering, Inc.": {
       "folder": {
         "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Rove%20Engineering/Discovery/PAGA/Written%20Discovery",
         "descriptor": "Rove Engineering > Discovery > PAGA > Written Discovery (auto-drafted 4/14)"

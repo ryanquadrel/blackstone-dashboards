@@ -73,7 +73,46 @@
         "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Maurices",
         "descriptor": "Maurices (Active Cases root)"
       }
+    },
+    "Veridiam, Inc.": {
+      "drafts": [
+        {
+          "draft_id": "930c724b-ca74-43f0-9d80-cef68f3a2b59",
+          "type": "Mediation Brief Outline (Shelby draft)",
+          "doc_type": "Mediation-Brief",
+          "state": "attorney-returned",
+          "state_changed": "2026-04-17T16:49:12.771868Z",
+          "current_owner": "SM",
+          "owner_since": "2026-04-17T16:49:12.771868Z",
+          "locked_by": null,
+          "lock_acquired_at": null,
+          "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/sminer_blackstonepc_com/Documents/Microsoft%20Teams%20Chat%20Files/Mediation%20Brief%20Outline%20(Veridiam).docx",
+          "descriptor": "Shelby's initial outline \u2014 delivered via Teams DM on 2026-04-16 20:32 UTC, pending full brief build from BCG report",
+          "created": "2026-04-17T16:49:12.771868Z",
+          "status": "attorney-returned",
+          "operative_version": {
+            "version": 1,
+            "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/sminer_blackstonepc_com/Documents/Microsoft%20Teams%20Chat%20Files/Mediation%20Brief%20Outline%20(Veridiam).docx",
+            "sha256": null,
+            "author": "SM",
+            "created": "2026-04-17T16:49:12.771868Z",
+            "status": "attorney-returned",
+            "descriptor": "Shelby's initial outline \u2014 delivered via Teams DM on 2026-04-16 20:32 UTC, pending full brief build from BCG report"
+          },
+          "versions": [
+            {
+              "version": 1,
+              "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/sminer_blackstonepc_com/Documents/Microsoft%20Teams%20Chat%20Files/Mediation%20Brief%20Outline%20(Veridiam).docx",
+              "sha256": null,
+              "author": "SM",
+              "created": "2026-04-17T16:49:12.771868Z",
+              "status": "attorney-returned",
+              "descriptor": "Shelby's initial outline \u2014 delivered via Teams DM on 2026-04-16 20:32 UTC, pending full brief build from BCG report"
+            }
+          ]
+        }
+      ]
     }
   },
-  "last_updated": "2026-04-17T15:44:45.557030Z"
+  "last_updated": "2026-04-17T16:49:13.106027Z"
 }

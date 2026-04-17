@@ -86,16 +86,16 @@
           "owner_since": "2026-04-17T15:43:14.027700Z",
           "locked_by": null,
           "lock_acquired_at": null,
-          "url": "https://example.com/test-v2.docx",
+          "url": "https://ex.com/v3.docx",
           "descriptor": "Sanity test v1",
-          "created": "2026-04-17T15:43:31.482692Z",
+          "created": "2026-04-17T15:44:37.452726Z",
           "status": "attorney-returned",
           "operative_version": {
-            "version": 2,
-            "url": "https://example.com/test-v2.docx",
+            "version": 3,
+            "url": "https://ex.com/v3.docx",
             "sha256": null,
-            "author": "SM",
-            "created": "2026-04-17T15:43:31.482692Z",
+            "author": "JM",
+            "created": "2026-04-17T15:44:37.452726Z",
             "status": "attorney-returned",
             "descriptor": "Sanity test v1"
           },
@@ -117,11 +117,20 @@
               "created": "2026-04-17T15:43:31.482692Z",
               "status": "attorney-returned",
               "descriptor": "Sanity test v1"
+            },
+            {
+              "version": 3,
+              "url": "https://ex.com/v3.docx",
+              "sha256": null,
+              "author": "JM",
+              "created": "2026-04-17T15:44:37.452726Z",
+              "status": "attorney-returned",
+              "descriptor": "Sanity test v1"
             }
           ]
         }
       ]
     }
   },
-  "last_updated": "2026-04-17T15:44:34.974220Z"
+  "last_updated": "2026-04-17T15:44:37.452787Z"
 }

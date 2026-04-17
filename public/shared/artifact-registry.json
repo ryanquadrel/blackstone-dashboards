@@ -73,6 +73,46 @@
         "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Maurices",
         "descriptor": "Maurices (Active Cases root)"
       }
+    },
+    "ZZ-SANITY-TEST-drafts-logger": {
+      "drafts": [
+        {
+          "draft_id": "2545d3e6-e2cc-40f3-a600-a9665360d555",
+          "type": "Mediation Brief",
+          "doc_type": "Mediation-Brief",
+          "state": "auto-drafted",
+          "state_changed": "2026-04-17T15:43:14.027700Z",
+          "current_owner": "ai-mediation-brief",
+          "owner_since": "2026-04-17T15:43:14.027700Z",
+          "locked_by": null,
+          "lock_acquired_at": null,
+          "url": "https://example.com/test-v1.docx",
+          "descriptor": "Sanity test v1",
+          "created": "2026-04-17T15:43:14.027700Z",
+          "status": "draft",
+          "operative_version": {
+            "version": 1,
+            "url": "https://example.com/test-v1.docx",
+            "sha256": null,
+            "author": "ai-mediation-brief",
+            "created": "2026-04-17T15:43:14.027700Z",
+            "status": "draft",
+            "descriptor": "Sanity test v1"
+          },
+          "versions": [
+            {
+              "version": 1,
+              "url": "https://example.com/test-v1.docx",
+              "sha256": null,
+              "author": "ai-mediation-brief",
+              "created": "2026-04-17T15:43:14.027700Z",
+              "status": "draft",
+              "descriptor": "Sanity test v1"
+            }
+          ]
+        }
+      ]
     }
-  }
+  },
+  "last_updated": "2026-04-17T15:43:14.283009Z"
 }

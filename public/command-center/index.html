@@ -481,7 +481,19 @@ function inferStage(c){
   if(c.with_arb_team&&c.arb==='Y')return'arb-track';
   if(c.with_pst)return'pst';
   if(all.indexOf('settlement')>=0||all.indexOf('mou')>=0||phase.indexOf('settlement')>=0)return'settlement';
-  if(event.indexOf('post-mediation')>=0||event.indexOf('post mediation')>=0||ns.indexOf('post-mediation')>=0||ns.indexOf('post mediation')>=0)return'post-mediation';
+  if(c._mediation && c._mediation.phase){
+    var mp=String(c._mediation.phase).toLowerCase();
+    if(mp.indexOf('pending proposal')>=0)return'post-mediation';
+    if(mp.indexOf('phase 3')>=0||mp.indexOf('booked')>=0)return'med-booked';
+    if(mp.indexOf('phase 2')>=0||mp.indexOf('prep')>=0||mp.indexOf('brief')>=0)return'med-prep';
+    if(mp.indexOf('phase 1')>=0||mp.indexOf('scheduling')>=0||mp.indexOf('vacated')>=0)return'med-scheduling';
+  }
+  if(c.mediation){
+    var dUntil=(new Date(c.mediation)-new Date())/86400000;
+    if(dUntil<-1)return'post-mediation';
+    return'med-booked';
+  }
+if(event.indexOf('post-mediation')>=0||event.indexOf('post mediation')>=0||ns.indexOf('post-mediation')>=0||ns.indexOf('post mediation')>=0)return'post-mediation';
   if((ns.match(/mediation\s+(with|on|set for|scheduled|via)/i)||ns.match(/\d{1,2}\/\d{1,2}\/\d{2,4}.*mediation/i))&&ns.indexOf('cancel mediation')<0)return'med-booked';
   if(ns.indexOf('mediation brief')>=0||disco.indexOf('data demand')>=0||ns.indexOf('data demand')>=0)return'med-prep';
   if(all.indexOf('mediation')>=0&&(all.indexOf('schedul')>=0||all.indexOf('mediator')>=0))return'med-scheduling';

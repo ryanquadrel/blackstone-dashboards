@@ -121,6 +121,10 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
 .cross-badge.motion.won{background:var(--green-bg);color:var(--green)}
 .cross-badge.motion.lost{background:var(--red-bg);color:var(--red)}
 .cross-badge.mediation{background:var(--teal-bg);color:var(--teal)}
+.cross-badge.service.cyan{background:var(--cyan-bg);color:var(--cyan)}
+.cross-badge.service.yellow{background:var(--yellow-bg);color:var(--yellow)}
+.cross-badge.service.red{background:var(--red-bg);color:var(--red)}
+.cross-badge.service.gray{background:rgba(148,163,184,.12);color:var(--text-muted)}
 .case-card-body{padding:10px 16px}
 .case-field{display:flex;justify-content:space-between;padding:3px 0;font-size:.77rem;border-bottom:1px solid rgba(71,85,105,.3)}
 .case-field:last-child{border-bottom:none}
@@ -412,6 +416,18 @@ function slugify(s){return(s||'').replace(/[^a-zA-Z0-9]/g,'_').slice(0,60);}
 function caseId(c){return slugify(c.case_name)+'_'+c._idx;}
 function daysBetween(a,b){return Math.floor((a-b)/86400000);}
 function contactChipHtml(c){var v=c.last_client_contact;var sl=caseId(c);if(!v)return'<span class="contact-chip red" onclick="logContact(\''+sl+'\',this,event)" title="No contact on file. Click to log.">\u260E No contact</span>';var dt=parseDate(v);if(!dt){var s=String(v);var disp=s.length>22?s.slice(0,22)+'\u2026':s;return'<span class="contact-chip red" onclick="logContact(\''+sl+'\',this,event)" title="'+esc(s)+' \u2014 click to log a new contact.">\u26A0 '+esc(disp)+'</span>';}var d=daysBetween(TODAY,dt);var cls=d<=60?'green':(d<=90?'yellow':'red');var label=d<=0?'Today':(d===1?'1d ago':d+'d ago');return'<span class="contact-chip '+cls+'" onclick="logContact(\''+sl+'\',this,event)" title="Last contact '+formatDate(v)+'. Click to log a new contact.">\u260E '+label+'</span>';}
+function serviceBadgeHTML(c){
+  if(c.service_completed) return '';
+  if(c.defense_counsel && String(c.defense_counsel).trim()) return '';
+  if(!c.file_date) return '<span class="cross-badge service gray" title="No file_date on record">✉ Service status unknown</span>';
+  var fd=parseDate(c.file_date); if(!fd) return '';
+  var d=daysBetween(TODAY,fd);
+  var cls,label;
+  if(d<30){cls='cyan';label='✉ Serving · '+d+'d';}
+  else if(d<=60){cls='yellow';label='⚠ Serving · '+d+'d';}
+  else{cls='red';label='✉ Not served · '+d+'d';}
+  return '<span class="cross-badge service '+cls+'" title="Filed '+formatDate(c.file_date)+' — no OC appearance, no response deadline calendared.">'+label+'</span>';
+}
 function parseDate(d){if(!d)return null;var s=String(d);if(/^\d{4}-\d{2}-\d{2}$/.test(s)){var p=s.split('-');return new Date(+p[0],+p[1]-1,+p[2]);}var dt=new Date(d);return isNaN(dt)?null:dt;}
 
 // Cross-dashboard matching: fuzzy match defendant name against lookup keys
@@ -787,8 +803,9 @@ function renderDeepDive(){
       (c._score>=25?'<span class="tag" style="background:var(--red-bg);color:var(--red)">\u26a1'+c._score+'</span>':'')+
       contactChipHtml(c)+
       '</div></div>';
-    // Cross-dashboard badges
-    if(c._motion||c._mediation){
+    // Cross-dashboard badges (service badge hides once OC appears or sheet has response deadline)
+    var _svc=serviceBadgeHTML(c);
+    if(c._motion||c._mediation||_svc){
       html+='<div class="cross-badges">';
       if(c._motion){
         var mcls='motion';if(c._motion.status==='WON')mcls+=' won';if(c._motion.status==='LOST')mcls+=' lost';
@@ -802,6 +819,7 @@ function renderDeepDive(){
         var ccls='cmc';if(cfdDays>=0&&cfdDays<=7)ccls+=' urgent';
         html+='<span class="cross-badge '+ccls+'">' + String.fromCharCode(0x1F4C5) + ' '+esc(c._cmc.hearing_type||'CMC')+' filing '+(cfdDays>=0?'due in '+cfdDays+'d':'due '+formatDate(c._cmc.filing_deadline))+'</span>';
       }
+      if(_svc)html+=_svc;
       html+='</div>';
     }
     html+='<div class="case-card-body">';
@@ -923,6 +941,7 @@ function openModal(idx){
   if(c._motion){var mcls=c._motion.status==='WON'?'won':c._motion.status==='LOST'?'lost':'';html+='<div style="margin-bottom:8px"><span class="cross-badge motion '+mcls+'">\u2696 '+esc(c._motion.motion)+' \u2014 '+esc(c._motion.status)+(c._motion.hearing?' \u00b7 Hearing '+formatDate(c._motion.hearing):'')+'</span></div>';}
   if(c._mediation){html+='<div style="margin-bottom:12px"><span class="cross-badge mediation">\u2693 Mediation: '+esc(c._mediation.phase)+(c._mediation.mediator?' \u00b7 '+esc(c._mediation.mediator):'')+(c._mediation.med_date?' \u00b7 '+formatDate(c._mediation.med_date):'')+'</span>';var stratUrl=null;Object.keys(STRATEGY_DASHBOARDS).forEach(function(k){if(c.defendant&&c.defendant.indexOf(k)>=0)stratUrl=STRATEGY_DASHBOARDS[k];});if(stratUrl)html+=' <a href="'+stratUrl+'" target="_blank" style="display:inline-block;padding:2px 10px;border-radius:12px;font-size:11px;font-weight:600;background:rgba(99,102,241,0.15);color:#818cf8;text-decoration:none;margin-left:6px">\u{1F3AF} Strategy Dashboard</a>';html+='</div>';}
   if(c._cmc&&c._cmc.filing_deadline){html+='<div style="margin-bottom:8px"><span class="cross-badge cmc">' + String.fromCharCode(0x1F4C5) + ' '+esc(c._cmc.hearing_type||'CMC')+' filing due '+formatDate(c._cmc.filing_deadline)+'</span></div>';}
+  var _svcM=serviceBadgeHTML(c);if(_svcM){html+='<div style="margin-bottom:8px">'+_svcM+'</div>';}
   if(c._reasons&&c._reasons.length>0){html+='<div style="margin-bottom:12px;display:flex;flex-wrap:wrap;gap:4px">';c._reasons.forEach(function(r){html+='<span class="reason-tag '+r.level+'">'+r.text+'</span>';});html+='</div>';}
   fields.forEach(function(f){if(f[1]&&String(f[1]).trim())html+='<div class="case-field"><span class="cf-label">'+f[0]+'</span><span class="cf-value" style="white-space:pre-wrap;text-align:left;margin-left:12px">'+esc(String(f[1]))+'</span></div>';});
   var mslug=caseId(c);

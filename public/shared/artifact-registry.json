@@ -80,23 +80,23 @@
           "draft_id": "2545d3e6-e2cc-40f3-a600-a9665360d555",
           "type": "Mediation Brief",
           "doc_type": "Mediation-Brief",
-          "state": "auto-drafted",
-          "state_changed": "2026-04-17T15:43:14.027700Z",
+          "state": "attorney-returned",
+          "state_changed": "2026-04-17T15:43:31.482692Z",
           "current_owner": "ai-mediation-brief",
           "owner_since": "2026-04-17T15:43:14.027700Z",
           "locked_by": null,
           "lock_acquired_at": null,
-          "url": "https://example.com/test-v1.docx",
+          "url": "https://example.com/test-v2.docx",
           "descriptor": "Sanity test v1",
-          "created": "2026-04-17T15:43:14.027700Z",
-          "status": "draft",
+          "created": "2026-04-17T15:43:31.482692Z",
+          "status": "attorney-returned",
           "operative_version": {
-            "version": 1,
-            "url": "https://example.com/test-v1.docx",
+            "version": 2,
+            "url": "https://example.com/test-v2.docx",
             "sha256": null,
-            "author": "ai-mediation-brief",
-            "created": "2026-04-17T15:43:14.027700Z",
-            "status": "draft",
+            "author": "SM",
+            "created": "2026-04-17T15:43:31.482692Z",
+            "status": "attorney-returned",
             "descriptor": "Sanity test v1"
           },
           "versions": [
@@ -108,11 +108,20 @@
               "created": "2026-04-17T15:43:14.027700Z",
               "status": "draft",
               "descriptor": "Sanity test v1"
+            },
+            {
+              "version": 2,
+              "url": "https://example.com/test-v2.docx",
+              "sha256": null,
+              "author": "SM",
+              "created": "2026-04-17T15:43:31.482692Z",
+              "status": "attorney-returned",
+              "descriptor": "Sanity test v1"
             }
           ]
         }
       ]
     }
   },
-  "last_updated": "2026-04-17T15:43:14.283009Z"
+  "last_updated": "2026-04-17T15:43:31.482743Z"
 }

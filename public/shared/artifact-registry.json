@@ -82,8 +82,8 @@
           "doc_type": "Mediation-Brief",
           "state": "rq-redlining",
           "state_changed": "2026-04-17T15:44:39.955461Z",
-          "current_owner": "ai-mediation-brief",
-          "owner_since": "2026-04-17T15:43:14.027700Z",
+          "current_owner": "RQ",
+          "owner_since": "2026-04-17T15:44:42.447883Z",
           "locked_by": null,
           "lock_acquired_at": null,
           "url": "https://ex.com/v3.docx",
@@ -132,5 +132,5 @@
       ]
     }
   },
-  "last_updated": "2026-04-17T15:44:39.955518Z"
+  "last_updated": "2026-04-17T15:44:42.447915Z"
 }

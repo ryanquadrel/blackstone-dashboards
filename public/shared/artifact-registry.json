@@ -82,8 +82,8 @@
           "doc_type": "Mediation-Brief",
           "state": "attorney-returned",
           "state_changed": "2026-04-17T16:49:12.771868Z",
-          "current_owner": "SM",
-          "owner_since": "2026-04-17T16:49:12.771868Z",
+          "current_owner": "RQ",
+          "owner_since": "2026-04-17T16:49:13.990253Z",
           "locked_by": null,
           "lock_acquired_at": null,
           "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/sminer_blackstonepc_com/Documents/Microsoft%20Teams%20Chat%20Files/Mediation%20Brief%20Outline%20(Veridiam).docx",
@@ -114,5 +114,5 @@
       ]
     }
   },
-  "last_updated": "2026-04-17T16:49:13.106027Z"
+  "last_updated": "2026-04-17T16:49:13.990284Z"
 }

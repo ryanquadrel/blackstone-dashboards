@@ -80,24 +80,24 @@
           "draft_id": "930c724b-ca74-43f0-9d80-cef68f3a2b59",
           "type": "Mediation Brief Outline (Shelby draft)",
           "doc_type": "Mediation-Brief",
-          "state": "for-attorney-review",
-          "state_changed": "2026-04-17T19:14:57.341959Z",
+          "state": "auto-drafted",
+          "state_changed": "2026-04-17T19:29:26.542539Z",
           "current_owner": "SM",
           "owner_since": "2026-04-17T19:14:59.825552Z",
           "locked_by": null,
           "lock_acquired_at": null,
-          "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Veridiam/Settlement%20%26%20Mediation/Drafts/Mediation-Brief_v2_for-attorney-review_ai-mediation-brief_2026-04-17.docx",
-          "descriptor": "AI v2 brief \u2014 built on Shelby's v1 outline + BCG 4/16 analysis; mandatory-meeting arb rollout frame; for SM review prior to 4/20 submission",
-          "created": "2026-04-17T19:14:57.341959Z",
-          "status": "for-attorney-review",
+          "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Veridiam/Settlement%20%26%20Mediation/Drafts/Mediation-Brief_v99_draft_test_2026-04-17.docx",
+          "descriptor": "auto-registered by new-draft-filesystem-detector on 2026-04-17",
+          "created": "2026-04-17T19:29:26.542539Z",
+          "status": "draft",
           "operative_version": {
-            "version": 2,
-            "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Veridiam/Settlement%20%26%20Mediation/Drafts/Mediation-Brief_v2_for-attorney-review_ai-mediation-brief_2026-04-17.docx",
-            "sha256": "525181a748fbb5608e27ff168290569c1ea6403e748a36911d5219f2e7d9f751",
-            "author": "ai-mediation-brief",
-            "created": "2026-04-17T19:14:57.341959Z",
-            "status": "for-attorney-review",
-            "descriptor": "AI v2 brief \u2014 built on Shelby's v1 outline + BCG 4/16 analysis; mandatory-meeting arb rollout frame; for SM review prior to 4/20 submission"
+            "version": 3,
+            "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Veridiam/Settlement%20%26%20Mediation/Drafts/Mediation-Brief_v99_draft_test_2026-04-17.docx",
+            "sha256": null,
+            "author": "test",
+            "created": "2026-04-17T19:29:26.542539Z",
+            "status": "draft",
+            "descriptor": "auto-registered by new-draft-filesystem-detector on 2026-04-17"
           },
           "versions": [
             {
@@ -117,11 +117,20 @@
               "created": "2026-04-17T19:14:57.341959Z",
               "status": "for-attorney-review",
               "descriptor": "AI v2 brief \u2014 built on Shelby's v1 outline + BCG 4/16 analysis; mandatory-meeting arb rollout frame; for SM review prior to 4/20 submission"
+            },
+            {
+              "version": 3,
+              "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Veridiam/Settlement%20%26%20Mediation/Drafts/Mediation-Brief_v99_draft_test_2026-04-17.docx",
+              "sha256": null,
+              "author": "test",
+              "created": "2026-04-17T19:29:26.542539Z",
+              "status": "draft",
+              "descriptor": "auto-registered by new-draft-filesystem-detector on 2026-04-17"
             }
           ]
         }
       ]
     }
   },
-  "last_updated": "2026-04-17T19:14:59.825565Z"
+  "last_updated": "2026-04-17T19:29:26.542585Z"
 }

@@ -125,11 +125,12 @@
   }
 
   /** State → icon / color / human label. Used for both the emoji and
-   *  the verbose text next to it. */
+   *  the verbose text next to it. Label is the state portion only — the
+   *  draft type (e.g. "Brief v3") is prepended separately by draftTypeLabel. */
   function stateMeta(state, fallbackStatus) {
     var s = (state || '').toLowerCase();
     if (s === 'attorney-revising' || s === 'for-attorney-review')
-      return { icon: '\u23F3', color: '#eab308', label: 'With attorney' };
+      return { icon: '\u23F3', color: '#eab308', label: 'For review' };
     if (s === 'rq-redlining')
       return { icon: '\u270F\uFE0F', color: '#f97316', label: 'RQ redlining' };
     if (s === 'attorney-returned' || s === 'rq-returned')
@@ -146,6 +147,46 @@
     if (st === 'awaiting-client')  return { icon: '\uD83D\uDCDD', color: '#d97706', label: 'Awaiting client' };
     if (st === 'sent' || st === 'filed') return { icon: '\u2709\uFE0F', color: '#22c55e', label: 'Sent' };
     return { icon: '\uD83D\uDCDD', color: '', label: 'Draft' };
+  }
+
+  /** Short, human label for the draft's document type (+ version if known).
+   *  Prepended to the state label so the chip reads "Brief v3 · For review"
+   *  instead of the ambiguous "For review" or "With attorney". */
+  var DOC_TYPE_SHORT = {
+    'mediation-brief':       'Brief',
+    'mc-letter':             'M&C Letter',
+    'meet-and-confer':       'M&C Letter',
+    'separate-statement':    'Separate Statement',
+    'declaration':           'Declaration',
+    'mpa':                   'MPA',
+    'opposition':            'Opposition',
+    'cmc-statement':         'CMC Statement',
+    'rfp':                   'RFPs',
+    'rfp-set':               'RFPs',
+    'srog':                  'SROGs',
+    'cover-letter':          'Cover Letter',
+    'data-demand':           'Data Demand',
+    'stip-to-stay':          'Stip to Stay',
+    'belaire-west':          'Belaire-West',
+    'proof-of-service':      'POS',
+  };
+  function draftTypeLabel(draft) {
+    var base = '';
+    var dt = (draft.doc_type || '').toLowerCase();
+    if (dt && DOC_TYPE_SHORT[dt]) {
+      base = DOC_TYPE_SHORT[dt];
+    } else if (dt) {
+      base = draft.doc_type.replace(/-/g, ' ');
+    } else if (draft.type) {
+      // Strip trailing parenthetical like "(Shelby draft)"; truncate long labels
+      var t = String(draft.type).replace(/\s*\(.*?\)\s*$/, '').trim();
+      base = t.length > 22 ? t.slice(0, 20) + '\u2026' : t;
+    } else {
+      base = 'Draft';
+    }
+    var v = draft.operative_version && draft.operative_version.version;
+    if (v) base += ' v' + v;
+    return base;
   }
 
   function escapeAttr(s) { return String(s || '').replace(/"/g, '&quot;'); }
@@ -213,8 +254,9 @@
 
     var labelHtml = '';
     if (opts.verbose) {
-      var labelText = meta.label;
-      if (owner && isV2) labelText += ' \u00B7 ' + owner;
+      // "Brief v3 · For review". Owner is already shown in the colored badge
+      // next to the icon, so omit it from the label text to avoid redundancy.
+      var labelText = draftTypeLabel(primary) + ' \u00B7 ' + meta.label;
       labelHtml = '<span style="margin-left:4px;font-size:.75em;color:#cbd5e1;'
                 + 'font-weight:500;letter-spacing:.01em;">'
                 + escapeText(labelText) + '</span>';

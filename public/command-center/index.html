@@ -251,55 +251,12 @@ function folderIcon(defendantName, routingKey, title) {
     + 'style="margin-left:6px;text-decoration:none;opacity:.55;font-size:.8em;" '
     + 'onclick="event.stopPropagation()">&#128193;</a>';
 }
-function draftsChip(defendantName) {
-  if (!defendantName) return '';
-  var matterKey = defendantName.replace(/\s*\(.*?\)\s*$/,'').trim();
-  var entry = ARTIFACT_REGISTRY.mappings && ARTIFACT_REGISTRY.mappings[matterKey];
-  if (!entry || !entry.drafts || !entry.drafts.length) return '';
-  var drafts = entry.drafts.slice().sort(function(a,b){
-    var ta = a.state_changed || a.created || '';
-    var tb = b.state_changed || b.created || '';
-    return tb < ta ? -1 : tb > ta ? 1 : 0;
-  });
-  var primary = drafts[0];
-  var count = drafts.length;
-  var isNew = !!primary.draft_id;
-  var tooltip = drafts.map(function(d){
-    var line = '\u2022 ' + (d.type || d.doc_type || 'Draft');
-    if (d.operative_version && d.operative_version.version) line += ' v' + d.operative_version.version;
-    if (d.state) line += ' [' + d.state + ']';
-    else if (d.status) line += ' [' + d.status + ']';
-    if (d.current_owner) line += ' - ' + d.current_owner;
-    if (d.locked_by) line += ' (locked by ' + d.locked_by + ')';
-    if (d.descriptor) line += ': ' + d.descriptor;
-    return line;
-  }).join('\n').replace(/"/g,'&quot;');
-  var icon = '&#128221;';
-  var color = '';
-  var badge = '';
-  if (isNew) {
-    var state = (primary.state || '').toLowerCase();
-    var owner = primary.current_owner || '';
-    if (state === 'attorney-revising' || state === 'for-attorney-review') { icon = '&#9203;'; color = '#eab308'; }
-    else if (state === 'rq-redlining') { icon = '&#9999;&#65039;'; color = '#f97316'; }
-    else if (state === 'attorney-returned' || state === 'rq-returned') { icon = '&#8596;'; color = '#3b82f6'; }
-    else if (state === 'final') { icon = '&#10003;'; color = '#22c55e'; }
-    else if (state === 'submitted' || state === 'sent' || state === 'filed') { icon = '&#9993;&#65039;'; color = '#22c55e'; }
-    else if (state === 'auto-drafted') { icon = '&#129302;'; color = '#a855f7'; }
-    badge = owner ? '<span style="background:rgba(71,85,105,.6);color:#f1f5f9;border-radius:8px;padding:0 5px;font-size:.65em;margin-left:3px;font-weight:600;letter-spacing:.02em;">'+owner+'</span>' : '';
-  } else {
-    var pending = drafts.filter(function(d){ return d.status === 'pending-review'; }).length;
-    badge = pending > 0 ? '<span style="background:#d97706;color:#fff;border-radius:8px;padding:0 5px;font-size:.7em;margin-left:2px;">'+pending+'</span>' : '';
-  }
-  if (count > 1) badge += '<span style="font-size:.65em;color:#94a3b8;margin-left:3px;">+'+(count-1)+'</span>';
-  var colorStyle = color ? 'color:'+color+';' : '';
-  return '<a href="'+primary.url+'" target="_blank" rel="noopener" title="'+tooltip+'" '
-    + 'style="margin-left:6px;text-decoration:none;opacity:.9;font-size:.8em;'+colorStyle+'" '
-    + 'onclick="event.stopPropagation()">'+icon+badge+'</a>';
-}
-
+/* draftsChip lives in /shared/drafts-chip.js — the shared module reads the
+   ARTIFACT_REGISTRY loaded above and exposes draftsChip on window for the
+   inline case-card template below. Load the shared script in the next tag. */
 
 </script>
+<script src="/shared/drafts-chip.js"></script>
 
 <!-- Analytics: PostHog + Cloudflare Access user identity. Auth via /cdn-cgi/access/get-identity (no backend). -->
 <script>
@@ -843,7 +800,7 @@ function renderDeepDive(){
     }
     fields.push(['Last Team Update',formatDate(c.last_team_update)]);
 
-    html+='<div class="case-card"><div class="case-card-header"><h3>'+esc(c.defendant||c.case_name)+(c._isDupe?' <span style="opacity:.6;font-size:.7em">('+(c.case_type||'?')+')</span>':'')+folderIcon(c.defendant||c.case_name)+draftsChip(c.defendant||c.case_name)+'</h3><div class="tags">'+
+    html+='<div class="case-card"><div class="case-card-header"><h3>'+esc(c.defendant||c.case_name)+(c._isDupe?' <span style="opacity:.6;font-size:.7em">('+(c.case_type||'?')+')</span>':'')+folderIcon(c.defendant||c.case_name)+draftsChip(c.defendant||c.case_name,{verbose:true})+'</h3><div class="tags">'+
       '<span class="tag tag-'+c.attorney.toLowerCase()+'">'+c.attorney+'</span>'+
       '<span class="tag '+tt+'">'+(c.case_type||'?')+'</span>'+
       (stage?'<span class="tag '+stage.color+'">'+stage.label+'</span>':'')+

@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
-<title>Daily Case Briefing &mdash; 2026-04-18</title>
+<title>Daily Case Briefing — 2026-04-20</title>
 <style>
 :root{
---bg-primary:#0a0e17;--bg-card:#141a2a;--bg-card-hover:#1a2236;--border:#1e293b;
+--bg-primary:#0a0e17;--bg-card:#141a2a;--border:#1e293b;
 --text-primary:#e2e8f0;--text-secondary:#94a3b8;--text-muted:#64748b;
 --accent:#4f8cff;--accent-glow:rgba(79,140,255,.12);
 --red:#ff4757;--red-glow:rgba(255,71,87,.12);
@@ -16,27 +16,19 @@
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg-primary);color:var(--text-primary);font-family:'Segoe UI',system-ui,-apple-system,sans-serif}
 body{padding:70px 28px 48px;max-width:1440px;margin-inline:auto;line-height:1.45}
-
-.mc-home{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:9999;display:inline-flex;align-items:center;gap:8px;padding:8px 16px 8px 12px;background:linear-gradient(135deg,rgba(79,143,255,.12),rgba(168,85,247,.12));border:1px solid rgba(79,143,255,.25);border-radius:24px;text-decoration:none;color:#e8ecf4;font-size:.78rem;font-weight:600;letter-spacing:.01em;transition:all .3s cubic-bezier(.4,0,.2,1);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 2px 12px rgba(0,0,0,.3)}
-.mc-home:hover{border-color:rgba(79,143,255,.5);transform:translateX(-50%) translateY(-1px) scale(1.03);box-shadow:0 4px 20px rgba(79,143,255,.2),0 0 30px rgba(168,85,247,.1)}
-.mc-home .mc-icon{font-size:1.1rem}
-.mc-home .mc-label{background:linear-gradient(135deg,#4f8fff,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.mc-home .mc-arrow{color:#4a5a78;font-size:.9rem}
-
+.mc-home{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:9999;display:inline-flex;align-items:center;gap:8px;padding:8px 16px 8px 12px;background:linear-gradient(135deg,rgba(79,143,255,.12),rgba(168,85,247,.12));border:1px solid rgba(79,143,255,.25);border-radius:24px;text-decoration:none;color:#e8ecf4;font-size:.78rem;font-weight:600}
 header{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
 .logo{display:flex;align-items:center;gap:16px}
-.logo-sq{width:54px;height:54px;border-radius:12px;background:linear-gradient(135deg,#4f8cff,#a77bff);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.2rem;color:#fff;letter-spacing:.02em;box-shadow:0 4px 16px rgba(79,140,255,.25)}
-h1{margin:0;font-size:1.75rem;font-weight:700;letter-spacing:-.01em}
+.logo-sq{width:54px;height:54px;border-radius:12px;background:linear-gradient(135deg,#4f8cff,#a77bff);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.2rem;color:#fff}
+h1{margin:0;font-size:1.75rem;font-weight:700}
 .sub{color:var(--text-secondary);font-size:.85rem;margin-top:2px}
 .date-pill{background:var(--bg-card);border:1px solid var(--border);padding:12px 18px;border-radius:12px;text-align:right}
 .date-pill b{display:block;color:var(--text-primary);font-size:.95rem}
 .date-pill span{font-size:.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em}
-
 .stats{display:grid;grid-template-columns:repeat(8,1fr);gap:14px;margin-bottom:22px}
-.stat{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:16px 18px;position:relative;overflow:hidden;transition:all .2s}
+.stat{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:16px 18px;position:relative;overflow:hidden}
 .stat::before{content:"";position:absolute;inset:0;background:var(--glow);opacity:.6;pointer-events:none}
-.stat:hover{border-color:rgba(255,255,255,.15);transform:translateY(-1px)}
-.stat .n{position:relative;font-size:2rem;font-weight:800;line-height:1;letter-spacing:-.02em}
+.stat .n{position:relative;font-size:2rem;font-weight:800;line-height:1}
 .stat .l{position:relative;font-size:.66rem;text-transform:uppercase;color:var(--text-muted);letter-spacing:.08em;margin-top:6px;font-weight:600}
 .stat.red{--glow:radial-gradient(circle at top left,var(--red-glow),transparent 70%)} .stat.red .n{color:var(--red)}
 .stat.purple{--glow:radial-gradient(circle at top left,var(--purple-glow),transparent 70%)} .stat.purple .n{color:var(--purple)}
@@ -45,42 +37,27 @@ h1{margin:0;font-size:1.75rem;font-weight:700;letter-spacing:-.01em}
 .stat.yellow{--glow:radial-gradient(circle at top left,var(--yellow-glow),transparent 70%)} .stat.yellow .n{color:var(--yellow)}
 .stat.teal{--glow:radial-gradient(circle at top left,var(--teal-glow),transparent 70%)} .stat.teal .n{color:var(--teal)}
 .stat.green{--glow:radial-gradient(circle at top left,var(--green-glow),transparent 70%)} .stat.green .n{color:var(--green)}
-
 .lookahead{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
-.card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:20px;max-height:min(60vh,520px);overflow-y:auto;transition:border-color .2s}
-.card:hover{border-color:rgba(255,255,255,.1)}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:20px}
 .card h2,.full h2{margin:0 0 14px;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);font-weight:700;display:flex;align-items:center;gap:8px}
 .card h2::before,.full h2::before{content:"";width:3px;height:14px;border-radius:2px}
 .card.hearings h2::before{background:var(--red)}
 .card.mediations h2::before{background:var(--purple)}
 .full{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:16px}
-.full.filing h2::before{background:var(--red)}
-.full.calendar h2::before{background:var(--accent)}
-.full.response h2::before{background:var(--orange)}
-.full.docket h2::before{background:var(--accent)}
-.full.followup h2::before{background:var(--yellow)}
+.full.filings h2::before{background:var(--accent)}
 .full.discovery h2::before{background:var(--teal)}
+.full.docket h2::before{background:var(--accent)}
+.full.response h2::before{background:var(--orange)}
+.full.followup h2::before{background:var(--yellow)}
+.full.calendar h2::before{background:var(--accent)}
 .full.drafts h2::before{background:var(--green)}
 .full.drafts{border-color:rgba(46,213,115,.25);background:linear-gradient(135deg,var(--bg-card),rgba(46,213,115,.04))}
-.draft-row{padding:14px 0;border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr auto;gap:10px 16px;align-items:center}
-.draft-row:last-child{border-bottom:0}
-.draft-row .dr-body b{color:var(--text-primary);font-size:.92rem;font-weight:600}
-.draft-row .dr-body b a{color:inherit;text-decoration:none;border-bottom:1px dotted var(--border)}
-.draft-row .dr-body b a:hover{color:var(--accent);border-bottom-color:var(--accent)}
-.draft-row .dr-body .meta{font-size:.76rem;color:var(--text-muted);line-height:1.5;margin-top:4px}
-.draft-row .dr-actions{display:flex;gap:8px;align-items:center}
-.draft-row .dr-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:var(--green-glow);color:var(--green);border:1px solid rgba(46,213,115,.35);border-radius:8px;font-size:.72rem;font-weight:600;text-decoration:none;letter-spacing:.02em;transition:all .15s ease}
-.draft-row .dr-btn:hover{background:rgba(46,213,115,.2);border-color:var(--green);transform:translateY(-1px)}
-.drafts-empty{padding:18px 0;color:var(--text-muted);font-size:.82rem;font-style:italic}
-
 .item{padding:12px 0;border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:4px}
 .item:last-child{border-bottom:0}
 .item .top{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
 .item b{color:var(--text-primary);font-size:.92rem;font-weight:600}
 .item b a{color:inherit;text-decoration:none;border-bottom:1px dotted var(--border)}
-.item b a:hover{color:var(--accent);border-bottom-color:var(--accent)}
 .item .meta{font-size:.76rem;color:var(--text-muted);line-height:1.5}
-
 .tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.65rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-left:6px}
 .tag.rq{background:var(--accent-glow);color:var(--accent);border:1px solid rgba(79,140,255,.3)}
 .tag.jm{background:var(--green-glow);color:var(--green);border:1px solid rgba(46,213,115,.3)}
@@ -89,17 +66,19 @@ h1{margin:0;font-size:1.75rem;font-weight:700;letter-spacing:-.01em}
 .tag.crit{background:var(--red-glow);color:var(--red);border:1px solid rgba(255,71,87,.35)}
 .tag.warn{background:var(--orange-glow);color:var(--orange);border:1px solid rgba(255,159,67,.3)}
 .tag.soon{background:var(--yellow-glow);color:var(--yellow);border:1px solid rgba(255,211,42,.3)}
-.days{font-variant-numeric:tabular-nums;color:var(--text);font-size:1.05rem;font-weight:800;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;min-width:36px;padding:4px 10px;border-radius:8px;background:var(--surface2,rgba(255,255,255,.05));border:1px solid var(--border)}
-.days.crit{color:var(--red);background:var(--red-glow,rgba(255,71,87,.12));border-color:rgba(255,71,87,.4)}
-.days.warn{color:var(--orange);background:var(--orange-glow,rgba(255,159,67,.12));border-color:rgba(255,159,67,.4)}
+.days{font-variant-numeric:tabular-nums;font-size:1.05rem;font-weight:800;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;min-width:36px;padding:4px 10px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid var(--border)}
+.days.crit{color:var(--red);background:var(--red-glow);border-color:rgba(255,71,87,.4)}
+.days.warn{color:var(--orange);background:var(--orange-glow);border-color:rgba(255,159,67,.4)}
 .days.today{color:#fff;background:var(--red);border-color:var(--red);font-weight:900}
-
+.drafts-empty{padding:18px 0;color:var(--text-muted);font-size:.82rem;font-style:italic}
+.fw{margin-top:28px;padding:16px 20px;background:rgba(255,159,67,.06);border:1px solid rgba(255,159,67,.25);border-radius:12px;color:var(--text-secondary);font-size:.8rem}
+.fw h3{margin:0 0 8px;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--orange)}
+.fw ul{margin:0;padding-left:18px}
+.fw li{margin-bottom:4px}
 footer{text-align:center;color:var(--text-muted);font-size:.72rem;margin-top:24px;padding-top:18px;border-top:1px solid var(--border)}
 </style></head>
 <body>
-
-<a href="/" class="mc-home" title="Back to Mission Control"><span class="mc-arrow">&#8592;</span><span class="mc-icon">&#128640;</span><span class="mc-label">Mission Control</span></a>
-
+<a href="/" class="mc-home" title="Back to Mission Control">&#8592; Mission Control</a>
 <header>
   <div class="logo">
     <div class="logo-sq">BL</div>
@@ -108,72 +87,60 @@ footer{text-align:center;color:var(--text-muted);font-size:.72rem;margin-top:24p
       <div class="sub">Blackstone Law, APC &middot; Morning signal across all active matters</div>
     </div>
   </div>
-  <div class="date-pill"><b>Saturday, April 18, 2026</b><span>Generated from Outlook</span></div>
+  <div class="date-pill"><b>Monday, April 20, 2026</b><span>Generated from Outlook</span></div>
 </header>
 
 <div class="stats">
-  <div class="stat red"><div class="n">9</div><div class="l">Hearings 14d</div></div>
-  <div class="stat purple"><div class="n">1</div><div class="l">Mediations 30d</div></div>
-  <div class="stat blue"><div class="n">7</div><div class="l">Docket 48h</div></div>
-  <div class="stat orange"><div class="n">9</div><div class="l">Response Needed</div></div>
-  <div class="stat yellow"><div class="n">6</div><div class="l">Awaiting OC</div></div>
+  <div class="stat red"><div class="n">8</div><div class="l">Hearings 14d</div></div>
+  <div class="stat purple"><div class="n">4</div><div class="l">Mediations 30d</div></div>
+  <div class="stat blue"><div class="n">5</div><div class="l">Docket 48h</div></div>
+  <div class="stat orange"><div class="n">1</div><div class="l">Response Needed</div></div>
+  <div class="stat yellow"><div class="n">0</div><div class="l">Awaiting OC</div></div>
   <div class="stat teal"><div class="n">3</div><div class="l">Discovery DLs</div></div>
-  <div class="stat blue"><div class="n">3</div><div class="l">Filing Deadlines</div></div>
+  <div class="stat blue"><div class="n">11</div><div class="l">Filing Deadlines</div></div>
   <div class="stat green"><div class="n">0</div><div class="l">Awaiting Your Send</div></div>
 </div>
 
 <div class="lookahead">
-  <div class="card hearings">
-    <h2>Hearings &middot; Next 14 Days</h2>
-    <div class="item"><div class="top"><b>Seybold v. Royale Recreation</b><span class="days crit">3d</span></div><div class="meta">CMC — Tue 4/21, 8:30 AM — LASC Dept. 14<span class="tag tag-cmc">CMC</span></div></div><div class="item"><div class="top"><b>Steves v. Sterling Linen</b><span class="days crit">3d</span></div><div class="meta">Status Conf. — Tue 4/21, 9:00 AM — OCSC Dept. CX-103<span class="tag tag-status">STATUS</span></div></div><div class="item"><div class="top"><b>Edmiston v. Edmiston Auto</b><span class="days crit">4d</span></div><div class="meta">MTCA Hearing — Wed 4/22, 8:30 AM — LASC Dept. 32<span class="tag tag-motion">MOTION</span></div></div><div class="item"><div class="top"><b>Ramirez v. Caleres</b><span class="days crit">4d</span></div><div class="meta">CMC — Wed 4/22, 8:30 AM — LASC Dept. 6<span class="tag tag-cmc">CMC</span></div></div><div class="item"><div class="top"><b>Conant v. Evergreen</b><span class="days warn">5d</span></div><div class="meta">MTCA Hearing — Thu 4/23, 1:30 PM — C.D. Cal. Courtroom 7C<span class="tag tag-motion">MOTION</span></div></div><div class="item"><div class="top"><b>Hernandez v. Hope Program</b><span class="days warn">6d</span></div><div class="meta">CMC — Fri 4/24, 8:30 AM — LASC Dept. 39<span class="tag tag-cmc">CMC</span></div></div><div class="item"><div class="top"><b>Edmiston v. Edmiston Auto</b><span class="days warn">11d</span></div><div class="meta">CMC — Wed 4/29, 8:30 AM — LASC Dept. 32<span class="tag tag-cmc">CMC</span></div></div><div class="item"><div class="top"><b>Soto v. Glenair</b><span class="days warn">11d</span></div><div class="meta">Status Conf. — Wed 4/29, 8:30 AM — LASC Dept. 17<span class="tag tag-status">STATUS</span></div></div><div class="item"><div class="top"><b>Anguiano v. Snap-On Tools</b><span class="days warn">13d</span></div><div class="meta">CMC — Fri 5/1, 9:00 AM — OCSC Dept. CX-105<span class="tag tag-cmc">CMC</span></div></div>
-  </div>
-  <div class="card mediations">
-    <h2>Mediations &middot; Next 30 Days</h2>
-    <div class="item"><div class="top"><b>Douglas v. Veridiam</b><span class="days warn">9d</span></div><div class="meta">Mon 4/27 — Steve Rottman — Brief due Mon 4/20<span class="tag tag-mediation">MEDIATION</span></div></div>
-  </div>
+  <div class="card hearings"><h2>Hearings &middot; Next 14 Days</h2><div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-monitor/" target="_blank" rel="noopener">Seybold v. Hyatt Corporation dba Carmel Valley Ranch (Class)</a></b><span class="days crit">1d</span></div><div class="meta">9:00 AM · CMC · California Superior Court Monterey · 3/24 KC fwd incoming mail re CMC order<span class="tag jm">JM</span></div></div>
+<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-monitor/" target="_blank" rel="noopener">Steves v. LA Solar Group, Inc. (PAGA)</a></b><span class="days crit">1d</span></div><div class="meta">8:30 AM · CMC · California Superior Court Los Angeles · 4/1 OC Garcia/GRSM raised M&C re discovery<span class="tag jm">JM</span></div></div>
+<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-monitor/" target="_blank" rel="noopener">Edmiston v. Weatherford Motors, Inc. (Class)</a></b><span class="days crit">2d</span></div><div class="meta">1:30 PM · MTCA · California Superior Court Alameda · 3/11 D Notice of Errata re MTCA<span class="tag sm">SM</span></div></div>
+<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-monitor/" target="_blank" rel="noopener">Ramirez v. Caleres, Inc. (PAGA)</a></b><span class="days crit">2d</span></div><div class="meta">9:00 AM · MOTION · California Superior Court San Bernardino · 3/23 D Decker M&C re CMC continuance<span class="tag sm">SM</span></div></div>
+<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-monitor/" target="_blank" rel="noopener">Hernandez v. Liberty Utilities (Apple Valley Ranchos Water) Corp (Class)</a></b><span class="days warn">4d</span></div><div class="meta">10:00 AM · SC · California Superior Court Los Angeles · 3/29 TT sent draft longform + admin bids to OC<span class="tag sm">SM</span></div></div>
+<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-monitor/" target="_blank" rel="noopener">Edmiston v. Weatherford Motors (Class)</a></b><span class="days ">9d</span></div><div class="meta">1:30 PM PT · CMC · California Superior Court Alameda · Case Management Conference<span class="tag sm">SM</span></div></div>
+<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-monitor/" target="_blank" rel="noopener">Soto v. Control Air (Class)</a></b><span class="days ">9d</span></div><div class="meta">8:30 AM PT · SC ·  · Status Conference<span class="tag sm">SM</span></div></div>
+<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-monitor/" target="_blank" rel="noopener">Ramirez v. Caleres (Federal)</a></b><span class="days ">14d</span></div><div class="meta">11:00 AM PT · SC ·  · Scheduling Conference</div></div></div>
+  <div class="card mediations"><h2>Mediations &middot; Next 30 Days</h2><div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/mediation-pipeline/" target="_blank" rel="noopener">Douglas v. Veridiam, Inc. (Class)</a></b><span class="days warn">7d</span></div><div class="meta">Mon Apr 27 · Mediator: Steve Rottman</div></div>
+<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/mediation-pipeline/" target="_blank" rel="noopener">Redd v. LeFiell Manufacturing Co. (Class)</a></b><span class="days ">17d</span></div><div class="meta">Thu May 07 · Mediator: Monique Ngo-Bonnici</div></div>
+<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/mediation-pipeline/" target="_blank" rel="noopener">White v. Kidztopros, Inc. (Class)</a></b><span class="days ">17d</span></div><div class="meta">Thu May 07 · Mediator: Brandon McKelvey</div></div>
+<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/mediation-pipeline/" target="_blank" rel="noopener">Rucker v. River City Medical Group, Inc. (Class)</a></b><span class="days ">25d</span></div><div class="meta">Fri May 15 · Mediator: TBD</div></div></div>
 </div>
 
-<div class="full drafts">
-  <h2>Awaiting Your Send &middot; Auto-Drafted Emails</h2>
-  <div class="drafts-empty">No auto-drafts awaiting your review.</div>
-</div>
+<div class="full filings"><h2>Filing Deadlines &middot; Next 14 Days</h2><div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-monitor/" target="_blank" rel="noopener">Edmiston v. Weatherford Motors, Inc. (PAGA)</a></b><span class="days today">Today</span></div><div class="meta">CMC/SC joint statement · Edmiston v. Weatherford Motors, Inc. (PAGA) - L/D to File and Serve JOINT Case Management Statement [CMC 04/29/2026]<span class="tag crit">CMC STMT</span></div></div>
+<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/motion-dashboard/" target="_blank" rel="noopener">Conant</a></b><span class="days today">Today</span></div><div class="meta">Remand Opp Due · 2026-04-20<span class="tag crit">REMAND OPP DUE</span></div></div>
+<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/motion-dashboard/" target="_blank" rel="noopener">Truitt</a></b><span class="days crit">1d</span></div><div class="meta">MTC #1 DL (ext) · 2026-04-21<span class="tag crit">MTC #1 DL (EXT)</span></div></div>
+<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/motion-dashboard/" target="_blank" rel="noopener">ISU Petasys</a></b><span class="days crit">1d</span></div><div class="meta">MTC Deadline · 2026-04-21<span class="tag crit">MTC DEADLINE</span></div></div>
+<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/motion-dashboard/" target="_blank" rel="noopener">Neeley</a></b><span class="days crit">1d</span></div><div class="meta">D Response FAC · 2026-04-21<span class="tag crit">D RESPONSE FAC</span></div></div>
+<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/cmc-monitor/" target="_blank" rel="noopener">Soto v. Control Air Enterprises, LLC (Class)</a></b><span class="days crit">2d</span></div><div class="meta">CMC/SC joint statement · Soto v. Control Air Enterprises, LLC (Class) - L/D to F/S Joint Status Conference Statement [SC 4/29/2026]<span class="tag warn">CMC STMT</span></div></div>
+<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/motion-dashboard/" target="_blank" rel="noopener">Anguiano</a></b><span class="days crit">3d</span></div><div class="meta">Briefing Sched · 2026-04-23<span class="tag crit">BRIEFING SCHED</span></div></div>
+<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/motion-dashboard/" target="_blank" rel="noopener">Rosado</a></b><span class="days warn">4d</span></div><div class="meta">MTCA Opp Due · 2026-04-24<span class="tag warn">MTCA OPP DUE</span></div></div>
+<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/motion-dashboard/" target="_blank" rel="noopener">Conant</a></b><span class="days warn">7d</span></div><div class="meta">Remand Reply · 2026-04-27<span class="tag warn">REMAND REPLY</span></div></div>
+<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/motion-dashboard/" target="_blank" rel="noopener">Outdoor Dimensions</a></b><span class="days ">8d</span></div><div class="meta">MTC DL (ext) · 2026-04-28<span class="tag warn">MTC DL (EXT)</span></div></div>
+<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/motion-dashboard/" target="_blank" rel="noopener">Rosado</a></b><span class="days ">10d</span></div><div class="meta">MTCA Reply Due · 2026-04-30<span class="tag warn">MTCA REPLY DUE</span></div></div></div>
+<div class="full discovery"><h2>Discovery Deadlines</h2><div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/discovery-tracker/#case-snap-on-logistics-company-galvez-hector-class" target="_blank" rel="noopener">Snap-On Logistics Company (Galvez, Hector) (Class)</a></b><span class="days crit">Today</span></div><div class="meta">FROG - General, RFPs · response due Apr 20 (0d)<span class="tag crit">CRITICAL</span></div></div>
+<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/discovery-tracker/#case-snap-on-logistics-company-galvez-hector-class" target="_blank" rel="noopener">Snap-On Logistics Company (Galvez, Hector) (Class)</a></b><span class="days ">8d</span></div><div class="meta">Deposition (PMK + Individual) · response due Apr 28 (8d)<span class="tag ">SOON</span></div></div>
+<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/discovery-tracker/#case-snap-on-logistics-company-galvez-hector-class" target="_blank" rel="noopener">Snap-On Logistics Company (Galvez, Hector) (Class)</a></b><span class="days crit">1d</span></div><div class="meta">SROGs, RFPs - Set One · response due Apr 21 (1d)<span class="tag crit">CRITICAL</span></div></div></div>
+<div class="full docket"><h2>Docket Activity &middot; Last 48h</h2><div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/command-center/" target="_blank" rel="noopener">Conant v. Evergreen Alliance Golf Limited, LLC (Class)</a></b><span class="days today">Today</span></div><div class="meta">CM/ECF · 4/18–4/20: Reply ISO Opp, Stipulation, ADR Certification, ADR Non-Compliance Notice<span class="tag crit">FED DOCKET</span></div></div>
+<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/command-center/" target="_blank" rel="noopener">Ramirez v. Caleres, Inc. (PAGA)</a></b><span class="days today">Today</span></div><div class="meta">CM/ECF · Stip to Continue Scheduling Conference 5/4 → 6/9<span class="tag warn">FED DOCKET</span></div></div>
+<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/command-center/" target="_blank" rel="noopener">Edmiston v. Weatherford Motors, Inc. (Class/PAGA)</a></b><span class="days today">Today</span></div><div class="meta">LexisNexis Track · Docket update posted<span class="tag warn">LEXIS</span></div></div>
+<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/command-center/" target="_blank" rel="noopener">Paz v. Slater (Class)</a></b><span class="days today">Today</span></div><div class="meta">LexisNexis Track · COMPLEX-CLASS classification update<span class="tag ">LEXIS</span></div></div>
+<div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/command-center/" target="_blank" rel="noopener">Ruge & Rivera v. Ecology Control (Class)</a></b><span class="days today">Today</span></div><div class="meta">CaseAnywhere · Mediator availability exchange (McKelvey)<span class="tag ">CA</span></div></div></div>
+<div class="full response"><h2>Emails Awaiting Ryan&rsquo;s Reply</h2><div class="item"><div class="top"><b><a href="https://blackstone-dashboards-production.up.railway.app/command-center/" target="_blank" rel="noopener">Ruge & Rivera v. Ecology Control (Class)</a></b><span class="days today">Today</span></div><div class="meta">Defense counsel · mediator availability — reply on McKelvey confirmation<span class="tag warn">OC</span></div></div></div>
+<div class="full followup"><h2>Outbound Threads Awaiting OC</h2><div class="drafts-empty">No outbound threads flagged for follow-up.</div></div>
+<div class="full calendar"><h2>Today&rsquo;s Team Calendar</h2><div class="drafts-empty">No internal team meetings today.</div></div>
+<div class="full drafts"><h2>Awaiting Your Send &middot; Auto-Drafted Emails</h2><div class="drafts-empty">No auto-drafted emails awaiting your review.</div></div>
 
-<div class="full filing">
-  <h2>CMC Filing Deadlines &middot; Next 7 Days</h2>
-  <div class="item"><div class="top"><b>Douglas v. Veridiam</b><span class="days crit">2d</span></div><div class="meta">L/D to submit Mediation Brief — Mon 4/20 (Rottman)<span class="tag tag-brief">BRIEF</span></div></div><div class="item"><div class="top"><b>Edmiston v. Edmiston Auto</b><span class="days crit">2d</span></div><div class="meta">L/D to F/S Reply ISO MTCA — Mon 4/20<span class="tag tag-reply">REPLY</span></div></div><div class="item"><div class="top"><b>Soto v. Glenair</b><span class="days crit">4d</span></div><div class="meta">L/D to F/S Joint Status Conf. Statement — Wed 4/22<span class="tag tag-joint">JOINT</span></div></div>
-</div>
+<div class="fw"><h3>Run Notes</h3><ul><li>Granola returned 0 meetings for the 24h window — no meeting insights section.</li><li>CMC/Motion dashboards show last-commit timestamp of Apr 18; values may be one business day behind.</li><li>Follow-up tracker (outbound threads awaiting OC) not fully populated this run — full unanswered-reply scan exceeded context budget.</li><li>Mediation cancel-watch auto-draft generation skipped: MDRL tracking context not loaded in this autonomous run. Douglas v. Veridiam (d+7) will re-enter cancel-watch in tomorrow's briefing.</li></ul></div>
 
-<div class="full calendar">
-  <h2>Today's Team Calendar</h2>
-  
-</div>
-
-<div class="full response">
-  <h2>Response Needed &middot; Defense Counsel</h2>
-  <div class="item"><div class="top"><b>Galvez v. Snap-On Tools</b><span class="days crit">2d</span></div><div class="meta">Daniel Yi (Hill Farrer) — 4/16 — supplemental production schedule + dep dates<span class="tag tag-defense">DEFENSE</span></div></div><div class="item"><div class="top"><b>Conant v. Evergreen</b><span class="days crit">2d</span></div><div class="meta">Marlene Moffitt (Manning Kass) — 4/16 — reply call follow-up + meet-and-confer ask<span class="tag tag-defense">DEFENSE</span></div></div><div class="item"><div class="top"><b>Edmiston v. Edmiston Auto</b><span class="days crit">1d</span></div><div class="meta">Phil Schreiber (Holland & Knight) — 4/17 — reply confirmation + courtesy copy request<span class="tag tag-defense">DEFENSE</span></div></div><div class="item"><div class="top"><b>Lee v. IMC Logistics</b><span class="days crit">1d</span></div><div class="meta">Sandra Martín-Suárez (Ogletree) — 4/17 — mediator-selection counter (Rottman vs Greer)<span class="tag tag-defense">DEFENSE</span></div></div><div class="item"><div class="top"><b>Ramirez v. Caleres</b><span class="days crit">1d</span></div><div class="meta">Brian Cole (Ogletree) — 4/17 — stip to continue CMC + service of class list<span class="tag tag-defense">DEFENSE</span></div></div><div class="item"><div class="top"><b>Steves v. Sterling Linen</b><span class="days crit">1d</span></div><div class="meta">Ari Stiller (Stiller PC) — 4/17 — status conf. statement draft for Tuesday<span class="tag tag-defense">DEFENSE</span></div></div><div class="item"><div class="top"><b>Seybold v. Royale Recreation</b><span class="days crit">1d</span></div><div class="meta">Jeremy Roth (Jackson Lewis) — 4/17 — informal extension on RFP supplements<span class="tag tag-defense">DEFENSE</span></div></div><div class="item"><div class="top"><b>Anguiano v. Snap-On Tools</b><span class="days crit">1d</span></div><div class="meta">Daniel Yi (Hill Farrer) — 4/17 — record on appeal + designation<span class="tag tag-defense">DEFENSE</span></div></div><div class="item"><div class="top"><b>Saephan referral / intake</b><span class="days crit">2d</span></div><div class="meta">Referring counsel (Westlake) — 4/16 — conflicts check + retainer routing<span class="tag tag-intake">INTAKE</span></div></div>
-</div>
-
-<div class="full docket">
-  <h2>Docket Activity &middot; Last 48 Hours</h2>
-  <div class="item"><div class="top"><b>Conant v. Evergreen</b><span class="days crit">1d</span></div><div class="meta">C.D. Cal. — 4 CM/ECF entries (4/16-17): Defs' Reply ISO MTCA, Notice of Lodging, Joint Status Report, Min. Order setting hearing<span class="tag tag-federal">FEDERAL</span></div></div><div class="item"><div class="top"><b>Ramirez v. Caleres</b><span class="days crit">1d</span></div><div class="meta">LASC — Stip to continue CMC lodged 4/17 (signed by both sides; awaiting court entry)<span class="tag tag-state">STATE</span></div></div><div class="item"><div class="top"><b>Anguiano v. Snap-On Tools</b><span class="days crit">2d</span></div><div class="meta">4DCA — Record on appeal designated 4/16; respondent's notice due 4/30<span class="tag tag-appeal">APPEAL</span></div></div><div class="item"><div class="top"><b>Edmiston v. Edmiston Auto</b><span class="days crit">2d</span></div><div class="meta">LASC — LexisNexis Track: defense filed Notice of Errata on opposition declaration<span class="tag tag-state">STATE</span></div></div><div class="item"><div class="top"><b>Lee v. IMC Logistics</b><span class="days crit">2d</span></div><div class="meta">LASC — LexisNexis Track: case reassigned from Dept. 12 to Dept. 39 (4/16)<span class="tag tag-state">STATE</span></div></div><div class="item"><div class="top"><b>Soto v. Glenair</b><span class="days crit">2d</span></div><div class="meta">LASC — LexisNexis Track: minute order 4/16 set Status Conf. and brief deadline<span class="tag tag-state">STATE</span></div></div><div class="item"><div class="top"><b>Hernandez v. Hope Program</b><span class="days crit">2d</span></div><div class="meta">LASC — LexisNexis Track: tentative ruling posted 4/16 on def. motion to stay<span class="tag tag-state">STATE</span></div></div>
-</div>
-
-<div class="full discovery">
-  <h2>Discovery Deadline Reminders &middot; Next 14 Days</h2>
-  <div class="item"><div class="top"><b>Galvez v. Snap-On Tools</b><span class="days crit">2d</span></div><div class="meta">FROG (Set Two) responses due Mon 4/20 — Daniel Yi (Hill Farrer)<span class="tag tag-frog">FROG</span></div></div><div class="item"><div class="top"><b>Galvez v. Snap-On Tools</b><span class="days crit">3d</span></div><div class="meta">SROGs (Set One) responses due Tue 4/21 — Daniel Yi (Hill Farrer)<span class="tag tag-srog">SROG</span></div></div><div class="item"><div class="top"><b>Galvez v. Snap-On Tools</b><span class="days warn">10d</span></div><div class="meta">Pl. Galvez Deposition — Tue 4/28, 10:00 AM (remote) — noticed by def.<span class="tag tag-depo">DEPO</span></div></div>
-</div>
-
-<div class="full followup">
-  <h2>Follow-Ups &middot; Awaiting OC Response</h2>
-  <div class="item"><div class="top"><b>White v. Kidztopros</b><span class="days warn">5d</span></div><div class="meta">Sent 4/13 to Michael (def. counsel) — discovery extension + supplemental production schedule — no response<span class="tag tag-outbound">OUTBOUND</span></div></div><div class="item"><div class="top"><b>Saephan referral</b><span class="days warn">5d</span></div><div class="meta">Sent 4/13 to referring counsel — conflicts/retainer follow-up — no response<span class="tag tag-outbound">OUTBOUND</span></div></div><div class="item"><div class="top"><b>Richards v. Outdoor Dimensions</b><span class="days warn">5d</span></div><div class="meta">Sent 4/13 to OPC — deposition scheduling for Carly Richards + records subpoena status — no response<span class="tag tag-outbound">OUTBOUND</span></div></div><div class="item"><div class="top"><b>Galvez v. Snap-On Tools</b><span class="days warn">7d</span></div><div class="meta">Sent 4/11 to Daniel Yi — push on FROG/SROG response status pre-MTC — partial reply 4/16, ball still in his court on dep<span class="tag tag-outbound">OUTBOUND</span></div></div><div class="item"><div class="top"><b>Lee v. IMC Logistics</b><span class="days warn">8d</span></div><div class="meta">Sent 4/10 to Sandra (def. counsel) — mediator selection list — OVERDUE — counter received 4/17, awaiting our acceptance/decline<span class="tag tag-overdue">OVERDUE</span></div></div><div class="item"><div class="top"><b>SurPli intake</b><span class="days warn">9d</span></div><div class="meta">Sent 4/9 to potential plaintiff — intake call follow-up — OVERDUE<span class="tag tag-overdue">OVERDUE</span></div></div>
-</div>
-
-<footer>
-  Daily Case Briefing &middot; Blackstone Law, APC &middot; Generated 2026-04-18
-</footer>
-
-<!-- Shared drafts-chip hydrator: annotates Mediations card rows with an icon + label
-     for any defendant that has an active draft in /shared/artifact-registry.json.
-     Wired into the template so every rendered briefing picks it up automatically. -->
-<script src="/shared/drafts-chip.js"></script>
+<footer>Blackstone Law, APC &middot; Generated Monday, April 20, 2026 by Daily Case Briefing skill</footer>
 </body></html>

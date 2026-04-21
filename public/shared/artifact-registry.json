@@ -148,9 +148,16 @@
           "descriptor": "RFP Set One (1-53) + SROG Set One (1-11) - 22pg production (14 blank templates + our PAGA notice); MTC by 6/1/2026",
           "created": "2026-04-21T16:34:02.306832Z",
           "status": "pending-review"
+        },
+        {
+          "type": "M&C Letter",
+          "url": "https://blackstone.filevineapp.com/#/project/12237599",
+          "descriptor": "RFP+SROG Set One deficiencies; 15 demand categories; response deadline Fri 5/1/2026; MTC 6/1/2026",
+          "created": "2026-04-21T16:34:03.596245Z",
+          "status": "pending-review"
         }
       ]
     }
   },
-  "last_updated": "2026-04-21T16:34:02.306845Z"
+  "last_updated": "2026-04-21T16:34:03.596256Z"
 }

@@ -184,6 +184,7 @@ function folderIcon(defendantName, routingKey, title) {
     .catch(function(){});
 })();
 </script>
+<script src="/shared/drafts-chip.js"></script>
 </head>
 <body>
 <div class="container">
@@ -1198,6 +1199,31 @@ function showSubTab(id, btn) {
 
 </div>
 
+
+<script>
+// Drafts-chip mount attach for Discovery Tracker rows.
+// Walks every searchable row's case-name element and appends a
+// <span class="drafts-chip-mount" data-matter="..."> so the shared
+// drafts-chip.js hydrator picks it up and renders the chip in-row.
+// Registered BEFORE the folder-icon DOMContentLoaded so order doesn't matter.
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('tr.searchable .case-name, tr.jpa-row .jpa-case-name').forEach(function(el) {
+    if (el.querySelector('.drafts-chip-mount')) return;
+    var anchor = el.querySelector('a');
+    var text = (anchor || el).textContent.trim();
+    if (!text) return;
+    var mount = document.createElement('span');
+    mount.className = 'drafts-chip-mount';
+    mount.dataset.matter = text;
+    mount.style.marginLeft = '4px';
+    el.appendChild(mount);
+  });
+  // Re-trigger hydration in case drafts-chip.js already ran
+  if (window.BL_DRAFTS && window.BL_DRAFTS.hydrateAll) {
+    window.BL_DRAFTS.hydrateAll(document);
+  }
+});
+</script>
 <script>
 
 /* Auto-attach SharePoint folder icons to static case-name elements */

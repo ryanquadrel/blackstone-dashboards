@@ -184,7 +184,6 @@ function folderIcon(defendantName, routingKey, title) {
     .catch(function(){});
 })();
 </script>
-<script src="/shared/drafts-chip.js"></script>
 </head>
 <body>
 <div class="container">
@@ -210,9 +209,9 @@ function folderIcon(defendantName, routingKey, title) {
 <div class="phase-nav">
   <button class="phase-btn active" data-phase="dashboard" onclick="showPhase('dashboard')">📊 Dashboard</button>
   <button class="phase-btn" data-phase="pre-discovery" onclick="showPhase('pre-discovery')">Pre-Discovery <span class="count">62</span></button>
-  <button class="phase-btn" data-phase="awaiting" onclick="showPhase('awaiting')">Awaiting Response <span class="count">9</span></button>
-  <button class="phase-btn" data-phase="followup" onclick="showPhase('followup')">Follow-Up <span class="count">16</span></button>
-  <button class="phase-btn" data-phase="completed" onclick="showPhase('completed')">Completed <span class="count">10</span></button>
+  <button class="phase-btn" data-phase="awaiting" onclick="showPhase('awaiting')">Awaiting Response <span class="count">7</span></button>
+  <button class="phase-btn" data-phase="followup" onclick="showPhase('followup')">Follow-Up <span class="count">17</span></button>
+  <button class="phase-btn" data-phase="completed" onclick="showPhase('completed')">Completed <span class="count">11</span></button>
 </div>
 
 <!-- DASHBOARD PHASE -->
@@ -220,9 +219,9 @@ function folderIcon(defendantName, routingKey, title) {
   <div class="phase-updated">Last updated: April 21, 2026 (Discovery Tracker Sync)</div>
   <div class="stats">
     <div class="stat-card teal"><div class="label">Pre-Discovery</div><div class="value">62</div><div class="sub">Not yet propounded</div></div>
-    <div class="stat-card yellow"><div class="label">Awaiting Response</div><div class="value">9</div><div class="sub">Discovery served</div></div>
-    <div class="stat-card orange"><div class="label">Follow-Up</div><div class="value">16</div><div class="sub">M&amp;C / MTC track</div></div>
-    <div class="stat-card green"><div class="label">Completed</div><div class="value">10</div><div class="sub">Resolved / Settled</div></div>
+    <div class="stat-card yellow"><div class="label">Awaiting Response</div><div class="value">7</div><div class="sub">Discovery served</div></div>
+    <div class="stat-card orange"><div class="label">Follow-Up</div><div class="value">17</div><div class="sub">M&amp;C / MTC track</div></div>
+    <div class="stat-card green"><div class="label">Completed</div><div class="value">11</div><div class="sub">Resolved / Settled</div></div>
     <div class="stat-card red"><div class="label">Overdue</div><div class="value">0</div><div class="sub">Past deadline</div></div>
   </div>
   <div class="upcoming-section">
@@ -241,9 +240,9 @@ function folderIcon(defendantName, routingKey, title) {
       <div class="upcoming-date">May 12, 2026</div>
     </div>
     <div class="upcoming-row">
-      <div class="upcoming-case">Snap-On Logistics Company (Galvez, Hector) (Class)<span class="device">(FROG - General, RFPs)</span></div>
-      <div class="upcoming-type">Response Deadline</div>
-      <div class="upcoming-date">Apr 20, 2026</div>
+      <div class="upcoming-case">Hikvision USA Inc. (Fernald, James) (Class Only)<span class="device">(SROGs, RFPs — Set 1)</span></div>
+      <div class="upcoming-type">MTC Deadline</div>
+      <div class="upcoming-date">May 26, 2026</div>
     </div>
     <div class="upcoming-row">
       <div class="upcoming-case">Snap-On Logistics Company (Galvez, Hector) (Class)<span class="device">(SROGs, RFPs - Set One — 2-wk extension 4/20/26)</span></div>
@@ -793,31 +792,11 @@ function folderIcon(defendantName, routingKey, title) {
 
 <!-- AWAITING RESPONSE PHASE -->
 <div class="phase" data-id="awaiting">
-  <div class="phase-updated">Phase 2 — 9 entries awaiting defense responses</div>
+  <div class="phase-updated">Phase 2 — 7 entries awaiting defense responses</div>
   <div class="table-wrap"><div class="table-scroll">
   <table id="table-awaiting">
     <thead><tr><th>Case Name</th><th>Device</th><th>Propounding Party</th><th>Date Served</th><th>Orig. Deadline</th><th>Extensions</th><th>New Deadline</th><th>Status</th><th data-column="draft-status">Draft Status</th><th data-column="owner-lock">Owner / Lock</th></tr></thead>
     <tbody id="awaiting-body">
-    <tr class="searchable" data-status="extended">
-      <td class="case-name">Hikvision USA Inc. (Fernald, James) (Class Only)<span class="contingent-tag">⏳ Defense amenable to stay per 3/27/26 email. Mediator agreed: Marc Feder (confirmed 4/6/26). Defense responses served 4/10/26 (Gordon Rees via CaseAnywhere). Stip to stay still pending. [Sync 2026-04-14]</span></td>
-      <td>SROGs, RFPs — Set 1</td>
-      <td><span class="badge badge-blue">Plaintiff</span></td>
-      <td>N/A</td>
-      <td>Mar 06, 2026</td>
-      <td>1</td>
-      <td>Apr 10, 2026</td>
-      <td><span class="badge badge-yellow">Extended</span></td>
-    <td data-column="draft-status">—</td><td data-column="owner-lock">—</td></tr>
-    <tr class="searchable" data-status="pending">
-      <td class="case-name">Snap-On Logistics Company (Galvez, Hector) (Class)</td>
-      <td>FROG - General, RFPs</td>
-      <td><span class="badge badge-blue">Defendant</span></td>
-      <td>Mar 17, 2026</td>
-      <td>Apr 20, 2026</td>
-      <td>0</td>
-      <td>N/A</td>
-      <td><span class="badge badge-blue">Pending</span></td>
-    <td data-column="draft-status">—</td><td data-column="owner-lock">—</td></tr>
     <tr class="searchable" data-status="noticed">
       <td class="case-name">Snap-On Logistics Company (Galvez, Hector) (Class)</td>
       <td>Deposition (PMK + Individual)</td>
@@ -894,7 +873,7 @@ function folderIcon(defendantName, routingKey, title) {
 
 <!-- FOLLOW-UP PHASE -->
 <div class="phase" data-id="followup">
-  <div class="phase-updated">Phase 3 — 16 entries in M&amp;C / MTC pipeline</div>
+  <div class="phase-updated">Phase 3 — 17 entries in M&amp;C / MTC pipeline</div>
   <div class="table-wrap"><div class="table-scroll">
   <table id="table-followup">
     <thead><tr><th>Case Name</th><th>Device</th><th>Response Date</th><th>M&amp;C Sent</th><th>Supp. Resp. Due</th><th>MTC Deadline</th><th>MTC Drafted</th><th>MTC Filed</th><th>Status</th></tr></thead>
@@ -1075,13 +1054,24 @@ function folderIcon(defendantName, routingKey, title) {
       <td>No</td>
       <td><span class="badge badge-blue">In Progress (Mediation)</span></td>
     </tr>
+    <tr class="searchable" data-status="in-progress">
+      <td class="case-name">Hikvision USA Inc. (Fernald, James) (Class Only)<span class="contingent-tag">⏳ Def responses served 4/10/26 (Gordon Rees via CaseAnywhere). MTC deadline 5/26/26 (45d from receipt, extended from 5/25 Memorial Day). Mediator agreed Marc Feder 4/6/26; stip to stay still pending — if stay lands, MTC clock paused. Sufficiency review pending. Transitioned from Awaiting → Follow-Up per rubric 2026-04-21. [Sync 2026-04-21]</span></td>
+      <td>SROGs, RFPs — Set 1</td>
+      <td>Apr 10, 2026</td>
+      <td>N/A</td>
+      <td>N/A</td>
+      <td>May 26, 2026</td>
+      <td>No</td>
+      <td>No</td>
+      <td><span class="badge badge-blue">In Progress</span></td>
+    </tr>
   </tbody>
   </table></div></div>
 </div>
 
 <!-- COMPLETED PHASE -->
 <div class="phase" data-id="completed">
-  <div class="phase-updated">Completed — 10 entries resolved</div>
+  <div class="phase-updated">Completed — 11 entries resolved</div>
   <div class="table-wrap"><div class="table-scroll">
   <table id="table-completed">
     <thead><tr><th>Case Name</th><th>Device</th><th>Completed Date</th><th>Notes</th></tr></thead>
@@ -1146,6 +1136,12 @@ function folderIcon(defendantName, routingKey, title) {
       <td>May 07, 2025</td>
       <td class="text-muted" style="max-width:300px;font-size:.78rem">Discovery withdrawn</td>
     </tr>
+    <tr class="searchable" data-status="completed">
+      <td class="case-name">Snap-On Logistics Company (Galvez, Hector) (Class)<span class="contingent-tag">✅ Plaintiff's verified responses to Def's FROG-General + RFPs served 4/20/26 (original 30-day deadline). No extension requested. Transitioned from Awaiting → Completed per rubric 2026-04-21. [Sync 2026-04-21]</span></td>
+      <td>FROG - General, RFPs (P's Responses)</td>
+      <td>Apr 20, 2026</td>
+      <td class="text-muted" style="max-width:300px;font-size:.78rem">Plaintiff responses served on deadline. Def's discovery loop closed. Disc obligation from this set satisfied.</td>
+    </tr>
   </tbody>
   </table></div></div>
 </div>
@@ -1199,31 +1195,6 @@ function showSubTab(id, btn) {
 
 </div>
 
-
-<script>
-// Drafts-chip mount attach for Discovery Tracker rows.
-// Walks every searchable row's case-name element and appends a
-// <span class="drafts-chip-mount" data-matter="..."> so the shared
-// drafts-chip.js hydrator picks it up and renders the chip in-row.
-// Registered BEFORE the folder-icon DOMContentLoaded so order doesn't matter.
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('tr.searchable .case-name, tr.jpa-row .jpa-case-name').forEach(function(el) {
-    if (el.querySelector('.drafts-chip-mount')) return;
-    var anchor = el.querySelector('a');
-    var text = (anchor || el).textContent.trim();
-    if (!text) return;
-    var mount = document.createElement('span');
-    mount.className = 'drafts-chip-mount';
-    mount.dataset.matter = text;
-    mount.style.marginLeft = '4px';
-    el.appendChild(mount);
-  });
-  // Re-trigger hydration in case drafts-chip.js already ran
-  if (window.BL_DRAFTS && window.BL_DRAFTS.hydrateAll) {
-    window.BL_DRAFTS.hydrateAll(document);
-  }
-});
-</script>
 <script>
 
 /* Auto-attach SharePoint folder icons to static case-name elements */

@@ -195,7 +195,7 @@ function folderIcon(defendantName, routingKey, title) {
     <p>Blackstone Law, APC — Wage &amp; Hour Litigation</p>
   </div>
   <div class="header-meta">
-    <strong>100</strong> total entries tracked<br>
+    <strong>116</strong> total entries tracked<br>
     Report: <strong>April 21, 2026</strong>
   </div>
 </div>
@@ -208,9 +208,9 @@ function folderIcon(defendantName, routingKey, title) {
 
 <div class="phase-nav">
   <button class="phase-btn active" data-phase="dashboard" onclick="showPhase('dashboard')">📊 Dashboard</button>
-  <button class="phase-btn" data-phase="pre-discovery" onclick="showPhase('pre-discovery')">Pre-Discovery <span class="count">47</span></button>
-  <button class="phase-btn" data-phase="awaiting" onclick="showPhase('awaiting')">Awaiting Response <span class="count">8</span></button>
-  <button class="phase-btn" data-phase="followup" onclick="showPhase('followup')">Follow-Up <span class="count">13</span></button>
+  <button class="phase-btn" data-phase="pre-discovery" onclick="showPhase('pre-discovery')">Pre-Discovery <span class="count">62</span></button>
+  <button class="phase-btn" data-phase="awaiting" onclick="showPhase('awaiting')">Awaiting Response <span class="count">9</span></button>
+  <button class="phase-btn" data-phase="followup" onclick="showPhase('followup')">Follow-Up <span class="count">16</span></button>
   <button class="phase-btn" data-phase="completed" onclick="showPhase('completed')">Completed <span class="count">10</span></button>
 </div>
 
@@ -218,9 +218,9 @@ function folderIcon(defendantName, routingKey, title) {
 <div class="phase active" data-id="dashboard">
   <div class="phase-updated">Last updated: April 21, 2026 (Discovery Tracker Sync)</div>
   <div class="stats">
-    <div class="stat-card teal"><div class="label">Pre-Discovery</div><div class="value">47</div><div class="sub">Not yet propounded</div></div>
-    <div class="stat-card yellow"><div class="label">Awaiting Response</div><div class="value">8</div><div class="sub">Discovery served</div></div>
-    <div class="stat-card orange"><div class="label">Follow-Up</div><div class="value">13</div><div class="sub">M&amp;C / MTC track</div></div>
+    <div class="stat-card teal"><div class="label">Pre-Discovery</div><div class="value">62</div><div class="sub">Not yet propounded</div></div>
+    <div class="stat-card yellow"><div class="label">Awaiting Response</div><div class="value">9</div><div class="sub">Discovery served</div></div>
+    <div class="stat-card orange"><div class="label">Follow-Up</div><div class="value">16</div><div class="sub">M&amp;C / MTC track</div></div>
     <div class="stat-card green"><div class="label">Completed</div><div class="value">10</div><div class="sub">Resolved / Settled</div></div>
     <div class="stat-card red"><div class="label">Overdue</div><div class="value">0</div><div class="sub">Past deadline</div></div>
   </div>
@@ -264,18 +264,18 @@ function folderIcon(defendantName, routingKey, title) {
 
 <!-- PRE-DISCOVERY PHASE -->
 <div class="phase" data-id="pre-discovery">
-  <div class="phase-updated">Phase 1 — 47 entries | 15 need drafting | 8 mediation track | 21 stayed</div>
+  <div class="phase-updated">Phase 1 — 59 entries | 22 need drafting | 10 mediation track | 21 stayed | 1 on appeal | 1 in progress</div>
   
   <div class="sub-tabs" style="display:flex;gap:6px;margin-bottom:16px;">
-    <button class="sub-tab active" onclick="showSubTab('active-discovery', this)" style="flex:1;padding:10px 16px;border:2px solid var(--teal);background:var(--teal);color:#fff;font-size:.85rem;font-weight:600;border-radius:8px;cursor:pointer;transition:all .2s;">Active Discovery <span style="font-size:.75rem;background:rgba(255,255,255,.25);padding:2px 8px;border-radius:100px;margin-left:6px;">18</span></button>
-    <button class="sub-tab" onclick="showSubTab('inactive-discovery', this)" style="flex:1;padding:10px 16px;border:2px solid var(--border);background:var(--surface);color:var(--text-muted);font-size:.85rem;font-weight:600;border-radius:8px;cursor:pointer;transition:all .2s;">Inactive Discovery <span style="font-size:.75rem;background:rgba(255,255,255,.15);padding:2px 8px;border-radius:100px;margin-left:6px;">29</span></button>
+    <button class="sub-tab active" onclick="showSubTab('active-discovery', this)" style="flex:1;padding:10px 16px;border:2px solid var(--teal);background:var(--teal);color:#fff;font-size:.85rem;font-weight:600;border-radius:8px;cursor:pointer;transition:all .2s;">Active Discovery <span style="font-size:.75rem;background:rgba(255,255,255,.25);padding:2px 8px;border-radius:100px;margin-left:6px;">31</span></button>
+    <button class="sub-tab" onclick="showSubTab('inactive-discovery', this)" style="flex:1;padding:10px 16px;border:2px solid var(--border);background:var(--surface);color:var(--text-muted);font-size:.85rem;font-weight:600;border-radius:8px;cursor:pointer;transition:all .2s;">Inactive Discovery <span style="font-size:.75rem;background:rgba(255,255,255,.15);padding:2px 8px;border-radius:100px;margin-left:6px;">31</span></button>
   </div>
 
   <div id="active-discovery" class="sub-phase" style="display:block;">
     <div style="font-size:.76rem;color:var(--text-muted);margin-bottom:12px;padding:4px 10px;background:var(--surface);border-radius:6px;display:inline-block;">14 needs drafting · 5 drafted · 1 MTCA pending · 1 arb pending | 7 with arbitration agreement</div>
     <div class="table-wrap"><div class="table-scroll">
     <table id="table-active-discovery">
-  <div id="tracker-summary" data-total="81" data-pre-discovery="14" data-in-progress="5" data-pending="1" data-stayed="25" data-mediation-track="7" data-mtca-pending="1" data-drafted="5" data-m-and-c-sent="6" data-arb-pending="1" data-extended="2" data-noticed="1" data-ext-pending="0" data-mtc-scheduled="2" data-completed="10" style="display:none"></div>
+  <div id="tracker-summary" data-total="97" data-pre-discovery="22" data-in-progress="9" data-pending="1" data-stayed="25" data-mediation-track="9" data-mtca-pending="1" data-on-appeal="1" data-drafted="6" data-m-and-c-sent="6" data-arb-pending="1" data-extended="3" data-noticed="1" data-ext-pending="0" data-mtc-scheduled="3" data-completed="10" style="display:none"></div>
   
     <thead><tr><th>Case Name</th><th>Filing Date</th><th>County</th><th>Discovery Status</th><th>Arbitration</th><th>Notes</th></tr></thead>
     <tbody id="active-discovery-body">
@@ -446,6 +446,86 @@ function folderIcon(defendantName, routingKey, title) {
       <td><span class="badge badge-blue">Drafted (RFPs, SROGs, BW)</span></td>
       <td>No</td>
       <td class="text-muted" style="max-width:200px;font-size:.78rem">Auto-drafted 4/16/2026 by new-case-intake.</td>
+    </tr>
+    <tr class="searchable" data-status="needs-to-be-drafted">
+      <td class="case-name">Acushnet Golf Company (Garcia, Samantha) (Class/PAGA)</td>
+      <td>N/A</td>
+      <td></td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>?</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Backfilled 2026-04-21 — roster case missing from tracker; no discovery in FV. Marquee Staffing co-def.</td>
+    </tr>
+    <tr class="searchable" data-status="needs-to-be-drafted">
+      <td class="case-name">Bertolotti Modesto Disposal, Inc. et al. (Cardenas, Bonnie) (Class)</td>
+      <td>N/A</td>
+      <td></td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>?</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Backfilled 2026-04-21 — roster case missing from tracker; no discovery in FV.</td>
+    </tr>
+    <tr class="searchable" data-status="needs-to-be-drafted">
+      <td class="case-name">Bluestone Lane Holdings, LLC (Crespo-Valdez, Carmelo) (Class/PAGA) (Spanish)</td>
+      <td>N/A</td>
+      <td></td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>?</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Backfilled 2026-04-21 — roster case missing from tracker; no discovery in FV.</td>
+    </tr>
+    <tr class="searchable" data-status="needs-to-be-drafted">
+      <td class="case-name">Crescent Heights (Hearn, Joshua) (Class) (LEAD FV)<span class="contingent-tag">⏳ Reassigned from BDC → Team RQ 3/25/26; Shelby lead. LASC 26STCV02900. Jackson Lewis (Shannon). Entity issue — CH Employment Services LLC. Amendment likely, not dismissal.</span></td>
+      <td>N/A</td>
+      <td>Los Angeles (LASC)</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>?</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Backfilled 2026-04-21 — roster case missing from tracker; no discovery in FV; entity resolution pending.</td>
+    </tr>
+    <tr class="searchable" data-status="needs-to-be-drafted">
+      <td class="case-name">Filyn Corporation dba Lynch EMS (Boyadjiev, George — LEAD; Renteria/Aguayo) (Class)</td>
+      <td>N/A</td>
+      <td></td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>?</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Backfilled 2026-04-21 — roster case missing from tracker; no discovery in FV. Three reps under one master file.</td>
+    </tr>
+    <tr class="searchable" data-status="needs-to-be-drafted">
+      <td class="case-name">Goodwill of the San Francisco Bay (Perry, Harold) (Class/PAGA)<span class="contingent-tag">⏳ Shelby lead. Marin CV0009471; filed 3/18/26.</span></td>
+      <td>Mar 18, 2026</td>
+      <td>Marin</td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>?</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Backfilled 2026-04-21 — roster case missing from tracker; no discovery in FV.</td>
+    </tr>
+    <tr class="searchable" data-status="needs-to-be-drafted">
+      <td class="case-name">Shoe Palace Corporation / The Finish Line USA, Inc. (Ramirez, Norma Ailu) (Class/PAGA)</td>
+      <td>N/A</td>
+      <td></td>
+      <td><span class="badge badge-red">Needs to be Drafted</span></td>
+      <td>?</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Backfilled 2026-04-21 — roster case missing from tracker; no discovery in FV.</td>
+    </tr>
+    <tr class="searchable" data-status="in-progress">
+      <td class="case-name">ChildNet Youth and Family Services, Inc. (Valenzuela, Ashley) (Class + PAGA)<span class="contingent-tag">⏳ Class 25STCV05358 + PAGA 25STCV12784. RFP+SROG+RFA Set 1 served 5/13-22/25 (Plaintiff). CMC + Status Re Stay hearing 6/17/26. Wizzy request 4/1/26 for new class rep (current rep issues). Backfilled 2026-04-21 from FV+Outlook.</span></td>
+      <td>May 13, 2025</td>
+      <td>Los Angeles (LASC)</td>
+      <td><span class="badge badge-blue">In Progress</span></td>
+      <td>?</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Discovery served 2025-05; stay pending; rep swap in progress. [Sync 2026-04-21]</td>
+    </tr>
+    <tr class="searchable" data-status="drafted">
+      <td class="case-name">American Future Technology Corp. dba iBuyPower (Kreutzer, Joshua) (Class)<span class="contingent-tag">⏸ In mediation — M Resolution $16K invoice 2/24/26 paid; settlement discussions active. LASC 25STCV17303.</span></td>
+      <td>N/A</td>
+      <td>Los Angeles (LASC)</td>
+      <td><span class="badge badge-blue">Drafted (RFPs, SROGs)</span></td>
+      <td>?</td>
+      <td>Backfilled 2026-04-21 — Set 1 drafts in FV DRAFTS folder, not served. Mediation track. [Sync 2026-04-21]</td>
+    </tr>
+    <tr class="searchable" data-status="in-progress">
+      <td class="case-name">Kinecta Federal Credit Union (Anguiano, Natalie) (Class)<span class="contingent-tag">⚠ Case on APPEAL — Court of Appeal B353903 (Fisher &amp; Phillips appellant). LASC 25STCV10850. Trial court confirmed no automatic stay per CCP 1294(a) at Status Conf 4/14/26. RFP+SROG Set 1 (Arbitration) served 8/13/25. Backfilled 2026-04-21.</span></td>
+      <td>Aug 13, 2025</td>
+      <td>Los Angeles (LASC)</td>
+      <td><span class="badge badge-purple">On Appeal</span></td>
+      <td>Yes</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Arbitration set served; now on appeal; no automatic stay. Class Cert SROG draft in FV. [Sync 2026-04-21]</td>
     </tr>
 </tbody>
   </table></div></div>
@@ -689,6 +769,22 @@ function folderIcon(defendantName, routingKey, title) {
       <td>No</td>
       <td class="text-muted" style="max-width:200px;font-size:.78rem"></td>
     </tr>
+    <tr class="searchable" data-status="mediation-track">
+      <td class="case-name">Keenan Farms, Inc. (Cervantez, Eric) (Class/PAGA) (KG PARTNERING)<span class="contingent-tag">⏸ Mediation 10/20/26 with Gig Kyriacou (confirmed 2/3/26). KCSC 25CU0190. Bidirectional Set 1 served 6-7/2025; Ps supps through 12/01/25. CMS filed 3/23/26, CMC 4/8/26. OC: Rissa Stuart, Monica Moran (Schanford). PAGA companion exists. Backfilled 2026-04-21 — informal discovery posture, mediation track.</span></td>
+      <td>N/A</td>
+      <td>Kings</td>
+      <td><span class="badge badge-teal">Mediation Track</span></td>
+      <td>No</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Formal discovery paused pending mediation 10/20/26. [Sync 2026-04-21]</td>
+    </tr>
+    <tr class="searchable" data-status="mediation-track">
+      <td class="case-name">International Cosmetics and Perfumes, Inc. (Orihuela, Lourdes) (Class)<span class="contingent-tag">⏸ Mediation 6/18/26 (confirmed 3/25/26). LASC 25STCV11512. RFP+SROG Set 1 served (see FV Discovery folder). Deposition prep 3/25/26. Notice of Ruling at Status Conf 3/24/26. Backfilled 2026-04-21.</span></td>
+      <td>N/A</td>
+      <td>Los Angeles (LASC)</td>
+      <td><span class="badge badge-teal">Mediation Track</span></td>
+      <td>?</td>
+      <td class="text-muted" style="max-width:200px;font-size:.78rem">Discovery served; mediation 6/18/26. [Sync 2026-04-21]</td>
+    </tr>
     </tbody>
   </table></div></div>
   </div>
@@ -696,7 +792,7 @@ function folderIcon(defendantName, routingKey, title) {
 
 <!-- AWAITING RESPONSE PHASE -->
 <div class="phase" data-id="awaiting">
-  <div class="phase-updated">Phase 2 — 8 entries awaiting defense responses</div>
+  <div class="phase-updated">Phase 2 — 9 entries awaiting defense responses</div>
   <div class="table-wrap"><div class="table-scroll">
   <table id="table-awaiting">
     <thead><tr><th>Case Name</th><th>Device</th><th>Propounding Party</th><th>Date Served</th><th>Orig. Deadline</th><th>Extensions</th><th>New Deadline</th><th>Status</th><th data-column="draft-status">Draft Status</th><th data-column="owner-lock">Owner / Lock</th></tr></thead>
@@ -781,13 +877,23 @@ function folderIcon(defendantName, routingKey, title) {
       <td>N/A</td>
       <td><span class="badge badge-orange">Stayed</span></td>
     <td data-column="draft-status">—</td><td data-column="owner-lock">—</td></tr>
+    <tr class="searchable" data-status="extended">
+      <td class="case-name">Ecology Control Industries, Inc. (Ruge, David &amp; Rivera, Oscar) (Class/PAGA) (Spanish)<span class="contingent-tag">⏳ RFP+SROG Set 1 served 3/20/26. 2-wk extension agreed 4/16/26 with Mullen Law (Ochoa/Gonzalez). Mediation discussion underway — Henry Bongiovi or Michael Strauss proposed (Ryan 4/17/26). LASC 25STCV33403. Backfilled 2026-04-21.</span></td>
+      <td>SROGs, RFPs — Set 1</td>
+      <td><span class="badge badge-blue">Plaintiff</span></td>
+      <td>Mar 20, 2026</td>
+      <td>Apr 19, 2026</td>
+      <td>1</td>
+      <td>May 03, 2026</td>
+      <td><span class="badge badge-yellow">Extended</span></td>
+    <td data-column="draft-status">—</td><td data-column="owner-lock">—</td></tr>
   </tbody>
   </table></div></div>
 </div>
 
 <!-- FOLLOW-UP PHASE -->
 <div class="phase" data-id="followup">
-  <div class="phase-updated">Phase 3 — 13 entries in M&amp;C / MTC pipeline</div>
+  <div class="phase-updated">Phase 3 — 16 entries in M&amp;C / MTC pipeline</div>
   <div class="table-wrap"><div class="table-scroll">
   <table id="table-followup">
     <thead><tr><th>Case Name</th><th>Device</th><th>Response Date</th><th>M&amp;C Sent</th><th>Supp. Resp. Due</th><th>MTC Deadline</th><th>MTC Drafted</th><th>MTC Filed</th><th>Status</th></tr></thead>
@@ -934,6 +1040,39 @@ function folderIcon(defendantName, routingKey, title) {
       <td>No</td>
       <td>No</td>
       <td><span class="badge badge-blue">In Progress</span></td>
+    </tr>
+    <tr class="searchable" data-status="mtc-scheduled">
+      <td class="case-name">BenQ America Corp. (Naquin, Jonathon) (Class)<span class="contingent-tag">🔴 MTC Deadline 5/5/26 (per e-service confirmation 3/20/26). RFP+SROG Set 1 served 10/24/25 · Def Responses 12/19/25 · M&amp;C letter 1/21/26 (RAQ) · Def Supp Responses to RFP+SROG received 3/18/26. Mediation 9/11/26 with Monique Ngo-Bonnici (confirmed 3/31/26). New class rep swap under discussion with OC (3/26/26). OC: Tatyana Esmailian + Kristina Denbleyker (O'Hagan Meyer). OC Case 30-2025-01479226-CU-OE-CXC. Backfilled 2026-04-21.</span></td>
+      <td>SROGs, RFPs — Set 1 (Supp)</td>
+      <td>Mar 18, 2026</td>
+      <td>Jan 21, 2026</td>
+      <td>N/A</td>
+      <td>May 05, 2026</td>
+      <td>No</td>
+      <td>No</td>
+      <td><span class="badge badge-orange">MTC May 5</span></td>
+    </tr>
+    <tr class="searchable" data-status="in-progress">
+      <td class="case-name">PRS Holdings / Pavement Recycling Systems (Yang, Matthew) (Class)<span class="contingent-tag">⏳ Sacramento 25CV005380. RFP Set 1 served 5/22/25 · Def Response to RFP Set 1 received 10/31/25 (deficient). IDC posture Jan-Feb 2026 with Morgan Lewis (McGuigan/Burch/Brennan). Dept relocation notice 4/15/26. PAGA companion (Munoz) with Debi/Wemployment Law — JPA discussions. No M&amp;C letter filed yet; IDC track active. Backfilled 2026-04-21.</span></td>
+      <td>RFPs — Set 1</td>
+      <td>Oct 31, 2025</td>
+      <td>N/A</td>
+      <td>N/A</td>
+      <td>N/A</td>
+      <td>No</td>
+      <td>No</td>
+      <td><span class="badge badge-blue">In Progress (IDC)</span></td>
+    </tr>
+    <tr class="searchable" data-status="in-progress">
+      <td class="case-name">KidztoPros, Inc. (White, Kayla) (Class)<span class="contingent-tag">⏳ Mediation 5/5/26 with Brandon McKelvey; brief due 5/4/26. RFP+SROG Set 1 (Class Cert) served 12/5/25. Discovery extension under negotiation (DDWK — Garcia, 4/16-20/26). BCG analyzing 3,400 shifts Jan-Mar 2023; OC data production deadline 4/15/26 (time records still missing per Ryan's notes). Pre-Mediation production underway. Active 25CV147908. Backfilled 2026-04-21 — Todd + La companion reps.</span></td>
+      <td>SROGs, RFPs — Set 1 (Class Cert)</td>
+      <td>N/A</td>
+      <td>N/A</td>
+      <td>N/A</td>
+      <td>N/A</td>
+      <td>No</td>
+      <td>No</td>
+      <td><span class="badge badge-blue">In Progress (Mediation)</span></td>
     </tr>
   </tbody>
   </table></div></div>

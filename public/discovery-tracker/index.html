@@ -210,7 +210,7 @@ function folderIcon(defendantName, routingKey, title) {
   <button class="phase-btn active" data-phase="dashboard" onclick="showPhase('dashboard')">📊 Dashboard</button>
   <button class="phase-btn" data-phase="pre-discovery" onclick="showPhase('pre-discovery')">Pre-Discovery <span class="count">47</span></button>
   <button class="phase-btn" data-phase="awaiting" onclick="showPhase('awaiting')">Awaiting Response <span class="count">8</span></button>
-  <button class="phase-btn" data-phase="followup" onclick="showPhase('followup')">Follow-Up <span class="count">10</span></button>
+  <button class="phase-btn" data-phase="followup" onclick="showPhase('followup')">Follow-Up <span class="count">13</span></button>
   <button class="phase-btn" data-phase="completed" onclick="showPhase('completed')">Completed <span class="count">10</span></button>
 </div>
 
@@ -220,7 +220,7 @@ function folderIcon(defendantName, routingKey, title) {
   <div class="stats">
     <div class="stat-card teal"><div class="label">Pre-Discovery</div><div class="value">47</div><div class="sub">Not yet propounded</div></div>
     <div class="stat-card yellow"><div class="label">Awaiting Response</div><div class="value">8</div><div class="sub">Discovery served</div></div>
-    <div class="stat-card orange"><div class="label">Follow-Up</div><div class="value">10</div><div class="sub">M&amp;C / MTC track</div></div>
+    <div class="stat-card orange"><div class="label">Follow-Up</div><div class="value">13</div><div class="sub">M&amp;C / MTC track</div></div>
     <div class="stat-card green"><div class="label">Completed</div><div class="value">10</div><div class="sub">Resolved / Settled</div></div>
     <div class="stat-card red"><div class="label">Overdue</div><div class="value">0</div><div class="sub">Past deadline</div></div>
   </div>
@@ -275,7 +275,7 @@ function folderIcon(defendantName, routingKey, title) {
     <div style="font-size:.76rem;color:var(--text-muted);margin-bottom:12px;padding:4px 10px;background:var(--surface);border-radius:6px;display:inline-block;">14 needs drafting · 5 drafted · 1 MTCA pending · 1 arb pending | 7 with arbitration agreement</div>
     <div class="table-wrap"><div class="table-scroll">
     <table id="table-active-discovery">
-  <div id="tracker-summary" data-total="79" data-pre-discovery="14" data-in-progress="3" data-pending="1" data-stayed="25" data-mediation-track="7" data-mtca-pending="1" data-drafted="5" data-m-and-c-sent="6" data-arb-pending="1" data-extended="2" data-noticed="1" data-ext-pending="0" data-mtc-scheduled="2" data-completed="10" style="display:none"></div>
+  <div id="tracker-summary" data-total="81" data-pre-discovery="14" data-in-progress="5" data-pending="1" data-stayed="25" data-mediation-track="7" data-mtca-pending="1" data-drafted="5" data-m-and-c-sent="6" data-arb-pending="1" data-extended="2" data-noticed="1" data-ext-pending="0" data-mtc-scheduled="2" data-completed="10" style="display:none"></div>
   
     <thead><tr><th>Case Name</th><th>Filing Date</th><th>County</th><th>Discovery Status</th><th>Arbitration</th><th>Notes</th></tr></thead>
     <tbody id="active-discovery-body">
@@ -787,7 +787,7 @@ function folderIcon(defendantName, routingKey, title) {
 
 <!-- FOLLOW-UP PHASE -->
 <div class="phase" data-id="followup">
-  <div class="phase-updated">Phase 3 — 10 entries in M&amp;C / MTC pipeline</div>
+  <div class="phase-updated">Phase 3 — 13 entries in M&amp;C / MTC pipeline</div>
   <div class="table-wrap"><div class="table-scroll">
   <table id="table-followup">
     <thead><tr><th>Case Name</th><th>Device</th><th>Response Date</th><th>M&amp;C Sent</th><th>Supp. Resp. Due</th><th>MTC Deadline</th><th>MTC Drafted</th><th>MTC Filed</th><th>Status</th></tr></thead>
@@ -912,6 +912,28 @@ function folderIcon(defendantName, routingKey, title) {
       <td>No</td>
       <td>No</td>
       <td><span class="badge badge-yellow">M&C Sent</span></td>
+    </tr>
+    <tr class="searchable" data-status="in-progress">
+      <td class="case-name">LA Solar Group, Inc. (Steves, Curtis) (Class)<span class="contingent-tag">⏳ Defense served via Case Anywhere 4/15/26 (Gordon Rees): Verified Response to RFP Set One + document production (Bates 000001-000022). RFPs Set One propounded by Blackstone 2/27/26. Deficiency analysis pending. Related case 25STCV12093. Defense counsel: Gordon Rees Scully Mansukhani (Eulalio Garcia, C. Ledger). [Sync 2026-04-21]</span></td>
+      <td>RFPs — Set 1</td>
+      <td>Apr 15, 2026</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>No</td>
+      <td>No</td>
+      <td><span class="badge badge-blue">In Progress</span></td>
+    </tr>
+    <tr class="searchable" data-status="in-progress">
+      <td class="case-name">LA Solar Group, Inc. (Steves, Curtis) (Class)<span class="contingent-tag">⏳ Defense served via Case Anywhere 4/15/26 (Gordon Rees): Verified Response to SROG Set One. SROGs Set One propounded by Blackstone 2/27/26. Deficiency analysis pending. Related case 25STCV12093. Defense counsel: Gordon Rees Scully Mansukhani (Eulalio Garcia, C. Ledger). [Sync 2026-04-21]</span></td>
+      <td>SROGs — Set 1</td>
+      <td>Apr 15, 2026</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>No</td>
+      <td>No</td>
+      <td><span class="badge badge-blue">In Progress</span></td>
     </tr>
   </tbody>
   </table></div></div>

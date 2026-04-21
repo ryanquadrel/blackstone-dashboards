@@ -81,23 +81,23 @@
           "type": "Mediation Brief Outline (Shelby draft)",
           "doc_type": "Mediation-Brief",
           "state": "for-attorney-review",
-          "state_changed": "2026-04-17T19:36:17.651625Z",
+          "state_changed": "2026-04-21T11:10:00Z",
           "current_owner": "SM",
           "owner_since": "2026-04-17T19:14:59.825552Z",
           "locked_by": null,
           "lock_acquired_at": null,
-          "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Veridiam/Settlement%20%26%20Mediation/Drafts/Mediation-Brief_v3_for-attorney-review_ai-mediation-brief_2026-04-17.docx",
-          "descriptor": "AI v3 \u2014 BCG tables embedded as images per Section 7A (v2 had hand-recreated tables); for SM review",
+          "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Veridiam/Settlement%20%26%20Mediation/Drafts/Mediation-Brief_v4_for-attorney-review_ai-mediation-brief_2026-04-20.docx",
+          "descriptor": "auto-registered by new-draft-filesystem-detector on 2026-04-21",
           "created": "2026-04-17T19:36:17.651625Z",
           "status": "for-attorney-review",
           "operative_version": {
-            "version": 3,
-            "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Veridiam/Settlement%20%26%20Mediation/Drafts/Mediation-Brief_v3_for-attorney-review_ai-mediation-brief_2026-04-17.docx",
+            "version": 4,
+            "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Veridiam/Settlement%20%26%20Mediation/Drafts/Mediation-Brief_v4_for-attorney-review_ai-mediation-brief_2026-04-20.docx",
             "sha256": null,
             "author": "ai-mediation-brief",
-            "created": "2026-04-17T19:36:17.651625Z",
+            "created": "2026-04-21T11:10:00Z",
             "status": "for-attorney-review",
-            "descriptor": "AI v3 \u2014 BCG tables embedded as images per Section 7A (v2 had hand-recreated tables); for SM review"
+            "descriptor": "auto-registered by new-draft-filesystem-detector on 2026-04-21"
           },
           "versions": [
             {
@@ -126,11 +126,20 @@
               "created": "2026-04-17T19:36:17.651625Z",
               "status": "for-attorney-review",
               "descriptor": "AI v3 \u2014 BCG tables embedded as images per Section 7A (v2 had hand-recreated tables); for SM review"
+            },
+            {
+              "version": 4,
+              "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Veridiam/Settlement%20%26%20Mediation/Drafts/Mediation-Brief_v4_for-attorney-review_ai-mediation-brief_2026-04-20.docx",
+              "sha256": null,
+              "author": "ai-mediation-brief",
+              "created": "2026-04-21T11:10:00Z",
+              "status": "for-attorney-review",
+              "descriptor": "auto-registered by new-draft-filesystem-detector on 2026-04-21"
             }
           ]
         }
       ]
     }
   },
-  "last_updated": "2026-04-17T19:36:17.651670Z"
+  "last_updated": "2026-04-21T11:10:00Z"
 }

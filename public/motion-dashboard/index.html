@@ -185,6 +185,7 @@ tbody tr:last-child td{border-bottom:none;}
     .catch(function(){});
 })();
 </script>
+<script src="/shared/drafts-chip.js"></script>
 </head>
 <body>
 <a href="/" class="mc-home" title="Back to Mission Control"><span class="mc-arrow">&#8592;</span><span class="mc-icon">&#128640;</span><span class="mc-label">Mission Control</span></a>
@@ -1074,6 +1075,27 @@ document.querySelectorAll('.ft tr').forEach(function(row) {
   }
 });
 
+</script>
+<script>
+/* Drafts-chip mount attach for Motion Dashboard rows. Walks every .ft tr's
+   case-name element and appends a <span class="drafts-chip-mount" data-matter="..."> so
+   the shared drafts-chip.js hydrator picks it up and renders the chip in-row. */
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.ft tr .case-name').forEach(function(el) {
+    if (el.querySelector('.drafts-chip-mount')) return;
+    var row = el.closest('tr');
+    var text = (row && row.dataset && row.dataset.c) ? row.dataset.c.trim() : el.textContent.trim();
+    if (!text) return;
+    var mount = document.createElement('span');
+    mount.className = 'drafts-chip-mount';
+    mount.dataset.matter = text;
+    mount.style.marginLeft = '4px';
+    el.appendChild(mount);
+  });
+  if (window.BL_DRAFTS && window.BL_DRAFTS.hydrateAll) {
+    window.BL_DRAFTS.hydrateAll(document);
+  }
+});
 </script>
 </body>
 </html>

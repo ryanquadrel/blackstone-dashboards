@@ -137,6 +137,22 @@
               "descriptor": "auto-registered by new-draft-filesystem-detector on 2026-04-21"
             }
           ]
+        },
+        {
+          "type": "Mediation-Brief",
+          "version": 2,
+          "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Veridiam/Settlement%20%26%20Mediation/Drafts/Mediation-Brief_v2_for-attorney-review_ai-mediation-brief_2026-04-17.docx",
+          "descriptor": "auto-registered by new-draft-filesystem-detector on 2026-04-23",
+          "created": "2026-04-23T17:43:02.362763Z",
+          "status": "for-attorney-review",
+          "owner": "ai-mediation-brief",
+          "hard_lock": false,
+          "lock_reason": null,
+          "verify_passed_at": null,
+          "release_reviewer": null,
+          "released_at": null,
+          "served_email_id": null,
+          "served_at": null
         }
       ]
     },
@@ -159,5 +175,5 @@
       ]
     }
   },
-  "last_updated": "2026-04-21T16:35:58Z"
+  "last_updated": "2026-04-23T17:43:02.362796Z"
 }

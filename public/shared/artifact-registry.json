@@ -189,6 +189,42 @@
           "status": "pending-review"
         }
       ]
+    },
+    "El Dorado LF, LLC dba Hustler Casino": {
+      "folder": {
+        "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Hustler%20Casino/Discovery/Class/Written%20Discovery",
+        "descriptor": "Hustler Casino > Discovery > Class > Written Discovery (auto-drafted by new-case-intake)"
+      },
+      "discovery": {
+        "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Hustler%20Casino/Discovery/Class/Written%20Discovery",
+        "descriptor": "Hustler Casino > Discovery > Class > Written Discovery"
+      },
+      "pleadings": {
+        "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Hustler%20Casino/Pleadings%2C%20Motions%20and%20Court%20Filings",
+        "descriptor": "Hustler Casino > Pleadings, Motions and Court Filings"
+      },
+      "root": {
+        "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Hustler%20Casino",
+        "descriptor": "Hustler Casino (Active Cases root)"
+      }
+    },
+    "Autism Learning Partners, LLC": {
+      "folder": {
+        "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Autism%20Learning%20Partners/Discovery/Class/Written%20Discovery",
+        "descriptor": "Autism Learning Partners > Discovery > Class > Written Discovery (auto-drafted by new-case-intake)"
+      },
+      "discovery": {
+        "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Autism%20Learning%20Partners/Discovery/Class/Written%20Discovery",
+        "descriptor": "Autism Learning Partners > Discovery > Class > Written Discovery"
+      },
+      "pleadings": {
+        "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Autism%20Learning%20Partners/Pleadings%2C%20Motions%20and%20Court%20Filings",
+        "descriptor": "Autism Learning Partners > Pleadings, Motions and Court Filings"
+      },
+      "root": {
+        "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Autism%20Learning%20Partners",
+        "descriptor": "Autism Learning Partners (Active Cases root)"
+      }
     }
   },
   "last_updated": "2026-04-23T17:43:03.724899Z"

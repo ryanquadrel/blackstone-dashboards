@@ -208,7 +208,7 @@ function folderIcon(defendantName, routingKey, title) {
 
 <div class="phase-nav">
   <button class="phase-btn active" data-phase="dashboard" onclick="showPhase('dashboard')">📊 Dashboard</button>
-  <button class="phase-btn" data-phase="pre-discovery" onclick="showPhase('pre-discovery')">Pre-Discovery <span class="count">62</span></button>
+  <button class="phase-btn" data-phase="pre-discovery" onclick="showPhase('pre-discovery')">Pre-Discovery <span class="count">64</span></button>
   <button class="phase-btn" data-phase="awaiting" onclick="showPhase('awaiting')">Awaiting Response <span class="count">7</span></button>
   <button class="phase-btn" data-phase="followup" onclick="showPhase('followup')">Follow-Up <span class="count">17</span></button>
   <button class="phase-btn" data-phase="completed" onclick="showPhase('completed')">Completed <span class="count">11</span></button>
@@ -218,7 +218,7 @@ function folderIcon(defendantName, routingKey, title) {
 <div class="phase active" data-id="dashboard">
   <div class="phase-updated">Last updated: April 27, 2026 (Discovery Tracker Sync)</div>
   <div class="stats">
-    <div class="stat-card teal"><div class="label">Pre-Discovery</div><div class="value">62</div><div class="sub">Not yet propounded</div></div>
+    <div class="stat-card teal"><div class="label">Pre-Discovery</div><div class="value">64</div><div class="sub">Not yet propounded</div></div>
     <div class="stat-card yellow"><div class="label">Awaiting Response</div><div class="value">7</div><div class="sub">Discovery served</div></div>
     <div class="stat-card orange"><div class="label">Follow-Up</div><div class="value">17</div><div class="sub">M&amp;C / MTC track</div></div>
     <div class="stat-card green"><div class="label">Completed</div><div class="value">11</div><div class="sub">Resolved / Settled</div></div>
@@ -227,7 +227,7 @@ function folderIcon(defendantName, routingKey, title) {
   <div class="upcoming-section">
     <div class="upcoming-header">
       <h2>📅 Upcoming Deadlines (Next 30 Days)</h2>
-      <span class="badge badge-blue">6</span>
+      <span class="badge badge-blue">5</span>
     </div>
     <div class="upcoming-row">
       <div class="upcoming-case">Truitt Oilfield Maintenance Corp. (Carias-Paredes &amp; De Oilers) (Class)<span class="device">(SROGs, RFPs — Set 1 — Original deficient responses)</span></div>
@@ -250,11 +250,6 @@ function folderIcon(defendantName, routingKey, title) {
       <div class="upcoming-date">May 05, 2026</div>
     </div>
     <div class="upcoming-row">
-      <div class="upcoming-case">Snap-On Logistics Company (Galvez, Hector) (Class)<span class="device">(Deposition — PMK + Individual)</span></div>
-      <div class="upcoming-type">Deposition Date</div>
-      <div class="upcoming-date">Apr 28, 2026</div>
-    </div>
-    <div class="upcoming-row">
       <div class="upcoming-case">Truitt Oilfield Maintenance Corp. (Carias-Paredes &amp; De Oilers) (Class)<span class="device">(SROGs, RFPs — Set 1 — 2nd Supp Responses)</span></div>
       <div class="upcoming-type">MTC Deadline</div>
       <div class="upcoming-date">May 06, 2026</div>
@@ -264,15 +259,15 @@ function folderIcon(defendantName, routingKey, title) {
 
 <!-- PRE-DISCOVERY PHASE -->
 <div class="phase" data-id="pre-discovery">
-  <div class="phase-updated">Phase 1 — 59 entries | 22 need drafting | 10 mediation track | 21 stayed | 1 on appeal | 1 in progress</div>
+  <div class="phase-updated">Phase 1 — 64 entries | 21 need drafting | 8 drafted | 10 mediation track | 21 stayed | 1 MTCA pending | 1 arb pending | 1 on appeal | 1 in progress</div>
   
   <div class="sub-tabs" style="display:flex;gap:6px;margin-bottom:16px;">
-    <button class="sub-tab active" onclick="showSubTab('active-discovery', this)" style="flex:1;padding:10px 16px;border:2px solid var(--teal);background:var(--teal);color:#fff;font-size:.85rem;font-weight:600;border-radius:8px;cursor:pointer;transition:all .2s;">Active Discovery <span style="font-size:.75rem;background:rgba(255,255,255,.25);padding:2px 8px;border-radius:100px;margin-left:6px;">31</span></button>
+    <button class="sub-tab active" onclick="showSubTab('active-discovery', this)" style="flex:1;padding:10px 16px;border:2px solid var(--teal);background:var(--teal);color:#fff;font-size:.85rem;font-weight:600;border-radius:8px;cursor:pointer;transition:all .2s;">Active Discovery <span style="font-size:.75rem;background:rgba(255,255,255,.25);padding:2px 8px;border-radius:100px;margin-left:6px;">33</span></button>
     <button class="sub-tab" onclick="showSubTab('inactive-discovery', this)" style="flex:1;padding:10px 16px;border:2px solid var(--border);background:var(--surface);color:var(--text-muted);font-size:.85rem;font-weight:600;border-radius:8px;cursor:pointer;transition:all .2s;">Inactive Discovery <span style="font-size:.75rem;background:rgba(255,255,255,.15);padding:2px 8px;border-radius:100px;margin-left:6px;">31</span></button>
   </div>
 
   <div id="active-discovery" class="sub-phase" style="display:block;">
-    <div style="font-size:.76rem;color:var(--text-muted);margin-bottom:12px;padding:4px 10px;background:var(--surface);border-radius:6px;display:inline-block;">14 needs drafting · 7 drafted · 1 MTCA pending · 1 arb pending | 7 with arbitration agreement</div>
+    <div style="font-size:.76rem;color:var(--text-muted);margin-bottom:12px;padding:4px 10px;background:var(--surface);border-radius:6px;display:inline-block;">20 needs drafting · 8 drafted · 1 MTCA pending · 1 arb pending · 1 mediation track · 1 in progress · 1 on appeal</div>
     <div class="table-wrap"><div class="table-scroll">
     <table id="table-active-discovery">
   <div id="tracker-summary" data-total="99" data-pre-discovery="20" data-in-progress="9" data-pending="0" data-stayed="21" data-mediation-track="10" data-mtca-pending="1" data-on-appeal="1" data-drafted="8" data-m-and-c-sent="6" data-arb-pending="1" data-extended="0" data-noticed="0" data-ext-pending="0" data-mtc-scheduled="3" data-completed="11" style="display:none"></div>
@@ -520,7 +515,7 @@ function folderIcon(defendantName, routingKey, title) {
       <td>Backfilled 2026-04-21 — Set 1 drafts in FV DRAFTS folder, not served. Mediation track. [Sync 2026-04-21]</td>
     </tr>
     <tr class="searchable" data-status="on-appeal">
-      <td class="case-name">Kinecta Federal Credit Union (Anguiano, Natalie) (Class)<span class="contingent-tag">⚠ Case on APPEAL — Court of Appeal B353903 (Fisher &amp; Phillips appellant). LASC 25STCV10850. Trial court confirmed no automatic stay per CCP 1294(a) at Status Conf 4/14/26. RFP+SROG Set 1 (Arbitration) served 8/13/25. Backfilled 2026-04-21.</span></td>
+      <td class="case-name">Kinecta Federal Credit Union (Anguiano, Natalie) (Class)<span class="contingent-tag">⚠ Case on APPEAL — Court of Appeal B353903 (Fisher &amp; Phillips appellant). LASC 25STCV10850. Trial court confirmed no automatic stay per CCP 1294(a) at Status Conf 4/14/26. RFP+SROG Set 1 (Arbitration) served 8/13/25. Backfilled 2026-04-21. Joint Stip re Discovery & Mediation finalized + served 4/6/26 — court order pending; MTC 5/5 deadline expected to be vacated.</span></td>
       <td>Aug 13, 2025</td>
       <td>Los Angeles (LASC)</td>
       <td><span class="badge badge-purple">On Appeal</span></td>
@@ -814,13 +809,13 @@ function folderIcon(defendantName, routingKey, title) {
     <thead><tr><th>Case Name</th><th>Device</th><th>Propounding Party</th><th>Date Served</th><th>Orig. Deadline</th><th>Extensions</th><th>New Deadline</th><th>Status</th><th data-column="draft-status">Draft Status</th><th data-column="owner-lock">Owner / Lock</th></tr></thead>
     <tbody id="awaiting-body">
     <tr class="searchable" data-status="defendant">
-      <td class="case-name">Snap-On Logistics Company (Galvez, Hector) (Class)</td>
+      <td class="case-name">Snap-On Logistics Company (Galvez, Hector) (Class)<span class="contingent-tag">⏳ Amended depo notice 4/24/26: deposition moved to 6/30/26 (single-day) — agreed by Gregg Fisch (Sheppard Mullin)</span></td>
       <td>Deposition (PMK + Individual)</td>
       <td><span class="badge badge-blue">Defendant</span></td>
       <td>Mar 17, 2026</td>
       <td>Apr 28, 2026</td>
-      <td>0</td>
-      <td>N/A</td>
+      <td>1</td>
+      <td>Jun 30, 2026</td>
       <td><span class="badge badge-blue">Noticed</span></td>
     <td data-column="draft-status">—</td><td data-column="owner-lock">—</td></tr>
     <tr class="searchable" data-status="plaintiff">

@@ -265,7 +265,18 @@
           "filename_contract_reason": "ok"
         }
       ]
+    },
+    "Magnolia Springs": {
+      "drafts": [
+        {
+          "type": "Letter to OC re Post-Mediation Arbitration Campaign",
+          "url": "filevine://projects/12259714/Correspondence/(Claude Draft) Letter to OC re Post-Mediation Arbitration Campaign v1.docx",
+          "descriptor": "Cease + corrective notice demand re Defendants post-mediation arbitration agreement (names BCV-25-101296) and timecard attestation campaign at Sutton facilities",
+          "created": "2026-04-27T19:46:59.697619Z",
+          "status": "pending-review"
+        }
+      ]
     }
   },
-  "last_updated": "2026-04-27T19:28:14.444465Z"
+  "last_updated": "2026-04-27T19:46:59.697631Z"
 }

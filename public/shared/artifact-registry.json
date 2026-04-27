@@ -225,7 +225,29 @@
         "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Autism%20Learning%20Partners",
         "descriptor": "Autism Learning Partners (Active Cases root)"
       }
+    },
+    "Evergreen Alliance": {
+      "drafts": [
+        {
+          "type": "Reply ISO Motion to Remand",
+          "version": 1,
+          "url": "filevine://12339967/Federal (PAGA) - 426-cv-01964-LB/Motion for Remand/(Claude Draft) Reply ISO Motion to Remand v1.docx",
+          "descriptor": "Reply ISO Motion to Remand \u2014 Conant v. Evergreen (PAGA Federal). Hearing 5/14/26 before Judge Chhabria.",
+          "created": "2026-04-27T18:46:23.835818Z",
+          "status": "pending-review",
+          "owner": "ryan",
+          "hard_lock": true,
+          "lock_reason": "Federal court filing \u2014 Ryan signature required before service",
+          "verify_passed_at": null,
+          "release_reviewer": null,
+          "released_at": null,
+          "served_email_id": null,
+          "served_at": null,
+          "filename_contract_ok": true,
+          "filename_contract_reason": "ok"
+        }
+      ]
     }
   },
-  "last_updated": "2026-04-23T17:43:03.724899Z"
+  "last_updated": "2026-04-27T18:46:23.835833Z"
 }

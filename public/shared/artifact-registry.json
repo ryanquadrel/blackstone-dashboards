@@ -263,6 +263,24 @@
           "served_at": null,
           "filename_contract_ok": true,
           "filename_contract_reason": "ok"
+        },
+        {
+          "type": "Reply ISO Motion to Remand",
+          "version": 3,
+          "url": "filevine://12339967/Federal (PAGA) - 426-cv-01964-LB/Motion for Remand/(Claude Draft) Reply ISO Motion to Remand v3.docx",
+          "descriptor": "v3 (post-senior-partner review) - SS III.B restructured as Two Independent Paths (Urbino->$52,770; Hernandez->$70,560; combined->$39,230). Adds fees-vs-penalties asymmetry sentence (Lab. Code S2699(g)). Names parallel class action 3:25-cv-10265-VC at point of application. Service award demoted to closing paragraph.",
+          "created": "2026-04-27T21:53:56.855238Z",
+          "status": "pending-review",
+          "owner": "ryan",
+          "hard_lock": true,
+          "lock_reason": "Federal court filing - Ryan signature required before service. v3 reflects senior-partner review fixes; 1 [VERIFY] marker remaining (SWC KeyCite signal).",
+          "verify_passed_at": null,
+          "release_reviewer": null,
+          "released_at": null,
+          "served_email_id": null,
+          "served_at": null,
+          "filename_contract_ok": true,
+          "filename_contract_reason": "ok"
         }
       ]
     },
@@ -285,5 +303,5 @@
       ]
     }
   },
-  "last_updated": "2026-04-27T19:57:08.132817Z"
+  "last_updated": "2026-04-27T21:53:56.855256Z"
 }

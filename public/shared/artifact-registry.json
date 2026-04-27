@@ -245,9 +245,27 @@
           "served_at": null,
           "filename_contract_ok": true,
           "filename_contract_reason": "ok"
+        },
+        {
+          "type": "Reply ISO Motion to Remand",
+          "version": 2,
+          "url": "filevine://12339967/Federal (PAGA) - 426-cv-01964-LB/Motion for Remand/(Claude Draft) Reply ISO Motion to Remand v2.docx",
+          "descriptor": "v2 \u2014 leads with Hernandez v. Delta Star (Chhabria's own remand on near-identical facts: parallel class action by same counsel). Adds Selker/SWC/Evers for new-theory rule. Fixes Canela double-cite. Adolph pin to 1115. Tone stripped.",
+          "created": "2026-04-27T19:28:14.444448Z",
+          "status": "pending-review",
+          "owner": "ryan",
+          "hard_lock": true,
+          "lock_reason": "Federal court filing \u2014 Ryan signature required before service. v2 reflects Lexis-verified authorities; 1 [VERIFY] marker remaining (SWC KeyCite signal).",
+          "verify_passed_at": null,
+          "release_reviewer": null,
+          "released_at": null,
+          "served_email_id": null,
+          "served_at": null,
+          "filename_contract_ok": true,
+          "filename_contract_reason": "ok"
         }
       ]
     }
   },
-  "last_updated": "2026-04-27T18:46:23.835833Z"
+  "last_updated": "2026-04-27T19:28:14.444465Z"
 }

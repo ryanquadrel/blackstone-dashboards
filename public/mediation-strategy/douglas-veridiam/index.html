@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="case-slug" content="douglas-veridiam">
+<meta name="case-name" content="Douglas, et al. v. Veridiam, Inc.">
+<meta name="mediation-date" content="2026-04-27">
+<meta name="mediator" content="Steven Rottman">
+<meta name="generated" content="2026-04-27">
+<meta name="status" content="Upcoming">
+<title>Douglas v. Veridiam — Mediation Strategy</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --card-alt: #21242f;
+    --border: #2a2d3a;
+    --text: #e4e4e7;
+    --text-dim: #9ca3af;
+    --accent: #6366f1;
+    --accent-light: #818cf8;
+    --green: #22c55e;
+    --red: #ef4444;
+    --yellow: #eab308;
+    --orange: #f97316;
+    --blue: #3b82f6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .header h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+  .header-meta { text-align: right; font-size: 13px; color: var(--text-dim); line-height: 1.7; }
+  .header-meta strong { color: var(--text); }
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .badge-settle { background: rgba(34,197,94,0.15); color: var(--green); }
+  .badge-conf { background: rgba(99,102,241,0.15); color: var(--accent-light); }
+  .badge-warn { background: rgba(239,68,68,0.15); color: var(--red); }
+
+  /* Grid */
+  .grid { display: grid; gap: 16px; }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .grid-top { grid-template-columns: 300px 1fr 1fr; }
+
+  /* Cards */
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+  .card h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  .card.full-width { grid-column: 1 / -1; }
+
+  /* Snapshot KV */
+  .kv-row { display: flex; justify-content: space-between; padding: 5px 0; font-size: 13px; border-bottom: 1px solid rgba(42,45,58,0.5); }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-label { color: var(--text-dim); }
+  .kv-value { font-weight: 600; text-align: right; }
+  .kv-value.big { font-size: 15px; color: var(--accent-light); }
+
+  /* S/W lists */
+  .sw-list { list-style: none; }
+  .sw-list li { font-size: 12.5px; padding: 6px 0; padding-left: 20px; position: relative; border-bottom: 1px solid rgba(42,45,58,0.3); }
+  .sw-list li:last-child { border-bottom: none; }
+  .sw-list li::before { position: absolute; left: 0; top: 6px; font-size: 12px; }
+  .sw-list.pro li::before { content: "▲"; color: var(--green); }
+  .sw-list.con li::before { content: "▼"; color: var(--red); }
+  .sw-list li strong { color: var(--text); }
+
+  /* Numbers table */
+  .num-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .num-table th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-dim); padding: 6px 8px; border-bottom: 1px solid var(--border); }
+  .num-table td { padding: 7px 8px; border-bottom: 1px solid rgba(42,45,58,0.4); }
+  .num-table tr:last-child td { border-bottom: none; }
+  .num-table .label-cell { color: var(--text-dim); }
+  .num-table .money { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .num-table .highlight-row td { background: rgba(99,102,241,0.08); font-weight: 600; }
+  .num-table .target-row td { background: rgba(34,197,94,0.08); }
+  .num-table .floor-row td { background: rgba(239,68,68,0.08); }
+
+  /* Pipeline */
+  .pipeline { display: flex; flex-direction: column; gap: 0; }
+  .pipeline-step { display: grid; grid-template-columns: 100px 120px 70px 1fr; align-items: center; gap: 12px; padding: 10px 12px; border-left: 3px solid var(--border); font-size: 13px; position: relative; }
+  .pipeline-step::before { content: ""; position: absolute; left: -7px; top: 50%; transform: translateY(-50%); width: 11px; height: 11px; border-radius: 50%; background: var(--card); border: 2px solid var(--border); }
+  .pipeline-step .step-label { font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.3px; }
+  .pipeline-step .step-amount { font-weight: 700; font-variant-numeric: tabular-nums; }
+  .pipeline-step .step-ww { color: var(--text-dim); font-size: 12px; }
+  .pipeline-step .step-msg { color: var(--text-dim); font-size: 12px; font-style: italic; }
+  .pipeline-step.open { border-left-color: var(--accent); }
+  .pipeline-step.open::before { border-color: var(--accent); background: var(--accent); }
+  .pipeline-step.move { border-left-color: var(--blue); }
+  .pipeline-step.move::before { border-color: var(--blue); }
+  .pipeline-step.signal { border-left-color: var(--yellow); }
+  .pipeline-step.signal::before { border-color: var(--yellow); background: var(--yellow); }
+  .pipeline-step.bracket { border-left-color: var(--orange); }
+  .pipeline-step.bracket::before { border-color: var(--orange); }
+  .pipeline-step.target { border-left-color: var(--green); }
+  .pipeline-step.target::before { border-color: var(--green); background: var(--green); }
+  .pipeline-step.floor { border-left-color: var(--red); }
+  .pipeline-step.floor::before { border-color: var(--red); background: var(--red); }
+
+  /* Messaging cards */
+  .msg-card { padding: 10px 12px; background: var(--card-alt); border-radius: 8px; margin-bottom: 8px; font-size: 12.5px; }
+  .msg-card:last-child { margin-bottom: 0; }
+  .msg-card .msg-num { display: inline-block; width: 20px; height: 20px; background: var(--accent); color: white; font-size: 11px; font-weight: 700; text-align: center; line-height: 20px; border-radius: 4px; margin-right: 8px; }
+  .msg-card .msg-title { font-weight: 700; margin-bottom: 4px; }
+  .msg-card .msg-body { color: var(--text-dim); }
+
+  /* Brackets */
+  .bracket-opt { background: var(--card-alt); border-radius: 8px; padding: 12px; text-align: center; border: 1px solid var(--border); margin-bottom: 8px; }
+  .bracket-opt:last-child { margin-bottom: 0; }
+  .bracket-opt .bracket-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-dim); margin-bottom: 6px; }
+  .bracket-opt .bracket-range { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .bracket-opt .bracket-mid { font-size: 12px; color: var(--text-dim); }
+  .bracket-opt.agg { border-color: var(--orange); }
+  .bracket-opt.mod { border-color: var(--yellow); }
+  .bracket-opt.con { border-color: var(--green); }
+  .bracket-opt.agg .bracket-range { color: var(--orange); }
+  .bracket-opt.mod .bracket-range { color: var(--yellow); }
+  .bracket-opt.con .bracket-range { color: var(--green); }
+
+  /* OC read */
+  .oc-read { font-size: 13px; color: var(--text-dim); line-height: 1.7; }
+  .oc-read strong { color: var(--text); }
+
+  /* Damages bar */
+  .dmg-bar { display: flex; height: 24px; border-radius: 6px; overflow: hidden; font-size: 11px; font-weight: 600; margin-bottom: 16px; }
+  .dmg-bar div { display: flex; align-items: center; justify-content: center; color: #fff; white-space: nowrap; padding: 0 6px; }
+  .dmg-bar-label { font-size: 11px; color: var(--text-dim); margin-top: 4px; }
+
+  /* Footer */
+  .footer { text-align: center; margin-top: 20px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-dim); font-style: italic; }
+
+  @media (max-width: 900px) {
+    .grid-2, .grid-3, .grid-top { grid-template-columns: 1fr; }
+    .pipeline-step { grid-template-columns: 80px 100px 60px 1fr; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div>
+    <h1>Douglas, et al. v. Veridiam, Inc.</h1>
+    <div style="color:var(--text-dim); font-size:13px; margin-top:4px;">Case Nos. 25CU011565C (Class) &amp; 25CU023968C (PAGA) · Remote/Zoom · San Diego Superior Court</div>
+    <div style="margin-top:8px;">
+      <span class="badge badge-settle">Goal: Settlement</span>
+      <span class="badge badge-conf">Confidential</span>
+      <span class="badge badge-warn">Arb Rollout Coercive</span>
+    </div>
+  </div>
+  <div class="header-meta">
+    <strong>April 27, 2026</strong> &middot; 9:30 AM PT<br>
+    Mediator: <strong>Steven Rottman, Esq.</strong><br>
+    Hon. Judy S. Bae, Dept. C-62 (Class)<br>
+    Hon. Blaine K. Bowman, Dept. C-74 (PAGA)
+  </div>
+</div>
+
+<!-- DAMAGES BAR -->
+<div class="dmg-bar">
+  <div style="width:32.8%;background:#ef4444;" title="Rest Break Premiums: $5,365,480">Rest $5.37M</div>
+  <div style="width:30.1%;background:#22c55e;" title="PAGA Penalties: $4,917,600">PAGA $4.92M</div>
+  <div style="width:15.3%;background:#f97316;" title="Waiting Time + Wage Statement: $2,506,466">WT/WS $2.51M</div>
+  <div style="width:7.2%;background:#8b5cf6;" title="Off-the-Clock: $1,182,034">OTC $1.18M</div>
+  <div style="width:6.6%;background:#3b82f6;" title="Meal Break Premiums (Net): $1,084,709">Meal $1.08M</div>
+  <div style="width:5.9%;background:#06b6d4;" title="Liquidated Damages: $958,959">Liq $959K</div>
+  <div style="width:1.9%;background:#475569;" title="Reimbursements: $316,443">Reimb $316K</div>
+</div>
+<div class="dmg-bar-label">Full exposure breakdown — <strong>$16,337,292 total expert exposure</strong> · BCG analysis (4-16-2026) · 35,272 workweeks · 442 class · 324 PAGA aggrieved · 8,927 PAGA pay periods</div>
+
+<!-- TOP ROW: Snapshot + Strengths + Weaknesses -->
+<div class="grid grid-top" style="margin-bottom:16px;">
+
+  <!-- Case Snapshot -->
+  <div class="card">
+    <h2>Case Snapshot</h2>
+    <div class="kv-row"><span class="kv-label">Workweeks</span><span class="kv-value big">35,272</span></div>
+    <div class="kv-row"><span class="kv-label">Class Members</span><span class="kv-value">442</span></div>
+    <div class="kv-row"><span class="kv-label">PAGA Aggrieved</span><span class="kv-value">324 · 8,927 PP</span></div>
+    <div class="kv-row"><span class="kv-label">Class Period</span><span class="kv-value">3/4/21–present</span></div>
+    <div class="kv-row"><span class="kv-label">PAGA Period</span><span class="kv-value">3/3/24–present</span></div>
+    <div class="kv-row"><span class="kv-label">Expert Full Exposure</span><span class="kv-value big">$16,337,292</span></div>
+    <div class="kv-row"><span class="kv-label">Rest Break Rate</span><span class="kv-value" style="color:var(--red);">100% (assumed)</span></div>
+    <div class="kv-row"><span class="kv-label">Meal Violation Rate</span><span class="kv-value" style="color:var(--orange);">20.4% face / higher actual</span></div>
+    <div class="kv-row"><span class="kv-label">2nd Meal (12hr+)</span><span class="kv-value" style="color:var(--red);">82.3% missed</span></div>
+    <div class="kv-row"><span class="kv-label">Premiums Paid</span><span class="kv-value" style="color:var(--green);">0.5% (162 of 33,668)</span></div>
+    <div class="kv-row"><span class="kv-label">OC</span><span class="kv-value">Ogletree (Wrosch / LaBriola)</span></div>
+    <div class="kv-row"><span class="kv-label">Other Room</span><span class="kv-value" style="color:var(--yellow);">⚠ Plus Young Choi (training)</span></div>
+    <div class="kv-row"><span class="kv-label">Plaintiff Attending</span><span class="kv-value" style="color:var(--yellow);">⚠ Confirm Douglas/Dove</span></div>
+    <div class="kv-row"><span class="kv-label">Referral / JPA</span><span class="kv-value" style="color:var(--green);">None — Full Fee</span></div>
+    <div class="kv-row"><span class="kv-label">Prior W&amp;H Settlements</span><span class="kv-value" style="color:var(--green);">None</span></div>
+    <div class="kv-row"><span class="kv-label">Handling</span><span class="kv-value">RQ / SM</span></div>
+  </div>
+
+  <!-- Strengths -->
+  <div class="card">
+    <h2 style="color:var(--green);">&#9650; Our Strengths</h2>
+    <ul class="sw-list pro">
+      <li><strong>Expert-backed at $16.3M</strong> — BCG analyzed 98.4% of class (435 of 442 employees) from defendant's own time and pay records</li>
+      <li><strong>Defective rest break policy on its face</strong> — class members not allowed to leave premises violates <em>Augustus v. ABM</em> — supports 100% violation rate ($5.37M alone)</li>
+      <li><strong>"Fake meal periods"</strong> — class members directed to clock out, set 30-minute timer, keep working — meal looks compliant on records but is entirely missed</li>
+      <li><strong>2nd meal almost never given</strong> — 99.6% missed on 10–12 hr shifts; 82.3% missed on 12+ hr shifts; coerced waivers even on shifts &gt; 12 hr (illegal)</li>
+      <li><strong>Premium rate underpaid (Ferra)</strong> — even the rare 0.5% of premiums paid excludes shift-differentials and bonuses → automatic §226 + §203 derivative claims</li>
+      <li><strong>Plaintiff Douglas not bound by arb</strong> — employment ended 1/7/25, prior to 2/2025 rollout — PAGA representative posture survives entirely (post-<em>Adolph</em>)</li>
+      <li><strong>Coercive arb rollout</strong> — mandatory HR meeting, on-the-spot signature, no take-home, presenter angry at questions → strong <em>OTO/Davis v. Kozak</em> procedural unconscionability</li>
+      <li><strong>Arb agreement substantively defective</strong> — marked "Updated September 2024" but no prior version; signing-date roster overdue since 4/10/26</li>
+      <li><strong>Operational compulsion</strong> — furnace and CNC operators can't leave running machines/parts → meal/rest violations are <em>structural</em>, not anecdotal</li>
+      <li><strong>Manufacturing employer with deep-ish pocket</strong> — medical/aerospace/nuclear precision metals — not a struggling restaurant</li>
+      <li><strong>Waiting time + wage statement: $2.51M</strong> — 243 terminated employees in WT period; wage statement period is closed/closing 4/27/26</li>
+      <li><strong>No prior W&amp;H settlements</strong> — no low-anchor gravitational pull on Rottman</li>
+    </ul>
+  </div>
+
+  <!-- Weaknesses -->
+  <div class="card">
+    <h2 style="color:var(--red);">&#9660; Their Arguments</h2>
+    <ul class="sw-list con">
+      <li><strong>Plaintiff Dove signed arb (2/2025)</strong> — defense will press an arb carve-out for the post-rollout cohort; counter: agreement is procedurally and substantively unconscionable, no signing-date roster has been produced</li>
+      <li><strong>100% rest rate is aggressive</strong> — defense will argue facially compliant <em>written</em> policy and demand Plaintiff disaggregate; counter: <em>Augustus</em> is dispositive on the leave-premises issue</li>
+      <li><strong>OTC is testimony-dependent</strong> — $1.18M rests on a 1-hr/ww estimate; defense will attack as speculative</li>
+      <li><strong>20.4% face meal rate isn't the worst seen</strong> — defense will cherry-pick the headline number and downplay the structural "fake meal" testimony</li>
+      <li><strong>Third-shift workday novel argument</strong> — overlap into next calendar day creates exposure but is not yet briefed/tested at law and motion</li>
+      <li><strong>Ogletree Deakins is sophisticated</strong> — Wrosch/LaBriola are organized; expect "ability to pay" play (medical/aerospace cycles) and aggressive PAGA discounting</li>
+      <li><strong>Young Choi disclosure</strong> — Choi was Rottman's law school student; OC asked permission, we agreed — keep an eye on whether it tilts pacing</li>
+    </ul>
+  </div>
+</div>
+
+<!-- MIDDLE ROW: Numbers + Game Plan -->
+<div class="grid grid-2" style="margin-bottom:16px;">
+
+  <!-- Numbers Framework -->
+  <div class="card">
+    <h2>The Numbers (Expert-Backed + Asher Tiers)</h2>
+    <table class="num-table">
+      <thead>
+        <tr><th>Concept</th><th>$/WW</th><th>Amount</th><th style="font-size:10px;">Source</th></tr>
+      </thead>
+      <tbody>
+        <tr class="highlight-row"><td style="font-weight:700;">Opening (Full Expert)</td><td class="money" style="font-size:15px;">$463</td><td class="money" style="font-size:15px;">$16,337,292</td><td style="font-size:11px; color:var(--accent-light);">BCG</td></tr>
+        <tr><td class="label-cell">Asher High</td><td class="money">$275</td><td class="money">$9,699,800</td><td style="font-size:11px; color:var(--text-dim);">Asher</td></tr>
+        <tr><td class="label-cell">Asher Mid</td><td class="money">$125</td><td class="money">$4,409,000</td><td style="font-size:11px; color:var(--text-dim);">Asher</td></tr>
+        <tr><td class="label-cell" style="color:var(--yellow);">JG Signal (BCS+20%)</td><td class="money">$60–84</td><td class="money">$2.1M–$2.96M</td><td style="font-size:11px; color:var(--yellow);">JG cross-check</td></tr>
+        <tr class="target-row"><td>Target Zone</td><td class="money">$65</td><td class="money">$2,292,680</td><td style="font-size:11px; color:var(--text-dim);">Asher</td></tr>
+        <tr><td class="label-cell" style="color:var(--yellow);">JG BCS (band)</td><td class="money">$50–70</td><td class="money">$1.76M–$2.47M</td><td style="font-size:11px; color:var(--yellow);">JG cross-check</td></tr>
+        <tr class="floor-row"><td>Walk-Away</td><td class="money">$35</td><td class="money">$1,234,520</td><td style="font-size:11px; color:var(--yellow);">⚠ Confirm</td></tr>
+        <tr class="floor-row"><td>Hard Floor</td><td class="money">$30</td><td class="money">$1,058,160</td><td style="font-size:11px; color:var(--text-dim);">Asher</td></tr>
+        <tr><td class="label-cell">PAGA (independent)</td><td class="label-cell">$100/PP</td><td class="money">$4,917,600</td><td style="font-size:11px; color:var(--text-dim);">BCG</td></tr>
+        <tr><td class="label-cell">Rest Break (alone)</td><td class="label-cell">—</td><td class="money">$5,365,480</td><td style="font-size:11px; color:var(--text-dim);">BCG</td></tr>
+        <tr><td class="label-cell">Waiting Time + Wage Stmt</td><td class="label-cell">—</td><td class="money">$2,506,466</td><td style="font-size:11px; color:var(--text-dim);">BCG</td></tr>
+        <tr><td class="label-cell">Individual claims</td><td class="label-cell">—</td><td class="label-cell" style="color:var(--yellow);">⚠ None identified</td><td></td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:10px; padding:8px 10px; background:var(--card-alt); border-radius:6px; font-size:11px; color:var(--text-dim); line-height:1.6;">
+      <strong style="color:var(--accent-light);">Opening logic:</strong> Open at full expert ($16,337,292 / $463/ww). Anchor is grounded — BCG analyzed 35,272 of 35,272 workweeks from defendant's data. The rest break claim alone ($5.37M) and PAGA ($4.92M) each independently exceed Asher's $125/ww mid tier ($4.4M). Target landing at $65/ww (~$2.3M) = 14% of full expert with cross-framework agreement: JG BCS-band ($1.76M–$2.47M) and Asher's target both land here. Walk-away at $35/ww ($1.23M) — below this, the rest break and waiting time claims alone would justify trial.
+    </div>
+  </div>
+
+  <!-- Negotiation Pipeline -->
+  <div class="card">
+    <h2>Negotiation Game Plan</h2>
+    <div class="pipeline">
+      <div class="pipeline-step open">
+        <span class="step-label">Open</span>
+        <span class="step-amount">$16.34M</span>
+        <span class="step-ww">$463/ww</span>
+        <span class="step-msg">Full expert — BCG analyzed every workweek from their own records</span>
+      </div>
+      <div class="pipeline-step move">
+        <span class="step-label">Move 2</span>
+        <span class="step-amount">$10.5–11M</span>
+        <span class="step-ww">$298–312</span>
+        <span class="step-msg">Discount the OTC + portion of 100% rest assumption</span>
+      </div>
+      <div class="pipeline-step move">
+        <span class="step-label">Move 3</span>
+        <span class="step-amount">$6.5–7.5M</span>
+        <span class="step-ww">$184–213</span>
+        <span class="step-msg">Around Asher mid ($125/ww = $4.4M) plus PAGA shoulder</span>
+      </div>
+      <div class="pipeline-step move">
+        <span class="step-label">Move 4</span>
+        <span class="step-amount">$4.0–4.5M</span>
+        <span class="step-ww">$113–128</span>
+        <span class="step-msg">Asher mid territory — "we are in the data, not the policy fight"</span>
+      </div>
+      <div class="pipeline-step signal">
+        <span class="step-label">Signal</span>
+        <span class="step-amount">$2.5–3.0M</span>
+        <span class="step-ww">$71–85</span>
+        <span class="step-msg">"Rest break alone is $5.37M — this is a $70+/ww case all day long"</span>
+      </div>
+      <div class="pipeline-step bracket">
+        <span class="step-label">Bracket</span>
+        <span class="step-amount">$5.0M / $1.5M</span>
+        <span class="step-ww">Mid ~$3.25M</span>
+        <span class="step-msg">One-time use — moderate bracket, midpoint above target zone</span>
+      </div>
+      <div class="pipeline-step target">
+        <span class="step-label">Target</span>
+        <span class="step-amount">$2.0–2.5M</span>
+        <span class="step-ww">$57–71</span>
+        <span class="step-msg">12–15% of expert — strong outcome on a 442-class manufacturing matter</span>
+      </div>
+      <div class="pipeline-step floor">
+        <span class="step-label">Walk-Away</span>
+        <span class="step-amount">$1.23M</span>
+        <span class="step-ww">$35</span>
+        <span class="step-msg">⚠ Confirm — below this, rest + WT/WS alone justify litigation</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM ROW: Messaging + Brackets + OC Read -->
+<div class="grid grid-3">
+
+  <!-- Messaging Points -->
+  <div class="card" style="grid-column: span 2;">
+    <h2>Key Messaging Points for Rottman</h2>
+    <div class="msg-card">
+      <div class="msg-title"><span class="msg-num">1</span>Their Own Records Drive the Number</div>
+      <div class="msg-body">BCG analyzed 35,272 workweeks and 170,350 shifts from VERIDIAM 000486-488. The face of the time records yields a 20.4% meal violation rate, 99.6% no-2nd-meal on 10–12 hr shifts, and 82.3% missed 2nd meals on shifts over 12 hours. Premium payments offset 0.5% of meal violations. This is not advocacy — it's their own time and pay data.</div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-title"><span class="msg-num">2</span>Rest Break Policy Is Defective on Its Face</div>
+      <div class="msg-body">Class members are not permitted to leave the premises for rest breaks — a direct contradiction of <em>Augustus v. ABM Security Servs.</em> (2016) 2 Cal.5th 257. That alone supports a 100% violation rate and the $5.37M rest premium claim. There is no operational data that gets defendant out of <em>Augustus</em> — it's a policy-level violation.</div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-title"><span class="msg-num">3</span>"Fake" Meal Periods Are the Real Story</div>
+      <div class="msg-body">Furnace operators and CNC operators can't leave running machines or parts unattended — yet they were directed to clock out, set 30-minute timers, and keep working. That records as a compliant meal break and entirely defeats the headline 20.4% rate. Class member testimony across three departments (furnace, machine, CNC) is consistent and corroborating.</div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-title"><span class="msg-num">4</span>Plaintiff Douglas Is Outside the Arbitration Cohort</div>
+      <div class="msg-body">Douglas's employment ended 1/7/25 — a month before the 2/2025 rollout. He's not a signatory and never will be. PAGA representative claims survive entirely under <em>Adolph v. Uber</em>. Even the signatory cohort faces strong <em>OTO/Davis v. Kozak</em> procedural unconscionability — mandatory HR meeting, on-the-spot signature, no take-home, presenter angry at questions. The "Updated September 2024" date is a tell that they've been deploying without a prior version. The signing-date roster they promised is overdue since 4/10/26.</div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-title"><span class="msg-num">5</span>Every Premium Paid Is an Underpaid Premium (Ferra)</div>
+      <div class="msg-body">The 162 paid premiums all exclude shift-differential and bonus codes that <em>Ferra v. Loews</em> (2021) 11 Cal.5th 858 requires in the regular rate. That converts every "compliant" payment into an automatic §226 wage-statement violation and §203 derivative — without further fact development. This is a structural problem in their payroll, not an outlier.</div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-title"><span class="msg-num">6</span>PAGA Stands Independently — $4.92M</div>
+      <div class="msg-body">324 aggrieved employees. 8,927 PAGA pay periods. 99.9% rest break violation rate across the PAGA period; 46.2% net meal violations. Not arbitrable post-<em>Adolph</em>. PAGA penalties for waiting time, wage statements, reimbursements, overtime, and meal premiums each stack independently. This exposure exists even if every Class certification battle goes the wrong way.</div>
+    </div>
+  </div>
+
+  <!-- Right column: Brackets + OC Read -->
+  <div style="display:flex; flex-direction:column; gap:16px;">
+
+    <!-- Brackets -->
+    <div class="card">
+      <h2>Bracket Options (Use Once)</h2>
+      <div class="bracket-opt agg">
+        <div class="bracket-label">Aggressive</div>
+        <div class="bracket-range">$6.0M / $2.0M</div>
+        <div class="bracket-mid">Mid $4.0M &middot; $113/ww</div>
+      </div>
+      <div class="bracket-opt mod">
+        <div class="bracket-label">Moderate</div>
+        <div class="bracket-range">$5.0M / $1.5M</div>
+        <div class="bracket-mid">Mid $3.25M &middot; $92/ww</div>
+      </div>
+      <div class="bracket-opt con">
+        <div class="bracket-label">Conservative</div>
+        <div class="bracket-range">$3.5M / $1.5M</div>
+        <div class="bracket-mid">Mid $2.5M &middot; $71/ww</div>
+      </div>
+      <div style="margin-top:10px; font-size:11px; color:var(--text-dim); font-style:italic; text-align:center;">
+        Their counter-bracket top number tells you where they actually are.
+      </div>
+    </div>
+
+    <!-- OC Read -->
+    <div class="card">
+      <h2>OC Read</h2>
+      <div class="oc-read">
+        <strong>Mitchell A. Wrosch</strong> (lead) and <strong>Briana LaBriola</strong> at Ogletree Deakins, plus <strong>Young Choi</strong> attending for training (disclosed: prior student of Rottman in law school — we approved). Ogletree is sophisticated wage-and-hour defense — expect: arb carve-out as primary deflator (ignoring void/overdue roster), 100% rest rate as overreach, OTC as speculative, "manufacturer ability-to-pay" given medical/aerospace cycles, and aggressive PAGA discounting against the 99.9% rate. Counter: Douglas is not a signatory, the rollout is procedurally unconscionable, <em>Augustus</em> is dispositive on rest, and the BCG numbers are <em>their</em> records. <strong style="color:var(--yellow);">Unknown: insurance carrier in the room? authority cap?</strong> Affects pace and ceiling.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  No referral fee &middot; No JPA &middot; No §1.5.1 &middot; No prior W&amp;H settlements &middot; Full fee on resolution &middot; Generated 4/27/2026
+</div>
+
+</body>
+</html>

@@ -274,9 +274,16 @@
           "descriptor": "Cease + corrective notice demand re Defendants post-mediation arbitration agreement (names BCV-25-101296) and timecard attestation campaign at Sutton facilities",
           "created": "2026-04-27T19:46:59.697619Z",
           "status": "pending-review"
+        },
+        {
+          "type": "Witness Interview Script \u2014 Arbitration Campaign",
+          "url": "filevine://projects/12259714/Interviews/(Claude Draft) Witness Interview Script - Magnolia Springs Arbitration Campaign v1.docx",
+          "descriptor": "20-question script for Astrid: opening + priority Qs + opt-out posture + RQ-flag rubric. Witness = class member solicited under arb agreement at Sutton-affiliated facility.",
+          "created": "2026-04-27T19:57:08.132785Z",
+          "status": "pending-review"
         }
       ]
     }
   },
-  "last_updated": "2026-04-27T19:46:59.697631Z"
+  "last_updated": "2026-04-27T19:57:08.132817Z"
 }

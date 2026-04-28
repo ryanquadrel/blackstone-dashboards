@@ -23,11 +23,11 @@
     "Rove Engineering, Inc.": {
       "folder": {
         "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Rove%20Engineering/Discovery/PAGA/Written%20Discovery",
-        "descriptor": "Rove Engineering > Discovery > PAGA > Written Discovery (auto-drafted 4/14) \u2014 (SUPERSEDED 2026-04-28: case_type corrected to Class; PAGA-template auto-drafts pending re-draft as Class)"
+        "descriptor": "Rove Engineering > Discovery > PAGA > Written Discovery (auto-drafted 4/14) — (SUPERSEDED 2026-04-28: case_type corrected to Class; PAGA-template auto-drafts pending re-draft as Class)"
       },
       "discovery": {
         "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Rove%20Engineering/Discovery/PAGA/Written%20Discovery",
-        "descriptor": "Rove Engineering > Discovery > PAGA > Written Discovery \u2014 (SUPERSEDED 2026-04-28: case_type corrected to Class; PAGA-template auto-drafts pending re-draft as Class)"
+        "descriptor": "Rove Engineering > Discovery > PAGA > Written Discovery — (SUPERSEDED 2026-04-28: case_type corrected to Class; PAGA-template auto-drafts pending re-draft as Class)"
       },
       "pleadings": {
         "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Rove%20Engineering/Pleadings%2C%20Motions%20and%20Court%20Filings",
@@ -39,11 +39,11 @@
       },
       "drafts": [
         {
-          "type": "Email Draft \u2014 Service List Reply (LOR)",
+          "type": "Email Draft — Service List Reply (LOR)",
           "url": "mailto:kmoreno@murchisonlaw.com,sminer@blackstonepc.com,amejia@blackstonepc.com,karellano@blackstonepc.com,rqservice@blackstonepc.com?cc=cellington@murchisonlaw.com,edella@murchisonlaw.com,tmcdonald@murchisonlaw.com&subject=Re%3A%20Scott%20Hale%20vs.%20Rove%20Engineering%2C%20Inc.%20%28PAGA%29%20-%20LETTER%20OF%20REPRESENTATION%20%28M%26C%20%2353423%29&body=Ken%3A%0A%0ANice%20to%20meet%20you.%0A%0APlease%20update%20your%20service%20list%20to%20include%20%40Shelby%20Miner%2C%20%40Astrid%20Mejia%2C%20%40Karen%20Arellano%20and%20%40Team%20RQ%20%28Attorneys%20%26%20Support%20Staff%29%2C%20as%20copied%20above.%0A%0AWe%20look%20forward%20to%20working%20with%20you.%0A%0A%0A_______________________________________________________________%0A%0A%0ARyan%20Quadrel%20%7C%20Team%20Lead%20%26%20Trial%20Attorney%0ABLACKSTONE%20LAW%2C%20APC%0APhone%3A%20%28310%29%20622-4278%0AFax%3A%20%28855%29%20786-6356%0A8383%20Wilshire%20Boulevard%2C%20Suite%20745%0ABeverly%20Hills%2C%20CA%2090211%0A",
-          "descriptor": "Service-list reply to Murchison & Cumming re: Hale v. Rove LOR (4/24)",
+          "descriptor": "Service-list reply to Murchison & Cumming re: Hale v. Rove LOR (4/24) — SENT 2026-04-28 (Ryan's actual reply differs slightly from the staged draft; see feedback_lor_reply_recipe_pattern.md)",
           "created": "2026-04-28T18:25:45.028409Z",
-          "status": "pending-review"
+          "status": "sent"
         }
       ]
     },
@@ -116,7 +116,7 @@
               "author": "SM",
               "created": "2026-04-17T16:49:12.771868Z",
               "status": "attorney-returned",
-              "descriptor": "Shelby's initial outline \u2014 delivered via Teams DM on 2026-04-16 20:32 UTC, pending full brief build from BCG report"
+              "descriptor": "Shelby's initial outline — delivered via Teams DM on 2026-04-16 20:32 UTC, pending full brief build from BCG report"
             },
             {
               "version": 2,
@@ -125,7 +125,7 @@
               "author": "ai-mediation-brief",
               "created": "2026-04-17T19:14:57.341959Z",
               "status": "for-attorney-review",
-              "descriptor": "AI v2 brief \u2014 built on Shelby's v1 outline + BCG 4/16 analysis; mandatory-meeting arb rollout frame; for SM review prior to 4/20 submission"
+              "descriptor": "AI v2 brief — built on Shelby's v1 outline + BCG 4/16 analysis; mandatory-meeting arb rollout frame; for SM review prior to 4/20 submission"
             },
             {
               "version": 3,
@@ -134,7 +134,7 @@
               "author": "ai-mediation-brief",
               "created": "2026-04-17T19:36:17.651625Z",
               "status": "for-attorney-review",
-              "descriptor": "AI v3 \u2014 BCG tables embedded as images per Section 7A (v2 had hand-recreated tables); for SM review"
+              "descriptor": "AI v3 — BCG tables embedded as images per Section 7A (v2 had hand-recreated tables); for SM review"
             },
             {
               "version": 4,
@@ -183,7 +183,7 @@
           "type": "Mediation-Brief",
           "version": 4,
           "url": "https://outlook.office365.com/owa/?ItemID=AAMkADA5NDlkYWNkLTUzM2ItNGQyOS04Yzk2LWMzZTJjOTJjNDgyYwBGAAAAAAA%2FV%2BtaUrdAQ5ftyKsLoKhHBwAZv2juNm3rT77xYm367dFWAAAIvOyFAAAZv2juNm3rT77xYm367dFWAAEXZb1hAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
-          "descriptor": "Submitted to Steve Rottman (mediate@steverottman.com) \u2014 SM via email 2026-04-25 (mediation 2026-04-27)",
+          "descriptor": "Submitted to Steve Rottman (mediate@steverottman.com) — SM via email 2026-04-25 (mediation 2026-04-27)",
           "created": "2026-04-27T22:05:56.251644Z",
           "status": "submitted",
           "owner": "submitted",
@@ -195,7 +195,7 @@
           "served_email_id": null,
           "served_at": null,
           "filename_contract_ok": false,
-          "filename_contract_reason": "does not match (Claude Draft) <Title> v<N>.docx \u2014 see skills/_shared/docs/fvs-save-contract.md Rule 3"
+          "filename_contract_reason": "does not match (Claude Draft) <Title> v<N>.docx — see skills/_shared/docs/fvs-save-contract.md Rule 3"
         }
       ]
     },
@@ -204,14 +204,14 @@
         {
           "type": "Discovery Deficiency Memo",
           "url": "https://blackstone.filevineapp.com/#/project/12237599",
-          "descriptor": "v4 (2026-04-27): RFP+SROG Set One \u2014 22pg production (14 blank templates + our PAGA notice); MTC by 6/1/2026",
+          "descriptor": "v4 (2026-04-27): RFP+SROG Set One — 22pg production (14 blank templates + our PAGA notice); MTC by 6/1/2026",
           "created": "2026-04-28T04:10:11Z",
           "status": "pending-review"
         },
         {
           "type": "M&C Letter",
           "url": "https://blackstone.filevineapp.com/#/project/12237599",
-          "descriptor": "v4 \u2014 Joe-revised + Traber 4/21 directives section + corrected MTCA date 2/13; sending today (Tue 4/28); defense response deadline Fri 5/8",
+          "descriptor": "v4 — Joe-revised + Traber 4/21 directives section + corrected MTCA date 2/13; sending today (Tue 4/28); defense response deadline Fri 5/8",
           "created": "2026-04-28T19:02:56Z",
           "status": "pending-review"
         }
@@ -259,12 +259,12 @@
           "type": "Reply ISO Motion to Remand",
           "version": 1,
           "url": "filevine://12339967/Federal (PAGA) - 426-cv-01964-LB/Motion for Remand/(Claude Draft) Reply ISO Motion to Remand v1.docx",
-          "descriptor": "Reply ISO Motion to Remand \u2014 Conant v. Evergreen (PAGA Federal). Hearing 5/14/26 before Judge Chhabria.",
+          "descriptor": "Reply ISO Motion to Remand — Conant v. Evergreen (PAGA Federal). Hearing 5/14/26 before Judge Chhabria.",
           "created": "2026-04-27T18:46:23.835818Z",
           "status": "pending-review",
           "owner": "ryan",
           "hard_lock": true,
-          "lock_reason": "Federal court filing \u2014 Ryan signature required before service",
+          "lock_reason": "Federal court filing — Ryan signature required before service",
           "verify_passed_at": null,
           "release_reviewer": null,
           "released_at": null,
@@ -277,12 +277,12 @@
           "type": "Reply ISO Motion to Remand",
           "version": 2,
           "url": "filevine://12339967/Federal (PAGA) - 426-cv-01964-LB/Motion for Remand/(Claude Draft) Reply ISO Motion to Remand v2.docx",
-          "descriptor": "v2 \u2014 leads with Hernandez v. Delta Star (Chhabria's own remand on near-identical facts: parallel class action by same counsel). Adds Selker/SWC/Evers for new-theory rule. Fixes Canela double-cite. Adolph pin to 1115. Tone stripped.",
+          "descriptor": "v2 — leads with Hernandez v. Delta Star (Chhabria's own remand on near-identical facts: parallel class action by same counsel). Adds Selker/SWC/Evers for new-theory rule. Fixes Canela double-cite. Adolph pin to 1115. Tone stripped.",
           "created": "2026-04-27T19:28:14.444448Z",
           "status": "pending-review",
           "owner": "ryan",
           "hard_lock": true,
-          "lock_reason": "Federal court filing \u2014 Ryan signature required before service. v2 reflects Lexis-verified authorities; 1 [VERIFY] marker remaining (SWC KeyCite signal).",
+          "lock_reason": "Federal court filing — Ryan signature required before service. v2 reflects Lexis-verified authorities; 1 [VERIFY] marker remaining (SWC KeyCite signal).",
           "verify_passed_at": null,
           "release_reviewer": null,
           "released_at": null,
@@ -321,7 +321,7 @@
           "status": "pending-review"
         },
         {
-          "type": "Witness Interview Script \u2014 Arbitration Campaign",
+          "type": "Witness Interview Script — Arbitration Campaign",
           "url": "filevine://projects/12259714/Interviews/(Claude Draft) Witness Interview Script - Magnolia Springs Arbitration Campaign v1.docx",
           "descriptor": "20-question script for Astrid: opening + priority Qs + opt-out posture + RQ-flag rubric. Witness = class member solicited under arb agreement at Sutton-affiliated facility.",
           "created": "2026-04-27T19:57:08.132785Z",
@@ -387,12 +387,12 @@
         {
           "type": "Mediation Brief",
           "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/LeFiell/Settlement%20%26%20Mediation/Drafts/%28Claude%20Draft%29%20Macias%20and%20Redd%20v%20LeFiell%20Mediation%20Brief%20v6.docx",
-          "descriptor": "Ngo-Bonnici mediation 5/7/26 \u2014 full brief with LeFiell BCG damages images embedded",
+          "descriptor": "Ngo-Bonnici mediation 5/7/26 — full brief with LeFiell BCG damages images embedded",
           "created": "2026-04-28T18:58:39.495414Z",
           "status": "pending-review"
         }
       ]
     }
   },
-  "last_updated": "2026-04-28T19:12:04.067097Z"
+  "last_updated": "2026-04-28T19:42:18.760011+00:00"
 }

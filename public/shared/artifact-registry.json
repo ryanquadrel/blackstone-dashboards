@@ -474,6 +474,13 @@
           "descriptor": "Ngo-Bonnici 5/7/26 \u2014 v9: rebuilt with primitives extracted directly from Veridiam v4 AI baseline (24pt title, centered Roman headings, header+footer w/ page numbers, 4-paragraph highlight blocks)",
           "created": "2026-04-28T20:24:58.541963Z",
           "status": "pending-review"
+        },
+        {
+          "type": "Mediation Brief",
+          "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/LeFiell/Settlement%20%26%20Mediation/Drafts/%28Claude%20Draft%29%20Macias%20and%20Redd%20v%20LeFiell%20Mediation%20Brief%20v10.docx",
+          "descriptor": "Ngo-Bonnici 5/7/26 \u2014 v10: highlights chart now bordered TABLE per Veridiam canonical (1-col, alternating shaded header / body cells with bold hook + bold Estimated Liability)",
+          "created": "2026-04-28T21:15:03.127585Z",
+          "status": "pending-review"
         }
       ]
     },
@@ -514,5 +521,5 @@
       ]
     }
   },
-  "last_updated": "2026-04-28T20:24:58.541978Z"
+  "last_updated": "2026-04-28T21:15:03.127599Z"
 }

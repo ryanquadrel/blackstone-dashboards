@@ -368,6 +368,13 @@
           "descriptor": "v3: 4/27 references removed (that letter never sent). Recast as first written communication on the campaign. Production-order relief detailed inline. Counter-campaign threat NOT included pending research.",
           "created": "2026-04-28T19:55:17.660527Z",
           "status": "pending-review"
+        },
+        {
+          "type": "CMS Revisions Memo - Apprise Court of Arbitration Campaign",
+          "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Magnolia%20Springs/Research%2C%20Memos%20%26%20Notes/%28Claude%20Draft%29%20CMS%20Revisions%20Memo%20-%20Apprise%20Court%20of%20Arbitration%20Campaign%20v3.docx",
+          "descriptor": "v3: 4/27 reference removed from Section 19(a) proposal. Aligned with v3 OC letter framing (4/28 is first letter on campaign).",
+          "created": "2026-04-28T19:55:18.933300Z",
+          "status": "pending-review"
         }
       ]
     },
@@ -440,5 +447,5 @@
       ]
     }
   },
-  "last_updated": "2026-04-28T19:55:17.660542Z"
+  "last_updated": "2026-04-28T19:55:18.933322Z"
 }

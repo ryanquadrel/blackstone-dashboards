@@ -335,9 +335,16 @@
           "descriptor": "v2 - rebuilt via mediation_brief_template + bcg_report_extractor; passes validator (year-by-year damages tables, 51 dollar values trace to BCG)",
           "created": "2026-04-28T02:54:48.750670Z",
           "status": "pending-review"
+        },
+        {
+          "type": "Mediation Brief",
+          "url": "filevine/projects/Redd, Walter - LeFiell Manufacturing Co [12245112]/Settlement & Mediation/(Claude Draft) Macias and Redd v LeFiell Mediation Brief v3.docx",
+          "descriptor": "v3 - format extracted from Veridiam exemplar (Shelby/RAQ-redlined): tighter margins, JUSTIFY body, ALL CAPS no-numeral section headings, single spacing, 24pt cover",
+          "created": "2026-04-28T17:02:32.763396Z",
+          "status": "pending-review"
         }
       ]
     }
   },
-  "last_updated": "2026-04-28T04:10:11Z"
+  "last_updated": "2026-04-28T17:02:32.763414Z"
 }

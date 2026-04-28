@@ -234,7 +234,28 @@
     if (!entry || !entry.drafts || !entry.drafts.length) return '';
 
     var drafts = sortDrafts(entry.drafts);
-    var primary = drafts[0];
+    // Defensive: pick the newest draft with a usable URL. Some producers
+    // (e.g. drafts-logger called from manual interactive brief sessions)
+    // register entries with FV-relative paths like
+    // "filevine/projects/.../*.docx" — those resolve against the dashboard
+    // origin and 404 → Mission Control redirect. Skip those when picking
+    // the chip's primary so an older but valid version still renders.
+    // Caught 2026-04-28: LeFiell brief had v1+v2 (SharePoint URLs, valid)
+    // and v3 (FV-relative, broken). Without this filter the chip picked
+    // v3 and clicked through to Mission Control.
+    function isUsableUrl(u) {
+      if (!u || typeof u !== 'string') return false;
+      var lc = u.toLowerCase();
+      return lc.indexOf('http://') === 0 || lc.indexOf('https://') === 0;
+    }
+    var primary = null;
+    for (var pi = 0; pi < drafts.length; pi++) {
+      if (isUsableUrl(drafts[pi].url)) { primary = drafts[pi]; break; }
+    }
+    if (!primary) primary = drafts[0]; // ultimate fallback — chip will still
+                                       // render the icon but href may be broken;
+                                       // better than skipping entirely so user
+                                       // sees that a draft exists.
     var count = drafts.length;
     var isV2 = !!primary.draft_id;
     var meta = stateMeta(primary.state, primary.status);

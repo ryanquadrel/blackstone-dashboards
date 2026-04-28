@@ -211,8 +211,8 @@
         {
           "type": "M&C Letter",
           "url": "https://blackstone.filevineapp.com/#/project/12237599",
-          "descriptor": "v3 \u2014 sending Tue 4/28; defense response deadline Fri 5/8; 15 demand categories; MTC 6/1/2026",
-          "created": "2026-04-28T04:10:11Z",
+          "descriptor": "v4 \u2014 Joe-revised + Traber 4/21 directives section + corrected MTCA date 2/13; sending today (Tue 4/28); defense response deadline Fri 5/8",
+          "created": "2026-04-28T19:02:56Z",
           "status": "pending-review"
         }
       ]
@@ -373,5 +373,5 @@
       ]
     }
   },
-  "last_updated": "2026-04-28T18:58:39.495426Z"
+  "last_updated": "2026-04-28T19:02:56Z"
 }

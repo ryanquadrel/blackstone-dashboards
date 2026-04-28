@@ -58,6 +58,13 @@
           "descriptor": "Special Interrogatories Class Set One \u2014 10 class-cert interrogatories, joint to both defendants.",
           "created": "2026-04-28T22:52:31.215103Z",
           "status": "pending-review"
+        },
+        {
+          "type": "Belaire-West Notice",
+          "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Rove%20Engineering/Discovery/Class/Written%20Discovery/%28Claude%20Draft%29%20Belaire-West%20Notice%20-%20Hale%20v%20Rove%20v1.docx",
+          "descriptor": "Belaire-West opt-out notice; administrator fields are placeholder until Ryan picks one.",
+          "created": "2026-04-28T22:52:32.640228Z",
+          "status": "pending-review"
         }
       ]
     },
@@ -531,5 +538,5 @@
       ]
     }
   },
-  "last_updated": "2026-04-28T22:52:31.215121Z"
+  "last_updated": "2026-04-28T22:52:32.640241Z"
 }

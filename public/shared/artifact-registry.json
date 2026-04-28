@@ -36,7 +36,16 @@
       "root": {
         "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Rove%20Engineering",
         "descriptor": "Rove Engineering (Active Cases root)"
-      }
+      },
+      "drafts": [
+        {
+          "type": "Email Draft \u2014 Service List Reply (LOR)",
+          "url": "mailto:kmoreno@murchisonlaw.com,sminer@blackstonepc.com,amejia@blackstonepc.com,karellano@blackstonepc.com,rqservice@blackstonepc.com?cc=cellington@murchisonlaw.com,edella@murchisonlaw.com,tmcdonald@murchisonlaw.com&subject=Re%3A%20Scott%20Hale%20vs.%20Rove%20Engineering%2C%20Inc.%20%28PAGA%29%20-%20LETTER%20OF%20REPRESENTATION%20%28M%26C%20%2353423%29&body=Ken%3A%0A%0ANice%20to%20meet%20you.%0A%0APlease%20update%20your%20service%20list%20to%20include%20%40Shelby%20Miner%2C%20%40Astrid%20Mejia%2C%20%40Karen%20Arellano%20and%20%40Team%20RQ%20%28Attorneys%20%26%20Support%20Staff%29%2C%20as%20copied%20above.%0A%0AWe%20look%20forward%20to%20working%20with%20you.%0A%0A%0A_______________________________________________________________%0A%0A%0ARyan%20Quadrel%20%7C%20Team%20Lead%20%26%20Trial%20Attorney%0ABLACKSTONE%20LAW%2C%20APC%0APhone%3A%20%28310%29%20622-4278%0AFax%3A%20%28855%29%20786-6356%0A8383%20Wilshire%20Boulevard%2C%20Suite%20745%0ABeverly%20Hills%2C%20CA%2090211%0A",
+          "descriptor": "Service-list reply to Murchison & Cumming re: Hale v. Rove LOR (4/24)",
+          "created": "2026-04-28T18:25:45.028409Z",
+          "status": "pending-review"
+        }
+      ]
     },
     "Vicar Operating, Inc. dba VCA": {
       "folder": {
@@ -353,5 +362,5 @@
       ]
     }
   },
-  "last_updated": "2026-04-28T17:30:36.356849Z"
+  "last_updated": "2026-04-28T18:25:45.028422Z"
 }

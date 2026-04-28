@@ -40,7 +40,16 @@
     var registry = { mappings: {} };
     try {
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', REGISTRY_URL, false); // sync — must be available before hydrate runs
+      // Cache-bust per page-load. Registry is small (<25KB) and updates
+      // mid-day when producers register/correct draft URLs; without this,
+      // ETag revalidation + bfcache can leave chips hydrated against URLs
+      // we already fixed in the producer fleet. Caught 2026-04-28 when the
+      // LeFiell brief chip kept routing to Mission Control on Ryan's
+      // already-open tab even after the registry's relative-path bug was
+      // patched in commit 3a3b5dc.
+      var cacheBust = REGISTRY_URL + '?t=' + Date.now();
+      xhr.open('GET', cacheBust, false); // sync — must be available before hydrate runs
+      xhr.setRequestHeader('Cache-Control', 'no-cache');
       xhr.send(null);
       if (xhr.status === 200) registry = JSON.parse(xhr.responseText);
     } catch (e) { /* registry is optional — empty mappings render no chips */ }

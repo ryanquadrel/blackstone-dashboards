@@ -340,6 +340,13 @@
           "descriptor": "Second BBR letter dovetailing 4/13 MTC M&C + 4/27 demand letter. EOD 4/28 deadline; ex parte filing 4/29 morning if no stipulation.",
           "created": "2026-04-28T19:12:02.614118Z",
           "status": "pending-review"
+        },
+        {
+          "type": "CMS Revisions Memo - Apprise Court of Arbitration Campaign",
+          "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Magnolia%20Springs/Research%2C%20Memos%20%26%20Notes/%28Claude%20Draft%29%20CMS%20Revisions%20Memo%20-%20Apprise%20Court%20of%20Arbitration%20Campaign%20v1.docx",
+          "descriptor": "Internal memo to Joe: line edits to 4/28 CM-110 draft for Sections 4(b), 15, 16(c), 18, 19(a). Flags suspect CMC date (Mar 13 in past) for verify.",
+          "created": "2026-04-28T19:12:04.067085Z",
+          "status": "pending-review"
         }
       ]
     },
@@ -387,5 +394,5 @@
       ]
     }
   },
-  "last_updated": "2026-04-28T19:12:02.614130Z"
+  "last_updated": "2026-04-28T19:12:04.067097Z"
 }

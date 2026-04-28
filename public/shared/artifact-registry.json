@@ -204,8 +204,8 @@
         {
           "type": "Discovery Deficiency Memo",
           "url": "https://blackstone.filevineapp.com/#/project/12237599",
-          "descriptor": "v4 (2026-04-27): RFP+SROG Set One \u2014 22pg production (14 blank templates + our PAGA notice); MTC by 6/1/2026",
-          "created": "2026-04-28T04:10:11Z",
+          "descriptor": "v5 (2026-04-28): RFP+SROG Set One \u2014 corrected 'purportedly signed' framing per Joe's catch + Bates 000001 visual confirmation; MTC by 6/1/2026",
+          "created": "2026-04-28T19:53:37Z",
           "status": "pending-review"
         },
         {
@@ -433,5 +433,5 @@
       ]
     }
   },
-  "last_updated": "2026-04-28T19:47:00.989970Z"
+  "last_updated": "2026-04-28T19:53:37Z"
 }

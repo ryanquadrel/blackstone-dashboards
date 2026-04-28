@@ -342,9 +342,16 @@
           "descriptor": "v3 - format extracted from Veridiam exemplar (Shelby/RAQ-redlined): tighter margins, JUSTIFY body, ALL CAPS no-numeral section headings, single spacing, 24pt cover",
           "created": "2026-04-28T17:02:32.763396Z",
           "status": "pending-review"
+        },
+        {
+          "type": "Mediation Brief",
+          "url": "filevine/projects/Redd, Walter - LeFiell Manufacturing Co [12245112]/Settlement & Mediation/Mediation-Brief_v4_for-attorney-review_ai-mediation-brief_2026-04-28.docx",
+          "descriptor": "v4 - cloned from Mediation-Brief_v4_for-attorney-review_ai-mediation-brief_2026-04-20.docx (Veridiam) -- AI working pattern, NOT Shelby manual rewrite. 1in margins, Roman numeral headings, highlights chart, brief-title footer, no python-docx tables.",
+          "created": "2026-04-28T17:30:36.356828Z",
+          "status": "pending-review"
         }
       ]
     }
   },
-  "last_updated": "2026-04-28T17:02:32.763414Z"
+  "last_updated": "2026-04-28T17:30:36.356849Z"
 }

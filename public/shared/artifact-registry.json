@@ -195,15 +195,15 @@
         {
           "type": "Discovery Deficiency Memo",
           "url": "https://blackstone.filevineapp.com/#/project/12237599",
-          "descriptor": "RFP Set One (1-53) + SROG Set One (1-11) - 22pg production (14 blank templates + our PAGA notice); MTC by 6/1/2026",
-          "created": "2026-04-21T16:34:02.306832Z",
+          "descriptor": "v4 (2026-04-27): RFP+SROG Set One \u2014 22pg production (14 blank templates + our PAGA notice); MTC by 6/1/2026",
+          "created": "2026-04-28T04:10:11Z",
           "status": "pending-review"
         },
         {
           "type": "M&C Letter",
           "url": "https://blackstone.filevineapp.com/#/project/12237599",
-          "descriptor": "RFP+SROG Set One deficiencies; 15 demand categories; response deadline Fri 5/1/2026; MTC 6/1/2026",
-          "created": "2026-04-21T16:34:03.596245Z",
+          "descriptor": "v3 \u2014 sending Tue 4/28; defense response deadline Fri 5/8; 15 demand categories; MTC 6/1/2026",
+          "created": "2026-04-28T04:10:11Z",
           "status": "pending-review"
         }
       ]
@@ -339,5 +339,5 @@
       ]
     }
   },
-  "last_updated": "2026-04-28T02:54:48.750682Z"
+  "last_updated": "2026-04-28T04:10:11Z"
 }

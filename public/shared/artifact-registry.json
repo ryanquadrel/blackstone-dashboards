@@ -413,7 +413,18 @@
           "status": "pending-review"
         }
       ]
+    },
+    "NNA Services, LLC; National Notary Association": {
+      "drafts": [
+        {
+          "type": "Deficiency Memo",
+          "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/National%20Notary/%28Claude%20Draft%29%20NNA%20Discovery%20Deficiency%20Memo%20v1.docx",
+          "descriptor": "Arb-Only RFPs/SROGs Set One: 12 deficiency clusters spanning both defendants. Audit trail/metadata refused; NNA Notary blanket refusal; SROG admissions build procedural unconscionability.",
+          "created": "2026-04-28T19:46:59.627070Z",
+          "status": "pending-review"
+        }
+      ]
     }
   },
-  "last_updated": "2026-04-28T19:46:33.115266Z"
+  "last_updated": "2026-04-28T19:46:59.627081Z"
 }

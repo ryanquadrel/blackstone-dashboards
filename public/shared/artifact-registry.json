@@ -422,9 +422,16 @@
           "descriptor": "Arb-Only RFPs/SROGs Set One: 12 deficiency clusters spanning both defendants. Audit trail/metadata refused; NNA Notary blanket refusal; SROG admissions build procedural unconscionability.",
           "created": "2026-04-28T19:46:59.627070Z",
           "status": "pending-review"
+        },
+        {
+          "type": "M&C Letter",
+          "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/National%20Notary/Correspondence/%28Claude%20Draft%29%20MC%20Letter%20NNA%20Discovery%20Set%20One%20v1.docx",
+          "descriptor": "Arb-Only Set One M&C to Stacey James/Jessica Patel @ Littler; demands supplementation by May 13, 2026 (15 days).",
+          "created": "2026-04-28T19:47:00.989936Z",
+          "status": "pending-review"
         }
       ]
     }
   },
-  "last_updated": "2026-04-28T19:46:59.627081Z"
+  "last_updated": "2026-04-28T19:47:00.989970Z"
 }

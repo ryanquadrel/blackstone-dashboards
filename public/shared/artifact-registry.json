@@ -44,6 +44,13 @@
           "descriptor": "Service-list reply to Murchison & Cumming re: Hale v. Rove LOR (4/24) \u2014 SENT 2026-04-28 (Ryan's actual reply differs slightly from the staged draft; see feedback_lor_reply_recipe_pattern.md)",
           "created": "2026-04-28T18:25:45.028409Z",
           "status": "sent"
+        },
+        {
+          "type": "RFP Set One",
+          "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Rove%20Engineering/Discovery/Class/Written%20Discovery/%28Claude%20Draft%29%20RFP%20Set%20One%20-%20Hale%20v%20Rove%20v1.docx",
+          "descriptor": "RFP Set One (Class) \u2014 class-cert discovery, joint to both defendants. Draft only; no service yet.",
+          "created": "2026-04-28T22:52:30.020611Z",
+          "status": "pending-review"
         }
       ]
     },
@@ -517,5 +524,5 @@
       ]
     }
   },
-  "last_updated": "2026-04-28T22:06:01.288948Z"
+  "last_updated": "2026-04-28T22:52:30.020624Z"
 }

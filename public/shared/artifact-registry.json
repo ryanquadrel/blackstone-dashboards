@@ -65,6 +65,13 @@
           "descriptor": "Belaire-West opt-out notice; administrator fields are placeholder until Ryan picks one.",
           "created": "2026-04-28T22:52:32.640228Z",
           "status": "pending-review"
+        },
+        {
+          "type": "Discovery Cover Letter",
+          "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Rove%20Engineering/Discovery/Class/Written%20Discovery/%28Claude%20Draft%29%20Discovery%20Cover%20Letter%20-%20Hale%20v%20Rove%20v1.docx",
+          "descriptor": "Cover letter transmitting RFP Set One + SROG Class Set One; references proposed Belaire-West Notice.",
+          "created": "2026-04-28T22:52:33.996326Z",
+          "status": "pending-review"
         }
       ]
     },
@@ -538,5 +545,5 @@
       ]
     }
   },
-  "last_updated": "2026-04-28T22:52:32.640241Z"
+  "last_updated": "2026-04-28T22:52:33.996339Z"
 }

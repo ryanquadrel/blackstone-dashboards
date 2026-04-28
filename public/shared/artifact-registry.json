@@ -375,6 +375,13 @@
           "descriptor": "v3: 4/27 reference removed from Section 19(a) proposal. Aligned with v3 OC letter framing (4/28 is first letter on campaign).",
           "created": "2026-04-28T19:55:18.933300Z",
           "status": "pending-review"
+        },
+        {
+          "type": "Counter-Campaign Analysis Memo",
+          "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Magnolia%20Springs/Research%2C%20Memos%20%26%20Notes/%28Claude%20Draft%29%20Counter-Campaign%20Analysis%20Memo%20v1.docx",
+          "descriptor": "Strategic/ethical/logistical analysis of in-person plaintiff handout campaign at Sutton facilities. Recommendation: don't launch, don't promise in writing. Court-supervised Parris + Belaire-West + UCL gets same outcome at fraction of risk.",
+          "created": "2026-04-28T19:58:56.817060Z",
+          "status": "pending-review"
         }
       ]
     },
@@ -447,5 +454,5 @@
       ]
     }
   },
-  "last_updated": "2026-04-28T19:55:18.933322Z"
+  "last_updated": "2026-04-28T19:58:56.817073Z"
 }

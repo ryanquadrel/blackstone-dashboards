@@ -328,9 +328,16 @@
           "descriptor": "Ngo-Bonnici mediation 5/7/26 - full brief with damages, Default profile, .5M total exposure",
           "created": "2026-04-28T02:14:12.837382Z",
           "status": "pending-review"
+        },
+        {
+          "type": "Mediation Brief",
+          "url": "filevine/projects/Redd, Walter - LeFiell Manufacturing Co [12245112]/Settlement & Mediation/(Claude Draft) Macias and Redd v LeFiell Mediation Brief v2.docx",
+          "descriptor": "v2 - rebuilt via mediation_brief_template + bcg_report_extractor; passes validator (year-by-year damages tables, 51 dollar values trace to BCG)",
+          "created": "2026-04-28T02:54:48.750670Z",
+          "status": "pending-review"
         }
       ]
     }
   },
-  "last_updated": "2026-04-28T02:14:12.837395Z"
+  "last_updated": "2026-04-28T02:54:48.750682Z"
 }

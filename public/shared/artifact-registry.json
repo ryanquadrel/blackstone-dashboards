@@ -51,6 +51,13 @@
           "descriptor": "RFP Set One (Class) \u2014 class-cert discovery, joint to both defendants. Draft only; no service yet.",
           "created": "2026-04-28T22:52:30.020611Z",
           "status": "pending-review"
+        },
+        {
+          "type": "SROG Class Set One",
+          "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/Rove%20Engineering/Discovery/Class/Written%20Discovery/%28Claude%20Draft%29%20SROG%20Class%20Set%20One%20-%20Hale%20v%20Rove%20v1.docx",
+          "descriptor": "Special Interrogatories Class Set One \u2014 10 class-cert interrogatories, joint to both defendants.",
+          "created": "2026-04-28T22:52:31.215103Z",
+          "status": "pending-review"
         }
       ]
     },
@@ -524,5 +531,5 @@
       ]
     }
   },
-  "last_updated": "2026-04-28T22:52:30.020624Z"
+  "last_updated": "2026-04-28T22:52:31.215121Z"
 }

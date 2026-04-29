@@ -690,8 +690,10 @@
     </div>
 
     <!-- BOOKED PHASE TABS (Option A: nested tab navigation) -->
+    <!-- Producers updating #b-proposal MUST also update the Pending Proposal tab count below. -->
     <div class="tabs" data-group="booked">
       <button class="tab active" data-tab="b-action">Action Needed (8)</button>
+      <button class="tab" data-tab="b-proposal">Pending Proposal (0)</button>
       <button class="tab" data-tab="b-ontrack">On Track (5)</button>
       <button class="tab" data-tab="b-early">Early Stage (20)</button>
       <button class="tab" data-tab="b-fees">Fee Summary (37)</button>
@@ -843,7 +845,7 @@
     </div>
 
 <div class="section" id="b-proposal">
-      <div class="section-header"><h2>Pending Mediator's Proposal</h2><span class="badge badge-yellow">1 case</span></div>
+      <div class="section-header"><h2>Pending Mediator's Proposal</h2><span class="badge badge-yellow">0 cases</span></div>
       <div class="case-grid" id="proposal-grid">
         <p style="color:var(--text-muted);text-align:center;padding:1.5rem;">No pending proposals.</p>
       </div>
@@ -995,6 +997,23 @@
         document.getElementById(tab.dataset.tab).classList.add('active');
       });
     });
+  });
+
+  // ===== AUTO-SYNC TAB COUNTS FROM SECTION HEADER BADGES =====
+  // Producers update only the .section-header .badge count when content
+  // changes; this loop keeps the matching tab's "(N)" parenthetical in
+  // sync on each page load. Tabs without a parenthetical are left alone
+  // (e.g. "Continuing Negotiation", "Post Settlement", "Settled").
+  document.querySelectorAll('.tabs .tab[data-tab]').forEach(tab => {
+    const sec = document.getElementById(tab.dataset.tab);
+    if (!sec) return;
+    const badge = sec.querySelector(':scope > .section-header .badge');
+    if (!badge) return;
+    const m = badge.textContent.match(/(\d+)/);
+    if (!m) return;
+    if (/\(\d+\)/.test(tab.textContent)) {
+      tab.textContent = tab.textContent.replace(/\(\d+\)/, '(' + m[1] + ')');
+    }
   });
 
   // ===== ATTORNEY FILTER (scoped per phase) =====

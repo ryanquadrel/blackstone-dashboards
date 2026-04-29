@@ -548,9 +548,16 @@
           "descriptor": " mediation 2026-07-05 \u2014 auto-drafted by edgexpert-mediation-orchestrator",
           "created": "2026-04-29T19:52:47.748159Z",
           "status": "pending-review"
+        },
+        {
+          "type": "Mediation Brief Insertion Memo",
+          "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/LeFiell/Settlement%20%26%20Mediation/Drafts/Brief-Insertion-Memo_Shelby_2026-04-28_Armando-Torres.docx",
+          "descriptor": "Torres interview integration \u2014 6 recommended insertions for v11 \u2192 v12 (waiver-mountain mechanism testimony, Saturday \u00a7512(a) supervisor admission)",
+          "created": "2026-04-29T21:23:51.802594Z",
+          "status": "pending-review"
         }
       ]
     }
   },
-  "last_updated": "2026-04-29T19:52:47.748171Z"
+  "last_updated": "2026-04-29T21:23:51.802606Z"
 }

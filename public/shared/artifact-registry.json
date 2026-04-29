@@ -492,6 +492,24 @@
           "served_at": null,
           "filename_contract_ok": false,
           "filename_contract_reason": "does not match (Claude Draft) <Title> v<N>.docx \u2014 see skills/_shared/docs/fvs-save-contract.md Rule 3"
+        },
+        {
+          "type": "MTCA Opposition Roadmap",
+          "version": 1,
+          "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/National%20Notary/%28Claude%20Draft%29%20NNA%20MTCA%20Opposition%20Roadmap%20v1.docx",
+          "descriptor": "Argument hierarchy ranked by strength + evidence map. Lead arguments: class-waiver unconscionability (court-decidable); procedural unconscionability via SROG admissions; authentication challenge dependent on metadata production.",
+          "created": "2026-04-29T22:43:26.086119Z",
+          "status": "pending-review",
+          "owner": "Shelby Miner",
+          "hard_lock": false,
+          "lock_reason": null,
+          "verify_passed_at": null,
+          "release_reviewer": null,
+          "released_at": null,
+          "served_email_id": null,
+          "served_at": null,
+          "filename_contract_ok": false,
+          "filename_contract_reason": "does not match (Claude Draft) <Title> v<N>.docx \u2014 see skills/_shared/docs/fvs-save-contract.md Rule 3"
         }
       ]
     },
@@ -577,5 +595,5 @@
       ]
     }
   },
-  "last_updated": "2026-04-29T22:43:24.798321Z"
+  "last_updated": "2026-04-29T22:43:26.086138Z"
 }

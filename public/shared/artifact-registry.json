@@ -541,9 +541,16 @@
           "descriptor": "Ngo-Bonnici 5/7/26 \u2014 v11: full canonical match (0.71/0.82/0.94 margins, single spacing, all-24pt cover, CONFIDENTIAL underlined, two case-caption blocks, left-align section headings, no header, footer=page#, single-paragraph table body cells with inline bold Estimated Liability)",
           "created": "2026-04-28T22:06:01.288927Z",
           "status": "pending-review"
+        },
+        {
+          "type": "Mediation Brief",
+          "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/LeFiell/Settlement%20%26%20Mediation/Drafts/%28Claude%20Draft%29%20Lefiell%20Manufacturing%20Company%20Mediation%20Brief%20v1.docx",
+          "descriptor": " mediation 2026-07-05 \u2014 auto-drafted by edgexpert-mediation-orchestrator",
+          "created": "2026-04-29T19:52:47.748159Z",
+          "status": "pending-review"
         }
       ]
     }
   },
-  "last_updated": "2026-04-28T22:52:33.996339Z"
+  "last_updated": "2026-04-29T19:52:47.748171Z"
 }

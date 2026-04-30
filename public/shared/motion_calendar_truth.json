@@ -1,0 +1,678 @@
+{
+  "generated_at": "2026-04-30T20:55:59Z",
+  "generator_version": "1.0.0",
+  "tier1_count": 77,
+  "events_total": 63,
+  "cases": {
+    "america-central": {
+      "plaintiff_token": "Santamaria",
+      "events": [
+        {
+          "type": "Status Conf",
+          "date": "2026-04-28",
+          "subject": "(RQ Team) Santamaria v. America Central Corporation, et. al. (Class/PAGA) - L/D to M&C Re Post-Mediation Status Conference [SC 5/28/2026]",
+          "department": "",
+          "outlook_event_id": "AAMkAmericaCentralMC",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "american-future": {
+      "plaintiff_token": "Kreutzer",
+      "events": [
+        {
+          "type": "Status Conf",
+          "date": "2026-05-01",
+          "subject": "(JM/RQ Team) Kreutzer v. American Future Technology Corp. (Class) - L/D to M&C Re Further Status Conference [FSC 6/1/2026]",
+          "department": "",
+          "outlook_event_id": "AAMkKreutzerMC",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "apoyo-financiero": {
+      "plaintiff_token": "Ramirez",
+      "events": [
+        {
+          "type": "CMC",
+          "date": "2026-04-21",
+          "subject": "(SM - RQ Team) Ramirez, et. al. v. Apoyo Financiero, Inc. (Class) - L/D to M&C Re Initial Case Management Conference",
+          "department": "",
+          "outlook_event_id": "AAMkApoyoMC",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "caleres": {
+      "plaintiff_token": "Ramirez",
+      "events": [
+        {
+          "type": "Demurrer hearing",
+          "date": "2026-04-09",
+          "subject": "(SM - RQ Team) Ramirez v. Caleres, Inc. (PAGA) - L/D to File and Serve Opposition to Demurrer",
+          "department": "",
+          "outlook_event_id": "AAMkCaleresOpp",
+          "is_continuance_of": null
+        },
+        {
+          "type": "Demurrer hearing",
+          "date": "2026-04-15",
+          "subject": "(SM - RQ Team) Ramirez v. Caleres, Inc. (PAGA) - L/D to File and Serve Reply in Support of Demurrer",
+          "department": "",
+          "outlook_event_id": "AAMkCaleresReply",
+          "is_continuance_of": null
+        },
+        {
+          "type": "Tentative Ruling Posted",
+          "date": "2026-04-21",
+          "subject": "(SM - RQ Team) Ramirez v. Caleres, Inc. (PAGA) - Tentative Ruling May Be Available after 3 p.m.",
+          "department": "",
+          "outlook_event_id": "AAMkCaleresTent",
+          "is_continuance_of": null
+        },
+        {
+          "type": "Tentative Ruling Posted",
+          "date": "2026-04-22",
+          "subject": "(SM/RQ Team) Ramirez v. Caleres, Inc (PAGA) : Tentative ruling may be available after 3 pm today.",
+          "department": "",
+          "outlook_event_id": "AAMkCaleresTent2",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "autism-learning-partners": {
+      "plaintiff_token": "Rauda",
+      "events": [
+        {
+          "type": "Other",
+          "date": "2026-05-11",
+          "subject": "(JM/RQ Team) Rauda v. Autism Learning (Class) : L/D to F/S CCP 170.6 motion challenging Hon. Kevin C. Lee",
+          "department": "",
+          "outlook_event_id": "AAMkRaudaCcp170",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "benq-america": {
+      "plaintiff_token": "Naquin",
+      "events": [
+        {
+          "type": "MTC hearing",
+          "date": "2026-05-05",
+          "subject": "(SM/RQ Team) Naquin v. Benq America Corp. (Class) : Ps L/D to give notice of MTC further verified supplemental response to SROGS S1, RFP S1",
+          "department": "",
+          "outlook_event_id": "AAMkNaquinMtc",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "cargomatic": {
+      "plaintiff_token": "Duenas",
+      "events": [
+        {
+          "type": "MTC hearing",
+          "date": "2026-04-02",
+          "subject": "(JM - RQ Team) Duenas v. Cargomatic, Inc. (Class) - 2 Week Reminder: Send Meet and Confer Letter. Ps MTC Deadline to Ds Verified Responses to Ps RFP S1 is 4/16",
+          "department": "",
+          "outlook_event_id": "AAMkCargo2W",
+          "is_continuance_of": null
+        },
+        {
+          "type": "MTC hearing",
+          "date": "2026-04-16",
+          "subject": "(JM - RQ Team) Duenas v. Cargomatic, Inc. (Class) - Ps L/D to Provide Notice of MTC to Ds Verified Responses to Ps RFP S1",
+          "department": "",
+          "outlook_event_id": "AAMkCargoMtcNotice",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "ccl-tube": {
+      "plaintiff_token": "Matute",
+      "events": [
+        {
+          "type": "MTCA hearing",
+          "date": "2026-05-01",
+          "subject": "(SM/RQ Team) Matute v. CCL Tube, Inc. (Class) : Ds L/D to F/S MTCA",
+          "department": "",
+          "outlook_event_id": "AAMkCclMtca501",
+          "is_continuance_of": null
+        },
+        {
+          "type": "MTCA hearing",
+          "date": "2026-05-08",
+          "subject": "(SM/RQ Team) Matute v. CCL Tube, Inc. (Class) : Non-Appearance Case Review Re: Filing Motion to Compel Arbitration",
+          "department": "",
+          "outlook_event_id": "AAMkCclNacrMtca",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "childnet-youth": {
+      "plaintiff_token": "Valenzuela",
+      "events": [
+        {
+          "type": "MTC hearing",
+          "date": "2026-05-01",
+          "subject": "(JM - RQ Team) Valenzuela v. Childnet Youth and Family Services, Inc. (Class/PAGA) - Plf's L/D to F/S MTC Further Responses to SROG/RFP (Set One & Two)",
+          "department": "",
+          "outlook_event_id": "AAMkChildnetMtc",
+          "is_continuance_of": null
+        },
+        {
+          "type": "CMC",
+          "date": "2026-05-18",
+          "subject": "(JM/RQ) Valenzuela v. Childnet Youth (PAGA) : L/D to M&C Re Case Management Conference [CMC 6/17/2026]",
+          "department": "",
+          "outlook_event_id": "AAMkChildnetMcCmc",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "ecb": {
+      "plaintiff_token": "Rabadan",
+      "events": [
+        {
+          "type": "Other",
+          "date": "2026-04-16",
+          "subject": "(JM/RQ Team) Rabadan v. ECB Corp. (Class) : L/D to F/S CCP 170.6 motion challenging Hon. William Claster",
+          "department": "",
+          "outlook_event_id": "AAMkRabadanCcp170",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "ecology-control": {
+      "plaintiff_token": "Ruge",
+      "events": [
+        {
+          "type": "Other",
+          "date": "2026-04-01",
+          "subject": "(SM/RQ Team) Ruge v. Ecology Control Industries, Inc. (Class) : D's L/D to F/S Notice of Related Case",
+          "department": "",
+          "outlook_event_id": "AAMkRugeNor",
+          "is_continuance_of": null
+        },
+        {
+          "type": "Other",
+          "date": "2026-04-17",
+          "subject": "(SM/RQ Team) Ruge v. Ecology Control Industries, Inc. (Class) : D's L/D to F/S Answer",
+          "department": "",
+          "outlook_event_id": "AAMkRugeAns",
+          "is_continuance_of": null
+        },
+        {
+          "type": "CMC",
+          "date": "2026-04-13",
+          "subject": "(SM/RQ Team ) Ruge v. Ecology Control Industries, Inc. (PAGA) - L/D to Meet and Confer re CMC 5/13/26",
+          "department": "",
+          "outlook_event_id": "AAMkRugeCmcMc",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "evergreen-alliance": {
+      "plaintiff_token": "Conant",
+      "events": [
+        {
+          "type": "MTCA hearing",
+          "date": "2026-04-02",
+          "subject": "(JM/RQ Team) Conant v. Evergreen Alliance Golf (Class - Federal) : Ps Deadline - Opposition to MTCA",
+          "department": "",
+          "outlook_event_id": "AAMkConantMtcaOpp",
+          "is_continuance_of": null
+        },
+        {
+          "type": "Other",
+          "date": "2026-04-06",
+          "subject": "(JM/RQ Team) Conant v. Evergreen Alliance Golf Limited, L.P., et. al. (PAGA - Federal) - L/D to File Motion to Remand Case",
+          "department": "",
+          "outlook_event_id": "AAMkConantRemand",
+          "is_continuance_of": null
+        },
+        {
+          "type": "MTCA hearing",
+          "date": "2026-04-09",
+          "subject": "(JM/RQ Team) Conant v. Evergreen Alliance Golf (Class - Federal) :  Ds Deadline - Reply to OPP re MTCA",
+          "department": "",
+          "outlook_event_id": "AAMkConantMtcaReply",
+          "is_continuance_of": null
+        },
+        {
+          "type": "CMC",
+          "date": "2026-04-10",
+          "subject": "(JM-RQ Team) Conant v. Evergreen Alliance Golf Limited L.P., et al. (PAGA) - L/D to M&C Re Initial Case Management Conference [CMC 5/12/2026]",
+          "department": "",
+          "outlook_event_id": "AAMkConantCmcMc",
+          "is_continuance_of": null
+        },
+        {
+          "type": "Other",
+          "date": "2026-04-20",
+          "subject": "(JM/RQ Team) Conant v. Evergreen Alliance Golf (PAGA - Federal) : D's Deadline - Opposition to P's Motion to Remand",
+          "department": "",
+          "outlook_event_id": "AAMkConantRemOppD",
+          "is_continuance_of": null
+        },
+        {
+          "type": "CMC",
+          "date": "2026-04-27",
+          "subject": "(JM-RQ Team) Conant v. Evergreen Alliance Golf Limited L.P., et al. (PAGA) - L/D to F/S Case Management Statement (CM-110) [CMC 5/12/2026]",
+          "department": "",
+          "outlook_event_id": "AAMkConantCmcStmt",
+          "is_continuance_of": null
+        },
+        {
+          "type": "Other",
+          "date": "2026-04-27",
+          "subject": "(JM/RQ Team) Conant v. Evergreen Alliance Golf (PAGA - Federal) : P's Deadline - Reply to Opposition to P's Motion to Remand",
+          "department": "",
+          "outlook_event_id": "AAMkConantRemReply",
+          "is_continuance_of": null
+        },
+        {
+          "type": "MTCA hearing",
+          "date": "2026-05-18",
+          "subject": "(JM/RQ Team) Conant v. Evergreen Alliance Golf (Class - Federal) : L/D to file joint stipulation requesting that court convert MTCA to Zoom",
+          "department": "",
+          "outlook_event_id": "AAMkConantMtcaZoom",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "general-coatings": {
+      "plaintiff_token": "Lopez",
+      "events": [
+        {
+          "type": "CMC",
+          "date": "2026-04-29",
+          "subject": "(RQ Team) Lopez v. General Coatings Corporation (Class) - L/D to M&C Re Initial Case Management Conference [CMC 5/29/2026]",
+          "department": "",
+          "outlook_event_id": "AAMkGenCoatCmcMc",
+          "is_continuance_of": null
+        },
+        {
+          "type": "CMC",
+          "date": "2026-05-14",
+          "subject": "(RQ Team) Lopez v. General Coatings Corporation (Class) - L/D to F/S Case Management Statement (CM-110) [CMC 5/29/2026]",
+          "department": "",
+          "outlook_event_id": "AAMkGenCoatCmcStmt",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "hamcor": {
+      "plaintiff_token": "Touch",
+      "events": [
+        {
+          "type": "Other",
+          "date": "2026-05-11",
+          "subject": "(RQ Team) Touch v. Hamcor Inc. dba Dublin Toyota (Class) - L/D to F/S Motion for Class Certification [NACR 5/12/2026]",
+          "department": "",
+          "outlook_event_id": "AAMkHamcorMcc",
+          "is_continuance_of": null
+        },
+        {
+          "type": "CMC",
+          "date": "2026-05-11",
+          "subject": "(SM - RQ Team) Touch v. Hamcor Inc. dba Dublin Toyota (Class) - L/D to Meet and Confer re 06/10/2026 CMC",
+          "department": "",
+          "outlook_event_id": "AAMkHamcorCmcMc",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "hikvision-usa": {
+      "plaintiff_token": "Fernald",
+      "events": [
+        {
+          "type": "MTC hearing",
+          "date": "2026-04-27",
+          "subject": "(SM/RQ Team) Fernald v. Hikvision USA Inc (Class) : 1 Month Reminder: Ps L/D to give notice of MTC further response to Ds Objection Only Responses (SROGS S1, RFP S1)",
+          "department": "",
+          "outlook_event_id": "AAMkHikvisionMtc",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "hobie-cat": {
+      "plaintiff_token": "Gonzalez",
+      "events": [
+        {
+          "type": "CMC",
+          "date": "2026-04-30",
+          "subject": "(JM - RQ Team) Gonzalez v. Hobie Cat Company II, LLC - L/D to File and Serve Case Management Statement (CM-110) [CMC 05/15/2026]",
+          "department": "",
+          "outlook_event_id": "AAMkHobieCmcStmt",
+          "is_continuance_of": null
+        },
+        {
+          "type": "CMC",
+          "date": "2026-05-15",
+          "subject": "(JM - RQ Team) Gonzalez v. Hobie Cat Company II, LLC - Day of Case Management Conference",
+          "department": "",
+          "outlook_event_id": "AAMkHobieCmcDay",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "hyatt": {
+      "plaintiff_token": "Seybold",
+      "events": [
+        {
+          "type": "Other",
+          "date": "2026-04-10",
+          "subject": "(JM/RQ Team) Seybold v. Hyatt Corporation dba Carmel Valley Ranch (Federal) - L/D to File Motion to Remand Case",
+          "department": "",
+          "outlook_event_id": "AAMkHyattRemand",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "isu-petasys": {
+      "plaintiff_token": "Garfias",
+      "events": [
+        {
+          "type": "MTC hearing",
+          "date": "2026-05-05",
+          "subject": "(SM/RQ Team) Garfias v. ISU Petasys Corp. (Class) : 1 Month Reminder: Ps L/D to Provide Notice of MTC Further Response to Ds Verified Responses to Ps RFP S1, SROGS S1",
+          "department": "",
+          "outlook_event_id": "AAMkIsuPetasysMtc",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "keenan-farms": {
+      "plaintiff_token": "Cervantez",
+      "events": [
+        {
+          "type": "CMC",
+          "date": "2026-04-08",
+          "subject": "(JM - RQ Team) Cervantez v. Keenan Farms, Inc. (Class) - Day of Case Management Conference",
+          "department": "",
+          "outlook_event_id": "AAMkKeenanCmcDay",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "kinecta-federal": {
+      "plaintiff_token": "Anguiano",
+      "events": [
+        {
+          "type": "CMC",
+          "date": "2026-04-14",
+          "subject": "(SM - RQ Team) Anguiano v. Kinecta Federal Credit Union (Class) - Day of Case Management Conference",
+          "department": "",
+          "outlook_event_id": "AAMkKinectaCmc",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "la-solar": {
+      "plaintiff_token": "Steves",
+      "events": [
+        {
+          "type": "CMC",
+          "date": "2026-04-21",
+          "subject": "(JM - RQ/KG) Steves v. LA Solar Group, Inc. (PAGA) - Day of Case Management Conference",
+          "department": "",
+          "outlook_event_id": "AAMkLaSolarCmc",
+          "is_continuance_of": null
+        },
+        {
+          "type": "MTC hearing",
+          "date": "2026-05-04",
+          "subject": "(JM/RQ Team) Steves v. LA Solar Group, Inc. (Class) : 1 Month Reminder: Ps L/D to give notice of MTC to Ds Verified Responses (SROGS S1, RFP S1)",
+          "department": "",
+          "outlook_event_id": "AAMkLaSolarMtc",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "magnolia-springs": {
+      "plaintiff_token": "Agpalza",
+      "events": [
+        {
+          "type": "CMC",
+          "date": "2026-04-13",
+          "subject": "(JM - RQ Team) Agpalza v. Magnolia Springs, Inc., et. al. (Class) - L/D to M&C Re 5/13/26 CMC",
+          "department": "",
+          "outlook_event_id": "AAMkMagnoliaCmcMc",
+          "is_continuance_of": null
+        },
+        {
+          "type": "MTC hearing",
+          "date": "2026-04-28",
+          "subject": "(JM - RQ Team) Agpalza v. Magnolia Springs, Inc., et. al. (Class) - 1 Month REMINDER: Plf's L/D to F/S Motion to Compel Further Responses to Defs' SROG/RFP (Set One) by 5/28/2026",
+          "department": "",
+          "outlook_event_id": "AAMkMagnoliaMtc",
+          "is_continuance_of": null
+        },
+        {
+          "type": "CMC",
+          "date": "2026-04-28",
+          "subject": "(JM - RQ Team) Agpalza v. Magnolia Springs, Inc., et. al. (Class) - L/D to File and Serve Case Management Statement (CM-110) [CMC 5/13/26]",
+          "department": "",
+          "outlook_event_id": "AAMkMagnoliaCmcStmt",
+          "is_continuance_of": null
+        },
+        {
+          "type": "CMC",
+          "date": "2026-05-01",
+          "subject": "(RQ Team) Agpalza v. Magnolia Springs, Inc., et. al. (PAGA) - L/D to M&C Re Initial Case Management Conference [CMC 6/2/2026]",
+          "department": "",
+          "outlook_event_id": "AAMkMagnoliaPagaCmc",
+          "is_continuance_of": null
+        },
+        {
+          "type": "CMC",
+          "date": "2026-05-13",
+          "subject": "(JM - RQ Team) Agpalza v. Magnolia Springs, Inc., et. al. (Class) - Day of Case Management Conference",
+          "department": "",
+          "outlook_event_id": "AAMkMagnoliaCmcDay",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "martis-camp": {
+      "plaintiff_token": "Nithya",
+      "events": [
+        {
+          "type": "MTC hearing",
+          "date": "2026-04-24",
+          "subject": "(SM - RQ Team) Nithya v. Martis Camp Club, et. al. (Class) - MTC to D's Pending Supplemental Responses (Resp Due 3/21/26)",
+          "department": "",
+          "outlook_event_id": "AAMkMartisMtc",
+          "is_continuance_of": null
+        },
+        {
+          "type": "MTC hearing",
+          "date": "2026-04-24",
+          "subject": "(SM/RQ Team) Nithya v. Martis Camp (Class) : Ps L/D day to give notice of MTC further response to unverified 3rd Supl. RFPs and 2nd Supl. SROGS (Set One)",
+          "department": "",
+          "outlook_event_id": "AAMkMartisMtc2",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "maurices": {
+      "plaintiff_token": "Baeta",
+      "events": [
+        {
+          "type": "Other",
+          "date": "2026-04-24",
+          "subject": "(JM/RQ Team) Baeta v. Maurices Inc (Class) : L/D to F/S CCP 170.6 motion challenging Hon. Ann Moorman",
+          "department": "",
+          "outlook_event_id": "AAMkMauricesCcp170",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "merical": {
+      "plaintiff_token": "Murillo",
+      "events": [
+        {
+          "type": "CMC",
+          "date": "2026-05-04",
+          "subject": "(SM/RQ Team) Murillo v. Merical, LLC (PAGA) : L/D to Meet and Confer re CMC",
+          "department": "",
+          "outlook_event_id": "AAMkMericalCmcMc",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "oleander-holdings": {
+      "plaintiff_token": "Cazares",
+      "events": [
+        {
+          "type": "MTC hearing",
+          "date": "2026-05-11",
+          "subject": "(SM/RQ Team) Cazares v. Oleander Holdings, LLC (Class) : 1 Month Reminder: Ps L/D to give notice of MTC further response to Ds Objection Only Resp to SROGS S2, RFP S1",
+          "department": "",
+          "outlook_event_id": "AAMkOleanderMtc",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "outdoor-dimensions": {
+      "plaintiff_token": "Richards",
+      "events": [
+        {
+          "type": "MTC hearing",
+          "date": "2026-05-12",
+          "subject": "(SM/RQ Team) Richards v. Outdoor Dimensions, LLC (Class Only) : Ps L/D to Provide Notice of Motion to Compel Further to D Verified Response to SROGS S1, RFP S1",
+          "department": "",
+          "outlook_event_id": "AAMkOutdoorMtc",
+          "is_continuance_of": null
+        },
+        {
+          "type": "CMC",
+          "date": "2026-05-18",
+          "subject": "(SM/RQ Team) Richards v. Outdoor Dimensions, LLC (Class Only) : Last court day to meet and confer before initial case management conference.",
+          "department": "",
+          "outlook_event_id": "AAMkOutdoorCmcMc",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "peterson-tractor": {
+      "plaintiff_token": "Saephan",
+      "events": [
+        {
+          "type": "CMC",
+          "date": "2026-05-01",
+          "subject": "(JM - RQ Team) Saephan v. Peterson Tractor Co. (Class) - L/D to M&C Re Initial Case Management Conference [CMC 6/1/2026]",
+          "department": "",
+          "outlook_event_id": "AAMkPetersonCmcMc",
+          "is_continuance_of": null
+        },
+        {
+          "type": "Other",
+          "date": "2026-05-15",
+          "subject": "(JM - RQ Team) Saephan v. Peterson Tractor Co. (Class) - L/D to F/S Case Management Statement CM-110",
+          "department": "",
+          "outlook_event_id": "AAMkPetersonCmcStmt",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "road-one": {
+      "plaintiff_token": "Rodriguez",
+      "events": [
+        {
+          "type": "CMC",
+          "date": "2026-05-06",
+          "subject": "(JM-RQ Team) Rodriguez v. A to Z Enterprises, Inc. (Class) - L/D to M&C Re Initial Case Management Conference [CMC 6/5/2026]",
+          "department": "",
+          "outlook_event_id": "AAMkRoadOneCmc",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "rove-engineering": {
+      "plaintiff_token": "Hale",
+      "events": [
+        {
+          "type": "Other",
+          "date": "2026-04-21",
+          "subject": "(SM/RQ Team) Hale v. Rove Engineering, Inc. (Class) : L/D to F/S CCP 170.6 motion challenging Hon. L. Brooks Anderholt",
+          "department": "",
+          "outlook_event_id": "AAMkRoveCcp170",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "slater": {
+      "plaintiff_token": "Slater",
+      "events": [
+        {
+          "type": "CMC",
+          "date": "2026-04-06",
+          "subject": "(JM - RQ Team) Paz v. Slater, Inc. (Class) - L/D to M&C re [CMC 05/06/2026]",
+          "department": "",
+          "outlook_event_id": "AAMkSlaterCmcMc",
+          "is_continuance_of": null
+        },
+        {
+          "type": "CMC",
+          "date": "2026-04-29",
+          "subject": "(JM - RQ Team) Paz v. Slater, Inc. (Class) - L/D to File and Serve JOINT Case Management Statement [CMC 05/06/2026]",
+          "department": "",
+          "outlook_event_id": "AAMkSlaterCmcStmt",
+          "is_continuance_of": null
+        },
+        {
+          "type": "CMC",
+          "date": "2026-05-06",
+          "subject": "(JM - RQ Team) Paz v. Slater, Inc. (Class) - Day of Case Management Conference",
+          "department": "",
+          "outlook_event_id": "AAMkSlaterCmcDay",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "truitt-oilfield": {
+      "plaintiff_token": "Carias-Paredes",
+      "events": [
+        {
+          "type": "MTC hearing",
+          "date": "2026-04-09",
+          "subject": "(JM - RQ/KG) Carias-Paredes v. Truitt Oilfield Maintenance Corporation (Class) - Plfs L/D to F/S Motion to Compel Further Responses to Verified Suppl. SROG, RFP (Set One)",
+          "department": "",
+          "outlook_event_id": "AAMkTruittMtc",
+          "is_continuance_of": null
+        },
+        {
+          "type": "MTC hearing",
+          "date": "2026-05-14",
+          "subject": "(JM/RQ Team) Carias-Paredes v. Truitt Oilfield (Class) : Ps L/D to give notice of MTC further response to Verified 2nd Supl. SROGS S1, RFP S1",
+          "department": "",
+          "outlook_event_id": "AAMkTruittMtc2",
+          "is_continuance_of": null
+        }
+      ]
+    },
+    "weatherford-motors": {
+      "plaintiff_token": "Edmiston",
+      "events": [
+        {
+          "type": "MTCA hearing",
+          "date": "2026-04-09",
+          "subject": "(SM - RQ Team) Edmiston v. Weatherford Motors, Inc. (Class) - Ps L/D to File and Serve Opposition or Response to Motion to Compel Arbitration",
+          "department": "",
+          "outlook_event_id": "AAMkEdmistonMtcaOpp",
+          "is_continuance_of": null
+        },
+        {
+          "type": "MTCA hearing",
+          "date": "2026-04-15",
+          "subject": "(SM - RQ Team) Edmiston v. Weatherford Motors, Inc. (Class) - Ds L/D to File and Serve Reply in Support of Motion to Compel Arbitration",
+          "department": "",
+          "outlook_event_id": "AAMkEdmistonMtcaReply",
+          "is_continuance_of": null
+        }
+      ]
+    }
+  },
+  "unmapped_events": []
+}

@@ -616,9 +616,16 @@
           "descriptor": "Request for Judicial Notice of PAGA Complaint 26STCV05343 (Evid. Code \u00a7452(d))",
           "created": "2026-04-30T18:46:54.712539Z",
           "status": "pending-review"
+        },
+        {
+          "type": "MTCA Opposition - Evid Obj",
+          "url": "https://theblackstonefirmcom-my.sharepoint.com/personal/rquadrel_blackstonepc_com/Documents/Active%20Cases/CCL%20Tube/Settlement%20%26%20Mediation/Drafts/%28Claude%20Draft%29%20Evidentiary%20Objections%20v1.docx",
+          "descriptor": "Evidentiary Objections to Salinas, Alvarez, Gonzalez, Campbell decls \u2014 7 objections",
+          "created": "2026-04-30T18:46:56.096151Z",
+          "status": "pending-review"
         }
       ]
     }
   },
-  "last_updated": "2026-04-30T18:46:54.712567Z"
+  "last_updated": "2026-04-30T18:46:56.096176Z"
 }

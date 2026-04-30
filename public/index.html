@@ -105,6 +105,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 .bar-fill.g6{background:linear-gradient(90deg,#eab308,#facc15)}
 .bar-fill.g7{background:linear-gradient(90deg,#ec4899,#f472b6)}
 .bar-fill.g8{background:linear-gradient(90deg,#6366f1,#818cf8)}
+    .g12{background:linear-gradient(90deg,#065f46,#a7f3d0);}
     .g11{background:linear-gradient(90deg,#047857,#6ee7b7);}
     .g9{background:linear-gradient(90deg,#059669,#34d399);}
     .g10{background:linear-gradient(90deg,#0d9488,#5eead4);}
@@ -288,7 +289,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
     <div class="live-dot"></div>
     <div class="hdr-meta">
       <strong>RQ &middot; JM &middot; SM &middot; KA</strong><br>
-      <span id="clockDisplay"></span><br><span class="generated-stamp">Generated: <strong>2026-04-29 05:26 PT</strong></span>
+      <span id="clockDisplay"></span><br><span class="generated-stamp">Generated: <strong>2026-04-30 01:49 PT</strong></span>
     </div>
   </div>
 </div>
@@ -307,13 +308,13 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
     <svg class="ring-svg" viewBox="0 0 100 100">
       <circle class="ring-bg" cx="50" cy="50" r="42"/>
       <circle class="ring-fill" cx="50" cy="50" r="42" stroke="var(--green)" stroke-dasharray="264" stroke-dashoffset="264" transform="rotate(-90 50 50)" id="ring1"/>
-      <text x="50" y="46" fill="var(--green)" font-size="11" font-weight="800" text-anchor="middle">$13.2M</text>
+      <text x="50" y="46" fill="var(--green)" font-size="11" font-weight="800" text-anchor="middle">$14.4M</text>
       <text x="50" y="60" fill="var(--muted)" font-size="7" text-anchor="middle" font-weight="600">RECOVERED</text>
     </svg>
     <div class="ring-info">
       <div class="ri-val glow-green" id="recoveryCounter">$0</div>
       <div class="ri-label">Total Recovery</div>
-      <div class="ri-sub">11 settled &middot; avg $1.2M</div>
+      <div class="ri-sub">12 settled &middot; avg $1.2M</div>
     </div>
     <div class="arrow">&rarr;</div>
   </a>
@@ -335,13 +336,13 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
     <svg class="ring-svg" viewBox="0 0 100 100">
       <circle class="ring-bg" cx="50" cy="50" r="42"/>
       <circle class="ring-fill" cx="50" cy="50" r="42" stroke="var(--red)" stroke-dasharray="264" stroke-dashoffset="264" transform="rotate(-90 50 50)" id="ring-cc"/>
-      <text x="50" y="46" fill="var(--red)" font-size="16" font-weight="800" text-anchor="middle" id="ring-cc-num">16</text>
+      <text x="50" y="46" fill="var(--red)" font-size="16" font-weight="800" text-anchor="middle" id="ring-cc-num">17</text>
       <text x="50" y="60" fill="var(--muted)" font-size="7" text-anchor="middle" font-weight="600">URGENT</text>
     </svg>
     <div class="ring-info">
-      <div class="ri-val" style="color:var(--red);text-shadow:0 0 20px rgba(239,68,68,.3)" id="ring-cc-headline">16 Cases</div>
+      <div class="ri-val" style="color:var(--red);text-shadow:0 0 20px rgba(239,68,68,.3)" id="ring-cc-headline">17 Cases</div>
       <div class="ri-label">Command Center</div>
-      <div class="ri-sub" id="ring-cc-sub">16 need action &middot; 15 stale &middot; 82 active</div>
+      <div class="ri-sub" id="ring-cc-sub">17 need action &middot; 9 stale &middot; 80 active</div>
     </div>
     <div class="arrow">&rarr;</div>
   </a>
@@ -380,7 +381,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
   <!-- LEFT: SETTLEMENT BAR CHART -->
   <div class="chart-panel">
     <h2><span class="icon">&#128176;</span> Settlement Scoreboard</h2>
-    <div class="ch-sub">$13,189,974 total recovered since June 2025</div>
+    <div class="ch-sub">$14,389,974 total recovered since June 2025</div>
     <div class="bar-chart" id="barChart">
       <div class="bar-row"><div class="bar-label">Guardant Health</div><div class="bar-track"><div class="bar-fill g1" style="width:0" data-w="100%">$2.65M</div></div><div class="bar-amount">$2,650,000</div></div>
       <div class="bar-row"><div class="bar-label">Liberty Utilities</div><div class="bar-track"><div class="bar-fill g2" style="width:0" data-w="68%">$1.8M</div></div><div class="bar-amount">$1,800,000</div></div>
@@ -388,11 +389,12 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
       <div class="bar-row"><div class="bar-label">Rapid Manufacturin.</div><div class="bar-track"><div class="bar-fill g4" style="width:0" data-w="51%">$1.34M</div></div><div class="bar-amount">$1,342,524</div></div>
       <div class="bar-row"><div class="bar-label">Control Air Enterp.</div><div class="bar-track"><div class="bar-fill g5" style="width:0" data-w="50%">$1.31M</div></div><div class="bar-amount">$1,312,450</div></div>
       <div class="bar-row"><div class="bar-label">Sherwood Mechanical</div><div class="bar-track"><div class="bar-fill g6" style="width:0" data-w="49%">$1.29M</div></div><div class="bar-amount">$1,295,000</div></div>
-      <div class="bar-row"><div class="bar-label">Golden Rain Founda.</div><div class="bar-track"><div class="bar-fill g7" style="width:0" data-w="36%">$950K</div></div><div class="bar-amount">$950,000</div></div>
-      <div class="bar-row"><div class="bar-label">San Diego Family C.</div><div class="bar-track"><div class="bar-fill g8" style="width:0" data-w="31%">$830K</div></div><div class="bar-amount">$830,000</div></div>
-      <div class="bar-row"><div class="bar-label">Maruichi American</div><div class="bar-track"><div class="bar-fill g9" style="width:0" data-w="20%">$525K</div></div><div class="bar-amount">$525,000</div></div>
-      <div class="bar-row"><div class="bar-label">Lulu&rsquo;s / Tow.</div><div class="bar-track"><div class="bar-fill g10" style="width:0" data-w="19%">$500K</div></div><div class="bar-amount">$500,000</div></div>
-      <div class="bar-row"><div class="bar-label">Funlab USA</div><div class="bar-track"><div class="bar-fill g11" style="width:0" data-w="11%">$295K</div></div><div class="bar-amount">$295,000</div></div>
+      <div class="bar-row"><div class="bar-label">Veridiam</div><div class="bar-track"><div class="bar-fill g7" style="width:0" data-w="45%">$1.2M</div></div><div class="bar-amount">$1,200,000</div></div>
+      <div class="bar-row"><div class="bar-label">Golden Rain Founda.</div><div class="bar-track"><div class="bar-fill g8" style="width:0" data-w="36%">$950K</div></div><div class="bar-amount">$950,000</div></div>
+      <div class="bar-row"><div class="bar-label">San Diego Family C.</div><div class="bar-track"><div class="bar-fill g9" style="width:0" data-w="31%">$830K</div></div><div class="bar-amount">$830,000</div></div>
+      <div class="bar-row"><div class="bar-label">Maruichi American</div><div class="bar-track"><div class="bar-fill g10" style="width:0" data-w="20%">$525K</div></div><div class="bar-amount">$525,000</div></div>
+      <div class="bar-row"><div class="bar-label">Lulu&rsquo;s / Tow.</div><div class="bar-track"><div class="bar-fill g11" style="width:0" data-w="19%">$500K</div></div><div class="bar-amount">$500,000</div></div>
+      <div class="bar-row"><div class="bar-label">Funlab USA</div><div class="bar-track"><div class="bar-fill g12" style="width:0" data-w="11%">$295K</div></div><div class="bar-amount">$295,000</div></div>
     </div>
   </div>
 
@@ -421,10 +423,6 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
     <div class="tl-panel">
       <h2><span class="icon">&#9889;</span> 14-Day Action Timeline</h2>
                   <div class="tl-items">
-        <div class="tl-item s-disco" onclick="window.location='/cmc-deadline-monitor/'">
-          <div class="tl-date">APR 29</div>
-          <div class="tl-body"><div class="tl-case">Edmiston v. Weatherford Motors, Inc. (Class) -  L/D to Email Request or Agreement to Appear Remotely at In-Person Proceeding to Assigned Department</div><div class="tl-event">CMC hearing · 1:30 PM · SM · <span style="color:#ef4444;font-weight:700">DUE</span></div><span class="tl-badge b-disco">CMC</span></div>
-        </div>
         <div class="tl-item s-motion" onclick="window.location='/motion-dashboard'">
           <div class="tl-date">APR 30</div>
           <div class="tl-body"><div class="tl-case">Rosado v. Ridgecrest</div><div class="tl-event">MTCA deadline (RQ)</div><span class="tl-badge b-motion">MOTION</span></div>
@@ -433,17 +431,9 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
           <div class="tl-date">MAY 4</div>
           <div class="tl-body"><div class="tl-case">Ramirez v. Apoyo Financiero, Inc. (Class) -  L/D to M&C Re Initial Case Management Conference</div><div class="tl-event">SC hearing · 11:00 AM · — · <span style="color:#6b7280;font-weight:700">CHECK</span></div><span class="tl-badge b-disco">SC</span></div>
         </div>
-        <div class="tl-item s-motion" onclick="window.location='/motion-dashboard'">
-          <div class="tl-date">MAY 4</div>
-          <div class="tl-body"><div class="tl-case">Conant v. Evergreen (Class)</div><div class="tl-event">MTCA deadline (JM)</div><span class="tl-badge b-motion">MOTION</span></div>
-        </div>
         <div class="tl-item s-disco" onclick="window.location='/cmc-deadline-monitor/'">
           <div class="tl-date">MAY 7</div>
           <div class="tl-body"><div class="tl-case">Rosado v. Ridgecrest Regional Hospital</div><div class="tl-event">CMC hearing · 08:30 · SM · <span style="color:#6b7280;font-weight:700">CHECK</span></div><span class="tl-badge b-disco">CMC</span></div>
-        </div>
-        <div class="tl-item s-motion" onclick="window.location='/motion-dashboard'">
-          <div class="tl-date">MAY 7</div>
-          <div class="tl-body"><div class="tl-case">Conant v. Evergreen (Class)</div><div class="tl-event">3:25-cv-10265-VC (JM)</div><span class="tl-badge b-motion">MOTION</span></div>
         </div>
         <div class="tl-item s-motion" onclick="window.location='/motion-dashboard'">
           <div class="tl-date">MAY 7</div>
@@ -469,6 +459,10 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
           <div class="tl-date">MAY 13</div>
           <div class="tl-body"><div class="tl-case">Ruge v. Ecology Control Industries, Inc.</div><div class="tl-event">CMC hearing · 8:30 AM · SM · <span style="color:#6b7280;font-weight:700">CHECK</span></div><span class="tl-badge b-disco">CMC</span></div>
         </div>
+        <div class="tl-item s-motion" onclick="window.location='/motion-dashboard'">
+          <div class="tl-date">MAY 14</div>
+          <div class="tl-body"><div class="tl-case">Truitt / Carias-Paredes</div><div class="tl-event">MTC #1 — Deadline extended 4/21&rarr;5/14 (Viviano confirmed 4/18). Objections waived (CCP 2031.300). M&amp;C 2/27. Privilege logs 3/13. (RQ)</div><span class="tl-badge b-motion">MOTION</span></div>
+        </div>
 </div>
 </div>
 
@@ -481,53 +475,42 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
   <div class="cmc-body">
     <!-- CRITICAL FILINGS -->
     <div class="cmc-critical">
-    <div class="cmc-card" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'">
-  <div class="cmc-countdown cd-red"><div class="cd-num">0</div><div class="cd-unit">days</div></div>
-  <div class="cmc-meta">
-    <div class="cm-case">Edmiston v. Weatherford Motors, Inc. (Class) -  L/D to Email Request or Agreement to Appear Remotely at In-Person Proceeding to Assigned Department</div>
-    <div class="cm-detail">CMC hearing &middot; 1:30 PM &middot; <span style="color:#ef4444;font-weight:700">DUE</span></div>
-    <span class="cm-atty">SM</span>
-  </div>
-</div>
-    <div class="cmc-card" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'">
-  <div class="cmc-countdown cd-red"><div class="cd-num">0</div><div class="cd-unit">days</div></div>
-  <div class="cmc-meta">
-    <div class="cm-case">Soto v. Control Air Enterprises, LLC (Class) -  L/D to F/S Joint Status Conference Statement</div>
-    <div class="cm-detail">SC hearing &middot; 8:30 AM &middot; <span style="color:#ef4444;font-weight:700">DUE</span></div>
-    <span class="cm-atty">SM</span>
-  </div>
-</div>
+      <div class="cmc-card"><div class="cmc-meta"><div class="cm-detail">No critical hearings (next 3 days)</div></div></div>
     </div>
     <!-- UPCOMING -->
     <div class="cmc-upcoming">
-    <div class="cmc-up-item" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'">
-  <div class="cmc-up-days d-orange">5d</div>
-  <div class="cmc-up-info"><div class="ui-case">Ramirez v. Apoyo Financiero, Inc. (Class) -  L/D to M&C Re Initial Case Management Conference</div><div class="ui-date">05-04 SC &middot; — &middot; <span style="color:#6b7280;font-weight:700">CHECK</span></div></div>
-</div>
-    <div class="cmc-up-item" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'">
-  <div class="cmc-up-days d-yellow">8d</div>
-  <div class="cmc-up-info"><div class="ui-case">Rosado v. Ridgecrest Regional Hospital</div><div class="ui-date">05-07 CMC &middot; SM &middot; <span style="color:#6b7280;font-weight:700">CHECK</span></div></div>
-</div>
-    <div class="cmc-up-item" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'">
-  <div class="cmc-up-days d-muted">13d</div>
-  <div class="cmc-up-info"><div class="ui-case">Conant v. Evergreen Alliance Golf Limited L.P. (PAGA) -  L/D to F/S Case Management Statement</div><div class="ui-date">05-12 CMC &middot; JM &middot; <span style="color:#6b7280;font-weight:700">CHECK</span></div></div>
-</div>
-    <div class="cmc-up-item" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'">
-  <div class="cmc-up-days d-muted">14d</div>
-  <div class="cmc-up-info"><div class="ui-case">Agpalza v. Magnolia Springs, Inc. (PAGA) -  L/D to M&C Re Initial Case Management Conference</div><div class="ui-date">05-13 CMC &middot; JM &middot; <span style="color:#6b7280;font-weight:700">CHECK</span></div></div>
-</div>
-    <div class="cmc-up-item" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'">
-  <div class="cmc-up-days d-muted">14d</div>
-  <div class="cmc-up-info"><div class="ui-case">Ruge v. Ecology Control Industries, Inc.</div><div class="ui-date">05-13 CMC &middot; SM &middot; <span style="color:#6b7280;font-weight:700">CHECK</span></div></div>
-</div>
+      <div class="cmc-up-item" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'">
+        <div class="cmc-up-days d-orange">4d</div>
+        <div class="cmc-up-info"><div class="ui-case">Ramirez v. Apoyo Financiero, Inc. (Class) -  L/D to M&C Re Initial Case Management Conference</div><div class="ui-date">05-04 SC &middot; — &middot; <span style="color:#6b7280;font-weight:700">CHECK</span></div></div>
+      </div>
+      <div class="cmc-up-item" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'">
+        <div class="cmc-up-days d-orange">7d</div>
+        <div class="cmc-up-info"><div class="ui-case">Rosado v. Ridgecrest Regional Hospital</div><div class="ui-date">05-07 CMC &middot; SM &middot; <span style="color:#6b7280;font-weight:700">CHECK</span></div></div>
+      </div>
+      <div class="cmc-up-item" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'">
+        <div class="cmc-up-days d-muted">12d</div>
+        <div class="cmc-up-info"><div class="ui-case">Conant v. Evergreen Alliance Golf Limited L.P. (PAGA) -  L/D to F/S Case Management Statement</div><div class="ui-date">05-12 CMC &middot; JM &middot; <span style="color:#6b7280;font-weight:700">CHECK</span></div></div>
+      </div>
+      <div class="cmc-up-item" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'">
+        <div class="cmc-up-days d-muted">13d</div>
+        <div class="cmc-up-info"><div class="ui-case">Agpalza v. Magnolia Springs, Inc. (PAGA) -  L/D to M&C Re Initial Case Management Conference</div><div class="ui-date">05-13 CMC &middot; JM &middot; <span style="color:#6b7280;font-weight:700">CHECK</span></div></div>
+      </div>
+      <div class="cmc-up-item" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'">
+        <div class="cmc-up-days d-muted">13d</div>
+        <div class="cmc-up-info"><div class="ui-case">Ruge v. Ecology Control Industries, Inc.</div><div class="ui-date">05-13 CMC &middot; SM &middot; <span style="color:#6b7280;font-weight:700">CHECK</span></div></div>
+      </div>
+      <div class="cmc-up-item" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'">
+        <div class="cmc-up-days d-muted">14d</div>
+        <div class="cmc-up-info"><div class="ui-case">Bassell v. Golden Rain Foundation (Class/PAGA) -  L/D to F/S Status Conference Statement</div><div class="ui-date">05-14 SC &middot; RQ &middot; <span style="color:#6b7280;font-weight:700">CHECK</span></div></div>
+      </div>
     </div>
     <!-- STATS -->
     <div class="cmc-stats">
-      <div class="cmc-stat-box"><div class="sb-num" style="color:var(--yellow);text-shadow:0 0 16px rgba(234,179,8,.3)">7</div><div class="sb-label">CMC/ISC Filings (14d)</div></div>
-      <div class="cmc-stat-box"><div class="sb-num glow-red">2</div><div class="sb-label">Critical (&lt;7 days)</div></div>
+      <div class="cmc-stat-box"><div class="sb-num" style="color:var(--yellow);text-shadow:0 0 16px rgba(234,179,8,.3)">6</div><div class="sb-label">CMC/ISC Filings (14d)</div></div>
+      <div class="cmc-stat-box"><div class="sb-num glow-red">0</div><div class="sb-label">Critical (&lt;7 days)</div></div>
       <div class="cmc-workload">
         <div class="cmc-wl-bar"><span style="color:var(--blue)">2</span><div class="wl-name">JM</div></div>
-        <div class="cmc-wl-bar"><span style="color:var(--purple)">4</span><div class="wl-name">SM</div></div>
+        <div class="cmc-wl-bar"><span style="color:var(--purple)">2</span><div class="wl-name">SM</div></div>
       </div>
     </div>
   </div>
@@ -542,9 +525,9 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
       <a href="/mediation-pipeline" class="snap-card"><div class="snap-num glow-green">46</div><div class="snap-label">Pipeline Cases</div></a>
       <a href="/motion-dashboard" class="snap-card"><div class="snap-num glow-orange">57</div><div class="snap-label">Active Motions</div></a>
       <a href="/discovery-tracker" class="snap-card"><div class="snap-num glow-blue">33</div><div class="snap-label">Pre-Discovery</div></a>
-      <a href="/cmc-deadline-monitor/" class="snap-card"><div class="snap-num" style="color:var(--yellow);text-shadow:0 0 20px rgba(234,179,8,.3)">7</div><div class="snap-label">CMC Filings (14d)</div></a>
+      <a href="/cmc-deadline-monitor/" class="snap-card"><div class="snap-num" style="color:var(--yellow);text-shadow:0 0 20px rgba(234,179,8,.3)">6</div><div class="snap-label">CMC Filings (14d)</div></a>
       <a href="/motion-dashboard" class="snap-card"><div class="snap-num glow-red">35</div><div class="snap-label">Arb Track</div></a>
-      <a href="/command-center" class="snap-card"><div class="snap-num" id="cmdcenter-attention" style="color:var(--red);text-shadow:0 0 20px rgba(239,68,68,.3)">16</div><div class="snap-label">Needs Action</div></a>
+      <a href="/command-center" class="snap-card"><div class="snap-num" id="cmdcenter-attention" style="color:var(--red);text-shadow:0 0 20px rgba(239,68,68,.3)">17</div><div class="snap-label">Needs Action</div></a>
     </div>
   </div>
   <div class="nav-panel">
@@ -552,7 +535,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
     <a href="/mediation-pipeline" class="nav-tile"><span class="nav-icon">&#128176;</span><div class="nav-text"><div class="nt-title">Mediation Pipeline</div><div class="nt-desc">Pipeline &rarr; Booked &rarr; Resolved &mdash; settlement tracking &amp; recovery</div></div></a>
     <a href="/motion-dashboard" class="nav-tile"><span class="nav-icon">&#9889;</span><div class="nav-text"><div class="nt-title">Motion Dashboard</div><div class="nt-desc">Deadlines, filings, MTCA scorecard &amp; CMC tracker</div></div></a>
     <a href="/discovery-tracker" class="nav-tile"><span class="nav-icon">&#128203;</span><div class="nav-text"><div class="nt-title">Discovery Tracker</div><div class="nt-desc">66 entries &mdash; RFPs, SROGs, deadlines &amp; M&amp;C status</div></div></a>
-    <a href="/cmc-deadline-monitor/" class="nav-tile"><span class="nav-icon">&#128197;</span><div class="nav-text"><div class="nt-title">CMC Deadline Monitor</div><div class="nt-desc">7 upcoming CMC/ISC hearings — next 14 days</div></div></a>
+    <a href="/cmc-deadline-monitor/" class="nav-tile"><span class="nav-icon">&#128197;</span><div class="nav-text"><div class="nt-title">CMC Deadline Monitor</div><div class="nt-desc">6 upcoming CMC/ISC hearings — next 14 days</div></div></a>
     <a href="/mediation-strategy" class="nav-tile"><span class="nav-icon">&#9876;</span><div class="nav-text"><div class="nt-title">Mediation Strategy Archive</div><div class="nt-desc">Past mediation day-of dashboards &mdash; opening numbers, game plans &amp; outcomes</div></div></a>
     <a href="/competing-cases" class="nav-tile"><span class="nav-icon">&#128373;</span><div class="nav-text"><div class="nt-title">Competing Cases Tracker</div><div class="nt-desc">15 active &mdash; 2 firms with multiple cases</div></div></a>
     <a href="/ai-portfolio/" class="nav-tile"><span class="nav-icon">&#129504;</span><div class="nav-text"><div class="nt-title">AI Portfolio Dashboard</div><div class="nt-desc">Committee source of truth &mdash; 52 systems, dependencies &amp; convergence map</div></div></a>
@@ -638,7 +621,7 @@ function animateBars(){
 // ═══ RECOVERY COUNTER ═══
 function animateCounter(){
   var el=document.getElementById('recoveryCounter');
-  var target=13189974;
+  var target=14389974;
   var duration=2500;
   var start=performance.now();
   function tick(now){

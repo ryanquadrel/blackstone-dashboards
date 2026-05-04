@@ -1,0 +1,1402 @@
+{
+  "schema_version": 1,
+  "queried_at": "2026-05-04T10:02:59.861224+00:00",
+  "since": "2026-05-04T00:00:00Z",
+  "count": 37,
+  "rows": [
+    {
+      "id": 573,
+      "run_id": "45ba4e93-6268-4ceb-b017-991503ffde55",
+      "skill_name": "dashboard-health-checkup",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": null,
+      "started_at": "2026-05-04T10:01:21.641785+00:00",
+      "ended_at": "2026-05-04T10:01:28.184349+00:00",
+      "duration_ms": 6542,
+      "status": "error",
+      "exit_code": null,
+      "model_used": "claude-opus-4-7",
+      "input_tokens": 84026,
+      "output_tokens": 6844,
+      "cached_tokens": 501051,
+      "usd_cost": 2.5253,
+      "commit_sha": "20a2976b697232c30ada9e0dd68a6b7bef21dce5",
+      "error_message": "exit_code=1",
+      "metadata": {
+        "warnings": 5,
+        "criticals": 9,
+        "drift_fail": 4,
+        "floor_fail": 4,
+        "dashboards_ok": 7,
+        "dashboards_fail": 0,
+        "consistency_fail": 0
+      }
+    },
+    {
+      "id": 572,
+      "run_id": "a3d18233-078a-4a78-b19e-b0b138c42b1e",
+      "skill_name": "new-case-intake-scan",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": null,
+      "started_at": "2026-05-04T09:52:48.593283+00:00",
+      "ended_at": "2026-05-04T09:59:37.649526+00:00",
+      "duration_ms": 409056,
+      "status": "success",
+      "exit_code": null,
+      "model_used": "claude-opus-4-7",
+      "input_tokens": 115760,
+      "output_tokens": 14058,
+      "cached_tokens": 854989,
+      "usd_cost": 4.0732,
+      "commit_sha": "20a2976b697232c30ada9e0dd68a6b7bef21dce5",
+      "error_message": null,
+      "metadata": {
+        "candidate": "Diego Hernandez v. PSA Risk Management",
+        "case_number": "26STCV12714",
+        "skipped_settled": 0,
+        "intakes_handed_off": 0,
+        "skipped_already_intaked": 2,
+        "skipped_complaint_too_old": 0,
+        "cases_found_needing_intake": 1,
+        "skipped_discovery_propounded": 0
+      }
+    },
+    {
+      "id": 571,
+      "run_id": "6c0cb2c0-1a89-49b5-a29f-d6de2408827c",
+      "skill_name": "mediator-submission-monitor",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": null,
+      "started_at": "2026-05-04T09:48:47.450964+00:00",
+      "ended_at": "2026-05-04T09:50:54.026669+00:00",
+      "duration_ms": 126575,
+      "status": "success",
+      "exit_code": null,
+      "model_used": "claude-opus-4-7",
+      "input_tokens": 163482,
+      "output_tokens": 14305,
+      "cached_tokens": 1377872,
+      "usd_cost": 5.5919,
+      "commit_sha": "20a2976b697232c30ada9e0dd68a6b7bef21dce5",
+      "error_message": null,
+      "metadata": {
+        "unmatched": 0,
+        "dedup_skips": 0,
+        "domain_hits": 0,
+        "correlated_to_drafts": 0,
+        "subject_pattern_hits": 0,
+        "advanced_to_submitted": 0,
+        "mediator_domains_watched": 9
+      }
+    },
+    {
+      "id": 570,
+      "run_id": "be929b64-f995-4312-a1b7-11c612974835",
+      "skill_name": "mediator-ack-monitor",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": null,
+      "started_at": "2026-05-04T09:46:59.634714+00:00",
+      "ended_at": "2026-05-04T09:48:02.82777+00:00",
+      "duration_ms": 63193,
+      "status": "success",
+      "exit_code": null,
+      "model_used": "claude-opus-4-7",
+      "input_tokens": 46356,
+      "output_tokens": 7888,
+      "cached_tokens": 509603,
+      "usd_cost": 2.0513,
+      "commit_sha": "20a2976b697232c30ada9e0dd68a6b7bef21dce5",
+      "error_message": null,
+      "metadata": {
+        "ack_matches": 0,
+        "unverified_replies": 0,
+        "advanced_to_acknowledged": 0,
+        "submitted_drafts_in_window": 0
+      }
+    },
+    {
+      "id": 569,
+      "run_id": "50f5c91a-c7f8-4a98-b233-ace5ab48a391",
+      "skill_name": "brief-handoff-monitor",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": null,
+      "started_at": "2026-05-04T09:40:51.828524+00:00",
+      "ended_at": "2026-05-04T09:45:56.16217+00:00",
+      "duration_ms": 304333,
+      "status": "success",
+      "exit_code": null,
+      "model_used": "claude-opus-4-7",
+      "input_tokens": 88426,
+      "output_tokens": 18205,
+      "cached_tokens": 1495695,
+      "usd_cost": 4.9353,
+      "commit_sha": "20a2976b697232c30ada9e0dd68a6b7bef21dce5",
+      "error_message": null,
+      "metadata": {
+        "advanced": 0,
+        "unmatched": 0,
+        "correlated": 0,
+        "pending_drained": 0,
+        "already_processed": 0,
+        "attorneys_watched": 6,
+        "inbound_docx_emails": 0
+      }
+    },
+    {
+      "id": 568,
+      "run_id": "b55d04ec-e1ea-457d-8e02-f2f1ca6f3daf",
+      "skill_name": "bcg-report-monitor",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": null,
+      "started_at": "2026-05-04T09:38:01.634092+00:00",
+      "ended_at": "2026-05-04T09:39:52.147703+00:00",
+      "duration_ms": 110513,
+      "status": "success",
+      "exit_code": null,
+      "model_used": "claude-opus-4-7",
+      "input_tokens": 132587,
+      "output_tokens": 11132,
+      "cached_tokens": 779024,
+      "usd_cost": 3.9922,
+      "commit_sha": "20a2976b697232c30ada9e0dd68a6b7bef21dce5",
+      "error_message": null,
+      "metadata": {
+        "hits": 0,
+        "cases_scanned": 17,
+        "already_detected": 1,
+        "pending_orchs_inserted": 0
+      }
+    },
+    {
+      "id": 567,
+      "run_id": "e6e05938-d42c-4c61-8851-1a726defbfbb",
+      "skill_name": "pick-off-monitor-scan",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": null,
+      "started_at": "2026-05-04T09:32:05.897792+00:00",
+      "ended_at": "2026-05-04T09:35:33.664017+00:00",
+      "duration_ms": 207766,
+      "status": "success",
+      "exit_code": null,
+      "model_used": "claude-opus-4-7",
+      "input_tokens": 138440,
+      "output_tokens": 21677,
+      "cached_tokens": 2312933,
+      "usd_cost": 7.1718,
+      "commit_sha": "20a2976b697232c30ada9e0dd68a6b7bef21dce5",
+      "error_message": null,
+      "metadata": {
+        "high": 0,
+        "notes": "discovery_entries empty (cert-skip inactive); pick_off_hits table still missing (PGRST205) so auto-log skipped per SKILL fallback; 1 MONITOR-level continuation hit on Taylor Communications adv. Cotton Pick-Up-Stix campaign already being actively M&C-d by Ryan",
+        "monitor": 1,
+        "critical": 0,
+        "new_hits": 0,
+        "cases_scanned": 0,
+        "prior_open_hits": 0,
+        "skipped_post_cert": 0
+      }
+    },
+    {
+      "id": 566,
+      "run_id": "c87cdcd7-bdf6-4286-b2d3-3ebdcdd13db1",
+      "skill_name": "queue-runner-local",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": "local-202605040929 (continue-local)",
+      "started_at": "2026-05-04T09:29:09.019631+00:00",
+      "ended_at": "2026-05-04T09:29:09+00:00",
+      "duration_ms": 1000,
+      "status": "error",
+      "exit_code": 2,
+      "model_used": "Qwen/Qwen3.5-122B-A10B-FP8",
+      "input_tokens": null,
+      "output_tokens": null,
+      "cached_tokens": null,
+      "usd_cost": null,
+      "commit_sha": null,
+      "error_message": null,
+      "metadata": {}
+    },
+    {
+      "id": 565,
+      "run_id": "cc576353-9950-426e-91a0-5e7311e7aca9",
+      "skill_name": "reply-brief-detector",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": null,
+      "started_at": "2026-05-04T09:28:41.719903+00:00",
+      "ended_at": "2026-05-04T09:30:51.736247+00:00",
+      "duration_ms": 130016,
+      "status": "success",
+      "exit_code": null,
+      "model_used": "claude-opus-4-7",
+      "input_tokens": 189336,
+      "output_tokens": 12246,
+      "cached_tokens": 1802469,
+      "usd_cost": 6.4622,
+      "commit_sha": "20a2976b697232c30ada9e0dd68a6b7bef21dce5",
+      "error_message": null,
+      "metadata": {
+        "notes": "zero defense reply briefs in 72h window; schema gap not exercised",
+        "emergency": 0,
+        "window_hours": 72,
+        "rows_upserted": 0,
+        "sur_reply_only": 0,
+        "ex_parte_queued": 0,
+        "candidates_examined": 270,
+        "candidates_classified": 0
+      }
+    },
+    {
+      "id": 564,
+      "run_id": "af8cf9d2-811f-43b8-af9f-4c7951356666",
+      "skill_name": "client-contact-scanner",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": null,
+      "started_at": "2026-05-04T09:24:56.417402+00:00",
+      "ended_at": "2026-05-04T09:27:29.280562+00:00",
+      "duration_ms": 152863,
+      "status": "success",
+      "exit_code": null,
+      "model_used": "claude-opus-4-7",
+      "input_tokens": 57641,
+      "output_tokens": 13621,
+      "cached_tokens": 609918,
+      "usd_cost": 2.8011,
+      "commit_sha": "20a2976b697232c30ada9e0dd68a6b7bef21dce5",
+      "error_message": null,
+      "metadata": {
+        "warnings": 0,
+        "rows_matched": 16,
+        "rows_inserted": 1,
+        "rows_harvested": 106,
+        "pending_drained": 0,
+        "client_contacts_total": 250,
+        "rows_skipped_duplicate": 15
+      }
+    },
+    {
+      "id": 563,
+      "run_id": "b65f3f7e-53bb-46b8-ab69-7e3f6eedfc25",
+      "skill_name": "cmc-deadline-sweep",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": null,
+      "started_at": "2026-05-04T09:19:06.096306+00:00",
+      "ended_at": "2026-05-04T09:24:11.931055+00:00",
+      "duration_ms": 305834,
+      "status": "success",
+      "exit_code": null,
+      "model_used": "claude-opus-4-7",
+      "input_tokens": 246043,
+      "output_tokens": 25735,
+      "cached_tokens": 3200693,
+      "usd_cost": 10.4218,
+      "commit_sha": "20a2976b697232c30ada9e0dd68a6b7bef21dce5",
+      "error_message": null,
+      "metadata": {
+        "json_path": "/mnt/outputs/cmc_hdata_2026-05-04.json",
+        "hdata_rows": 483,
+        "skipped_same_day": false,
+        "sweep_queries_total": 10,
+        "sweep_queries_completed": 10
+      }
+    },
+    {
+      "id": 562,
+      "run_id": "f6d05b69-f5b3-4986-a608-f4bba29e2416",
+      "skill_name": "cmc-monitor-sync",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": null,
+      "started_at": "2026-05-04T09:16:58.802908+00:00",
+      "ended_at": "2026-05-04T09:17:01.515064+00:00",
+      "duration_ms": 2712,
+      "status": "success",
+      "exit_code": null,
+      "model_used": null,
+      "input_tokens": null,
+      "output_tokens": null,
+      "cached_tokens": null,
+      "usd_cost": null,
+      "commit_sha": "20a2976b697232c30ada9e0dd68a6b7bef21dce5",
+      "error_message": null,
+      "metadata": {
+        "motions": 15,
+        "next_week": 5,
+        "this_week": 2,
+        "weeks_3_4": 5,
+        "hdata_rows": 372,
+        "unfiled_rows": 12,
+        "unfiled_source": "verified_overrides"
+      }
+    },
+    {
+      "id": 561,
+      "run_id": "8e16856b-4cd0-470a-b16e-7137f71cb796",
+      "skill_name": "mediation-pipeline-monitor",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": null,
+      "started_at": "2026-05-04T09:07:52.542955+00:00",
+      "ended_at": "2026-05-04T09:15:12.561649+00:00",
+      "duration_ms": 440018,
+      "status": "success",
+      "exit_code": null,
+      "model_used": "claude-opus-4-7",
+      "input_tokens": 169525,
+      "output_tokens": 37470,
+      "cached_tokens": 3981382,
+      "usd_cost": 11.3252,
+      "commit_sha": "20a2976b697232c30ada9e0dd68a6b7bef21dce5",
+      "error_message": null,
+      "metadata": {
+        "drift": 0,
+        "commit_sha": "ce9d614",
+        "booked_cases": 32,
+        "pipeline_cases": 46,
+        "resolved_cases": 14,
+        "brief_due_attributes": 21
+      }
+    },
+    {
+      "id": 560,
+      "run_id": "acd70b66-e39a-455c-89de-34ec3b08a361",
+      "skill_name": "winky-system-monitor",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": "hourly@:07",
+      "started_at": "2026-05-04T09:07:07.715788+00:00",
+      "ended_at": "2026-05-04T09:07:07.800252+00:00",
+      "duration_ms": 84,
+      "status": "success",
+      "exit_code": null,
+      "model_used": "Qwen/Qwen3.5-122B-A10B-FP8",
+      "input_tokens": null,
+      "output_tokens": null,
+      "cached_tokens": null,
+      "usd_cost": 0.0,
+      "commit_sha": "20a2976b697232c30ada9e0dd68a6b7bef21dce5",
+      "error_message": null,
+      "metadata": {
+        "flags": [
+          {
+            "check": "C1",
+            "subject": "sync-skills-nightly",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C1",
+            "subject": "reply-brief-detector",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C1",
+            "subject": "bcg-report-monitor",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C1",
+            "subject": "brief-handoff-monitor",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C1",
+            "subject": "client-contact-scanner",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C1",
+            "subject": "cmc-deadline-sweep",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C1",
+            "subject": "dashboard-health-checkup",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C1",
+            "subject": "new-case-intake-scan",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C1",
+            "subject": "mediation-pipeline-monitor",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C1",
+            "subject": "mediator-ack-monitor",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C1",
+            "subject": "mediator-submission-monitor",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C1",
+            "subject": "pick-off-monitor-scan",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C2",
+            "subject": "queue-runner-local",
+            "severity": "CRITICAL"
+          },
+          {
+            "check": "C3",
+            "subject": "daily-briefing",
+            "severity": "WARNING"
+          }
+        ],
+        "checks_total": 5,
+        "checks_failed": 14,
+        "checks_skipped": []
+      }
+    },
+    {
+      "id": 559,
+      "run_id": "6e3903cd-9b94-4a9f-abb2-03578c641ba1",
+      "skill_name": "rfp-service-detector",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": null,
+      "started_at": "2026-05-04T08:53:11.862253+00:00",
+      "ended_at": "2026-05-04T08:56:34.029547+00:00",
+      "duration_ms": 202167,
+      "status": "success",
+      "exit_code": null,
+      "model_used": "claude-opus-4-7",
+      "input_tokens": 161580,
+      "output_tokens": 17832,
+      "cached_tokens": 1320107,
+      "usd_cost": 5.7413,
+      "commit_sha": "20a2976b697232c30ada9e0dd68a6b7bef21dce5",
+      "error_message": null,
+      "metadata": {
+        "pass_a_hits": 25,
+        "pass_b_hits": 50,
+        "sets_written": 0,
+        "alarms_warning": 0,
+        "skipped_responses": 1,
+        "skipped_news_alert": 1,
+        "candidates_examined": 75,
+        "detect_window_hours": 168,
+        "external_after_dedupe": 25,
+        "skipped_non_discovery": 3,
+        "skipped_court_eservice": 1,
+        "skipped_outbound_steno": 7
+      }
+    },
+    {
+      "id": 558,
+      "run_id": "8cd6fdd2-171d-439b-b255-4d4abcd2229d",
+      "skill_name": "queue-runner-cloud",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": "cloud-202605040842 (continue-cloud)",
+      "started_at": "2026-05-04T08:42:08.687186+00:00",
+      "ended_at": "2026-05-04T08:42:31+00:00",
+      "duration_ms": 23000,
+      "status": "success",
+      "exit_code": 0,
+      "model_used": "claude-sonnet-4-6",
+      "input_tokens": null,
+      "output_tokens": null,
+      "cached_tokens": null,
+      "usd_cost": null,
+      "commit_sha": null,
+      "error_message": null,
+      "metadata": {}
+    },
+    {
+      "id": 557,
+      "run_id": "77e4ff86-e204-4aaa-87f3-7ed0c1b618fd",
+      "skill_name": "cmc-monitor-sync",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": null,
+      "started_at": "2026-05-04T08:22:14.076047+00:00",
+      "ended_at": "2026-05-04T08:22:16.57777+00:00",
+      "duration_ms": 2501,
+      "status": "success",
+      "exit_code": null,
+      "model_used": "claude-opus-4-7",
+      "input_tokens": 76665,
+      "output_tokens": 13972,
+      "cached_tokens": 1024281,
+      "usd_cost": 3.7343,
+      "commit_sha": "20a2976b697232c30ada9e0dd68a6b7bef21dce5",
+      "error_message": null,
+      "metadata": {
+        "motions": 15,
+        "next_week": 5,
+        "this_week": 2,
+        "weeks_3_4": 5,
+        "hdata_rows": 372,
+        "unfiled_rows": 12,
+        "unfiled_source": "verified_overrides"
+      }
+    },
+    {
+      "id": 556,
+      "run_id": "b4d64123-3771-43a9-9b09-4e38bd6161f4",
+      "skill_name": "winky-system-monitor",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": "hourly@:07",
+      "started_at": "2026-05-04T08:07:08.34422+00:00",
+      "ended_at": "2026-05-04T08:07:08.421263+00:00",
+      "duration_ms": 77,
+      "status": "success",
+      "exit_code": null,
+      "model_used": "Qwen/Qwen3.5-122B-A10B-FP8",
+      "input_tokens": null,
+      "output_tokens": null,
+      "cached_tokens": null,
+      "usd_cost": 0.0,
+      "commit_sha": "20a2976b697232c30ada9e0dd68a6b7bef21dce5",
+      "error_message": null,
+      "metadata": {
+        "flags": [
+          {
+            "check": "C1",
+            "subject": "sync-skills-nightly",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C1",
+            "subject": "rfp-service-detector",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C1",
+            "subject": "reply-brief-detector",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C1",
+            "subject": "bcg-report-monitor",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C1",
+            "subject": "brief-handoff-monitor",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C1",
+            "subject": "client-contact-scanner",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C1",
+            "subject": "cmc-deadline-sweep",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C1",
+            "subject": "cmc-monitor-sync",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C1",
+            "subject": "dashboard-health-checkup",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C1",
+            "subject": "new-case-intake-scan",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C1",
+            "subject": "mediation-pipeline-monitor",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C1",
+            "subject": "mediator-ack-monitor",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C1",
+            "subject": "mediator-submission-monitor",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C1",
+            "subject": "pick-off-monitor-scan",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C2",
+            "subject": "queue-runner-local",
+            "severity": "CRITICAL"
+          },
+          {
+            "check": "C3",
+            "subject": "motion-dashboard",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "cmc-deadline-monitor",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "landing-page",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "daily-briefing",
+            "severity": "WARNING"
+          }
+        ],
+        "checks_total": 5,
+        "checks_failed": 19,
+        "checks_skipped": []
+      }
+    },
+    {
+      "id": 555,
+      "run_id": "370da23a-7d23-4b63-ba86-fca1c915c82d",
+      "skill_name": "queue-runner-local",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": "local-202605040759 (continue-local)",
+      "started_at": "2026-05-04T07:59:08.653441+00:00",
+      "ended_at": "2026-05-04T07:59:08+00:00",
+      "duration_ms": 0,
+      "status": "error",
+      "exit_code": 2,
+      "model_used": "Qwen/Qwen3.5-122B-A10B-FP8",
+      "input_tokens": null,
+      "output_tokens": null,
+      "cached_tokens": null,
+      "usd_cost": null,
+      "commit_sha": null,
+      "error_message": null,
+      "metadata": {}
+    },
+    {
+      "id": 554,
+      "run_id": "9975acfd-836e-4977-8d16-161751ace651",
+      "skill_name": "queue-runner-cloud",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": "cloud-202605040712 (continue-cloud)",
+      "started_at": "2026-05-04T07:12:08.678725+00:00",
+      "ended_at": "2026-05-04T07:12:31+00:00",
+      "duration_ms": 23000,
+      "status": "success",
+      "exit_code": 0,
+      "model_used": "claude-sonnet-4-6",
+      "input_tokens": null,
+      "output_tokens": null,
+      "cached_tokens": null,
+      "usd_cost": null,
+      "commit_sha": null,
+      "error_message": null,
+      "metadata": {}
+    },
+    {
+      "id": 553,
+      "run_id": "64af643a-39ec-473f-9a48-00351501d9dd",
+      "skill_name": "winky-system-monitor",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": "hourly@:07",
+      "started_at": "2026-05-04T07:07:06.214114+00:00",
+      "ended_at": "2026-05-04T07:07:06.297207+00:00",
+      "duration_ms": 83,
+      "status": "success",
+      "exit_code": null,
+      "model_used": "Qwen/Qwen3.5-122B-A10B-FP8",
+      "input_tokens": null,
+      "output_tokens": null,
+      "cached_tokens": null,
+      "usd_cost": 0.0,
+      "commit_sha": "20a2976b697232c30ada9e0dd68a6b7bef21dce5",
+      "error_message": null,
+      "metadata": {
+        "flags": [
+          {
+            "check": "C1",
+            "subject": "sync-skills-nightly",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C2",
+            "subject": "queue-runner-local",
+            "severity": "CRITICAL"
+          },
+          {
+            "check": "C3",
+            "subject": "motion-dashboard",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "cmc-deadline-monitor",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "discovery-tracker",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "landing-page",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "daily-briefing",
+            "severity": "WARNING"
+          }
+        ],
+        "checks_total": 5,
+        "checks_failed": 7,
+        "checks_skipped": []
+      }
+    },
+    {
+      "id": 552,
+      "run_id": "7c245dd9-fa93-49f1-ac01-29969a1dbf74",
+      "skill_name": "queue-runner-local",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": "local-202605040629 (continue-local)",
+      "started_at": "2026-05-04T06:29:08.617361+00:00",
+      "ended_at": "2026-05-04T06:29:08+00:00",
+      "duration_ms": 0,
+      "status": "error",
+      "exit_code": 2,
+      "model_used": "Qwen/Qwen3.5-122B-A10B-FP8",
+      "input_tokens": null,
+      "output_tokens": null,
+      "cached_tokens": null,
+      "usd_cost": null,
+      "commit_sha": null,
+      "error_message": null,
+      "metadata": {}
+    },
+    {
+      "id": 551,
+      "run_id": "df08a280-71dd-48ac-aa9c-09c6465801e2",
+      "skill_name": "winky-system-monitor",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": "hourly@:07",
+      "started_at": "2026-05-04T06:07:07.224037+00:00",
+      "ended_at": "2026-05-04T06:07:07.300453+00:00",
+      "duration_ms": 76,
+      "status": "success",
+      "exit_code": null,
+      "model_used": "Qwen/Qwen3.5-122B-A10B-FP8",
+      "input_tokens": null,
+      "output_tokens": null,
+      "cached_tokens": null,
+      "usd_cost": 0.0,
+      "commit_sha": "20a2976b697232c30ada9e0dd68a6b7bef21dce5",
+      "error_message": null,
+      "metadata": {
+        "flags": [
+          {
+            "check": "C1",
+            "subject": "sync-skills-nightly",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C2",
+            "subject": "queue-runner-local",
+            "severity": "CRITICAL"
+          },
+          {
+            "check": "C3",
+            "subject": "motion-dashboard",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "cmc-deadline-monitor",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "discovery-tracker",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "landing-page",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "daily-briefing",
+            "severity": "WARNING"
+          }
+        ],
+        "checks_total": 5,
+        "checks_failed": 7,
+        "checks_skipped": []
+      }
+    },
+    {
+      "id": 550,
+      "run_id": "aea3dfba-3a2d-4c82-bc58-21e2c896b9c8",
+      "skill_name": "queue-runner-cloud",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": "cloud-202605040541 (continue-cloud)",
+      "started_at": "2026-05-04T05:41:33.318217+00:00",
+      "ended_at": "2026-05-04T05:41:56+00:00",
+      "duration_ms": 23000,
+      "status": "success",
+      "exit_code": 0,
+      "model_used": "claude-sonnet-4-6",
+      "input_tokens": null,
+      "output_tokens": null,
+      "cached_tokens": null,
+      "usd_cost": null,
+      "commit_sha": null,
+      "error_message": null,
+      "metadata": {}
+    },
+    {
+      "id": 549,
+      "run_id": "e1189b99-67c3-4993-9dd7-65849ebee4aa",
+      "skill_name": "winky-system-monitor",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": "hourly@:07",
+      "started_at": "2026-05-04T05:07:05.975971+00:00",
+      "ended_at": "2026-05-04T05:07:06.050564+00:00",
+      "duration_ms": 74,
+      "status": "success",
+      "exit_code": null,
+      "model_used": "Qwen/Qwen3.5-122B-A10B-FP8",
+      "input_tokens": null,
+      "output_tokens": null,
+      "cached_tokens": null,
+      "usd_cost": 0.0,
+      "commit_sha": "20a2976b697232c30ada9e0dd68a6b7bef21dce5",
+      "error_message": null,
+      "metadata": {
+        "flags": [
+          {
+            "check": "C1",
+            "subject": "sync-skills-nightly",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C2",
+            "subject": "queue-runner-local",
+            "severity": "CRITICAL"
+          },
+          {
+            "check": "C3",
+            "subject": "motion-dashboard",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "cmc-deadline-monitor",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "discovery-tracker",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "landing-page",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "daily-briefing",
+            "severity": "WARNING"
+          }
+        ],
+        "checks_total": 5,
+        "checks_failed": 7,
+        "checks_skipped": []
+      }
+    },
+    {
+      "id": 548,
+      "run_id": "9e9836c1-956e-4e74-839f-2cd8506a757d",
+      "skill_name": "queue-runner-local",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": "local-202605040459 (continue-local)",
+      "started_at": "2026-05-04T04:59:08.613406+00:00",
+      "ended_at": "2026-05-04T04:59:08+00:00",
+      "duration_ms": 0,
+      "status": "error",
+      "exit_code": 2,
+      "model_used": "Qwen/Qwen3.5-122B-A10B-FP8",
+      "input_tokens": null,
+      "output_tokens": null,
+      "cached_tokens": null,
+      "usd_cost": null,
+      "commit_sha": null,
+      "error_message": null,
+      "metadata": {}
+    },
+    {
+      "id": 547,
+      "run_id": "af01130a-25b6-48e3-842d-2813b4668f27",
+      "skill_name": "queue-runner-cloud",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": "cloud-202605040411 (continue-cloud)",
+      "started_at": "2026-05-04T04:11:08.608414+00:00",
+      "ended_at": "2026-05-04T04:11:21+00:00",
+      "duration_ms": 13000,
+      "status": "success",
+      "exit_code": 0,
+      "model_used": "claude-sonnet-4-6",
+      "input_tokens": null,
+      "output_tokens": null,
+      "cached_tokens": null,
+      "usd_cost": null,
+      "commit_sha": null,
+      "error_message": null,
+      "metadata": {}
+    },
+    {
+      "id": 546,
+      "run_id": "0e013850-9c5b-429a-b80f-923277f21f1f",
+      "skill_name": "winky-system-monitor",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": "hourly@:07",
+      "started_at": "2026-05-04T04:07:06.929231+00:00",
+      "ended_at": "2026-05-04T04:07:07.013523+00:00",
+      "duration_ms": 84,
+      "status": "success",
+      "exit_code": null,
+      "model_used": "Qwen/Qwen3.5-122B-A10B-FP8",
+      "input_tokens": null,
+      "output_tokens": null,
+      "cached_tokens": null,
+      "usd_cost": 0.0,
+      "commit_sha": "20a2976b697232c30ada9e0dd68a6b7bef21dce5",
+      "error_message": null,
+      "metadata": {
+        "flags": [
+          {
+            "check": "C1",
+            "subject": "sync-skills-nightly",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C2",
+            "subject": "queue-runner-local",
+            "severity": "CRITICAL"
+          },
+          {
+            "check": "C3",
+            "subject": "motion-dashboard",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "cmc-deadline-monitor",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "discovery-tracker",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "landing-page",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "daily-briefing",
+            "severity": "WARNING"
+          }
+        ],
+        "checks_total": 5,
+        "checks_failed": 7,
+        "checks_skipped": []
+      }
+    },
+    {
+      "id": 545,
+      "run_id": "28eaca81-4296-4410-a7b7-a1097d4c6328",
+      "skill_name": "queue-runner-local",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": "local-202605040329 (continue-local)",
+      "started_at": "2026-05-04T03:29:08.52063+00:00",
+      "ended_at": "2026-05-04T03:29:08+00:00",
+      "duration_ms": 0,
+      "status": "error",
+      "exit_code": 2,
+      "model_used": "Qwen/Qwen3.5-122B-A10B-FP8",
+      "input_tokens": null,
+      "output_tokens": null,
+      "cached_tokens": null,
+      "usd_cost": null,
+      "commit_sha": null,
+      "error_message": null,
+      "metadata": {}
+    },
+    {
+      "id": 544,
+      "run_id": "69b8c3f8-7021-41e1-85d2-ebab8fe8d02e",
+      "skill_name": "winky-system-monitor",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": "hourly@:07",
+      "started_at": "2026-05-04T03:07:06.389639+00:00",
+      "ended_at": "2026-05-04T03:07:06.467463+00:00",
+      "duration_ms": 77,
+      "status": "success",
+      "exit_code": null,
+      "model_used": "Qwen/Qwen3.5-122B-A10B-FP8",
+      "input_tokens": null,
+      "output_tokens": null,
+      "cached_tokens": null,
+      "usd_cost": 0.0,
+      "commit_sha": "20a2976b697232c30ada9e0dd68a6b7bef21dce5",
+      "error_message": null,
+      "metadata": {
+        "flags": [
+          {
+            "check": "C1",
+            "subject": "sync-skills-nightly",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C2",
+            "subject": "queue-runner-local",
+            "severity": "CRITICAL"
+          },
+          {
+            "check": "C3",
+            "subject": "motion-dashboard",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "cmc-deadline-monitor",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "discovery-tracker",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "landing-page",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "daily-briefing",
+            "severity": "WARNING"
+          }
+        ],
+        "checks_total": 5,
+        "checks_failed": 7,
+        "checks_skipped": []
+      }
+    },
+    {
+      "id": 543,
+      "run_id": "0b151f67-6f42-419e-92c7-3379424e2f29",
+      "skill_name": "queue-runner-cloud",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": "cloud-202605040241 (continue-cloud)",
+      "started_at": "2026-05-04T02:41:08.570196+00:00",
+      "ended_at": "2026-05-04T02:41:31+00:00",
+      "duration_ms": 23000,
+      "status": "success",
+      "exit_code": 0,
+      "model_used": "claude-sonnet-4-6",
+      "input_tokens": null,
+      "output_tokens": null,
+      "cached_tokens": null,
+      "usd_cost": null,
+      "commit_sha": null,
+      "error_message": null,
+      "metadata": {}
+    },
+    {
+      "id": 542,
+      "run_id": "54d3cf6e-9abf-41b9-a32f-de6e2a16fbe1",
+      "skill_name": "winky-system-monitor",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": "hourly@:07",
+      "started_at": "2026-05-04T02:07:07.688889+00:00",
+      "ended_at": "2026-05-04T02:07:07.780265+00:00",
+      "duration_ms": 91,
+      "status": "success",
+      "exit_code": null,
+      "model_used": "Qwen/Qwen3.5-122B-A10B-FP8",
+      "input_tokens": null,
+      "output_tokens": null,
+      "cached_tokens": null,
+      "usd_cost": 0.0,
+      "commit_sha": "20a2976b697232c30ada9e0dd68a6b7bef21dce5",
+      "error_message": null,
+      "metadata": {
+        "flags": [
+          {
+            "check": "C1",
+            "subject": "sync-skills-nightly",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C2",
+            "subject": "queue-runner-local",
+            "severity": "CRITICAL"
+          },
+          {
+            "check": "C3",
+            "subject": "motion-dashboard",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "cmc-deadline-monitor",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "discovery-tracker",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "landing-page",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "daily-briefing",
+            "severity": "WARNING"
+          }
+        ],
+        "checks_total": 5,
+        "checks_failed": 7,
+        "checks_skipped": []
+      }
+    },
+    {
+      "id": 541,
+      "run_id": "6d10dd4b-a3b1-48d9-a6b6-781a8503b242",
+      "skill_name": "queue-runner-local",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": "local-202605040159 (continue-local)",
+      "started_at": "2026-05-04T01:59:08.595789+00:00",
+      "ended_at": "2026-05-04T01:59:08+00:00",
+      "duration_ms": 0,
+      "status": "error",
+      "exit_code": 2,
+      "model_used": "Qwen/Qwen3.5-122B-A10B-FP8",
+      "input_tokens": null,
+      "output_tokens": null,
+      "cached_tokens": null,
+      "usd_cost": null,
+      "commit_sha": null,
+      "error_message": null,
+      "metadata": {}
+    },
+    {
+      "id": 540,
+      "run_id": "cdfbd3b1-6737-437d-a52b-3bc492c63637",
+      "skill_name": "queue-runner-cloud",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": "cloud-202605040111 (continue-cloud)",
+      "started_at": "2026-05-04T01:11:08.522445+00:00",
+      "ended_at": "2026-05-04T01:11:31+00:00",
+      "duration_ms": 23000,
+      "status": "success",
+      "exit_code": 0,
+      "model_used": "claude-sonnet-4-6",
+      "input_tokens": null,
+      "output_tokens": null,
+      "cached_tokens": null,
+      "usd_cost": null,
+      "commit_sha": null,
+      "error_message": null,
+      "metadata": {}
+    },
+    {
+      "id": 539,
+      "run_id": "e074259f-83f2-4608-b92d-3add88200c78",
+      "skill_name": "winky-system-monitor",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": "hourly@:07",
+      "started_at": "2026-05-04T01:07:06.786842+00:00",
+      "ended_at": "2026-05-04T01:07:06.869363+00:00",
+      "duration_ms": 82,
+      "status": "success",
+      "exit_code": null,
+      "model_used": "Qwen/Qwen3.5-122B-A10B-FP8",
+      "input_tokens": null,
+      "output_tokens": null,
+      "cached_tokens": null,
+      "usd_cost": 0.0,
+      "commit_sha": "20a2976b697232c30ada9e0dd68a6b7bef21dce5",
+      "error_message": null,
+      "metadata": {
+        "flags": [
+          {
+            "check": "C1",
+            "subject": "sync-skills-nightly",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C2",
+            "subject": "queue-runner-local",
+            "severity": "CRITICAL"
+          },
+          {
+            "check": "C3",
+            "subject": "motion-dashboard",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "cmc-deadline-monitor",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "discovery-tracker",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "landing-page",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "daily-briefing",
+            "severity": "WARNING"
+          }
+        ],
+        "checks_total": 5,
+        "checks_failed": 7,
+        "checks_skipped": []
+      }
+    },
+    {
+      "id": 538,
+      "run_id": "d130d4a7-cd3e-464c-b7c0-e2a49fff56e6",
+      "skill_name": "queue-runner-local",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": "local-202605040029 (continue-local)",
+      "started_at": "2026-05-04T00:29:08.452285+00:00",
+      "ended_at": "2026-05-04T00:29:08+00:00",
+      "duration_ms": 0,
+      "status": "error",
+      "exit_code": 2,
+      "model_used": "Qwen/Qwen3.5-122B-A10B-FP8",
+      "input_tokens": null,
+      "output_tokens": null,
+      "cached_tokens": null,
+      "usd_cost": null,
+      "commit_sha": null,
+      "error_message": null,
+      "metadata": {}
+    },
+    {
+      "id": 537,
+      "run_id": "22b25407-9f84-4d50-bdc4-0b0bc15e4a56",
+      "skill_name": "winky-system-monitor",
+      "host": "edgexpert",
+      "trigger_type": "cron",
+      "trigger_detail": "hourly@:07",
+      "started_at": "2026-05-04T00:07:06.37471+00:00",
+      "ended_at": "2026-05-04T00:07:06.450099+00:00",
+      "duration_ms": 75,
+      "status": "success",
+      "exit_code": null,
+      "model_used": "Qwen/Qwen3.5-122B-A10B-FP8",
+      "input_tokens": null,
+      "output_tokens": null,
+      "cached_tokens": null,
+      "usd_cost": 0.0,
+      "commit_sha": "20a2976b697232c30ada9e0dd68a6b7bef21dce5",
+      "error_message": null,
+      "metadata": {
+        "flags": [
+          {
+            "check": "C1",
+            "subject": "sync-skills-nightly",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C2",
+            "subject": "queue-runner-local",
+            "severity": "CRITICAL"
+          },
+          {
+            "check": "C3",
+            "subject": "motion-dashboard",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "cmc-deadline-monitor",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "discovery-tracker",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "landing-page",
+            "severity": "WARNING"
+          },
+          {
+            "check": "C3",
+            "subject": "daily-briefing",
+            "severity": "WARNING"
+          }
+        ],
+        "checks_total": 5,
+        "checks_failed": 7,
+        "checks_skipped": []
+      }
+    }
+  ],
+  "query_error": null
+}

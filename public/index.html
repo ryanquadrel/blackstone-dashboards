@@ -283,13 +283,13 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
       <div class="eotd-tooltip" id="eotdTooltip"></div>
     </div>
     <a href="/daily-briefing" class="hdr-btn hdr-btn-briefing"><span class="hb-icon">&#128240;</span><span class="hb-label">Daily Briefing</span></a>
-    <a href="/mediation-strategy/" class="hdr-btn hdr-btn-strategy" id="strategyBtn" style="display:none" style="display:none"><span class="hb-live"></span><span class="hb-icon">&#9876;</span><span class="hb-label">Strategy: Veridiam</span></a>
+    <a href="/mediation-strategy/" class="hdr-btn hdr-btn-strategy" id="strategyBtn" style="display:none" style="display:none" style="display:none"><span class="hb-live"></span><span class="hb-icon">&#9876;</span><span class="hb-label">Strategy: Veridiam</span></a>
   </div>
   <div class="hdr-right">
     <div class="live-dot"></div>
     <div class="hdr-meta">
       <strong>RQ &middot; JM &middot; SM &middot; KA</strong><br>
-      <span id="clockDisplay"></span><br><span class="generated-stamp">Generated: <strong>2026-05-01 02:22 PT</strong></span>
+      <span id="clockDisplay"></span><br><span class="generated-stamp">Generated: <strong>2026-05-04 02:05 PT</strong></span>
     </div>
   </div>
 </div>
@@ -336,13 +336,13 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
     <svg class="ring-svg" viewBox="0 0 100 100">
       <circle class="ring-bg" cx="50" cy="50" r="42"/>
       <circle class="ring-fill" cx="50" cy="50" r="42" stroke="var(--red)" stroke-dasharray="264" stroke-dashoffset="264" transform="rotate(-90 50 50)" id="ring-cc"/>
-      <text x="50" y="46" fill="var(--red)" font-size="16" font-weight="800" text-anchor="middle" id="ring-cc-num">17</text>
+      <text x="50" y="46" fill="var(--red)" font-size="16" font-weight="800" text-anchor="middle" id="ring-cc-num">51</text>
       <text x="50" y="60" fill="var(--muted)" font-size="7" text-anchor="middle" font-weight="600">URGENT</text>
     </svg>
     <div class="ring-info">
-      <div class="ri-val" style="color:var(--red);text-shadow:0 0 20px rgba(239,68,68,.3)" id="ring-cc-headline">17 Cases</div>
+      <div class="ri-val" style="color:var(--red);text-shadow:0 0 20px rgba(239,68,68,.3)" id="ring-cc-headline">51 Cases</div>
       <div class="ri-label">Command Center</div>
-      <div class="ri-sub" id="ring-cc-sub">17 need action &middot; 9 stale &middot; 80 active</div>
+      <div class="ri-sub" id="ring-cc-sub">51 need action &middot; 9 stale &middot; 80 active</div>
     </div>
     <div class="arrow">&rarr;</div>
   </a>
@@ -471,6 +471,14 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
           <div class="tl-date">MAY 15</div>
           <div class="tl-body"><div class="tl-case">Gonzalez v. Hobie Cat Company II, LLC -  Meet and Confer re CMC set for 05/15/2026</div><div class="tl-event">CMC hearing &middot; 09:00 &middot; JM &middot; <span style="color:#6b7280;font-weight:700">CHECK</span></div><span class="tl-badge b-disco">CMC</span></div>
         </div>
+        <div class="tl-item s-motion" onclick="window.location='/motion-dashboard'">
+          <div class="tl-date">MAY 18</div>
+          <div class="tl-body"><div class="tl-case">Conant v. Evergreen (Class)</div><div class="tl-event">3:25-cv-10265-VC (JM)</div><span class="tl-badge b-motion">MOTION</span></div>
+        </div>
+        <div class="tl-item s-motion" onclick="window.location='/motion-dashboard'">
+          <div class="tl-date">MAY 18</div>
+          <div class="tl-body"><div class="tl-case">Conant v. Evergreen (PAGA)</div><div class="tl-event">3:26-cv-01964-VC (JM)</div><span class="tl-badge b-motion">MOTION</span></div>
+        </div>
 </div>
 </div>
 
@@ -484,45 +492,49 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
     <!-- CRITICAL FILINGS -->
     <div class="cmc-critical">
       <div class="cmc-card" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'">
-        <div class="cmc-countdown cd-orange"><div class="cd-num">3</div><div class="cd-unit">days</div></div>
+        <div class="cmc-countdown cd-red"><div class="cd-num">0</div><div class="cd-unit">days</div></div>
         <div class="cmc-meta">
           <div class="cm-case">Ramirez v. Apoyo Financiero, Inc. (Class) -  L/D to M&C Re Initial Case Management Conference</div>
           <div class="cm-detail">SC hearing &middot; 11:00 AM &middot; <span style="color:#6b7280;font-weight:700">CHECK</span></div>
           <span class="cm-atty">—</span>
         </div>
       </div>
+      <div class="cmc-card" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'">
+        <div class="cmc-countdown cd-orange"><div class="cd-num">3</div><div class="cd-unit">days</div></div>
+        <div class="cmc-meta">
+          <div class="cm-case">Rosado v. Ridgecrest Regional Hospital</div>
+          <div class="cm-detail">CMC hearing &middot; 08:30 &middot; <span style="color:#6b7280;font-weight:700">CHECK</span></div>
+          <span class="cm-atty">SM</span>
+        </div>
+      </div>
     </div>
     <!-- UPCOMING -->
     <div class="cmc-upcoming">
       <div class="cmc-up-item" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'">
-        <div class="cmc-up-days d-orange">6d</div>
-        <div class="cmc-up-info"><div class="ui-case">Rosado v. Ridgecrest Regional Hospital</div><div class="ui-date">05-07 CMC &middot; SM &middot; <span style="color:#6b7280;font-weight:700">CHECK</span></div></div>
-      </div>
-      <div class="cmc-up-item" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'">
-        <div class="cmc-up-days d-muted">11d</div>
+        <div class="cmc-up-days d-yellow">8d</div>
         <div class="cmc-up-info"><div class="ui-case">Conant v. Evergreen Alliance Golf Limited L.P. (PAGA) -  L/D to F/S Case Management Statement</div><div class="ui-date">05-12 CMC &middot; JM &middot; <span style="color:#6b7280;font-weight:700">CHECK</span></div></div>
       </div>
       <div class="cmc-up-item" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'">
-        <div class="cmc-up-days d-muted">12d</div>
+        <div class="cmc-up-days d-yellow">9d</div>
         <div class="cmc-up-info"><div class="ui-case">Agpalza v. Magnolia Springs, Inc. (PAGA) -  L/D to M&C Re Initial Case Management Conference</div><div class="ui-date">05-13 CMC &middot; JM &middot; <span style="color:#6b7280;font-weight:700">CHECK</span></div></div>
       </div>
       <div class="cmc-up-item" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'">
-        <div class="cmc-up-days d-muted">12d</div>
+        <div class="cmc-up-days d-yellow">9d</div>
         <div class="cmc-up-info"><div class="ui-case">Ruge v. Ecology Control Industries, Inc.</div><div class="ui-date">05-13 CMC &middot; SM &middot; <span style="color:#6b7280;font-weight:700">CHECK</span></div></div>
       </div>
       <div class="cmc-up-item" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'">
-        <div class="cmc-up-days d-muted">13d</div>
+        <div class="cmc-up-days d-yellow">10d</div>
         <div class="cmc-up-info"><div class="ui-case">Bassell v. Golden Rain Foundation (Class/PAGA) -  L/D to F/S Status Conference Statement</div><div class="ui-date">05-14 SC &middot; RQ &middot; <span style="color:#6b7280;font-weight:700">CHECK</span></div></div>
       </div>
       <div class="cmc-up-item" onclick="event.stopPropagation();window.location='/cmc-deadline-monitor/'">
-        <div class="cmc-up-days d-muted">14d</div>
+        <div class="cmc-up-days d-muted">11d</div>
         <div class="cmc-up-info"><div class="ui-case">Gonzalez v. Hobie Cat Company II, LLC -  Meet and Confer re CMC set for 05/15/2026</div><div class="ui-date">05-15 CMC &middot; JM &middot; <span style="color:#6b7280;font-weight:700">CHECK</span></div></div>
       </div>
     </div>
     <!-- STATS -->
     <div class="cmc-stats">
       <div class="cmc-stat-box"><div class="sb-num" style="color:var(--yellow);text-shadow:0 0 16px rgba(234,179,8,.3)">7</div><div class="sb-label">CMC/ISC Filings (14d)</div></div>
-      <div class="cmc-stat-box"><div class="sb-num glow-red">1</div><div class="sb-label">Critical (&lt;7 days)</div></div>
+      <div class="cmc-stat-box"><div class="sb-num glow-red">2</div><div class="sb-label">Critical (&lt;7 days)</div></div>
       <div class="cmc-workload">
         <div class="cmc-wl-bar"><span style="color:var(--blue)">3</span><div class="wl-name">JM</div></div>
         <div class="cmc-wl-bar"><span style="color:var(--purple)">2</span><div class="wl-name">SM</div></div>
@@ -542,7 +554,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
       <a href="/discovery-tracker" class="snap-card"><div class="snap-num glow-blue">33</div><div class="snap-label">Pre-Discovery</div></a>
       <a href="/cmc-deadline-monitor/" class="snap-card"><div class="snap-num" style="color:var(--yellow);text-shadow:0 0 20px rgba(234,179,8,.3)">7</div><div class="snap-label">CMC Filings (14d)</div></a>
       <a href="/motion-dashboard" class="snap-card"><div class="snap-num glow-red">32</div><div class="snap-label">Arb Track</div></a>
-      <a href="/command-center" class="snap-card"><div class="snap-num" id="cmdcenter-attention" style="color:var(--red);text-shadow:0 0 20px rgba(239,68,68,.3)">17</div><div class="snap-label">Needs Action</div></a>
+      <a href="/command-center" class="snap-card"><div class="snap-num" id="cmdcenter-attention" style="color:var(--red);text-shadow:0 0 20px rgba(239,68,68,.3)">51</div><div class="snap-label">Needs Action</div></a>
     </div>
   </div>
   <div class="nav-panel">
